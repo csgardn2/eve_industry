@@ -1,0 +1,54 @@
+{
+    "blueprints": [
+        
+        // Rapid Heavy Missile Launcher II
+        {
+            "manufacturing": {
+                "output items": [
+                    "Rapid Heavy Missile Launcher II": 1
+                ],
+                "input items": [
+                    "Tritanium": 106,
+                    "Pyerite": 1167,
+                    "Nocxium": 8,
+                    "Zydrine": 4,
+                    "Megacyte": 20
+                ],
+                "time": 2700,
+                "me": 10,
+                "te": 20
+            }
+            "invention": {
+                "output blueprint": "Rapid Heavy Missile Launcher II",
+                "input materials": [
+                    "Datacore - Nuclear Physics": 6,
+                    "Datacore - Rocket Science": 6
+                ]
+                "probability": 34,
+                "time": 2160,
+                "runs per copy": 20,
+                "me": 2,
+                "te": 4
+            }
+        },
+        
+        // Quantum Microprocessor
+        {
+            "manufacturing": {
+                "output items": [
+                    "Quantum Microprocessor": 1
+                ],
+                "input items": [
+                    "Phenolic Composites": 6,
+                    "Nanotransistors": 2
+                    "Nonlinear Metamaterials": 2,
+                    "Titanium Carbide": 17
+                ],
+                "time": 60,
+                "me": 10,
+                "te": 20
+            }
+        }
+        
+    ]
+}

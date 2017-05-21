@@ -1,0 +1,2604 @@
+J100001  	4  	
+J100009  	3  	Pulsar
+J100015  	3  	
+J100033  	2  	
+J100040  	1  	Black Hole
+J100046  	4  	Cataclysmic Variable
+J100102  	2  	
+J100107  	4  	
+J100109  	5  	
+J100118  	3  	Magnetar
+J100120  	5  	
+J100129  	3  	
+J100142  	4  	
+J100150  	4  	Black Hole
+J100156  	3  	
+J100211  	1  	
+J100237  	5  	Wolf Rayet
+J100246  	2  	
+J100250  	1  	
+J100252  	5
+J100328  	5  	Black Hole
+J100338  	3  	
+J100346  	4  	
+J100357  	4  	
+J100409  	6  	
+J100415  	5  	
+J100422  	1  	Red Giant
+J100425  	5  	
+J100447  	2  	Black Hole
+J100501  	6  	
+J100509  	2  	
+J100549  	5  	
+J100551  	5  	
+J100616  	5  	Pulsar
+J100620  	3  	
+J100640  	2  	
+J100642  	2  	
+J100651  	2  	Red Giant
+J100702  	5  	Black Hole
+J100724  	5  	Red Giant
+J100728  	3  	Red Giant
+J100744  	1  	Cataclysmic Variable
+J100759  	5  	
+J100806  	4  	
+J100808  	2  	
+J100820  	5  	
+J100830  	4  	
+J100846  	4  	Black Hole
+J100854  	5  	
+J100858  	5  	
+J100919  	5  	Wolf Rayet
+J100932  	3  	
+J100937  	4  	Cataclysmic Variable
+J100956  	4  	
+J101000  	5  	Cataclysmic Variable
+J101012  	3  	Red Giant
+J101020  	1  	
+J101028  	5  	
+J101042  	4  	Cataclysmic Variable
+J101048  	3  	
+J101126  	4  	
+J101129  	4  	
+J101142  	4  	
+J101145  	4  	Pulsar
+J101149  	2  	
+J101243  	3  	
+J101248  	5  	
+J101307  	2  	
+J101315  	4  	
+J101323  	3  	
+J101331  	4  	
+J101336  	1  	Cataclysmic Variable
+J101343  	5  	Wolf Rayet
+J101346  	2  	
+J101408  	1  	
+J101415  	2  	Red Giant
+J101435  	5  	Cataclysmic Variable
+J101441  	2  	Red Giant
+J101453  	1  	
+J101500  	3  	
+J101507  	4  	Red Giant
+J101524  	2  	
+J101535  	4  	Pulsar
+J101551  	4  	
+J101553  	6  	Pulsar
+J101556  	5  	
+J101604  	4  	Pulsar
+J101612  	3  	
+J101647  	5  	
+J101650  	2  	Wolf Rayet
+J101652  	6  	Red Giant
+J101706  	4  	
+J101708  	6  	
+J101710  	2  	Black Hole
+J101719  	2  	
+J101729  	1  	
+J101736  	3  	
+J101748  	6  	
+J101750  	3  	
+J101755  	6  	Black Hole
+J101757  	1  	Black Hole
+J101817  	1  	
+J101824  	2  	
+J101833  	3  	
+J101835  	4  	Cataclysmic Variable
+J101845  	1  	
+J101854  	3  	
+J101912  	5  	Wolf Rayet
+J101915  	4  	Magnetar
+J101957  	4  	Wolf Rayet
+J102005  	1  	
+J102038  	2  	Red Giant
+J102045  	4  	Pulsar
+J102053  	5  	Red Giant
+J102055  	4  	
+J102057  	3  	Pulsar
+J102103  	5  	
+J102143  	3  	Wolf Rayet
+J102206  	1  	
+J102209  	2
+J102222  	2  	Cataclysmic Variable
+J102257  	3  	
+J102304  	3  	
+J102336  	4  	
+J102345  	5  	Magnetar
+J102347  	2  	
+J102407  	3  	
+J102409  	4  	
+J102414  	1  	
+J102433  	3  	
+J102439  	4  	Magnetar
+J102446  	5  	Black Hole
+J102504  	2  	
+J102515  	3  	
+J102521  	4  	
+J102534  	4  	Wolf Rayet
+J102602  	2  	
+J102623  	5  	Wolf Rayet
+J102630  	1  	
+J102655  	1
+J102734  	1  	
+J102736  	5  	Magnetar
+J102739  	2  	
+J102749  	1  	
+J102753  	5  	Black Hole
+J102834  	6  	Magnetar
+J102837  	1  	Cataclysmic Variable
+J102844  	4  	
+J102849  	1  	
+J102853  	5  	
+J102856  	3  	Red Giant
+J102918  	1  	
+J102946  	2  	Cataclysmic Variable
+J103008  	4  	Magnetar
+J103032  	3  	Cataclysmic Variable
+J103104  	4  	Cataclysmic Variable
+J103110  	4  	Black Hole
+J103116  	5  	
+J103120  	4  	Cataclysmic Variable
+J103141  	4  	Black Hole
+J103144  	2  	
+J103151  	1  	Pulsar
+J103213  	4  	
+J103215  	5  	
+J103217  	2  	Magnetar
+J103228  	4  	
+J103237  	3  	
+J103242  	4  	Cataclysmic Variable
+J103251  	5  	Magnetar
+J103320  	1  	
+J103326  	3  	
+J103328  	5  	Wolf Rayet
+J103339  	2  	
+J103341  	1  	
+J103351  	2  	
+J103353  	3  	
+J103400  	6  	Red Giant
+J103404  	1  	Wolf Rayet
+J103406  	2  	Pulsar
+J103408  	2  	Red Giant
+J103412  	4  	
+J103414  	6  	Red Giant
+J103422  	2  	Wolf Rayet
+J103448  	5  	
+J103453  	5  	Black Hole
+J103504  	6  	
+J103512  	2  	
+J103529  	3  	
+J103533  	2  	Magnetar
+J103538  	4  	
+J103547  	1  	
+J103600  	5  	Black Hole
+J103604  	3  	Wolf Rayet
+J103615  	5  	
+J103619  	2  	Pulsar
+J103631  	4  	
+J103653  	3  	
+J103701  	5  	
+J103704  	4  	Magnetar
+J103716  	2  	
+J103724  	3  	Red Giant
+J103727  	5  	
+J103731  	4  	
+J103800  	6  	Red Giant
+J103812  	5  	
+J103839  	2  	Wolf Rayet
+J103854  	2  	
+J103907  	4  	
+J103924  	2  	
+J103948  	2  	
+J103955  	3  	Cataclysmic Variable
+J103959  	5  	
+J104001  	3  	
+J104008  	2  	
+J104029  	2  	
+J104037  	6  	
+J104103  	1  	
+J104115  	2  	
+J104136  	6  	
+J104138  	1  	Magnetar
+J104140  	1  	
+J104201  	1  	
+J104210  	2  	Pulsar
+J104216  	5  	
+J104218  	5  	
+J104253  	2  	
+J104311  	4  	Black Hole
+J104321  	2  	
+J104328  	2  	
+J104330  	3  	
+J104335  	1  	Wolf Rayet
+J104351  	3  	
+J104404  	4  	
+J104416  	3  	Pulsar
+J104421  	3  	Cataclysmic Variable
+J104439  	1  	Wolf Rayet
+J104448  	5  	Magnetar
+J104459  	3  	Red Giant
+J104502  	4  	
+J104515  	2  	Wolf Rayet
+J104517  	2  	
+J104537  	5  	Black Hole
+J104603  	4  	Pulsar
+J104606  	2  	Pulsar
+J104617  	5  	Cataclysmic Variable
+J104624  	4  	
+J104626  	3  	
+J104628  	1  	
+J104632  	6  	
+J104643  	3  	Wolf Rayet
+J104649  	4  	Magnetar
+J104654  	3  	
+J104704  	5  	
+J104714  	4  	Pulsar
+J104718  	2  	Wolf Rayet
+J104723  	4  	Pulsar
+J104729  	4  	Red Giant
+J104754  	4  	
+J104802  	2  	
+J104809  	5  	Black Hole
+J104815  	3  	
+J104820  	2  	
+J104835  	3  	
+J104837  	3  	
+J104841  	3  	
+J104846  	5  	Red Giant
+J104850  	2  	
+J104857  	6  	Magnetar
+J104859  	6  	Pulsar
+J104903  	3  	
+J104905  	3  	
+J104921  	6  	
+J104948  	4  	Cataclysmic Variable
+J105000  	2  	Magnetar
+J105002  	3  	
+J105007  	3  	Magnetar
+J105013  	1  	Cataclysmic Variable
+J105017  	3  	Pulsar
+J105023  	6  	Wolf Rayet
+J105033  	3  	
+J105039  	1  	Pulsar
+J105059  	5  	Magnetar
+J105102  	3  	Wolf Rayet
+J105123  	2  	
+J105135  	5  	Red Giant
+J105201  	3  	Cataclysmic Variable
+J105203  	2  	
+J105232  	1  	
+J105244  	2  	Black Hole
+J105246  	5  	
+J105311  	2  	
+J105319  	4  	
+J105321  	2  	
+J105342  	2  	
+J105346  	4  	Wolf Rayet
+J105348  	4  	Red Giant
+J105352  	2  	
+J105409  	3  	
+J105411  	4  	
+J105415  	4  	Cataclysmic Variable
+J105433  	4  	
+J105439  	2  	
+J105441  	5  	
+J105443  	1  	
+J105447  	3  	
+J105504  	5  	Black Hole
+J105521  	1  	Red Giant
+J105531  	5  	
+J105544  	2  	Cataclysmic Variable
+J105546  	4  	Wolf Rayet
+J105549  	3  	
+J105607  	5  	Cataclysmic Variable
+J105621  	4  	Red Giant
+J105623  	5  	Magnetar
+J105632  	1  	
+J105642  	1  	
+J105700  	1  	
+J105705  	6  	Cataclysmic Variable
+J105711  	1  	Cataclysmic Variable
+J105719  	5  	Black Hole
+J105722  	5  	
+J105726  	4  	
+J105801  	6  	Pulsar
+J105803  	2  	
+J105822  	5  	Wolf Rayet
+J105835  	4  	
+J105837  	1  	
+J105849  	5  	Wolf Rayet
+J105858  	4  	Wolf Rayet
+J105934  	6  	Magnetar
+J105936  	1  	Red Giant
+J105942  	1  	Cataclysmic Variable
+J105951  	2  	
+J110016  	4  	Red Giant
+J110018  	5  	
+J110034  	3  	
+J110043  	2  	
+J110051  	1  	
+J110101  	1  	
+J110108  	1  	
+J110117  	5  	
+J110121  	3  	Wolf Rayet
+J110126  	1  	
+J110213  	1  	
+J110226  	3  	Cataclysmic Variable
+J110316  	2  	
+J110408  	2  	
+J110411  	3  	
+J110413  	2  	
+J110417  	4  	
+J110421  	6  	Wolf Rayet
+J110425  	3  	Pulsar
+J110431  	1  	Cataclysmic Variable
+J110448  	3  	
+J110530  	5  	Magnetar
+J110538  	2  	Red Giant
+J110545  	1  	
+J110550  	5  	
+J110555  	2  	
+J110605  	1  	
+J110634  	5  	Cataclysmic Variable
+J110651  	1  	
+J110656  	2  	
+J110706  	3  	
+J110719  	4  	
+J110736  	4  	Wolf Rayet
+J110738  	3  	
+J110750  	1  	
+J110759  	5  	
+J110810  	6  	Black Hole
+J110823  	2  	Red Giant
+J110834  	6  	
+J110841  	5  	
+J110906  	1  	
+J110910  	2  	
+J110915  	4  	
+J110924  	3  	
+J110938  	5  	
+J110946  	5  	
+J111000  	5  	
+J111003  	5  	Cataclysmic Variable
+J111007  	4  	
+J111009  	4  	
+J111011  	2  	
+J111029  	4  	
+J111031  	3  	Magnetar
+J111038  	2  	
+J111106  	5  	Cataclysmic Variable
+J111141  	2  	
+J111150  	5  	Red Giant
+J111159  	2  	
+J111214  	3  	
+J111218  	3  	
+J111220  	5  	
+J111227  	5  	Wolf Rayet
+J111245  	5  	
+J111249  	5  	
+J111255  	3  	
+J111301  	1  	Cataclysmic Variable
+J111309  	3  	
+J111329  	4  	Red Giant
+J111355  	3  	
+J111404  	4  	Cataclysmic Variable
+J111421  	3  	Cataclysmic Variable
+J111447  	6  	
+J111450  	6  	Cataclysmic Variable
+J111458  	4  	
+J111508  	2  	
+J111518  	5  	
+J111520  	6  	Black Hole
+J111543  	5  	
+J111555  	4  	
+J111557  	2  	
+J111603  	3  	
+J111613  	5  	Cataclysmic Variable
+J111617  	4  	Black Hole
+J111619  	3  	
+J111629  	4  	Cataclysmic Variable
+J111634  	3  	
+J111640  	5  	Wolf Rayet
+J111644  	4  	Cataclysmic Variable
+J111707  	1  	
+J111740  	2  	
+J111753  	4  	Pulsar
+J111758  	4  	Cataclysmic Variable
+J111805  	3  	Wolf Rayet
+J111811  	1  	
+J111818  	5  	Red Giant
+J111823  	3  	
+J111846  	2  	
+J111856  	3  	
+J111918  	6  	Red Giant
+J111935  	5  	
+J111939  	5  	Black Hole
+J111950  	4  	
+J112003  	5  	
+J112019  	2  	Pulsar
+J112028  	6  	Black Hole
+J112042  	5  	
+J112110  	4  	
+J112124  	1  	
+J112129  	1  	
+J112137  	2  	
+J112146  	2  	Red Giant
+J112150  	4  	
+J112215  	4  	
+J112241  	5  	Magnetar
+J112250  	1  	
+J112309  	2  	
+J112325  	5  	Cataclysmic Variable
+J112404  	4  	Magnetar
+J112406  	1  	Cataclysmic Variable
+J112417  	6  	
+J112420  	3  	
+J112450  	4  	
+J112505  	2  	
+J112520  	2  	
+J112558  	2  	
+J112603  	5  	Black Hole
+J112608  	3  	
+J112610  	4  	
+J112614  	2  	
+J112617  	2  	
+J112628  	1  	Wolf Rayet
+J112630  	4  	
+J112656  	3  	
+J112709  	3  	Wolf Rayet
+J112715  	2  	Red Giant
+J112722  	4  	Magnetar
+J112744  	1  	
+J112747  	3  	
+J112801  	2  	
+J112820  	2  	
+J112829  	6  	
+J112844  	5  	Pulsar
+J112850  	3  	
+J112854  	3  	Red Giant
+J112905  	3  	
+J112913  	1  	
+J112916  	2  	
+J112918  	5  	Black Hole
+J112928  	4  	
+J112934  	1  	
+J112942  	3  	
+J112944  	3  	
+J112948  	3  	Black Hole
+J112954  	3  	
+J112956  	2  	Black Hole
+J113039  	2  	
+J113048  	3  	
+J113050  	1  	
+J113057  	2  	
+J113059  	5  	
+J113108  	2  	
+J113131  	4  	
+J113133  	4  	
+J113143  	3  	
+J113152  	4  	
+J113158  	4  	Red Giant
+J113221  	2  	
+J113223  	2  	
+J113227  	4  	Pulsar
+J113230  	2  	
+J113243  	3  	
+J113250  	4  	Magnetar
+J113323  	2  	Wolf Rayet
+J113334  	3  	
+J113339  	3  	Pulsar
+J113347  	3  	
+J113420  	3  	
+J113432  	3  	Black Hole
+J113434  	1  	
+J113437  	4  	
+J113449  	2  	Magnetar
+J113451  	3  	
+J113453  	4  	Magnetar
+J113456  	4  	
+J113506  	1  	
+J113508  	4  	
+J113530  	3  	Magnetar
+J113543  	3  	
+J113551  	4  	Red Giant
+J113619  	3  	Black Hole
+J113629  	3  	
+J113632  	1  	Magnetar
+J113636  	5  	Cataclysmic Variable
+J113647  	3  	
+J113653  	1  	
+J113701  	5  	
+J113705  	3  	Black Hole
+J113712  	5  	Cataclysmic Variable
+J113721  	1  	
+J113723  	2  	
+J113727  	4  	Magnetar
+J113730  	4  	Red Giant
+J113754  	4  	Magnetar
+J113758  	5  	
+J113813  	4  	Pulsar
+J113820  	1  	
+J113907  	5  	
+J113918  	1  	
+J113923  	3  	
+J113925  	4  	Black Hole
+J113950  	4  	
+J114003  	6  	Magnetar
+J114008  	2  	Magnetar
+J114010  	3  	
+J114014  	5  	Wolf Rayet
+J114019  	5  	
+J114026  	4  	
+J114031  	4  	
+J114033  	1  	Wolf Rayet
+J114041  	5  	
+J114046  	2  	Red Giant
+J114048  	3  	
+J114055  	2  	
+J114100  	5  	Wolf Rayet
+J114107  	1  	
+J114119  	3  	Black Hole
+J114127  	3  	Black Hole
+J114133  	4  	Magnetar
+J114154  	5  	Cataclysmic Variable
+J114225  	3  	
+J114306  	2  	
+J114308  	2  	
+J114313  	1  	
+J114315  	5  	
+J114318  	4  	Red Giant
+J114330  	3  	
+J114337  	5  	
+J114342  	3  	Black Hole
+J114346  	2  	
+J114353  	5  	Red Giant
+J114355  	4  	Cataclysmic Variable
+J114358  	3  	
+J114403  	5  	Black Hole
+J114405  	2  	
+J114408  	4  	
+J114420  	1  	
+J114430  	6  	Magnetar
+J114441  	5  	
+J114443  	5  	Magnetar
+J114506  	3  	
+J114508  	3  	
+J114518  	5  	Cataclysmic Variable
+J114528  	2  	Red Giant
+J114530  	4  	Cataclysmic Variable
+J114537  	5  	Cataclysmic Variable
+J114540  	1  	
+J114546  	1  	
+J114612  	3  	
+J114627  	3  	Wolf Rayet
+J114648  	3  	Pulsar
+J114700  	1  	
+J114712  	2  	
+J114719  	1  	
+J114735  	4  	
+J114749  	2  	
+J114758  	2  	Pulsar
+J114809  	5  	
+J114835  	2  	
+J114842  	5  	
+J114905  	1  	
+J114914  	1  	Cataclysmic Variable
+J114916  	3  	
+J115008  	6  	Red Giant
+J115015  	3  	Cataclysmic Variable
+J115018  	4  	Wolf Rayet
+J115026  	4  	Black Hole
+J115031  	4  	
+J115041  	5  	
+J115048  	1  	
+J115118  	4  	
+J115124  	5  	
+J115127  	5  	
+J115136  	3  	
+J115200  	1  	
+J115216  	1  	
+J115234  	2  	
+J115253  	3  	
+J115304  	4  	
+J115308  	5  	Red Giant
+J115310  	2  	
+J115314  	2  	Cataclysmic Variable
+J115327  	2  	Wolf Rayet
+J115334  	2  	Cataclysmic Variable
+J115347  	2  	
+J115405  	5  	
+J115418  	5  	
+J115422  	5  	
+J115448  	3  	
+J115502  	3  	
+J115504  	3  	
+J115512  	3  	
+J115517  	5  	
+J115520  	5  	Wolf Rayet
+J115522  	5  	
+J115528  	4  	
+J115530  	2  	
+J115545  	1  	
+J115547  	4  	Cataclysmic Variable
+J115549  	1  	
+J115552  	4  	
+J115554  	4  	
+J115644  	5  	
+J115651  	2  	
+J115658  	4  	
+J115700  	2  	Wolf Rayet
+J115706  	3  	
+J115727  	5  	
+J115734  	2  	Cataclysmic Variable
+J115738  	1  	Pulsar
+J115808  	1  	
+J115815  	1  	
+J115823  	1  	
+J115844  	6  	
+J115855  	6  	
+J115901  	5  	
+J115905  	5  	Magnetar
+J115907  	5  	Wolf Rayet
+J115909  	3  	
+J115911  	2  	Wolf Rayet
+J115918  	3  	Pulsar
+J115923  	6  	
+J115933  	5  	Pulsar
+J115935  	6  	
+J115950  	5  	Red Giant
+J120010  	5  	
+J120103  	6  	Red Giant
+J120124  	3  	
+J120131  	4  	
+J120134  	4  	Pulsar
+J120252  	2  	
+J120256  	1  	
+J120308  	2  	
+J120310  	2  	Black Hole
+J120316  	4  	Cataclysmic Variable
+J120335  	1  	
+J120338  	1  	Wolf Rayet
+J120354  	5  	Cataclysmic Variable
+J120357  	3  	
+J120409  	4  	
+J120431  	1  	
+J120437  	5  	
+J120442  	2  	
+J120450  	4  	Red Giant
+J120452  	3  	
+J120455  	2  	
+J120512  	6  	Cataclysmic Variable
+J120522  	1  	
+J120546  	5  	Black Hole
+J120619  	2  	
+J120621  	1  	
+J120634  	2  	
+J120643  	4  	Pulsar
+J120704  	2  	
+J120726  	2  	
+J120734  	1  	
+J120742  	3  	
+J120750  	5  	
+J120816  	5  	Red Giant
+J120823  	5  	Magnetar
+J120844  	4  	
+J120922  	5  	Red Giant
+J120924  	2  	
+J120928  	2  	Red Giant
+J120937  	4  	
+J120945  	3  	Pulsar
+J121006  	4  	Pulsar
+J121027  	3  	
+J121105  	3  	
+J121116  	4  	Wolf Rayet
+J121131  	1  	Wolf Rayet
+J121146  	5  	
+J121158  	1  	Black Hole
+J121230  	5  	
+J121300  	3  	Red Giant
+J121323  	2  	
+J121347  	4  	Cataclysmic Variable
+J121358  	1  	
+J121412  	2  	Wolf Rayet
+J121416  	5  	Magnetar
+J121418  	1  	
+J121422  	3  	
+J121450  	5  	
+J121452  	3  	
+J121454  	2  	
+J121459  	5  	
+J121507  	3  	
+J121516  	1  	
+J121558  	4  	
+J121603  	3  	
+J121623  	4  	Pulsar
+J121628  	3  	
+J121649  	5  	Cataclysmic Variable
+J121658  	2  	Wolf Rayet
+J121700  	3  	Cataclysmic Variable
+J121704  	5  	
+J121706  	3  	Pulsar
+J121720  	2  	Black Hole
+J121728  	2  	
+J121745  	2  	Cataclysmic Variable
+J121747  	5  	Wolf Rayet
+J121749  	2  	
+J121842  	5  	
+J121845  	4  	Cataclysmic Variable
+J121847  	4  	
+J121856  	3  	
+J121915  	1  	
+J121921  	3  	Wolf Rayet
+J121925  	2  	Cataclysmic Variable
+J121928  	2  	Red Giant
+J121935  	1  	
+J121941  	1  	
+J121952  	2  	
+J121959  	5  	
+J122041  	3  	
+J122049  	5  	Red Giant
+J122056  	4  	Red Giant
+J122114  	1  	
+J122116  	5  	
+J122118  	2  	Wolf Rayet
+J122124  	2  	
+J122137  	2  	Magnetar
+J122155  	4  	Wolf Rayet
+J122213  	3  	
+J122220  	3  	Magnetar
+J122224  	1  	
+J122246  	2  	
+J122249  	6  	Red Giant
+J122259  	3  	Pulsar
+J122331  	2  	
+J122442  	3  	Black Hole
+J122452  	6  	Pulsar
+J122503  	4  	
+J122515  	5  	Wolf Rayet
+J122518  	5  	
+J122520  	5  	
+J122524  	2  	
+J122600  	4  	
+J122610  	5  	
+J122635  	2  	Red Giant
+J122638  	2  	
+J122656  	4  	Black Hole
+J122659  	1  	
+J122706  	4  	
+J122712  	1  	
+J122717  	1  	
+J122721  	5  	Magnetar
+J122728  	4  	
+J122732  	2  	
+J122757  	5  	
+J122803  	3  	Cataclysmic Variable
+J122806  	3  	
+J122818  	6  	Pulsar
+J122821  	2  	
+J122832  	2  	Red Giant
+J122837  	2  	
+J122843  	1  	Pulsar
+J122854  	3  	Red Giant
+J122931  	2  	
+J122934  	4  	
+J123047  	1  	
+J123055  	5  	Magnetar
+J123111  	1  	
+J123230  	3  	Magnetar
+J123235  	5  	
+J123246  	4  	Cataclysmic Variable
+J123249  	2  	
+J123303  	3  	Cataclysmic Variable
+J123345  	4  	
+J123352  	4  	
+J123405  	3  	
+J123412  	2  	Cataclysmic Variable
+J123432  	5  	Red Giant
+J123435  	2  	
+J123440  	5  	
+J123443  	3  	
+J123450  	2  	Wolf Rayet
+J123452  	3  	Cataclysmic Variable
+J123454  	1  	Wolf Rayet
+J123458  	4  	
+J123528  	4  	
+J123540  	2  	
+J123546  	5  	
+J123555  	2  	
+J123602  	5  	Black Hole
+J123628  	5  	
+J123658  	5  	
+J123708  	1  	
+J123726  	4  	Black Hole
+J123746  	4  	
+J123748  	1  	
+J123753  	4  	
+J123828  	1  	
+J123831  	1  	
+J123837  	3  	
+J123850  	2  	
+J123907  	2  	
+J123940  	6  	
+J123947  	4  	Cataclysmic Variable
+J123958  	2  	Cataclysmic Variable
+J124007  	2  	Red Giant
+J124023  	2  	
+J124028  	2  	
+J124046  	5  	
+J124051  	1  	
+J124058  	5  	Magnetar
+J124100  	5  	Black Hole
+J124109  	4  	Black Hole
+J124126  	3  	
+J124152  	5  	Red Giant
+J124201  	6  	
+J124203  	3  	
+J124207  	3  	
+J124215  	1  	Magnetar
+J124219  	2  	
+J124224  	4  	
+J124236  	4  	Cataclysmic Variable
+J124253  	2  	
+J124257  	3  	
+J124306  	4  	
+J124327  	3  	
+J124329  	3  	Red Giant
+J124358  	3  	
+J124409  	5  	Wolf Rayet
+J124449  	2  	Black Hole
+J124451  	1  	
+J124504  	6  	Red Giant
+J124508  	2  	
+J124526  	2  	Red Giant
+J124530  	2  	
+J124538  	5  	Red Giant
+J124611  	2  	
+J124630  	3  	
+J124635  	3  	Black Hole
+J124646  	3  	
+J124654  	3  	Wolf Rayet
+J124715  	3  	Black Hole
+J124722  	5  	Black Hole
+J124727  	4  	
+J124730  	5  	Black Hole
+J124733  	5  	
+J124744  	3  	Pulsar
+J124749  	2  	
+J124753  	3  	Magnetar
+J124813  	3  	Black Hole
+J124830  	3  	
+J124837  	4  	
+J124926  	1  	Cataclysmic Variable
+J124930  	4  	
+J124933  	4  	Cataclysmic Variable
+J124942  	5  	Cataclysmic Variable
+J124949  	5  	Black Hole
+J125011  	1  	
+J125016  	3  	Cataclysmic Variable
+J125023  	5  	
+J125029  	2  	
+J125031  	4  	
+J125049  	3  	
+J125101  	5  	
+J125111  	6  	Pulsar
+J125122  	6  	Cataclysmic Variable
+J125149  	3  	Pulsar
+J125209  	1  	Magnetar
+J125213  	4  	Magnetar
+J125216  	3  	
+J125227  	2  	Pulsar
+J125243  	3  	
+J125245  	5  	
+J125247  	4  	
+J125254  	5  	Cataclysmic Variable
+J125302  	4  	
+J125316  	4  	Magnetar
+J125350  	2  	
+J125403  	3  	
+J125428  	1  	
+J125449  	3  	Pulsar
+J125532  	5  	
+J125544  	5  	Wolf Rayet
+J125629  	4  	Pulsar
+J125634  	5  	
+J125641  	5  	Black Hole
+J125650  	1  	
+J125657  	5  	
+J125713  	1  	
+J125716  	5  	Magnetar
+J125721  	2  	
+J125727  	2  	Black Hole
+J125741  	3  	
+J125824  	2  	
+J125833  	3  	
+J125843  	1  	
+J125853  	5  	Cataclysmic Variable
+J125900  	5  	
+J125903  	1  	
+J125923  	2  	
+J125925  	1  	
+J125927  	2  	Red Giant
+J125929  	4  	
+J125938  	3  	
+J125944  	3  	Magnetar
+J125949  	3  	
+J125956  	2  	
+J130001  	4  	
+J130022  	3  	Magnetar
+J130026  	5  	Pulsar
+J130037  	5  	Magnetar
+J130039  	5  	Wolf Rayet
+J130045  	1  	
+J130116  	3  	Magnetar
+J130125  	2  	
+J130155  	1  	
+J130203  	4  	Wolf Rayet
+J130209  	2  	
+J130222  	2  	
+J130237  	4  	
+J130241  	5  	
+J130247  	3  	Black Hole
+J130253  	4  	
+J130256  	2  	Magnetar
+J130302  	5  	Cataclysmic Variable
+J130305  	5  	
+J130322  	1  	
+J130330  	4  	Pulsar
+J130332  	4  	
+J130334  	5  	
+J130343  	4  	Black Hole
+J130401  	5  	Red Giant
+J130403  	3  	
+J130451  	4  	Wolf Rayet
+J130510  	5  	
+J130518  	4  	
+J130535  	3  	Red Giant
+J130542  	1  	
+J130554  	4  	
+J130602  	1  	
+J130616  	3  	Magnetar
+J130621  	5  	
+J130650  	2  	Cataclysmic Variable
+J130709  	2  	
+J130711  	5  	Black Hole
+J130714  	1  	Black Hole
+J130719  	3  	
+J130735  	5  	
+J130759  	3  	
+J130810  	4  	Red Giant
+J130818  	5  	Magnetar
+J130828  	4  	Wolf Rayet
+J130832  	2  	
+J130835  	3  	
+J130842  	1  	
+J130854  	2  	
+J130900  	6  	
+J130931  	1  	
+J130944  	4  	
+J131004  	4  	Black Hole
+J131025  	3  	
+J131034  	2  	Wolf Rayet
+J131037  	4  	
+J131047  	4  	Red Giant
+J131107  	2  	Black Hole
+J131113  	4  	
+J131124  	2  	
+J131128  	5  	Cataclysmic Variable
+J131142  	5  	Black Hole
+J131204  	2  	
+J131208  	4  	Black Hole
+J131221  	2  	
+J131228  	3  	Red Giant
+J131232  	1  	
+J131240  	2  	
+J131245  	3  	Pulsar
+J131252  	4  	
+J131304  	3  	Magnetar
+J131315  	2  	Black Hole
+J131324  	3  	Red Giant
+J131401  	5  	
+J131450  	5  	Wolf Rayet
+J131505  	5  	Cataclysmic Variable
+J131509  	5  	
+J131520  	5  	
+J131549  	5  	Cataclysmic Variable
+J131551  	1  	Black Hole
+J131553  	4  	
+J131559  	3  	Red Giant
+J131618  	2  	
+J131624  	4  	Magnetar
+J131646  	5  	
+J131656  	3  	
+J131702  	1  	Pulsar
+J131704  	4  	
+J131706  	2  	Cataclysmic Variable
+J131712  	4  	
+J131716  	3  	Red Giant
+J131718  	5  	
+J131744  	2  	
+J131747  	5  	Wolf Rayet
+J131753  	2  	
+J131757  	3  	
+J131802  	3  	Wolf Rayet
+J131808  	2  	
+J131842  	2  	
+J131852  	2  	
+J131854  	1  	Black Hole
+J131859  	3  	Wolf Rayet
+J131916  	6  	
+J131948  	5  	
+J132009  	2  	
+J132012  	2  	
+J132024  	2  	
+J132037  	3  	
+J132048  	2  	
+J132052  	2  	Magnetar
+J132103  	2  	
+J132106  	6  	Pulsar
+J132144  	4  	Red Giant
+J132149  	4  	
+J132152  	4  	
+J132216  	1  	
+J132222  	3  	
+J132226  	3  	Black Hole
+J132256  	4  	Cataclysmic Variable
+J132258  	5  	
+J132309  	4  	
+J132328  	5  	Pulsar
+J132401  	2  	
+J132418  	2  	
+J132427  	5  	Black Hole
+J132458  	2  	Cataclysmic Variable
+J132525  	3  	
+J132532  	4  	
+J132546  	5  	
+J132557  	2  	
+J132559  	2  	
+J132601  	5  	Black Hole
+J132605  	5  	
+J132611  	4  	
+J132617  	2  	
+J132635  	3  	
+J132712  	2  	
+J132721  	3  	
+J132735  	4  	
+J132737  	3  	Red Giant
+J132740  	4  	
+J132746  	3  	
+J132750  	3  	
+J132754  	4  	Wolf Rayet
+J132758  	1  	Cataclysmic Variable
+J132814  	5  	Wolf Rayet
+J132823  	5  	
+J132907  	3  	
+J132918  	2  	
+J132946  	5  	
+J133011  	5  	Red Giant
+J133013  	4  	Red Giant
+J133015  	2  	
+J133023  	5  	Magnetar
+J133030  	1  	Cataclysmic Variable
+J133041  	3  	Cataclysmic Variable
+J133049  	2  	
+J133052  	1  	
+J133111  	2  	
+J133113  	4  	
+J133119  	5  	Magnetar
+J133121  	3  	
+J133128  	1  	
+J133150  	2  	
+J133157  	4  	Pulsar
+J133207  	3  	Pulsar
+J133210  	2  	
+J133218  	3  	Magnetar
+J133222  	5  	
+J133234  	3  	
+J133241  	6  	Cataclysmic Variable
+J133245  	1  	Red Giant
+J133250  	3  	
+J133252  	5  	
+J133259  	1  	
+J133335  	1  	
+J133358  	4  	
+J133417  	2  	
+J133419  	2  	Cataclysmic Variable
+J133440  	5  	
+J133458  	4  	
+J133513  	5  	Black Hole
+J133521  	3  	
+J133525  	5  	Red Giant
+J133529  	5  	
+J133537  	5  	Black Hole
+J133553  	5  	Black Hole
+J133557  	2  	Wolf Rayet
+J133613  	1  	
+J133632  	2  	Red Giant
+J133638  	4  	
+J133651  	3  	
+J133653  	1  	
+J133833  	5  	
+J133857  	3  	Wolf Rayet
+J133906  	6  	
+J133913  	5  	Magnetar
+J133923  	5  	Red Giant
+J133931  	4  	Magnetar
+J133936  	4  	
+J133951  	3  	
+J133957  	4  	Red Giant
+J134016  	5  	Cataclysmic Variable
+J134006  	2  	
+J134022  	3  	Cataclysmic Variable
+J134024  	5  	
+J134102  	3  	
+J134107  	2  	
+J134118  	3  	Cataclysmic Variable
+J134123  	3  	Cataclysmic Variable
+J134132  	1  	
+J134136  	3  	
+J134141  	5  	Cataclysmic Variable
+J134143  	1  	
+J134145  	1  	Pulsar
+J134216  	4  	Wolf Rayet
+J134242  	5  	
+J134301  	3  	Pulsar
+J134306  	2  	
+J134312  	1  	Magnetar
+J134323  	2  	Wolf Rayet
+J134330  	1  	
+J134333  	4  	
+J134349  	2  	Cataclysmic Variable
+J134354  	4  	
+J134401  	2  	
+J134405  	2  	
+J134407  	4  	
+J134414  	4  	
+J134431  	3  	
+J134440  	5  	
+J134446  	1  	
+J134459  	4  	
+J134527  	4  	Wolf Rayet
+J134534  	2  	Pulsar
+J134540  	1  	
+J134610  	1  	Wolf Rayet
+J134618  	2  	Black Hole
+J134629  	3  	
+J134637  	1  	
+J134652  	5  	
+J134654  	2  	
+J134702  	5  	Red Giant
+J134716  	4  	
+J134730  	2  	Black Hole
+J134732  	4  	Red Giant
+J134735  	2  	
+J134800  	2  	
+J134833  	1  	
+J134851  	4  	Wolf Rayet
+J134914  	1  	
+J134939  	1  	
+J134949  	2  	
+J134951  	2  	
+J135031  	6  	Magnetar
+J135036  	3  	Cataclysmic Variable
+J135038  	1  	
+J135046  	5  	
+J135100  	5  	
+J135129  	3  	Black Hole
+J135141  	2  	
+J135155  	2  	
+J135204  	5  	
+J135214  	3  	Magnetar
+J135220  	6  	Cataclysmic Variable
+J135230  	2  	
+J135245  	1  	
+J135250  	1  	
+J135301  	5  	Wolf Rayet
+J135304  	3  	
+J135306  	5  	Red Giant
+J135346  	4  	
+J135355  	3  	
+J135402  	5  	
+J135406  	3  	Black Hole
+J135411  	1  	Magnetar
+J135422  	2  	
+J135449  	5  	Black Hole
+J135504  	6  	Red Giant
+J135508  	4  	
+J135526  	3  	
+J135533  	5  	Wolf Rayet
+J135540  	5  	Red Giant
+J135543  	4  	
+J135554  	5  	
+J135559  	5  	
+J135623  	6  	Cataclysmic Variable
+J135626  	5  	Black Hole
+J135629  	2  	
+J135642  	3  	
+J135653  	5  	
+J135703  	2  	Pulsar
+J135705  	5  	Red Giant
+J135723  	3  	Wolf Rayet
+J135807  	4  	
+J135809  	2  	Red Giant
+J135825  	5  	Cataclysmic Variable
+J135827  	2  	Red Giant
+J135836  	4  	Pulsar
+J135852  	3  	
+J135908  	4  	
+J135910  	2  	Cataclysmic Variable
+J140012  	2  	
+J140019  	1  	Black Hole
+J140050  	3  	Red Giant
+J140053  	4  	
+J140112  	2  	
+J140121  	1  	Magnetar
+J140133  	5  	
+J140135  	1  	Pulsar
+J140154  	4  	Red Giant
+J140200  	6  	Magnetar
+J140208  	3  	
+J140215  	4  	
+J140244  	4  	Wolf Rayet
+J140246  	4  	
+J140249  	5  	
+J140308  	2  	
+J140322  	3  	
+J140336  	5  	Red Giant
+J140341  	3  	
+J140343  	5  	
+J140353  	2  	
+J140418  	5  	Black Hole
+J140514  	5  	
+J140521  	3  	Wolf Rayet
+J140524  	5  	Black Hole
+J140545  	4  	
+J140555  	6  	
+J140600  	5  	
+J140602  	1  	
+J140608  	5  	Wolf Rayet
+J140642  	2  	
+J140717  	5  	
+J140720  	4  	
+J140722  	2  	
+J140739  	3  	Pulsar
+J140741  	1  	Black Hole
+J140750  	2  	
+J140752  	3  	Cataclysmic Variable
+J140810  	4  	
+J140816  	2  	
+J140823  	4  	
+J140831  	1  	
+J140843  	2  	
+J140912  	4  	
+J140918  	6  	Wolf Rayet
+J140932  	4  	Wolf Rayet
+J141001  	4  	
+J141004  	3  	
+J141007  	3  	Wolf Rayet
+J141015  	2  	
+J141017  	1  	
+J141019  	1  	
+J141021  	4  	
+J141032  	5  	
+J141038  	1  	Wolf Rayet
+J141043  	5  	
+J141046  	3  	
+J141055  	4  	
+J141104  	4  	
+J141137  	5  	
+J141150  	1  	
+J141156  	2  	
+J141204  	5  	Cataclysmic Variable
+J141218  	4  	Black Hole
+J141220  	4  	Magnetar
+J141239  	1  	
+J141250  	5  	Red Giant
+J141252  	4  	Cataclysmic Variable
+J141316  	4  	
+J141319  	6  	Red Giant
+J141322  	4  	Pulsar
+J141332  	2  	Wolf Rayet
+J141342  	4  	
+J141425  	4  	
+J141434  	6  	
+J141438  	2  	
+J141451  	3  	
+J141502  	6  	
+J141514  	1  	
+J141609  	5  	
+J141611  	2  	
+J141615  	5  	
+J141633  	4  	
+J141637  	2  	Magnetar
+J141647  	4  	
+J141728  	5  	
+J141740  	4  	Pulsar
+J141807  	1  	
+J141812  	1  	
+J141832  	3  	
+J141848  	3  	
+J141857  	2  	
+J141931  	4  	
+J142018  	3  	
+J142026  	3  	Magnetar
+J142038  	3  	Pulsar
+J142055  	2  	
+J142110  	5  	
+J142114  	1  	
+J142117  	4  	
+J142119  	1  	
+J142136  	1  	
+J142138  	5  	Magnetar
+J142200  	4  	Cataclysmic Variable
+J142214  	4  	
+J142234  	5  	
+J142239  	2  	
+J142241  	4  	Cataclysmic Variable
+J142247  	6  	Cataclysmic Variable
+J142306  	2  	
+J142327  	1  	
+J142335  	4  	
+J142349  	5  	
+J142355  	4  	Red Giant
+J142400  	3  	
+J142414  	3  	Black Hole
+J142438  	5  	Wolf Rayet
+J142443  	3  	Wolf Rayet
+J142506  	4  	Magnetar
+J142520  	3  	Magnetar
+J142528  	6  	
+J142533  	2  	Pulsar
+J142535  	5  	
+J142547  	2  	
+J142603  	3  	Wolf Rayet
+J142617  	1  	
+J142624  	5  	Magnetar
+J142631  	5  	
+J142649  	1  	
+J142653  	5  	Red Giant
+J142701  	1  	
+J142800  	4  	Magnetar
+J142814  	5  	Magnetar
+J142822  	4  	Wolf Rayet
+J142826  	2  	Wolf Rayet
+J142838  	2  	Red Giant
+J142845  	2  	
+J142847  	2  	Magnetar
+J142858  	5  	Wolf Rayet
+J142910  	5  	
+J142918  	2  	Wolf Rayet
+J142923  	4  	
+J142937  	2  	
+J142941  	1  	Magnetar
+J142951  	3  	
+J143002  	1  	Black Hole
+J143040  	3  	
+J143057  	5  	
+J143107  	5  	Black Hole
+J143110  	3  	
+J143123  	5  	Pulsar
+J143127  	5  	Black Hole
+J143133  	1  	
+J143140  	4  	Magnetar
+J143200  	6  	Red Giant
+J143202  	1  	
+J143204  	1  	
+J143234  	2  	
+J143245  	5  	
+J143320  	2  	Magnetar
+J143336  	2  	
+J143345  	3  	
+J143359  	2  	
+J143421  	1  	
+J143429  	2  	
+J143447  	3  	
+J143455  	2  	
+J143505  	2  	
+J143513  	3  	Cataclysmic Variable
+J143517  	1  	Black Hole
+J143525  	5  	
+J143546  	2  	
+J143557  	4  	Red Giant
+J143605  	5  	Magnetar
+J143614  	3  	
+J143626  	5  	Pulsar
+J143628  	1  	
+J143639  	2  	
+J143649  	1  	
+J143702  	2  	Black Hole
+J143704  	3  	
+J143706  	2  	
+J143718  	5  	Black Hole
+J143740  	5  	
+J143751  	6  	
+J143819  	5  	
+J143841  	4  	
+J143845  	5  	Cataclysmic Variable
+J143902  	4  	
+J143916  	3  	
+J143918  	3  	
+J143922  	4  	
+J143933  	2  	
+J143946  	4  	Pulsar
+J144004  	2  	
+J144024  	3  	
+J144038  	4  	Pulsar
+J144057  	2  	
+J144103  	3  	
+J144107  	5  	Magnetar
+J144115  	5  	Black Hole
+J144120  	4  	Black Hole
+J144131  	4  	
+J144135  	4  	Black Hole
+J144153  	2  	
+J144203  	2  	
+J144218  	2  	
+J144228  	1  	Red Giant
+J144303  	1  	
+J144316  	3  	Pulsar
+J144326  	2  	
+J144329  	4  	
+J144401  	4  	Red Giant
+J144408  	3  	Black Hole
+J144420  	6  	
+J144422  	2  	
+J144426  	2  	
+J144434  	5  	Black Hole
+J144436  	6  	
+J144447  	3  	
+J144450  	1  	
+J144454  	5  	Red Giant
+J144519  	4  	Magnetar
+J144530  	1  	
+J144543  	5  	Wolf Rayet
+J144546  	2  	Pulsar
+J144553  	3  	
+J144605  	2  	
+J144621  	3  	Red Giant
+J144632  	1  	
+J144636  	3  	
+J144646  	3  	
+J144704  	1  	
+J144725  	3  	Magnetar
+J144727  	2  	
+J144732  	4  	Magnetar
+J144739  	2  	
+J144743  	4  	Wolf Rayet
+J144746  	4  	
+J144751  	3  	
+J144822  	1  	
+J144838  	2  	
+J144845  	4  	
+J144855  	1  	
+J144902  	6  	
+J144913  	1  	
+J144938  	1  	
+J144944  	5  	Cataclysmic Variable
+J144956  	2  	
+J145040  	3  	
+J145129  	4  	
+J145131  	5  	
+J145145  	2  	Red Giant
+J145155  	2  	
+J145203  	5  	Wolf Rayet
+J145208  	5  	
+J145211  	2  	Black Hole
+J145225  	2  	Black Hole
+J145238  	4  	
+J145246  	2  	Red Giant
+J145310  	5  	
+J145313  	5  	
+J145316  	2  	Magnetar
+J145318  	4  	Black Hole
+J145320  	5  	Red Giant
+J145322  	5  	Magnetar
+J145335  	4  	
+J145337  	1  	
+J145349  	5  	
+J145359  	5  	
+J145406  	1  	
+J145416  	5  	
+J145424  	4  	Cataclysmic Variable
+J145426  	2  	
+J145440  	2  	
+J145452  	4  	
+J145510  	6  	
+J145512  	5  	Magnetar
+J145523  	6  	
+J145535  	4  	
+J145555  	3  	
+J145604  	4  	
+J145615  	3  	
+J145619  	2  	
+J145632  	3  	
+J145634  	2  	
+J145645  	3  	
+J145659  	4  	
+J145706  	5  	Wolf Rayet
+J145715  	2  	
+J145717  	3  	Pulsar
+J145735  	5  	
+J145739  	4  	
+J145749  	4  	Black Hole
+J145753  	5  	
+J145757  	4  	Black Hole
+J145759  	2  	
+J145805  	2  	
+J145825  	5  	
+J145838  	4  	
+J145844  	5  	Magnetar
+J145846  	5  	
+J145848  	4  	Red Giant
+J145851  	3  	Cataclysmic Variable
+J145916  	3  	Pulsar
+J145931  	2  	
+J145937  	4  	Black Hole
+J145939  	6  	
+J145944  	4  	
+J150020  	6  	Magnetar
+J150026  	4  	Wolf Rayet
+J150036  	5  	
+J150044  	4  	
+J150048  	3  	
+J150109  	2  	
+J150112  	4  	Red Giant
+J150131  	1  	
+J150135  	3  	
+J150137  	2  	
+J150216  	1  	
+J150234  	2  	Cataclysmic Variable
+J150306  	5  	
+J150318  	4  	Cataclysmic Variable
+J150320  	4  	Black Hole
+J150325  	1  	
+J150341  	2  	Wolf Rayet
+J150407  	1  	Red Giant
+J150418  	2  	Wolf Rayet
+J150444  	3  	
+J150515  	5  	Magnetar
+J150533  	2  	
+J150539  	1  	Black Hole
+J150606  	5  	Wolf Rayet
+J150625  	4  	
+J150627  	2  	
+J150629  	1  	
+J150635  	4  	Red Giant
+J150637  	4  	
+J150656  	4  	Black Hole
+J150700  	2  	
+J150704  	3  	
+J150737  	3  	
+J150745  	1  	
+J150754  	2  	
+J150805  	4  	
+J150807  	2  	
+J150818  	1  	Pulsar
+J150827  	1  	
+J150836  	2  	Magnetar
+J150853  	2  	
+J150859  	2  	
+J150904  	2  	Pulsar
+J150921  	2  	
+J150944  	4  	Magnetar
+J150951  	4  	Black Hole
+J151021  	4  	
+J151035  	5  	
+J151045  	3  	
+J151047  	2  	Pulsar
+J151057  	5  	
+J151102  	2  	Black Hole
+J151106  	1  	Magnetar
+J151125  	2  	Magnetar
+J151141  	1  	
+J151200  	5  	Black Hole
+J151204  	5  	
+J151231  	2  	
+J151242  	3  	
+J151248  	2  	
+J151250  	2  	
+J151300  	5  	Cataclysmic Variable
+J151303  	4  	Red Giant
+J151311  	2  	
+J151319  	5  	
+J151325  	6  	Pulsar
+J151332  	1  	
+J151341  	3  	
+J151348  	2  	Pulsar
+J151353  	4  	Black Hole
+J151359  	4  	
+J151405  	3  	
+J151416  	4  	Wolf Rayet
+J151429  	3  	
+J151431  	2  	
+J151433  	3  	
+J151503  	2  	Red Giant
+J151516  	3  	
+J151518  	1  	
+J151520  	4  	Pulsar
+J151530  	5  	Pulsar
+J151538  	3  	Magnetar
+J151548  	2  	Magnetar
+J151601  	1  	
+J151610  	4  	Red Giant
+J151615  	2  	Cataclysmic Variable
+J151643  	4  	Pulsar
+J151645  	3  	Wolf Rayet
+J151718  	5  	
+J151720  	4  	
+J151733  	3  	Wolf Rayet
+J151757  	4  	
+J151804  	3  	Pulsar
+J151811  	5  	Black Hole
+J151813  	5  	Pulsar
+J151817  	6  	Wolf Rayet
+J151838  	6  	
+J151900  	3  	Cataclysmic Variable
+J151902  	2  	
+J151909  	5  	Pulsar
+J151920  	6  	Cataclysmic Variable
+J151940  	4  	
+J152006  	1  	
+J152014  	1  	
+J152031  	3  	
+J152034  	5  	Magnetar
+J152044  	3  	Magnetar
+J152106  	5  	Pulsar
+J152111  	5  	Pulsar
+J152117  	6  	
+J152143  	3  	
+J152146  	3  	Pulsar
+J152218  	3  	Magnetar
+J152255  	4  	Magnetar
+J152257  	1  	
+J152322  	2  	Cataclysmic Variable
+J152325  	5  	Cataclysmic Variable
+J152333  	3  	
+J152353  	1  	
+J152404  	4  	Red Giant
+J152421  	4  	
+J152433  	2  	Red Giant
+J152443  	4  	
+J152502  	4  	
+J152537  	1  	Black Hole
+J152544  	3  	Wolf Rayet
+J152550  	6  	
+J152624  	2  	
+J152628  	4  	Black Hole
+J152633  	4  	
+J152636  	3  	
+J152654  	4  	Cataclysmic Variable
+J152703  	5  	
+J152711  	4  	Black Hole
+J152720  	4  	Magnetar
+J152722  	6  	
+J152737  	2  	Black Hole
+J152739  	5  	
+J152741  	3  	
+J152757  	3  	
+J152801  	2  	Pulsar
+J152820  	5  	Pulsar
+J152825  	2  	
+J152827  	5  	Black Hole
+J152912  	5  	Black Hole
+J152928  	1  	
+J152931  	3  	
+J152941  	2  	
+J152950  	2  	Cataclysmic Variable
+J153001  	1  	
+J153003  	2  	
+J153030  	2  	Wolf Rayet
+J153034  	3  	Pulsar
+J153051  	3  	
+J153054  	5  	
+J153104  	3  	
+J153106  	5  	Red Giant
+J153110  	4  	Red Giant
+J153116  	4  	Black Hole
+J153144  	5  	
+J153202  	4  	
+J153215  	4  	Wolf Rayet
+J153217  	6  	
+J153222  	5  	Cataclysmic Variable
+J153229  	2  	
+J153247  	2  	Wolf Rayet
+J153311  	1  	
+J153335  	5  	Wolf Rayet
+J153338  	4  	
+J153447  	5  	Cataclysmic Variable
+J153449  	5  	Red Giant
+J153528  	3  	
+J153530  	1  	
+J153532  	2  	Pulsar
+J153536  	1  	
+J153546  	3  	Wolf Rayet
+J153627  	2  	Magnetar
+J153722  	4  	Magnetar
+J153802  	5  	Cataclysmic Variable
+J153825  	5  	Red Giant
+J153858  	3  	
+J153903  	3  	
+J153919  	5  	Pulsar
+J154021  	6  	Magnetar
+J154029  	1  	
+J154102  	4  	
+J154109  	4  	
+J154145  	3  	
+J154152  	5  	
+J154212  	2  	
+J154226  	1  	
+J154232  	4  	
+J154249  	2  	
+J154321  	4  	
+J154354  	1  	Magnetar
+J154357  	3  	
+J154407  	4  	
+J154449  	3  	
+J154509  	5  	
+J154515  	2  	
+J154530  	3  	
+J154535  	1  	Black Hole
+J154538  	2  	
+J154541  	4  	
+J154551  	5  	
+J154606  	2  	
+J154610  	4  	Wolf Rayet
+J154631  	4  	Red Giant
+J154634  	3  	Black Hole
+J154642  	3  	Black Hole
+J154706  	4  	
+J154724  	4  	
+J154726  	5  	
+J154733  	5  	
+J154735  	2  	
+J154813  	2  	
+J154824  	4  	Wolf Rayet
+J154829  	6  	Cataclysmic Variable
+J154833  	4  	
+J154846  	5  	Wolf Rayet
+J154854  	4  	
+J154858  	2  	
+J154900  	3  	
+J154906  	5  	Magnetar
+J154934  	3  	Cataclysmic Variable
+J154937  	2  	
+J155002  	4  	
+J155008  	3  	
+J155013  	1  	
+J155023  	1  	
+J155029  	1  	Black Hole
+J155035  	2  	
+J155040  	5  	
+J155117  	3  	
+J155124  	3  	
+J155200  	4  	
+J155203  	1  	Wolf Rayet
+J155207  	6  	
+J155214  	4  	
+J155249  	4  	Pulsar
+J155256  	5  	Black Hole
+J155307  	2  	
+J155311  	6  	
+J155313  	4  	
+J155338  	4  	
+J155340  	4  	
+J155403  	3  	
+J155416  	4  	
+J155419  	3  	
+J155429  	1  	
+J155459  	1  	
+J155504  	1  	
+J155506  	4  	
+J155521  	4  	Cataclysmic Variable
+J155541  	3  	
+J155545  	3  	
+J155551  	2  	
+J155600  	5  	Cataclysmic Variable
+J155616  	2  	Black Hole
+J155620  	2  	Wolf Rayet
+J155631  	2  	
+J155650  	6  	
+J155711  	4  	Wolf Rayet
+J155714  	5  	Pulsar
+J155722  	3  	
+J155737  	2  	Pulsar
+J155739  	5  	
+J155831  	4  	
+J155833  	1  	Magnetar
+J155838  	6  	
+J155845  	5  	
+J155852  	3  	
+J155905  	5  	
+J155928  	5  	
+J155935  	1  	
+J155959  	4  	
+J160014  	2  	Red Giant
+J160016  	4  	
+J160032  	4  	Black Hole
+J160039  	1  	
+J160046  	4  	
+J160111  	3  	Wolf Rayet
+J160126  	2  	
+J160156  	4  	
+J160225  	4  	
+J160305  	2  	
+J160307  	1  	Red Giant
+J160311  	2  	
+J160321  	4  	
+J160334  	1  	Black Hole
+J160345  	1  	
+J160412  	2  	Pulsar
+J160419  	4  	
+J160455  	4  	
+J160459  	4  	Red Giant
+J160534  	1  	
+J160547  	5  	Magnetar
+J160623  	5  	Pulsar
+J160645  	3  	
+J160650  	3  	
+J160710  	1  	
+J160715  	2  	Black Hole
+J160722  	6  	Red Giant
+J160739  	3  	Pulsar
+J160753  	2  	
+J160800  	4  	Pulsar
+J160822  	3  	
+J160835  	1  	
+J160837  	1  	
+J160847  	3  	
+J160855  	6  	
+J160927  	2  	Cataclysmic Variable
+J160929  	4  	Black Hole
+J160941  	2  	
+J161029  	4  	
+J161032  	5  	
+J161037  	4  	
+J161051  	3  	Cataclysmic Variable
+J161107  	1  	
+J161115  	1  	
+J161119  	4  	
+J161138  	2  	Red Giant
+J161213  	3  	
+J161215  	6  	
+J161246  	2  	
+J161257  	1  	Red Giant
+J161301  	5  	
+J161303  	3  	
+J161335  	6  	
+J161338  	3  	
+J161344  	1  	Black Hole
+J161354  	5  	
+J161357  	4  	Black Hole
+J161411  	2  	Wolf Rayet
+J161441  	3  	
+J161455  	3  	Pulsar
+J161509  	1  	
+J161524  	1  	Pulsar
+J161609  	5  	
+J161628  	2  	
+J161635  	5  	Black Hole
+J161644  	1  	
+J161657  	3  	
+J161737  	5  	Black Hole
+J161745  	5  	Red Giant
+J161747  	5  	Cataclysmic Variable
+J161752  	4  	
+J161811  	1  	
+J161815  	4  	
+J161838  	5  	Cataclysmic Variable
+J161846  	1  	
+J161854  	3  	Black Hole
+J161940  	5  	
+J161944  	5  	
+J162007  	5  	Black Hole
+J162010  	3  	Cataclysmic Variable
+J162042  	2  	
+J162047  	5  	Wolf Rayet
+J162118  	1  	Cataclysmic Variable
+J162132  	5  	
+J162159  	2  	
+J162205  	4  	
+J162226  	4  	Red Giant
+J162231  	4  	
+J162251  	4  	Black Hole
+J162255  	4  	
+J162303  	4  	Black Hole
+J162332  	2  	
+J162349  	5  	Wolf Rayet
+J162430  	2  	
+J162437  	3  	
+J162459  	3  	
+J162516  	2  	
+J162518  	2  	Black Hole
+J162604  	1  	
+J162612  	5  	
+J162614  	6  	Pulsar
+J162632  	4  	
+J162638  	5  	Pulsar
+J162641  	1  	Red Giant
+J162656  	4  	
+J162700  	2  	
+J162720  	2  	Red Giant
+J162753  	5  	Pulsar
+J162816  	4  	Magnetar
+J162819  	4  	
+J162828  	4  	Cataclysmic Variable
+J162831  	4  	
+J162853  	5  	Red Giant
+J162858  	1  	
+J163138  	2  	Pulsar
+J163146  	2  	Cataclysmic Variable
+J163156  	1  	
+J163203  	1  	Cataclysmic Variable
+J163217  	4  	Cataclysmic Variable
+J163225  	6  	Pulsar
+J163318  	2  	
+J163408  	5  	Cataclysmic Variable
+J163435  	4  	Wolf Rayet
+J163444  	4  	
+J163446  	2  	
+J163522  	2  	
+J163526  	3  	
+J163529  	3  	
+J163533  	1  	Pulsar
+J163641  	4  	Black Hole
+J163701  	5  	
+J163743  	1  	
+J163745  	3  	
+J163754  	4  	
+J163804  	1  	Wolf Rayet
+J163902  	2  	Red Giant
+J163911  	3  	Red Giant
+J163923  	2  	
+J163930  	5  	Cataclysmic Variable
+J164025  	4  	
+J164031  	4  	
+J164034  	3  	
+J164104  	3  	
+J164116  	3  	
+J164126  	2  	
+J164130  	2  	
+J164147  	5  	
+J164218  	1  	
+J164223  	3  	Pulsar
+J164235  	2  	Pulsar
+J164250  	3  	Black Hole
+J164327  	5  	
+J164338  	3  	Magnetar
+J164342  	3  	Wolf Rayet
+J164417  	2  	
+J164430  	5  	
+J164457  	3  	
+J164501  	3  	
+J164507  	2  	Cataclysmic Variable
+J164511  	5  	Cataclysmic Variable
+J164528  	4  	Pulsar
+J164550  	1  	Magnetar
+J164553  	5  	
+J164610  	5  	
+J164613  	2  	Magnetar
+J164621  	5  	Magnetar
+J164659  	4  	
+J164701  	6  	Wolf Rayet
+J164713  	3  	
+J164729  	3  	Wolf Rayet
+J164732  	5  	
+J164745  	6  	Cataclysmic Variable
+J164751  	3  	
+J164756  	1  	
+J164759  	1  	
+J164807  	1  	
+J164816  	2  	
+J164835  	4  	Black Hole
+J164846  	5  	Wolf Rayet
+J164900  	5  	
+J164921  	2  	Cataclysmic Variable
+J164927  	1  	
+J164931  	2  	
+J164938  	2  	
+J164951  	3  	
+J165001  	3  	Red Giant
+J165006  	2  	
+J165014  	2  	
+J165020  	4  	Wolf Rayet
+J165056  	1  	
+J165058  	4  	
+J165105  	4  	Cataclysmic Variable
+J165118  	3  	
+J165153  	3  	Pulsar
+J165157  	2  	Red Giant
+J165205  	5  	Cataclysmic Variable
+J165216  	1  	Red Giant
+J165220  	5  	
+J165224  	3  	
+J165302  	3  	Magnetar
+J165308  	4  	Cataclysmic Variable
+J165312  	5  	
+J165326  	4  	Cataclysmic Variable
+J165340  	5  	
+J165357  	2  	
+J165412  	2  	
+J165423  	4  	
+J165520  	5  	
+J165532  	4  	
+J165611  	4  	Black Hole
+J165641  	6  	Black Hole
+J165645  	4  	Pulsar
+J165648  	2  	
+J165719  	4  	Pulsar
+J165741  	1  	Cataclysmic Variable
+J165743  	5  	
+J165803  	3  	Wolf Rayet
+J165806  	3  	Wolf Rayet
+J165815  	3  	
+J165820  	4  	
+J165839  	4  	Black Hole
+J165847  	3  	Cataclysmic Variable
+J165901  	1  	
+J165920  	4  	
+J165936  	3  	
+J165940  	5  	Pulsar
+J165943  	4  	Wolf Rayet
+J165946  	5  	Red Giant
+J165953  	5  	Wolf Rayet
+J170002  	3  	
+J170038  	2  	Black Hole
+J170106  	1  	
+J170118  	6  	
+J170122  	5  	
+J170127  	4  	
+J170132  	3  	Black Hole
+J170144  	3  	
+J170151  	4  	Pulsar
+J170158  	5  	Black Hole
+J170215  	4  	
+J170231  	5  	
+J170236  	3  	
+J170240  	5  	
+J170305  	4  	Black Hole
+J170327  	5  	
+J170409  	3  	Red Giant
+J170417  	5  	Red Giant
+J170445  	4  	
+J170511  	3  	
+J170540  	5  	Wolf Rayet
+J170544  	1  	
+J170550  	3  	
+J170552  	2  	
+J170558  	2  	Black Hole
+J170642  	4  	Pulsar
+J170645  	1  	
+J170656  	3  	
+J170717  	3  	
+J170736  	5  	Red Giant
+J170740  	3  	
+J170807  	5  	
+J170809  	5  	Black Hole
+J170817  	3  	Cataclysmic Variable
+J170845  	6  	
+J170930  	5  	
+J170949  	1  	
+J171013  	5  	
+J171019  	1  	Cataclysmic Variable
+J171136  	5  	
+J171142  	2  	
+J171158  	5  	
+J171225  	4  	Black Hole
+J171246  	5  	
+J171309  	2  	
+J171312  	1  	
+J171334  	4  	
+J171344  	4  	Red Giant
+J171359  	4  	
+J171404  	6  	Red Giant
+J171420  	3  	
+J171424  	2  	
+J171430  	4  	Magnetar
+J171518  	2  	
+J171539  	2  	
+J171542  	3  	
+J171549  	3  	Pulsar
+J171554  	4  	Magnetar
+J171622  	5  	Cataclysmic Variable
+J171653  	1  	
+J171700  	1  	
+J171722  	5  	Pulsar
+J171805  	1  	Red Giant
+J171813  	3  	Magnetar
+J171818  	1  	Magnetar
+J171828  	3  	
+J171937  	4  	
+J172003  	1  	
+J172028  	3  	
+J172052  	3  	Pulsar
+J172125  	5  	Magnetar
+J172139  	5  	Red Giant
+J172147  	1  	
+J172240  	1  	
+J172350  	2  	
+J172354  	2  	
+J172422  	3  	Magnetar
+J172431  	5  	
+J172502  	4  	
+J172512  	4  	
+J172551  	2  	
+J172556  	2  	
+J172701  	3  	Wolf Rayet
+J172743  	3  	
+J172751  	3  	Red Giant
+J172815  	3  	
+J172840  	5  	
+J172842  	6  	Cataclysmic Variable
+J172852  	3  	
+J172907  	1  	Pulsar
+J172915  	4  	
+J172926  	4  	
+J172937  	5  	
+J172943  	5  	
+J173052  	5  	
+J173213  	2  	
+J173223  	3  	
+J173230  	3  	
+J173245  	2  	
+J173322  	2  	
+J173330  	3  	
+J173506  	5  	Wolf Rayet
+J173550  	5  	
+J173638  	4  	
+J173645  	5  	
+J173842  	1  	
+J174317  	3  	Wolf Rayet
+J174405  	1  	Wolf Rayet
+J174449  	2  	
+J203753  	3  	
+J203814  	2  	
+J203952  	4  	
+J204030  	3  	
+J204039  	3  	Magnetar
+J204221  	2  	
+J204230  	4  	
+J204323  	3  	
+J204350  	5  	
+J204503  	1  	Magnetar
+J204506  	4  	
+J204623  	2  	
+J204635  	4  	
+J204640  	1  	Black Hole
+J204815  	4  	
+J204842  	3  	
+J204853  	4  	
+J205004  	1  	
+J205027  	3  	
+J205136  	3  	
+J205141  	6  	Magnetar
+J205205  	5  	
+J205412  	3  	
+J205517  	5  	
+J205546  	2  	
+J205659  	5  	Red Giant
+J205738  	5  	
+J205818  	1  	
+J205900  	3  	
+J205922  	4  	Black Hole
+J210235  	5  	
+J210247  	4  	
+J210333  	4  	
+J210355  	2  	
+J210422  	2  	
+J210436  	1  	
+J210445  	3  	
+J210458  	4  	Wolf Rayet
+J210519  	5  	Black Hole
+J210536  	2  	
+J210548  	2  	
+J210750  	5  	Pulsar
+J210952  	3  	
+J211000  	2  	Red Giant
+J211027  	4  	
+J211036  	2  	
+J211151  	3  	
+J211258  	4  	
+J211328  	4  	
+J211353  	6  	Wolf Rayet
+J211504  	4  	
+J211517  	5  	Wolf Rayet
+J211805  	3  	
+J211817  	4  	Pulsar
+J211908  	2  	
+J211915  	2  	Cataclysmic Variable
+J211936  	2  	
+J212025  	3  	Magnetar
+J212028  	4  	Magnetar
+J212129  	4  	
+J212159  	3  	
+J212203  	5  	Wolf Rayet
+J212207  	3  	
+J212224  	5  	Wolf Rayet
+J212238  	2  	Cataclysmic Variable
+J212302  	5  	Magnetar
+J212304  	3  	Cataclysmic Variable
+J212319  	2  	Pulsar
+J212329  	3  	
+J212336  	5  	Pulsar
+J212338  	1  	
+J212417  	4  	Cataclysmic Variable
+J212504  	1  	Wolf Rayet
+J212607  	2  	
+J212612  	6  	
+J212627  	4  	Black Hole
+J212713  	3  	
+J212812  	3  	Wolf Rayet
+J212838  	4  	
+J212851  	4  	Magnetar
+J212904  	1  	
+J212906  	2  	
+J212954  	4  	
+J212957  	1  	
+J213055  	5  	Cataclysmic Variable
+J213058  	2  	
+J213109  	3  	
+J213111  	2  	
+J213125  	5  	Pulsar
+J213139  	4  	Pulsar
+J213226  	5  	Pulsar
+J213245  	5  	Wolf Rayet
+J213342  	1  	
+J213344  	5  	
+J213411  	3  	Red Giant
+J213423  	3  	Red Giant
+J213429  	4  	Red Giant
+J213502  	5  	Black Hole
+J213534  	3  	Wolf Rayet
+J213555  	1  	Black Hole
+J213615  	4  	Magnetar
+J213642  	5  	
+J213653  	1  	
+J213734  	5  	
+J213737  	2  	Black Hole
+J213753  	6  	Red Giant
+J213820  	4  	
+J213924  	4  	
+J213932  	1  	
+J213956  	5  	Wolf Rayet
+J214006  	5  	Cataclysmic Variable
+J214009  	3  	
+J214212  	5  	
+J214227  	3  	Pulsar
+J214238  	2  	Magnetar
+J214308  	4  	
+J214318  	5  	
+J214440  	4  	
+J214534  	1  	
+J214600  	3  	Black Hole
+J214654  	3  	
+J214712  	5  	
+J214725  	2  	
+J214739  	2  	Pulsar
+J214744  	3  	Wolf Rayet
+J214811  	4  	
+J214843  	2  	Wolf Rayet
+J214854  	2  	
+J214901  	2  	Wolf Rayet
+J214929  	2  	
+J215009  	5  	Cataclysmic Variable
+J215101  	4  	
+J215117  	1  	
+J215124  	5  	
+J215151  	2  	
+J215215  	5  	
+J215304  	5  	Black Hole
+J215326  	3  	
+J215338  	5  	
+J215417  	1  	
+J215431  	1  	
+J215455  	4  	
+J215537  	2  	
+J215554  	5  	
+J215615  	4  	Magnetar
+J215736  	2  	Red Giant
+J215743  	4  	
+J215754  	1  	Red Giant
+J215758  	4  	
+J215900  	1  	Cataclysmic Variable
+J215930  	6  	Red Giant
+J215935  	4  	
+J215944  	2  	
+J220151  	4  	
+J220215  	4  	Pulsar
+J220301  	3  	
+J220338  	3  	
+J220438  	3  	
+J220546  	5  	
+J220654  	1  	
+J220832  	3  	Pulsar
+J220838  	3  	
+J220924  	5  	
+J220950  	3  	
+J221117  	3  	
+J221203  	1  	Black Hole
+J221325  	5  	Wolf Rayet
+J221337  	2  	
+J221356  	5  	
+J221414  	3  	
+J221447  	3  	
+J221512  	5  	Red Giant
+J221515  	3  	
+J221855  	4  	Magnetar
+J221859  	4  	
+J222045  	6  	Pulsar
+J222104  	3  	
+J222120  	3  	
+J222125  	4  	Black Hole
+J222206  	1  	
+J222222  	3  	
+J222408  	5  	
+J222604  	6  	Red Giant
+J222732  	3  	
+J222822  	2  	
+J222830  	2  	Pulsar
+J222834  	5  	
+J222914  	1  	Pulsar
+J223018  	5  	Pulsar
+J223026  	1  	
+J223029  	2  	
+J223109  	3  	Cataclysmic Variable
+J223207  	3  	
+J223312  	4  	
+J223320  	2  	
+J223348  	2  	
+J223432  	6  	
+J223511  	2  	
+J223538  	2  	
+J223552  	2  	Wolf Rayet
+J223601  	3  	Magnetar
+J223650  	1  	
+J223658  	3  	
+J223703  	1  	
+J223733  	1  	
+J223808  	4  	Black Hole
+J223824  	4  	
+J223853  	2  	
+J223855  	1  	Red Giant
+J224031  	4  	Pulsar
+J224145  	2  	
+J224148  	4  	Wolf Rayet
+J224217  	2  	
+J224324  	1  	
+J224352  	3  	
+J224401  	3  	
+J224442  	1  	Black Hole
+J224558  	4  	
+J224721  	5  	Cataclysmic Variable
+J224754  	4  	
+J224826  	3  	Wolf Rayet
+J224926  	3  	
+J225046  	1  	
+J225111  	4  	
+J225128  	2  	Magnetar
+J225133  	4  	Red Giant
+J225234  	4  	
+J225316  	2  	Cataclysmic Variable
+J225350  	3  	Red Giant
+J225441  	4  	Magnetar
+J225524  	3  	Black Hole
+J225530  	4  	Magnetar
+J225555  	1  	Magnetar
+J225805  	2  	
+J225949  	3  	
+J230047  	5  	Black Hole
+J230049  	6  	Cataclysmic Variable
+J230207  	2  	
+J230221  	5  	Cataclysmic Variable
+J230226  	3  	
+J230242  	5  	Black Hole
+J230257  	5  	
+J230301  	4  	
+J230559  	6  	Red Giant
+J230708  	3  	
+J230722  	3  	Black Hole
+J230745  	5  	
+J230842  	5  	
+J230905  	3  	
+J230936  	5  	
+J230959  	2  	
+J231004  	1  	Cataclysmic Variable
+J231137  	5  	
+J231210  	2  	
+J231240  	3  	
+J231245  	3  	Red Giant
+J231306  	1  	Wolf Rayet
+J231341  	4  	
+J231517  	2  	Cataclysmic Variable
+J231541  	1  	
+J231545  	3  	Pulsar
+J231614  	4  	
+J231644  	2  	Wolf Rayet
+J231710  	4  	Magnetar
+J231837  	2  	
+J232044  	2  	Cataclysmic Variable
+J232147  	2  	
+J232200  	2  	
+J232246  	6  	
+J232305  	2  	Pulsar
+J232329  	2  	Black Hole
+J232336  	5  	
+J232359  	2  	
+J232441  	3  	Red Giant
+J232605  	1  	
+J232715  	1  	
+J232741  	5  	Red Giant
+J232801  	2  	
+J232826  	3  	
+J232934  	5  	Wolf Rayet
+J232959  	5  	
+J233129  	2  	
+J233255  	5  	Wolf Rayet
+J233317  	1  	Wolf Rayet
+J233359  	1  	
+J233449  	4  	
+J233517  	5  	
+J233534  	2  	Magnetar
+J233550  	1  	
+J233555  	2  	
+J233628  	3  	
+J233630  	5  	Black Hole
+J233658  	5  	
+J233739  	3  	
+J233828  	1  	
+J233839  	2  	Red Giant
+J233909  	4  	
+J233917  	5  	Magnetar
+J234152  	5  	Magnetar
+J234208  	5  	Black Hole
+J234252  	5  	Black Hole
+J234421  	4  	
+J234542  	2  	
+J234557  	2  	
+J234722  	5  	Pulsar
+J234810  	2  	
+J234915  	2  	
+J234928  	5  	
+J234942  	2  	Red Giant
+J235001  	1  	
+J235108  	5  	
+J235117  	2  	
+J235219  	4  	
+J235305  	5  	Black Hole
+J235321  	2  	Cataclysmic Variable
+J235330  	3  	
+J235408  	2  	
+J235419  	1  	
+J235447  	2  	
+J235456  	5  	Red Giant
+J235525  	2  	
+J235630  	3  	
+J235712  	3  	
+J235759  	2  	Cataclysmic Variable
+J235852  	2  	Black Hole
+J235924  	2  	
+J235953  	4  	
+J170376  	3  	
+J101354  	3  	
+Thera  	12  	
+J015092  	1  	Black Hole
+J005834  	1  	Cataclysmic Variable
+J012402  	1  	Magnetar
+J005926  	1  	Pulsar
+J010569  	1  	Red Giant
+J012157  	1  	
+J002757  	1  	
+J004791  	1  	
+J004317  	1  	
+J002216  	1  	
+J005482  	2  	Black Hole
+J005900  	2  	Cataclysmic Variable
+J013070  	2  	Magnetar
+J001057  	2  	Pulsar
+J011321  	2  	Red Giant
+J013123  	2  	
+J012735  	2  	
+J012635  	2  	
+J010000  	2  	
+J001890  	2  	
+J002964  	2  	
+J004686  	2  	
+J011563  	3  	Black Hole
+J001348  	3  	Cataclysmic Variable
+J002838  	3  	Magnetar
+J001670  	3  	Pulsar
+J014348  	3  	Red Giant
+J003789  	3  	
+J012794  	3  	
+J005923  	3  	
+J001398  	3  	
+J011339  	3  	
+J004283  	3  	
+J002625  	4  	Black Hole
+J004470  	4  	Black Hole
+J011824  	4  	Cataclysmic Variable
+J010247  	4  	Cataclysmic Variable
+J002423  	4  	Magnetar
+J001302  	4  	Magnetar
+J010556  	4  	Pulsar
+J011778  	4  	Pulsar
+J005259  	4  	Red Giant
+J005969  	4  	Red Giant
+J001769  	4  	Wolf Rayet
+J004150  	4  	Wolf Rayet
+J005872  	4  	
+J011376  	4  	
+J005299  	4  	
+J011355  	4  	
+J011195  	4  	
+J005280  	4  	
+J010811  	5  	Black Hole
+J001694  	5  	Black Hole
+J003941  	5  	Cataclysmic Variable
+J011790  	5  	Cataclysmic Variable
+J013146  	5  	Magnetar
+J004998  	5  	Magnetar
+J003382  	5  	Pulsar
+J003546  	5  	Pulsar
+J001820  	5  	Red Giant
+J012578  	5  	Red Giant
+J012773  	5  	Wolf Rayet
+J005223  	5  	Wolf Rayet
+J005663  	5  	
+J003793  	5  	
+J004128  	5  	
+J005070  	5  	
+J001025  	5  	
+J005724  	5  	
+J004921  	5  	
+J012686  	6  	
+J010366  	6  	
+J012475  	6  	
+J015227  	6  	
+J010951  	6  	
+J000895  	13  	Wolf Rayet
+J000487  	13  	Wolf Rayet
+J000621  	13  	Wolf Rayet
+J000551  	13  	Wolf Rayet
+J000630  	13  	Wolf Rayet
+J000452  	13  	Wolf Rayet
+J000327  	13  	Wolf Rayet
+J000186  	13  	Wolf Rayet
+J000528  	13  	Wolf Rayet
+J000353  	13  	Wolf Rayet
+J000461  	13  	Wolf Rayet
+J000522  	13  	Wolf Rayet
+J000965  	13  	Wolf Rayet
+J000304  	13  	Wolf Rayet
+J000595  	13  	Wolf Rayet
+J000685  	13  	Wolf Rayet
+J000844  	13  	Wolf Rayet
+J000719  	13  	Wolf Rayet
+J000726  	13  	Wolf Rayet
+J000214  	13  	Wolf Rayet
+J000652  	13  	Wolf Rayet
+J000313  	13  	Wolf Rayet
+J000687  	13  	Wolf Rayet
+J000427  	13  	Wolf Rayet
+J000102  	13  	Wolf Rayet
+J110145  	15  	Cataclysmic Variable
+J055520  	14  	Red Giant
+J164710  	16  	Magnetar
+J200727  	17  	Pulsar
+J175618  	18  	Wolf Rayet 

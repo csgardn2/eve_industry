@@ -1,0 +1,90 @@
+Wormhole A009  	Leads into w-space system | Class 13  	16 h
+Wormhole A239  	Leads into low-sec system  	24 h
+Wormhole A641  	Leads into hi-sec system  	16 h
+Wormhole A982  	Leads into deadly w-space system | Class 6  	24 h
+Wormhole B041  	Leads into deadly w-space system | Class 6  	48 h
+Wormhole B274  	Leads into hi-sec system  	24 h
+Wormhole B449  	Leads into hi-sec system  	16 h
+Wormhole B520  	Leads into hi-sec system  	48 h
+Wormhole B735  	Leads into drifter w-space system | Barbican  	16 h
+Wormhole C008  	Leads into dangerous w-space system | Class 5  	16 h
+Wormhole C125  	Leads into w-space system | Class 2  	16 h
+Wormhole C140  	Leads into low-sec system  	24 h
+Wormhole C247  	Leads into w-space system | Class 3  	16 h
+Wormhole C248  	Leads into 0.0 system  	16 h
+Wormhole C391  	Leads into low-sec system  	48 h
+Wormhole C414  	Leads into drifter w-space system | Conflux  	16 h
+Wormhole D364  	Leads into w-space system | Class 2  	16 h
+Wormhole D382  	Leads into w-space system | Class 2  	16 h
+Wormhole D792  	Leads into hi-sec system  	24 h
+Wormhole D845  	Leads into hi-sec system  	24 h
+Wormhole E004  	Leads into w-space system | Class 1  	16 h
+Wormhole E175  	Leads into dangerous w-space system | Class 4  	16 h
+Wormhole E545  	Leads into 0.0 system  	16 h
+Wormhole E587  	Leads into 0.0 system  	16 h
+Wormhole F135  	Leads to Thera  	16 h
+Wormhole F355  	Leads to Thera  	16 h
+Wormhole G008  	Leads into deadly w-space system | Class 6  	16 h
+Wormhole G024  	Leads into w-space system | Class 2  	16 h
+Wormhole H121  	Leads into w-space system | Class 1  	16 h
+Wormhole H296  	Leads into dangerous w-space system | Class 5  	24 h
+Wormhole H900  	Leads into dangerous w-space system | Class 5  	24 h
+Wormhole I182  	Leads into w-space system | Class 2  	16 h
+Wormhole J244  	Leads into low-sec system  	24 h
+Wormhole K162  	Exit WH  	0 h
+Wormhole K329  	Leads into 0.0 system  	16 h
+Wormhole K346  	Leads into 0.0 system  	16 h
+Wormhole L005  	Leads into w-space system | Class 2  	16 h
+Wormhole L031  	Leads to Thera  	16 h
+Wormhole L477  	Leads into w-space system | Class 3  	16 h
+Wormhole L614  	Leads into dangerous w-space system | Class 5  	24 h
+Wormhole M001  	Leads into dangerous w-space system | Class 4  	16 h
+Wormhole M164  	Leads to Thera  	16 h
+Wormhole M267  	Leads into w-space system | Class 3  	16 h
+Wormhole M555  	Leads into dangerous w-space system | Class 5  	24 h
+Wormhole M609  	Leads into dangerous w-space system | Class 4  	16 h
+Wormhole N062  	Leads into dangerous w-space system | Class 5  	24 h
+Wormhole N110  	Leads into hi-sec system  	24 h
+Wormhole N290  	Leads into low-sec system  	24 h
+Wormhole N432  	Leads into dangerous w-space system | Class 5  	24 h
+Wormhole N766  	Leads into w-space system | Class 2  	16 h
+Wormhole N770  	Leads into dangerous w-space system | Class 5  	24 h
+Wormhole N944  	Leads into low-sec system  	24 h
+Wormhole N968  	Leads into w-space system | Class 3  	16 h
+Wormhole O128  	Leads into dangerous w-space system | Class 4  	24 h
+Wormhole O477  	Leads into w-space system | Class 3  	16 h
+Wormhole O883  	Leads into w-space system | Class 3  	16 h
+Wormhole P060  	Leads into w-space system | Class 1  	16 h
+Wormhole Q003  	Leads into 0.0 system  	16 h
+Wormhole Q063  	Leads into hi-sec system  	16 h
+Wormhole Q317  	Leads into w-space system | Class 1  	16 h
+Wormhole R051  	Leads into low-sec system  	16 h
+Wormhole R259  	Leads into drifter w-space system | Redoubt  	16 h
+Wormhole R474  	Leads into deadly w-space system | Class 6  	24 h
+Wormhole R943  	Leads into w-space system | Class 2  	16 h
+Wormhole S047  	Leads into hi-sec system  	24 h
+Wormhole S199  	Leads into 0.0 system  	16 h
+Wormhole S804  	Leads into deadly w-space system | Class 6  	24 h
+Wormhole S877  	Leads into drifter w-space system | Sentinel  	16 h
+Wormhole T405  	Leads into dangerous w-space system | Class 4  	16 h
+Wormhole T458  	Leads to Thera  	16 h
+Wormhole U210  	Leads into low-sec system  	24 h
+Wormhole U319  	Leads into deadly w-space system | Class 6  	48 h
+Wormhole U574  	Leads into deadly w-space system | Class 6  	24 h
+Wormhole V283  	Leads into 0.0 system  	16 h
+Wormhole V301  	Leads into w-space system | Class 1  	16 h
+Wormhole V753  	Leads into deadly w-space system | Class 6  	24 h
+Wormhole V898  	Leads into low-sec system  	16 h
+Wormhole V911  	Leads into dangerous w-space system | Class 5  	24 h
+Wormhole V928  	Leads into drifter w-space system | Vidette  	16 h
+Wormhole W237  	Leads into deadly w-space system | Class 6  	24 h
+Wormhole X702  	Leads into w-space system | Class 3  	24 h
+Wormhole X877  	Leads into dangerous w-space system | Class 4  	16 h
+Wormhole Y683  	Leads into dangerous w-space system | Class 4  	16 h
+Wormhole Y790  	Leads into w-space system | Class 1  	16 h
+Wormhole Z006  	Leads into w-space system | Class 3  	16 h
+Wormhole Z060  	Leads into 0.0 system  	16 h
+Wormhole Z142  	Leads into 0.0 system  	16 h
+Wormhole Z457  	Leads into dangerous w-space system | Class 4  	16 h
+Wormhole Z647  	Leads into w-space system | Class 1  	16 h
+Wormhole Z971  	Leads into w-space system | Class 1  	16 h

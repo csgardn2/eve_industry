@@ -1,0 +1,106 @@
+{
+    "alliances": {
+        "href": "https://crest-tq.eveonline.com/alliances/"
+    },
+    "authEndpoint": {
+        "href": "https://login-tq.eveonline.com/oauth/token/"
+    },
+    "bloodlines": {
+        "href": "https://crest-tq.eveonline.com/bloodlines/"
+    },
+    "constellations": {
+        "href": "https://crest-tq.eveonline.com/constellations/"
+    },
+    "corporations": {
+        "href": "https://crest-tq.eveonline.com/corporations/"
+    },
+    "decode": {
+        "href": "https://crest-tq.eveonline.com/decode/"
+    },
+    "dogma": {
+        "attributes": {
+            "href": "https://crest-tq.eveonline.com/dogma/attributes/"
+        },
+        "effects": {
+            "href": "https://crest-tq.eveonline.com/dogma/effects/"
+        }
+    },
+    "incursions": {
+        "href": "https://crest-tq.eveonline.com/incursions/"
+    },
+    "industry": {
+        "facilities": {
+            "href": "https://crest-tq.eveonline.com/industry/facilities/"
+        },
+        "systems": {
+            "href": "https://crest-tq.eveonline.com/industry/systems/"
+        }
+    },
+    "insurancePrices": {
+        "href": "https://crest-tq.eveonline.com/insuranceprices/"
+    },
+    "itemCategories": {
+        "href": "https://crest-tq.eveonline.com/inventory/categories/"
+    },
+    "itemGroups": {
+        "href": "https://crest-tq.eveonline.com/inventory/groups/"
+    },
+    "itemTypes": {
+        "href": "https://crest-tq.eveonline.com/inventory/types/"
+    },
+    "marketGroups": {
+        "href": "https://crest-tq.eveonline.com/market/groups/"
+    },
+    "marketPrices": {
+        "href": "https://crest-tq.eveonline.com/market/prices/"
+    },
+    "marketTypes": {
+        "href": "https://crest-tq.eveonline.com/market/types/"
+    },
+    "npcCorporations": {
+        "href": "https://crest-tq.eveonline.com/corporations/npccorps/"
+    },
+    "opportunities": {
+        "groups": {
+            "href": "https://crest-tq.eveonline.com/opportunities/groups/"
+        },
+        "tasks": {
+            "href": "https://crest-tq.eveonline.com/opportunities/tasks/"
+        }
+    },
+    "races": {
+        "href": "https://crest-tq.eveonline.com/races/"
+    },
+    "regions": {
+        "href": "https://crest-tq.eveonline.com/regions/"
+    },
+    "serverName": "TRANQUILITY",
+    "serverVersion": "EVE-TRANQUILITY 14.11.1107050.1107050",
+    "serviceStatus": "online",
+    "sovereignty": {
+        "campaigns": {
+            "href": "https://crest-tq.eveonline.com/sovereignty/campaigns/"
+        },
+        "structures": {
+            "href": "https://crest-tq.eveonline.com/sovereignty/structures/"
+        }
+    },
+    "systems": {
+        "href": "https://crest-tq.eveonline.com/solarsystems/"
+    },
+    "time": {
+        "href": "https://crest-tq.eveonline.com/time/"
+    },
+    "tournaments": {
+        "href": "https://crest-tq.eveonline.com/tournaments/"
+    },
+    "userCount": 23940,
+    "userCount_str": "23940",
+    "virtualGoodStore": {
+        "href": "https://vgs-tq.eveonline.com/"
+    },
+    "wars": {
+        "href": "https://crest-tq.eveonline.com/wars/"
+    }
+}
+

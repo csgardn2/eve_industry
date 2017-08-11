@@ -1,0 +1,5 @@
+*.o
+*/html
+v4/documentation/html_out
+*/eve_industry
+v4/bin

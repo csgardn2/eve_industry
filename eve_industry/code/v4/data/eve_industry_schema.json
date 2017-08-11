@@ -1,0 +1,296 @@
+{
+    "description": "You can split up your various members like 'items' and 'blueprints' into separate files or group multiple members into a single file.",
+    "type": "object",
+    "properties": {
+        "ITEMS": {
+            "description": "Item IDs and prices are stored here",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "NAME": {
+                        "description": "The name of an item exactly as it appears in EvE such as '5MN Microwarpdrive I'",
+                        "type": "string"
+                    },
+                    "ID": {
+                        "description": "The inventory_type integer for this item used by the EVE swagger API.",
+                        "type": "integer"
+                    },
+                    "PRICE": {
+                        "type": "object",
+                        "properties": {
+                            "VALUE": {
+                                "description": "The price of this item according to the lowest sell order at this station.",
+                                "type": "number"
+                            },
+                            "STATION_ID": {
+                                "description": "The station that is selling this item at this price.",
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
+                "required": ["NAME"]
+            }
+        },
+        "BLUEPRINTS": {
+            "description": "This array describes all of the items that you are capable of manufacturing.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "NAME": {
+                        "description": "The name of this blueprint, exactly as it appears in EvE Online.  Example = '5MN Microwarpdrive I Blueprint'",
+                        "type": "string"
+                    },
+                    "ME": {
+                        "description": "The material efficiency of this blueprint.",
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 10
+                    },
+                    "TE": {
+                        "description": "The time efficiency of this blueprint.",
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 20
+                    },
+                    "MANUFACTURE": {
+                        "description": "Relevant information for a single manufacturing run.",
+                        "type": "object",
+                        "properties": {
+                            "TIME": {
+                                "description": "The number of seconds it takes to execute a single run of this blueprint at 0ME with no skill bonuses nor station bonuses.",
+                                "type": "object",
+                                "properties": {
+                                    "hours": {
+                                        "type": "integer",
+                                        "default": 0
+                                    },
+                                    "minutes": {
+                                        "type": "integer",
+                                        "default": 0
+                                    },
+                                    "seconds": {
+                                        "type": "integer",
+                                        "default": 0
+                                    }
+                                }
+                            },
+                            "INPUTS": {
+                                "description": "Array of all the materials required for exactly one manufacturing run at 0ME.",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "NAME": {
+                                            "description": "The name of an input material exactly as it appears in EvE Online.  Example = 'Tritanium'",
+                                            "type": "string"
+                                        },
+                                        "QUANTITY": {
+                                            "description": "The amount of this material required for exactly one manufacturing run at 0ME",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": ["NAME", "QUANTITY"]
+                                }
+                            },
+                            "OUTPUT": {
+                                "description": "The product of a single manufacturing run for this blueprint",
+                                "type": "object",
+                                "properties": {
+                                    "NAME": {
+                                        "description": "The name of the output product exactly as it appears in EvE Online.  Example = 'Mjolnir Light Missile'",
+                                        "type": "string"
+                                    },
+                                    "QUANTITY": {
+                                        "description": "The number of items produced by a signle run of this blueprint.  This is usually just 1.",
+                                        "type": "integer",
+                                        "default": 1
+                                    }
+                                }
+                            }
+                        },
+                        "required": ["NAME"]
+                    },
+                    "COPY": {
+                       "properties": {
+                            "TIME": {
+                                "description": "The number of seconds it takes to make a single run single copy BPC at 0ME with no skill bonuses nor station bonuses.",
+                                "type": "object",
+                                "properties": {
+                                    "hours": {
+                                        "type": "integer",
+                                        "default": 0
+                                    },
+                                    "minutes": {
+                                        "type": "integer",
+                                        "default": 0
+                                    },
+                                    "seconds": {
+                                        "type": "integer",
+                                        "default": 0
+                                    }
+                                }
+                            },
+                            "INPUTS": {
+                                "description": "Array of all the materials required for exactly one copy run at 0ME.  This array is usually empty for COPY.",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "NAME": {
+                                            "description": "The name of an input material exactly as it appears in EvE Online.  Example = 'Datasheets'",
+                                            "type": "string"
+                                        },
+                                        "QUANTITY": {
+                                            "description": "The amount of this material required to produce a single copy of a single run BPC at 0ME",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": ["NAME", "QUANTITY"]
+                                }
+                            }
+                        }
+                    },
+                    "INVENT": {
+                        "description": "This member is an array since some T1 blueprints such as the Atron can be used to invent more than one T2 blueprint.",
+                        "type": "array",
+                        "items": {
+                            "description": "Each structure in this array represents an inventable blueprint copy (BPC) that can be created from a single 1-run BPC of this blueprint.",
+                            "type": "object",
+                            "properties": {
+                                "NAME": {
+                                    "description": "The name of the T2 blueprint copy that can be invented from this T1 blueprint.",
+                                    "type": "string"
+                                },
+                                "INPUTS": {
+                                    "description": "List of materials required to perform an invention run from a BPC.  Items in this array are usually just datacores.  Do NOT include materials required to make a BPC from a BPO, use the COPY member instead.  Do NOT include optional items such as decryptors in this list.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "NAME": {
+                                                "description": "The name of an input material exactly as it appears in EvE Online.  Example = 'Datacore - Rocket Science'",
+                                                "type": "string"
+                                            },
+                                            "QUANTITY": {
+                                                "description": "The amount of this material required for exactly one manufacturing run before any station or skill bonuses.",
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "required": ["ITEM_NAME", "QUANTITY"]
+                                    }
+                                },
+                                "ME": {
+                                    "description": "The material efficiency of an invented T2 blueprint without any bonuses or decryptors.",
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 10
+                                },
+                                "TE": {
+                                    "description": "The time efficiency of an invented T2 blueprint without any bonuses or decryptors.",
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 20
+                                },
+                                "RUNS": {
+                                    "description": "The number of runs per T2 BPC invented before any bonuses or decryptors.",
+                                    "type": "integer",
+                                    "minimum": 1
+                                },
+                                "PROBABILITY": {
+                                    "description": "The probability of successfully inventing a T2 BPC before any bonuses or decryptors.",
+                                    "type": "number",
+                                    "minimum": 0.0,
+                                    "maximum": 1.0
+                                }
+                            }
+                        }
+                    }
+                },
+                "required": ["NAME", "ME", "TE", "MANUFACTURE", "COPY", "INVENT"]
+            }
+        },
+        "STATIONS": {
+            "description": "This array describes all of the stations and citadels you use for production, invention, copying, buying, and selling",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "NAME": {
+                        "description": "The name of this citadel or station.",
+                        "type": "string"
+                    },
+                    "SYSTEM": {
+                        "description": "The name of the solar system that contains this station.",
+                        "type": "string"
+                    },
+                    "REGION": {
+                        "description": "The name of the region that contains this station.",
+                        "type": "string"
+                    },
+                    "CAN_TRADE": {
+                        "description": "Set to true if you can place buy and sell orders at this station.",
+                        "type": "boolean"
+                    },
+                    "CAN_MANUFACTURE": {
+                        "description": "Set to true if you can start manufacturing jobs here.",
+                        "type": "boolean"
+                    },
+                    "CAN_COPY": {
+                        "description": "Set to true if you can start copy jobs here.",
+                        "type": "boolean"
+                    },
+                    "CAN_INVENT": {
+                        "description": "Set to true if you can start invention jobs here.",
+                        "type": "string"
+                    },
+                    "BROKERS_FEE": {
+                        "description": "A 2.3% broker's fee would be recorded as 0.023.",
+                        "type": "number",
+                        "minimum": 0.0
+                    },
+                    "SALES_TAX": {
+                        "description": "A 2.3% sales tax would be recorded as 0.023",
+                        "type": "number",
+                        "minimum": 0.0
+                    }
+                },
+                "required": ["NAME", "SYSTEM", "REGION"]
+            }
+        },
+        "CHARACTERS": {
+            "description": "An array of all the characters you have available for production.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "NAME": {
+                        "description": "The name of an eve character",
+                        "type": "string"
+                    },
+                    "SKILLS": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "NAME": {
+                                    "description": "The name of the skillbook associated with this skill.",
+                                    "type": "string"
+                                },
+                                "LEVEL": {
+                                    "description": "Your current level with this skill.",
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 5
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

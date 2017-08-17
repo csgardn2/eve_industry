@@ -1,24 +1,43 @@
 COMPILER=g++
 EXENAME=eve_industry
+VALNAME=validator
 COMPILEFLAGS=-Wall -Wextra -ansi -Wfatal-errors -std=c++11
 LINKFLAGS=-Wall -Wextra -ansi -Wfatal-errors
 LIBS=-lcurl
 ARGS=
 
-SOURCEDIR=source
 BINDIR=bin
 DATADIR=data
+DOCDIR=documentation
+SOURCEDIR=source
+VALDIR=validator
 
-all: documentation $(BINDIR)/$(EXENAME)
+all: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME) $(BINDIR)/$(VALNAME)
 
 # Add additional .o files on the line below (after main.o)
-$(BINDIR)/$(EXENAME): $(BINDIR)/https_get.o $(BINDIR)/main.o
+$(BINDIR)/$(EXENAME):           \
+    $(BINDIR)/args.o            \
+    $(BINDIR)/https_get.o       \
+    $(BINDIR)/main.o            \
+    
 	$(COMPILER) $(LINKFLAGS) -o $@ $^ $(LIBS)
 	@echo "*** COMPILE_SUCCESSFUL ***"
 
+$(BINDIR)/$(VALNAME):           \
+    $(BINDIR)/args.o            \
+    $(BINDIR)/https_get.o       \
+    $(BINDIR)/validator.o       \
+    $(BINDIR)/validate_args.o   \
+    
+	$(COMPILER) $(LINKFLAGS) -o $@ $^ $(LIBS)
+
 #########################
+# Main source tree
 
 # Add more .cpp -> .o compile commands here
+
+$(BINDIR)/args.o: $(SOURCEDIR)/args.cpp $(SOURCEDIR)/args.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/https_get.o: $(SOURCEDIR)/https_get.cpp $(SOURCEDIR)/https_get.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
@@ -31,6 +50,16 @@ Doxyfile:
 	doxygen -g
 
 #########################
+# Validator source tree
+
+$(BINDIR)/validator.o: $(VALDIR)/validator.cpp $(VALDIR)/validator.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/validate_args.o: $(VALDIR)/validate_args.cpp $(SOURCEDIR)/args.cpp $(SOURCEDIR)/args.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+#########################
+# Convenience targets
 
 clean:
 	@rm -fv $(BINDIR)/*.o $(BINDIR)/$(EXENAME)
@@ -39,10 +68,11 @@ run: $(BINDIR)/$(EXENAME)
 	$(BINDIR)/$(EXENAME) $(ARGS)
 
 valgrind: $(BINDIR)/$(EXENAME)
-	valgrind --leak-check=full $(BINDIR)/$(EXENAME) $(ARGS)
+	valgrind --suppressions=$(DATADIR)/valgrind_suppressions.supp --leak-check=full $(BINDIR)/$(EXENAME) $(ARGS)
 
-documentation: documentation/Doxyfile $(ls *.cpp *.h) documentation/html_out/index.html
+validate: $(BINDIR)/$(VALNAME)
+	valgrind --suppressions=$(DATADIR)/valgrind_suppressions.supp --leak-check=full $(BINDIR)/$(VALNAME)
 
-documentation/html_out/index.html:
-	doxygen documentation/Doxyfile
+$(DOCDIR)/html_out/index.html: $(ls *.cpp *.h)
+	doxygen $(DOCDIR)/Doxyfile
 

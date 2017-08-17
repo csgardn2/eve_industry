@@ -20,14 +20,50 @@
                         "type": "object",
                         "properties": {
                             "VALUE": {
-                                "description": "The price of this item according to the lowest sell order at this station.",
+                                "description": "The price of this item in ISK according to the lowest sell order at this station.",
                                 "type": "number"
                             },
                             "STATION_ID": {
                                 "description": "The station that is selling this item at this price.",
                                 "type": "integer"
+                            },
+                            "TIME": {
+                                "description": "UTC time that this price information was pulled.",
+                                "type": "object",
+                                "properties": {
+                                    "YEAR": {
+                                        "type": "integer",
+                                        "minimum": 2002
+                                    },
+                                    "MONTH": {
+                                        "type": "integer",
+                                        "minimum": 1,
+                                        "maximum": 12
+                                    },
+                                    "DAY": {
+                                        "type": "integer",
+                                        "minimum": 1,
+                                        "maximum": 31
+                                    },
+                                    "HOUR": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "maximum": 23
+                                    },
+                                    "MINUTE": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "maximum": 59
+                                    },
+                                    "SECOND": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "maximum": 59
+                                    }
+                                }
                             }
-                        }
+                        },
+                        "required": ["VALUE", "STATION_ID", "TIME"]
                     }
                 },
                 "required": ["NAME"]

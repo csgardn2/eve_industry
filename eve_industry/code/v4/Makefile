@@ -73,6 +73,11 @@ valgrind: $(BINDIR)/$(EXENAME)
 validate: $(BINDIR)/$(VALNAME)
 	valgrind --suppressions=$(DATADIR)/valgrind_suppressions.supp --leak-check=full $(BINDIR)/$(VALNAME)
 
-$(DOCDIR)/html_out/index.html: $(ls *.cpp *.h)
+$(DOCDIR)/html_out/index.html:  \
+    $(DOCDIR)/mainpage.md       \
+    $(DOCDIR)/Doxyfile          \
+    $(BINDIR)/$(VALNAME)        \
+    $(BINDIR)/$(EXENAME)
+    
 	doxygen $(DOCDIR)/Doxyfile
 

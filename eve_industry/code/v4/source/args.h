@@ -7,8 +7,8 @@
 namespace args
 {
     
-    /// @brief This is thrown from @ref args_t::parse if the arguments were
-    /// not valid.
+    /// @brief This is thrown from
+    /// args_t::parse() if the arguments were not valid.
     enum class error_t
     {
         BLUEPRINTS_IN_NOT_FOUND,
@@ -19,6 +19,8 @@ namespace args
         NUM_ENUMS
     };
     
+    /// @brief Generate a human-readable error message suitable for printing
+    /// from an error code.
     const std::string& enum_to_string(error_t error);
     
     /// @brief Parse command line argument and package them into a structure.
@@ -47,13 +49,13 @@ namespace args
             /// in the corresponding member variables of the object calling this
             /// member function.
             ///
-            /// @except error_t See @ref error_t "enum description".
+            /// @exception error_t See @ref error_t "enum description".
             ///
             /// @return Value of @ref validated_ when parsing finishes.
             void parse
             (
                 /// [in] The number of strings in the argv array.  You can copy
-                /// this directly from @ref main.
+                /// this directly from @ref main(int argc, char** argv).
                 unsigned argc,
                 /// [in] Array of strings passed to this program on the command line.
                 /// You can copy this directly from @ref main.

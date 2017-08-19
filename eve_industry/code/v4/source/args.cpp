@@ -21,8 +21,7 @@ namespace args
     
     void args_t::parse(unsigned argc, char const* const* argv)
     {
-        /// @todo
-        Conor, you left off here.  You can start by loading a blueprint file.
+        /// @todo Conor, you left off here.  You can start by loading a blueprint file.
     }
     
 }

@@ -1,1 +1,67 @@
-Hello World!
+High Level Workflow
+----
+@image html high_level_workflow.png
+
+Command line usage:
+----
+````
+./eve_industry
+    --mode {fetch-prices, calculate-bluerint-profitability, generate-todo-list}
+    --stations FILE.json            # Specifies the capabilities of a station for manufacture, invention, trade, etc.
+    --items-in FILE.json            # Specifies item IDs used in the EvE API.
+    --blueprints-in FILE.json       # Specifies input materials, ME, TE, and other attributes of all the blueprints you own or want to own.
+    --assembly-lines-in FILE.json   # Specifies what multistep processes you want to perform such as "First buy materials, then invent, then manufacture, then sell."
+    --jobs-in FILE.json             # Specifies what materials you have in-use at your various assembly-lines.
+    --jobs-out FILE.json            # After a --generate-todo-list operation, a new file is created representing your production state after completing the todo list.
+    --profitability-in FILE.json    # Specifies the ratio of (input materials)/(output materials) for each blueprint.
+    --profitability-out FILE.json   # Generated after a --calculate-blueprint-profitability operation
+    --todo-list-out FILE.txt        # A human readable list of instructions that you can perform to advance your production
+````
+
+The operation you choose to perform with the --mode argument determines which
+arguments are required.  This table below lists the required and optional
+command line arguments for each mode.
+
+<table>
+    <tr>
+        <th>Mode</th>
+        <th>Required Additional Arguments</th>
+        <th>Optional Additional Arguments</th>
+    </tr>
+    <tr>
+        <td>--fetch-prices</td>
+        <td>
+            <ul>
+                <li>--stations-in</li>
+                <li>--items-in</li>
+                <li>--prices-out</li>
+            </ul>
+        </td>
+        <td>None</td>
+    </tr>
+    <tr>
+        <td>--calculate-blueprint-profitability</td>
+        <td>
+            <ul>
+                <li>--prices-in</li>
+                <li>--blueprints-in</li>
+                <li>--profitability-out</li>
+            </ul>
+        </td>
+        <td>None</td>
+    </tr>
+    <tr>
+        <td>--generate-todo-list</td>
+        <td>
+            <ul>
+                <li>--assembly-lines-in</li>
+                <li>--profitability-in</li>
+                <li>--jobs-in</li>
+                <li>--jobs-out</li>
+                <li>--todo-list-out</li>
+            </ul>
+        </td>
+        <td>None</td>
+    </tr>
+</table>
+

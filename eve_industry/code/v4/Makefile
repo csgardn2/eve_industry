@@ -1,4 +1,4 @@
-COMPILER=g++
+COMPILER=g++-7
 EXENAME=eve_industry
 VALNAME=validator
 COMPILEFLAGS=-Wall -Wextra -ansi -Wfatal-errors -std=c++11
@@ -64,13 +64,13 @@ $(BINDIR)/validate_args.o: $(VALDIR)/validate_args.cpp $(SOURCEDIR)/args.cpp $(S
 clean:
 	@rm -fv $(BINDIR)/*.o $(BINDIR)/$(EXENAME)
 
-run: $(BINDIR)/$(EXENAME)
+run:  $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 	$(BINDIR)/$(EXENAME) $(ARGS)
 
-valgrind: $(BINDIR)/$(EXENAME)
+valgrind:  $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 	valgrind --suppressions=$(DATADIR)/valgrind_suppressions.supp --leak-check=full $(BINDIR)/$(EXENAME) $(ARGS)
 
-validate: $(BINDIR)/$(VALNAME)
+validate:  $(DOCDIR)/html_out/index.html $(BINDIR)/$(VALNAME)
 	valgrind --suppressions=$(DATADIR)/valgrind_suppressions.supp --leak-check=full $(BINDIR)/$(VALNAME)
 
 $(DOCDIR)/html_out/index.html:  \

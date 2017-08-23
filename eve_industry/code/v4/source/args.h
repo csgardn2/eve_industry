@@ -1,11 +1,29 @@
 #ifndef HEADER_GUARD_ARGS
 #define HEADER_GUARD_ARGS
 
+#include <fstream>
 #include <string>
 
 /// @brief Utilities for command line parsing.
 namespace args
 {
+    
+    enum class mode_t
+    {
+        
+        /// Connect to the EvE RESTful API and download the current market
+        /// prices of every item in @ref items_in_file_ using prices from every
+        /// station in @ref stations_in_file_
+        FETCH_PRICES,
+        
+        /// Compute the ratio of (output material price) / (input material price)
+        /// for each @ref blueprint_file_in_ using the prices in @ref
+        /// prices_in_.
+        CALCULATE_BLUEPRINT_PROFITABILITY,
+        
+        /// Generate a text file in no par TODO
+        GENERATE_TODO_LIST
+    };
     
     /// @brief This is thrown from
     /// args_t::parse() if the arguments were not valid.
@@ -69,6 +87,28 @@ namespace args
             }
             
         protected:
+            
+            std::ifstream stations_in_file_;
+            
+            std::ifstream items_in_file_;
+            
+            std::ifstream prices_in_file_;
+            
+            std::ofstream prices_out_file_;
+            
+            std::ifstream blueprints_in_file_;
+            
+            std::ifstream assembly_lines_in_file_;
+            
+            std::ifstream jobs_in_file_;
+            
+            std::ofstream jobs_out_file_;
+            
+            std::ifstream profitability_in_file_;
+            
+            std::ofstream profitability_out_file_;
+            
+            std::ofstream todo_list_out_file_;
             
             /// Set to true if @ref parse is called and all required arguments 
             /// were parsed successfully.

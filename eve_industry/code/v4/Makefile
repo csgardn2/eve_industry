@@ -1,35 +1,28 @@
-COMPILER=g++-7
 EXENAME=eve_industry
-VALNAME=validator
-COMPILEFLAGS=-Wall -Wextra -ansi -Wfatal-errors -std=c++11
+COMPILEFLAGS=-Wall -Wextra -ansi -Wfatal-errors -std=c++1z -g
 LINKFLAGS=-Wall -Wextra -ansi -Wfatal-errors
 LIBS=-lcurl
-ARGS=
+ARGS=--mode fetch-item-ids --item-ids-out data/json/item_ids.json
 
 BINDIR=bin
 DATADIR=data
 DOCDIR=documentation
 SOURCEDIR=source
-VALDIR=validator
+COMPILER=g++-7
 
-all: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME) $(BINDIR)/$(VALNAME)
+all: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 
 # Add additional .o files on the line below (after main.o)
 $(BINDIR)/$(EXENAME):           \
     $(BINDIR)/args.o            \
     $(BINDIR)/https_get.o       \
+    $(BINDIR)/item_id.o         \
+    $(BINDIR)/item_ids.o        \
+    $(BINDIR)/json.o            \
     $(BINDIR)/main.o            \
     
 	$(COMPILER) $(LINKFLAGS) -o $@ $^ $(LIBS)
 	@echo "*** COMPILE_SUCCESSFUL ***"
-
-$(BINDIR)/$(VALNAME):           \
-    $(BINDIR)/args.o            \
-    $(BINDIR)/https_get.o       \
-    $(BINDIR)/validator.o       \
-    $(BINDIR)/validate_args.o   \
-    
-	$(COMPILER) $(LINKFLAGS) -o $@ $^ $(LIBS)
 
 #########################
 # Main source tree
@@ -42,21 +35,21 @@ $(BINDIR)/args.o: $(SOURCEDIR)/args.cpp $(SOURCEDIR)/args.h
 $(BINDIR)/https_get.o: $(SOURCEDIR)/https_get.cpp $(SOURCEDIR)/https_get.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
+$(BINDIR)/item_id.o: $(SOURCEDIR)/item_id.cpp $(SOURCEDIR)/item_id.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/item_ids.o: $(SOURCEDIR)/item_ids.cpp $(SOURCEDIR)/item_ids.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/json.o: $(SOURCEDIR)/jsoncpp.cpp $(SOURCEDIR)/json.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
 $(BINDIR)/main.o: $(SOURCEDIR)/main.cpp
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 Doxyfile:
 	@echo "Couldn't find Doxyfile, generating default"
 	doxygen -g
-
-#########################
-# Validator source tree
-
-$(BINDIR)/validator.o: $(VALDIR)/validator.cpp $(VALDIR)/validator.h
-	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
-
-$(BINDIR)/validate_args.o: $(VALDIR)/validate_args.cpp $(SOURCEDIR)/args.cpp $(SOURCEDIR)/args.h
-	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 #########################
 # Convenience targets
@@ -70,14 +63,20 @@ run:  $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 valgrind:  $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 	valgrind --suppressions=$(DATADIR)/valgrind_suppressions.supp --leak-check=full $(BINDIR)/$(EXENAME) $(ARGS)
 
-validate:  $(DOCDIR)/html_out/index.html $(BINDIR)/$(VALNAME)
-	valgrind --suppressions=$(DATADIR)/valgrind_suppressions.supp --leak-check=full $(BINDIR)/$(VALNAME)
-
-$(DOCDIR)/html_out/index.html:  \
-    $(DOCDIR)/mainpage.md       \
-    $(DOCDIR)/Doxyfile          \
-    $(BINDIR)/$(VALNAME)        \
-    $(BINDIR)/$(EXENAME)
+$(DOCDIR)/html_out/index.html:      \
+    $(DOCDIR)/mainpage.md           \
+    $(DOCDIR)/Doxyfile              \
+    $(SOURCEDIR)/args.h             \
+    $(SOURCEDIR)/args.cpp           \
+    $(SOURCEDIR)/https_get.h        \
+    $(SOURCEDIR)/https_get.cpp      \
+    $(SOURCEDIR)/item_id.h          \
+    $(SOURCEDIR)/item_id.cpp        \
+    $(SOURCEDIR)/item_ids.h         \
+    $(SOURCEDIR)/item_ids.cpp       \
+    $(SOURCEDIR)/json.h             \
+    $(SOURCEDIR)/jsoncpp.cpp        \
+    $(SOURCEDIR)/main.cpp           \
     
 	doxygen $(DOCDIR)/Doxyfile
 

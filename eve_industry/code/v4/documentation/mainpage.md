@@ -81,3 +81,12 @@ sudo apt-get install gcc-7 g++-7
 sudo apt-get install libcurl4-openssl-dev
 ````
 
+File IO Protocols
+----
+*   The preferred file format of this project is JSON, although this program allows
+    some outputs to be exported as CSV.
+*   You can validate any JSON file consumed or produced by this script using
+    data/eve_industry_schema.json
+*   A good online schema validator can be found <a href="https://json-schema-validator.herokuapp.com/">here</a>
+
+Access/Documentation to the fabulous EvE Swagger API can be found at <a href="https://esi.tech.ccp.is/latest/">here</a>

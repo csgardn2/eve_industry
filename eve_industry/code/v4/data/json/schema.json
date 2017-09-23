@@ -1,0 +1,43 @@
+{
+    "definitions": {
+        "args": {
+            "type": "object",
+            "description": "Parsed arguments passed to eve_industry program on the command line.",
+            "properties": {
+                "mode": {
+                    "type": "string",
+                    "description": "Specifies the high-level operation to be performed by this tool.",
+                    "enum": ["fetch-item-ids"]
+                },
+                "item_ids_out": {
+                    "type": "string",
+                    "description": "Name of a file to open for writing and fill with item IDs from the EVE API."
+                }
+            },
+            "required": ["mode", "item_ids_out"]
+        },
+        "item_id": {
+            "type": "object",
+            "description": "The integral ID of a specific item in the EvE universe as well as other descriptive information about an item.",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "Integral uniquifier for tracking this item in the EvE swagger API.",
+                    "minimum": 0
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The human readable name of this item, as it appears in the game.",
+                    "minLength": 1
+                }
+            }
+        },
+        "item_ids": {
+            "type": "array",
+            "items": {
+                "$ref": "item_id"
+            }
+        }
+    }
+}
+

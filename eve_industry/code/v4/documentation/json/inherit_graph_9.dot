@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Json::PathArgument",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classJson_1_1PathArgument.html",tooltip="Experimental and untested: represents an element of the \"path\" to access a node. "];
+}

@@ -38,6 +38,7 @@ class item_ids_t : public std::vector<item_id_t>
             FILE_READ_FAILED,
             FILE_WRITE_FAILED,
             JSON_SCHEMA_VIOLATION,
+            EVE_SUCKS,
             /// This element must be last
             NUM_ENUMS
         };

@@ -1,7 +1,7 @@
 EXENAME=eve_industry
-COMPILEFLAGS=-Wall -Wextra -ansi -Wfatal-errors -std=c++1z -g
+COMPILEFLAGS=-Wall -Wextra -ansi -Wfatal-errors -std=c++1z -g -fopenmp
 LINKFLAGS=-Wall -Wextra -ansi -Wfatal-errors
-LIBS=-lcurl
+LIBS=-lcurl -fopenmp
 ARGS=--mode fetch-item-ids --item-ids-out data/json/item_ids.json
 
 BINDIR=bin

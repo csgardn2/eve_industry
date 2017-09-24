@@ -7,11 +7,13 @@
 
 #include <fstream>
 #include <iostream>
+#include <omp.h>
 #include <string>
 #include <string_view>
 #include <vector>
 
 #include "error.h"
+#include "https_get.h"
 #include "item_id.h"
 #include "item_ids.h"
 #include "json.h"
@@ -22,7 +24,8 @@ const std::vector<std::string_view> item_ids_t::error_names_ =
     "FILE_SIZE_FAILED",
     "FILE_READ_FAILED",
     "FILE_WRITE_FAILED",
-    "JSON_SCHEMA_VIOLATION"
+    "JSON_SCHEMA_VIOLATION",
+    "EVE_SUCKS"
 };
 
 /// @brief Default error messages suitable for printing.  Note that
@@ -32,13 +35,183 @@ const std::vector<std::string_view> item_ids_t::default_error_messages_ =
     "Error.  Failed to determine size of input file.\n",
     "Error.  Failed to read content from file.\n",
     "Error.  Failed to write content to file.\n",
-    "Error.  Json input does not contain the correct fields.\n"
+    "Error.  Json input does not contain the correct fields.\n",
+    "Error.  CCP has changed something that used to work.  Bastards.\n"
 };
+
+void destroy_json_readers(std::vector<Json::CharReader*>& readers)
+{
+    for (Json::CharReader* cur_reader : readers)
+        delete cur_reader;
+}
 
 /// @todo Under construction
 void item_ids_t::fetch()
 {
-    // TODO
+    
+    static const std::string_view api_item_list_prefix("https://esi.tech.ccp.is/latest/universe/types/?datasource=tranquility");
+    static const std::string_view api_item_properties_prefix("https://esi.tech.ccp.is/latest/universe/types/");
+    static const std::string_view api_item_properties_suffix("/?datasource=tranquility&language=en-us");
+    
+    // Construct annoying JSON decoders.  One for each thread.
+    Json::CharReaderBuilder builder;
+    std::vector<Json::CharReader*> readers(omp_get_max_threads(), nullptr);
+    for (Json::CharReader*& cur_reader : readers)
+        cur_reader = builder.newCharReader();
+    
+    std::vector<unsigned> parsed_item_ids;
+    
+    // Fetch a list of all the item IDS in the game.
+    unsigned page = 1;
+    while (true)
+    {
+        
+        // Prepare a request URL
+        std::string query(api_item_list_prefix);
+        query += "&page=";
+        query += std::to_string(page);
+        page++;
+        
+        // Attempt to pull data from the EVE API
+        std::string payload = https_get(query);
+        
+        // Attempt to decode received data
+        Json::Value json_item_ids;
+        std::string error_message;
+        bool success = readers[0]->parse(payload.data(), payload.data() + payload.size(), &json_item_ids, &error_message);
+        if (!success)
+        {
+            std::string message("Error.  Tried to decode JSON data from\"");
+            message += query;
+            message += "\" but it failed with message \"";
+            message += error_message;
+            message += "\".\n";
+            destroy_json_readers(readers);
+            throw error_message_t(error_code_t::EVE_SUCKS, message);
+        }
+        
+        // Start parsing the data received from the EVE API.
+        if (!json_item_ids.isArray())
+        {
+            std::string message("Error.  Data fetched from \"");
+            message += query;
+            message += "\" was not of type \"array\".\n";
+            destroy_json_readers(readers);
+            throw error_message_t(error_code_t::EVE_SUCKS, message);
+        }
+        
+        // The last page is marked with an empty array.
+        if (json_item_ids.empty())
+            break;
+        
+        // Step through each element in the received array and extract it
+        parsed_item_ids.reserve(parsed_item_ids.size() + json_item_ids.size());
+        for (const Json::Value json_cur_id : json_item_ids)
+        {
+            if (!json_cur_id.isUInt())
+            {
+                std::string message("Error.  Element from JSON array received from \"");
+                message += query;
+                message += "\" was not of type \"unsigned integer\".\n";
+                destroy_json_readers(readers);
+                throw error_message_t(error_code_t::EVE_SUCKS, message);
+            }
+            parsed_item_ids.emplace_back(json_cur_id.asUInt());
+        }
+        
+        std::string status("Fetched item id list ");
+        status += std::to_string(page);
+        std::cout << status;
+        status.assign(status.length(), '\b');
+        std::cout << status << std::flush;
+        
+    }
+    std::cout << '\n';
+    
+    // Prepare to store new data received from the EvE API.
+    unsigned num_ids = parsed_item_ids.size();
+    this->clear();
+    this->reserve(num_ids);
+    
+    // Now that we know all the integral IDs, fetch the information associated
+    // with each ID.
+    const std::string num_ids_str(std::to_string(num_ids));
+    unsigned finished_operations = 0;
+    #pragma omp parallel for
+    for (unsigned ix = 0; ix < num_ids; ix++)
+    {
+        
+        unsigned cur_id = parsed_item_ids[ix];
+        unsigned thread_ix = omp_get_thread_num();
+        
+        // Prepare a query
+        std::string query(api_item_properties_prefix);
+        query += std::to_string(cur_id);
+        query += api_item_properties_suffix;
+        
+        // Attempt to read data from the EVE API
+        std::string payload = https_get(query);
+        
+        // Attempt to decode received data
+        Json::Value json_cur_item;
+        std::string error_message;
+        bool success = readers[thread_ix]->parse(payload.data(), payload.data() + payload.size(), &json_cur_item, &error_message);
+        if (!success)
+        {
+            std::string message("Error.  Tried to decode JSON data from\"");
+            message += query;
+            message += "\" but it failed with message \"";
+            message += error_message;
+            message += "\".\n";
+            destroy_json_readers(readers);
+            throw error_message_t(error_code_t::EVE_SUCKS, message);
+        }
+        
+        // Parse the JSON root object received from the EVE API.
+        if (!json_cur_item.isObject())
+        {
+            std::string message("Error.  Data fetched from \"");
+            message += query;
+            message += "\" was not of type \"object\".\n";
+            destroy_json_readers(readers);
+            throw error_message_t(error_code_t::EVE_SUCKS, message);
+        }
+        
+        // Parse the name of the current item
+        const Json::Value json_name = json_cur_item["name"];
+        if (!json_name.isString())
+        {
+            std::string message("Error.  Data fetched from \"");
+            message += query;
+            message += "\" did not contain \"name\" member.\n";
+        }
+        
+        // Extracted an item successfully!
+        #pragma omp critical
+        {
+            this->emplace_back(cur_id, json_name.asString());
+            finished_operations++;
+        }
+        
+        // Print progress on screen
+        if (thread_ix == 0)
+        {
+            std::string status("Fetched ");
+            status += std::to_string(finished_operations);
+            status += " / ";
+            status += num_ids_str;
+            status += " item ids.\n";
+            std::cout << status;
+//            status.assign(status.length(), '\b');
+//            std::cout << status << std::flush;
+        }
+        
+    }
+    
+    destroy_json_readers(readers);
+    
+    std::cout << '\n';
+    
 }
 
 void item_ids_t::decode(std::istream& file)

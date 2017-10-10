@@ -39,12 +39,14 @@ const std::vector<std::string_view> args_t::default_error_messages_ =
 
 const std::vector<std::string_view> args_t::mode_names_ =
 {
-    "FETCH_ITEM_IDS"
+    "FETCH_ITEM_ATTRIBUTES",
+    "FETCH_STRUCTURE_IDS"
 };
 
 const std::vector<std::string_view> args_t::mode_values_ =
 {
-    "fetch-item-ids"
+    "fetch-item-attributes",
+    "fetch-structure-ids"
 };
 
 /// @brief Search for a particular argument within argv and extract that
@@ -95,7 +97,7 @@ void args_t::parse(unsigned argc, char const* const* argv)
         throw error_message_t(error_code_t::MODE_INVALID);
     
     // Parse --item-ids-out
-    if (this->mode_ == mode_t::FETCH_ITEM_IDS)
+    if (this->mode_ == mode_t::FETCH_ITEM_ATTRIBUTES)
     {
         this->item_ids_out_ = search_argv("--item-ids-out", argc, argv);
         if (this->item_ids_out_.empty())

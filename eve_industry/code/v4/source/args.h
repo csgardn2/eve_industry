@@ -29,7 +29,7 @@ class args_t
             /// only has to be done once.
             /// * Inputs: EvE API
             /// * Outputs: --item-ids-out
-            FETCH_ITEM_IDS,
+            FETCH_ITEM_ATTRIBUTES,
             /// This must be last.
             NUM_ENUMS
         };

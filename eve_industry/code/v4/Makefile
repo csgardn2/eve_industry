@@ -2,7 +2,7 @@ EXENAME=eve_industry
 COMPILEFLAGS=-Wall -Wextra -ansi -Wfatal-errors -std=c++1z -g -fopenmp
 LINKFLAGS=-Wall -Wextra -ansi -Wfatal-errors
 LIBS=-lcurl -fopenmp
-ARGS=--mode fetch-item-ids --item-ids-out data/json/item_ids.json
+ARGS=--mode fetch-item-attributes --item-ids-out data/json/item_ids.json
 
 BINDIR=bin
 DATADIR=data
@@ -13,13 +13,13 @@ COMPILER=g++-7
 all: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 
 # Add additional .o files on the line below (after main.o)
-$(BINDIR)/$(EXENAME):           \
-    $(BINDIR)/args.o            \
-    $(BINDIR)/https_get.o       \
-    $(BINDIR)/item_id.o         \
-    $(BINDIR)/item_ids.o        \
-    $(BINDIR)/json.o            \
-    $(BINDIR)/main.o            \
+$(BINDIR)/$(EXENAME):               \
+    $(BINDIR)/args.o                \
+    $(BINDIR)/https_get.o           \
+    $(BINDIR)/item_attribute.o      \
+    $(BINDIR)/item_ids.o            \
+    $(BINDIR)/json.o                \
+    $(BINDIR)/main.o                \
     
 	$(COMPILER) $(LINKFLAGS) -o $@ $^ $(LIBS)
 	@echo "*** COMPILE_SUCCESSFUL ***"
@@ -35,7 +35,7 @@ $(BINDIR)/args.o: $(SOURCEDIR)/args.cpp $(SOURCEDIR)/args.h
 $(BINDIR)/https_get.o: $(SOURCEDIR)/https_get.cpp $(SOURCEDIR)/https_get.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
-$(BINDIR)/item_id.o: $(SOURCEDIR)/item_id.cpp $(SOURCEDIR)/item_id.h
+$(BINDIR)/item_attribute.o: $(SOURCEDIR)/item_attribute.cpp $(SOURCEDIR)/item_attribute.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/item_ids.o: $(SOURCEDIR)/item_ids.cpp $(SOURCEDIR)/item_ids.h
@@ -70,8 +70,6 @@ $(DOCDIR)/html_out/index.html:      \
     $(SOURCEDIR)/args.cpp           \
     $(SOURCEDIR)/https_get.h        \
     $(SOURCEDIR)/https_get.cpp      \
-    $(SOURCEDIR)/item_id.h          \
-    $(SOURCEDIR)/item_id.cpp        \
     $(SOURCEDIR)/item_ids.h         \
     $(SOURCEDIR)/item_ids.cpp       \
     $(SOURCEDIR)/json.h             \

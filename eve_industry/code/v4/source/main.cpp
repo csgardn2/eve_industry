@@ -9,8 +9,7 @@
 #include <iostream>
 
 #include "args.h"
-#include "https_get.h"
-#include "item_id.h"
+#include "item_attribute.h"
 #include "item_ids.h"
 
 /// @brief Code execution starts here
@@ -27,36 +26,33 @@ int main(int argc, char** argv)
         return -1;
     }
     
+    item_attribute_t lard;
+    lard.fetch(34);
+    std::cout << lard << '\n';
+    return 0;
+    
     try
     {
-        
         switch (args.mode())
         {
-            
-            case args_t::mode_t::FETCH_ITEM_IDS:
+            case args_t::mode_t::FETCH_ITEM_ATTRIBUTES:
             {
                 
                 item_ids_t item_ids;
+                std::cout << "Fetching item ids..." << std::flush;
                 item_ids.fetch();
+                std::cout << "done\n";
                 
-                std::ofstream file(args.item_ids_out());
-                if (!file.good())
-                {
-                    std::cerr << "Error.  Failed to open \"" << args.item_ids_out() << "\" for writing.\n";
-                    return -1;
-                }
-                item_ids.encode(file);
+                
                 
                 break;
                 
             }
-            
             default:
             {
-                std::cerr << "Error.  Unimplemented mode " << args.mode() << ".\n";
+                std::cerr << "Error.  Unimplemented mode \"" << args_t::enum_to_string(args.mode()) << "\".\n";
                 return -1;
             }
-            
         }
     } catch (Json::Exception error) {
         std::cerr << error.what() << "  Fatal.  Could not decode JSON input file.\n";
@@ -67,10 +63,8 @@ int main(int argc, char** argv)
     } catch (item_ids_t::error_message_t error) {
         std::cerr << error;
         return -1;
-    } catch (item_id_t::error_message_t error) {
-        std::cerr << error;
-        return -1;
     }
+    
     return 0;
     
 }

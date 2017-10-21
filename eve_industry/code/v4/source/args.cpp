@@ -23,7 +23,7 @@ const std::vector<std::string_view> args_t::error_names_ =
     "JSON_SCHEMA_VIOLATION",
     "MODE_MISSING",
     "MODE_INVALID",
-    "ITEM_IDS_OUT_MISSING"
+    "ITEM_ATTRIBUTES_OUT_MISSING"
 };
 
 const std::vector<std::string_view> args_t::default_error_messages_ =
@@ -34,19 +34,19 @@ const std::vector<std::string_view> args_t::default_error_messages_ =
     "Error.  Json input does not contain the correct fields.\n",
     "Error.  Missing argument --mode {fetch-item-ids}.\n",
     "Error.  Valid options for mode are {fetch-item-ids}\n.",
-    "Error.  Missing argument --item-ids-out FILE.\n"
+    "Error.  Missing argument --item-attributes-out FILE.\n"
 };
 
 const std::vector<std::string_view> args_t::mode_names_ =
 {
     "FETCH_ITEM_ATTRIBUTES",
-    "FETCH_STRUCTURE_IDS"
+    "FETCH_STRUCTURE_ATTRIBUTES"
 };
 
 const std::vector<std::string_view> args_t::mode_values_ =
 {
     "fetch-item-attributes",
-    "fetch-structure-ids"
+    "fetch-structure-attributes"
 };
 
 /// @brief Search for a particular argument within argv and extract that
@@ -96,16 +96,16 @@ void args_t::parse(unsigned argc, char const* const* argv)
     if (this->mode_ == mode_t::NUM_ENUMS)
         throw error_message_t(error_code_t::MODE_INVALID);
     
-    // Parse --item-ids-out
+    // Parse --item-attributes-out
     if (this->mode_ == mode_t::FETCH_ITEM_ATTRIBUTES)
     {
-        this->item_ids_out_ = search_argv("--item-ids-out", argc, argv);
-        if (this->item_ids_out_.empty())
+        this->item_attributes_out_ = search_argv("--item-attributes-out", argc, argv);
+        if (this->item_attributes_out_.empty())
         {
-            std::string message("Error.  --item-ids-out FILE is required for ");
+            std::string message("Error.  --item-attributes-out FILE is required for ");
             message += mode_values_[unsigned(this->mode_)];
             message += " mode.\n";
-            throw error_message_t(error_code_t::ITEM_IDS_OUT_MISSING);
+            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING);
         }
     }
     
@@ -114,7 +114,7 @@ void args_t::parse(unsigned argc, char const* const* argv)
 void args_t::clear()
 {
     this->mode_ = mode_t::NUM_ENUMS;
-    this->item_ids_out_.clear();
+    this->item_attributes_out_.clear();
 }
 
 void args_t::decode(std::istream& file)
@@ -193,11 +193,11 @@ void args_t::decode(const Json::Value& json_root)
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, message);
     }
     
-    // Parse root/item_ids_out
-    const Json::Value& json_item_ids_out = json_root["item_ids_out"];
-    if (!json_item_ids_out.isString())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/item_ids_out was not found or not of type \"string\".\n");
-    this->item_ids_out_ = json_item_ids_out.asString();
+    // Parse root/item_attributes_out
+    const Json::Value& json_item_attributes_out = json_root["item_attributes_out"];
+    if (!json_item_attributes_out.isString())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/item_attributes_out was not found or not of type \"string\".\n");
+    this->item_attributes_out_ = json_item_attributes_out.asString();
     
 }
 
@@ -226,8 +226,8 @@ void args_t::encode(std::string& buffer, unsigned indent_start, unsigned spaces_
     
     buffer += ",\n";
     buffer += indent_1;
-    buffer += "\"item_ids_out\": \"";
-    buffer += this->item_ids_out_;
+    buffer += "\"item_attributes_out\": \"";
+    buffer += this->item_attributes_out_;
     buffer += "\"\n";
     
     // It is recommended to not put a newline on the last brace to allow

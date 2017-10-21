@@ -1,5 +1,5 @@
-/// @file item_attribite.cpp
-/// @brief Implementation of @ref item_attribite_t class
+/// @file item_attribute.cpp
+/// @brief Implementation of @ref item_attribute_t class
 /// 
 /// * Contact conor.gardner@arm.com if you have questions about this code.
 /// * Date Created = Tuesday October 10 2017

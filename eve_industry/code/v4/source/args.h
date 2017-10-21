@@ -15,6 +15,8 @@
 #include "error.h"
 #include "json.h"
 
+/// @brief Command line arguments are pre-processed, validated, and stored
+/// in this structure for easy access.
 class args_t
 {
     
@@ -28,8 +30,13 @@ class args_t
             /// Pull the integral IDs of all the items in EvE.  This normally
             /// only has to be done once.
             /// * Inputs: EvE API
-            /// * Outputs: --item-ids-out
+            /// * Outputs: --item-attributes-out
             FETCH_ITEM_ATTRIBUTES,
+            /// Pull the integral IDs of all the player owned and NPC structures
+            /// in Eve.  This normally only has to be done once.
+            /// * Inputs: EvE API
+            /// * Outputs: --structure-attributes-out
+            FETCH_STRUCTURE_ATTRIBUTES,
             /// This must be last.
             NUM_ENUMS
         };
@@ -55,7 +62,7 @@ class args_t
         
         /// @brief Filename of a JSON containing the integral IDs used by the
         /// EvE API for items.
-        std::string item_ids_out_;
+        std::string item_attributes_out_;
         
     // Public section 2 of 2.
     public:
@@ -76,7 +83,7 @@ class args_t
             JSON_SCHEMA_VIOLATION,
             MODE_MISSING,
             MODE_INVALID,
-            ITEM_IDS_OUT_MISSING,
+            ITEM_ATTRIBUTES_OUT_MISSING,
             /// This element must be last
             NUM_ENUMS
         };
@@ -147,10 +154,10 @@ class args_t
             return this->mode_;
         }
         
-        /// @brief Read access to @ref item_ids_out_ member.
-        inline const std::string& item_ids_out() const
+        /// @brief Read access to @ref item_attributes_out_ member.
+        inline const std::string& item_attributes_out() const
         {
-            return this->item_ids_out_;
+            return this->item_attributes_out_;
         }
         
         /// @brief See @ref decode(std::istream& file)

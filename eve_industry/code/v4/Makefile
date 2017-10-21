@@ -2,7 +2,7 @@ EXENAME=eve_industry
 COMPILEFLAGS=-Wall -Wextra -ansi -Wfatal-errors -std=c++1z -g -fopenmp
 LINKFLAGS=-Wall -Wextra -ansi -Wfatal-errors
 LIBS=-lcurl -fopenmp
-ARGS=--mode fetch-item-attributes --item-ids-out data/json/item_ids.json
+ARGS=--mode fetch-item-attributes --item-attributes-out data/json/item_attributes.json
 
 BINDIR=bin
 DATADIR=data
@@ -17,6 +17,7 @@ $(BINDIR)/$(EXENAME):               \
     $(BINDIR)/args.o                \
     $(BINDIR)/https_get.o           \
     $(BINDIR)/item_attribute.o      \
+    $(BINDIR)/item_attributes.o     \
     $(BINDIR)/item_ids.o            \
     $(BINDIR)/json.o                \
     $(BINDIR)/main.o                \
@@ -38,6 +39,9 @@ $(BINDIR)/https_get.o: $(SOURCEDIR)/https_get.cpp $(SOURCEDIR)/https_get.h
 $(BINDIR)/item_attribute.o: $(SOURCEDIR)/item_attribute.cpp $(SOURCEDIR)/item_attribute.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
+$(BINDIR)/item_attributes.o: $(SOURCEDIR)/item_attributes.cpp $(SOURCEDIR)/item_attributes.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
 $(BINDIR)/item_ids.o: $(SOURCEDIR)/item_ids.cpp $(SOURCEDIR)/item_ids.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
@@ -53,6 +57,9 @@ Doxyfile:
 
 #########################
 # Convenience targets
+
+fetch_item_attributes: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
+	$(BINDIR)/$(EXENAME) $(ARGS)
 
 clean:
 	@rm -fv $(BINDIR)/*.o $(BINDIR)/$(EXENAME)

@@ -48,12 +48,21 @@ void item_ids_t::fetch()
     Json::CharReaderBuilder builder;
     std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
     
+    std::string progress_message;
+    
     // There are multiple pages of item IDs.  The last page is signified with
     // and empty array.
     std::string_view query_prefix("https://esi.tech.ccp.is/latest/universe/types/?datasource=tranquility&page=");
     unsigned page = 1;
     while (true)
     {
+        
+        // Print progress message, erasing previous one if it existed
+        for (unsigned ix = 0, bound = progress_message.length(); ix < bound; ix++)
+            std::cout << '\b';
+        progress_message = "Page ";
+        progress_message += std::to_string(page);
+        std::cout << progress_message << std::flush;
         
         // Prepare a request URL
         std::string query(query_prefix);
@@ -104,7 +113,10 @@ void item_ids_t::fetch()
         }
         
         if (json_item_ids.empty())
+        {
+            std::cout << '\n';
             return;
+        }
         
     }
     

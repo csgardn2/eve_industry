@@ -1,5 +1,4 @@
 *.o
-*/html
-v4/documentation/html_out
-*/eve_industry
-v4/bin
+*.html
+bin/eve_industry
+documentation/html_out

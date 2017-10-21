@@ -22,6 +22,7 @@ $(BINDIR)/$(EXENAME):               \
     $(BINDIR)/item_ids.o            \
     $(BINDIR)/json.o                \
     $(BINDIR)/main.o                \
+    $(BINDIR)/station_ids.o         \
     
 	$(COMPILER) $(LINKFLAGS) -o $@ $^ $(LIBS)
 	@echo "*** COMPILE_SUCCESSFUL ***"
@@ -46,13 +47,16 @@ $(BINDIR)/item_attribute.o: $(SOURCEDIR)/item_attribute.cpp $(SOURCEDIR)/item_at
 $(BINDIR)/item_attributes.o: $(SOURCEDIR)/item_attributes.cpp $(SOURCEDIR)/item_attributes.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
-$(BINDIR)/item_ids.o: $(SOURCEDIR)/item_ids.cpp $(SOURCEDIR)/item_ids.h
+$(BINDIR)/item_ids.o: $(SOURCEDIR)/item_ids.cpp $(SOURCEDIR)/item_ids.h $(SOURCEDIR)/id_vector.cpp $(SOURCEDIR)/id_vector.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/json.o: $(SOURCEDIR)/jsoncpp.cpp $(SOURCEDIR)/json.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
-$(BINDIR)/main.o: $(SOURCEDIR)/main.cpp
+$(BINDIR)/main.o: $(SOURCEDIR)/main.cpp $(SOURCEDIR)/id_vector.cpp $(SOURCEDIR)/id_vector.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/station_ids.o: $(SOURCEDIR)/station_ids.cpp $(SOURCEDIR)/station_ids.h $(SOURCEDIR)/id_vector.cpp $(SOURCEDIR)/id_vector.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 Doxyfile:
@@ -89,6 +93,8 @@ $(DOCDIR)/html_out/index.html:      \
     $(SOURCEDIR)/json.h             \
     $(SOURCEDIR)/jsoncpp.cpp        \
     $(SOURCEDIR)/main.cpp           \
+    $(SOURCEDIR)/station_ids.h      \
+    $(SOURCEDIR)/station_ids.cpp    \
     
 	doxygen $(DOCDIR)/Doxyfile
 

@@ -17,26 +17,4 @@
 #include "error.h"
 #include "json.h"
 
-/// @brief String representations of enumeration symbols.
-template <const char* url>
-const std::vector<std::string_view> id_vector_t<url>::error_names_ =
-{
-    "FILE_SIZE_FAILED",
-    "FILE_READ_FAILED",
-    "FILE_WRITE_FAILED",
-    "JSON_SCHEMA_VIOLATION",
-    "EVE_SUCKS"
-};
-
-/// @brief Default error messages suitable for printing.  Note that
-/// some of these are inherently vague without additional information.
-template <const char* url>
-const std::vector<std::string_view> id_vector_t<url>::default_error_messages_ =
-{
-    "Error.  Failed to determine size of input file.\n",
-    "Error.  Failed to read content from file.\n",
-    "Error.  Failed to write content to file.\n",
-    "Error.  Json input does not contain the correct fields.\n",
-    "Error.  CCP changed something that used to work.\n"
-};
-
+// Empty for now, since the class is just a template.

@@ -18,6 +18,8 @@
 #include "https_get.h"
 #include "json.h"
 
+
+
 /// @brief Generic class for fetching and storing a list of valid integral
 /// uniquifiers from the EvE Swagger API.
 template
@@ -28,7 +30,7 @@ template
 >
 /// @brief List of integral uniquifiers used by inventory items in the EvE
 /// universe.  These are only the IDs, not the attributes for any items.
-class id_vector_t : public std::vector<unsigned>
+class id_vector_t : public std::vector<uint64_t>
 {
         
     protected:
@@ -192,10 +194,11 @@ class id_vector_t : public std::vector<unsigned>
                 std::string payload = https_get(query);
                 
                 // Attempt to decode received data
-                Json::Value json_item_ids;
+                Json::Value json_ids;
                 std::string error_message;
-                if (!reader->parse(payload.data(), payload.data() + payload.size(), &json_item_ids, &error_message))
+                if (!reader->parse(payload.data(), payload.data() + payload.size(), &json_ids, &error_message))
                 {
+                    std::cout << '\n';
                     std::string message("Error.  Tried to decode JSON data from\"");
                     message += query;
                     message += "\" but it failed with message \"";
@@ -204,9 +207,36 @@ class id_vector_t : public std::vector<unsigned>
                     throw error_message_t(error_code_t::EVE_SUCKS, message);
                 }
                 
+                if (!json_ids.isArray())
+                {
+                    std::cout << '\n';
+                    std::string message("Error.  Data fetched from \"");
+                    message += query;
+                    message += "\" was not of type \"array\"\n";
+                    throw error_message_t(error_code_t::EVE_SUCKS, message);
+                }
+                
+                unsigned num_elements = json_ids.size();
+                
+                // Some API endpoints will use a blank page to signify the end
+                // of data
+                if (num_elements == 0)
+                {
+                    std::cout << '\n';
+                    return;
+                }
+                
+                // Some API endpoints will just repeat the same data over and
+                // over when it runs out.
+                if (!this->empty() && json_ids[num_elements - 1] == this->back())
+                {
+                    std::cout << '\n';
+                    return;
+                }
+                
                 // Append fetched data to internal storage
                 unsigned old_size = this->size();
-                unsigned new_size = old_size + json_item_ids.size();
+                unsigned new_size = old_size + num_elements;
                 this->resize(new_size);
                 for
                 (
@@ -215,26 +245,23 @@ class id_vector_t : public std::vector<unsigned>
                     read_ix++, write_ix++
                 ){
                     
-                    const Json::Value& json_cur_element = json_item_ids[read_ix];
+                    const Json::Value& json_cur_element = json_ids[read_ix];
                     
-                    if (!json_cur_element.isUInt())
+                    if (!json_cur_element.isUInt64())
                     {
+                        std::cout << '\n';
                         std::string message("Error.  Element ");
                         message += std::to_string(read_ix);
-                        message += " fetched from \"";
+                        message += " = \"";
+                        message += json_cur_element.asString();
+                        message += "\" fetched from \"";
                         message += query;
-                        message += "\" was not of type \"unsigned int\"\n";
+                        message += "\" was not of type \"uint64\"\n";
                         throw error_message_t(error_code_t::EVE_SUCKS, message);
                     }
                     
-                    (*this)[write_ix] = json_cur_element.asUInt();
+                    (*this)[write_ix] = json_cur_element.asUInt64();
                     
-                }
-                
-                if (json_item_ids.empty())
-                {
-                    std::cout << '\n';
-                    return;
                 }
                 
             }
@@ -420,6 +447,29 @@ class id_vector_t : public std::vector<unsigned>
             return buffer;
         }
         
+};
+
+/// @brief String representations of enumeration symbols.
+template <const char* url>
+const std::vector<std::string_view> id_vector_t<url>::error_names_ =
+{
+    "FILE_SIZE_FAILED",
+    "FILE_READ_FAILED",
+    "FILE_WRITE_FAILED",
+    "JSON_SCHEMA_VIOLATION",
+    "EVE_SUCKS"
+};
+
+/// @brief Default error messages suitable for printing.  Note that
+/// some of these are inherently vague without additional information.
+template <const char* url>
+const std::vector<std::string_view> id_vector_t<url>::default_error_messages_ =
+{
+    "Error.  Failed to determine size of input file.\n",
+    "Error.  Failed to read content from file.\n",
+    "Error.  Failed to write content to file.\n",
+    "Error.  Json input does not contain the correct fields.\n",
+    "Error.  CCP changed something that used to work.\n"
 };
 
 /// @brief Convenience alias to allow printing directly via cout or similar.

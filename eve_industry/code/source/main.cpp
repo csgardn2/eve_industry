@@ -11,6 +11,7 @@
 #include "args.h"
 #include "item_attributes.h"
 #include "item_ids.h"
+#include "station_ids.h"
 
 /// @brief Code execution starts here
 int main(int argc, char** argv)
@@ -46,10 +47,10 @@ int main(int argc, char** argv)
                 item_ids_t item_ids;
                 item_ids.fetch();
                 
-                std::cout << "Fetching item attributes\n";
+                std::cout << "Fetching item attributes...\n";
                 item_attributes_t item_attributes(item_ids);
                 
-                std::cout << "Writing output file.\n";
+                std::cout << "Writing output file...\n";
                 item_attributes.encode(item_attributes_out_file);
                 
                 break;
@@ -67,6 +68,13 @@ int main(int argc, char** argv)
                     std::cerr << "Error.  Failed to open \"" << args.station_attributes_out() << "\" for writing.\n";
                     return -1;
                 }
+                
+                std::cout << "Fetching station ids...\n";
+                station_ids_t station_ids;
+                station_ids.fetch();
+                
+                std::cout << "Writing test output file.\n";
+                station_attributes_out_file << station_ids << '\n';
                 
                 break;
                 
@@ -91,6 +99,9 @@ int main(int argc, char** argv)
         std::cerr << error;
         return -1;
     } catch (item_attributes_t::error_message_t error) {
+        std::cerr << error;
+        return -1;
+    } catch (station_ids_t::error_message_t error) {
         std::cerr << error;
         return -1;
     }

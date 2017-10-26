@@ -50,6 +50,39 @@
                 "type": "integer",
                 "minimum": 0
             }
+        },
+        "station_attribute": {
+            "type": "object",
+            "description": "Static information about an NPC station in EvE",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The integral uniquifier for this station, as used by the EvE swagger interface.",
+                    "minimum": 0
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of a station, such as 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'",
+                    "minLength": 1
+                },
+                "system": {
+                    "type": "integer",
+                    "description": "The integral uniquifier for the solar system containing this station, as used by the EvE swagger interface.",
+                    "minimum": 0
+                },
+                "region": {
+                    "type": "integer",
+                    "description": "The integral uniquifier for the region containing this station, as used by the EvE swagger ubterface,",
+                    "minimum": 0
+                }
+            }
+        },
+        "station_attributes": {
+            "type": "array",
+            "description": "Collection of multiple station descriptions.",
+            "items": {
+                "$ref": "#/definitions/station_attribute"
+            }
         }
     }
 }

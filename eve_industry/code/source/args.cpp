@@ -23,8 +23,7 @@ const std::vector<std::string_view> args_t::error_names_ =
     "JSON_SCHEMA_VIOLATION",
     "MODE_MISSING",
     "MODE_INVALID",
-    "ITEM_ATTRIBUTES_OUT_MISSING",
-    "STATION_ATTRIBUTES_OUT_MISSING"
+    "ITEM_ATTRIBUTES_OUT_MISSING"
 };
 
 const std::vector<std::string_view> args_t::default_error_messages_ =
@@ -35,20 +34,19 @@ const std::vector<std::string_view> args_t::default_error_messages_ =
     "Error.  Json input does not contain the correct fields.\n",
     "Error.  Missing argument --mode {fetch-item-ids}.\n",
     "Error.  Valid options for mode are {fetch-item-ids}\n.",
-    "Error.  Missing argument --item-attributes-out FILE.\n",
-    "Error.  Missing argument --station-attributes-out FILE.\n"
+    "Error.  Missing argument --item-attributes-out FILE.\n"
 };
 
 const std::vector<std::string_view> args_t::mode_names_ =
 {
     "FETCH_ITEM_ATTRIBUTES",
-    "FETCH_STATION_ATTRIBUTES"
+    "FETCH_STRUCTURE_ATTRIBUTES"
 };
 
 const std::vector<std::string_view> args_t::mode_values_ =
 {
     "fetch-item-attributes",
-    "fetch-station-attributes"
+    "fetch-structure-attributes"
 };
 
 /// @brief Search for a particular argument within argv and extract that
@@ -107,20 +105,7 @@ void args_t::parse(unsigned argc, char const* const* argv)
             std::string message("Error.  --item-attributes-out FILE is required for ");
             message += mode_values_[unsigned(this->mode_)];
             message += " mode.\n";
-            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING, message);
-        }
-    }
-    
-    // Parse --station-attributes-out
-    if (this->mode_ == mode_t::FETCH_STATION_ATTRIBUTES)
-    {
-        this->station_attributes_out_ = search_argv("--station-attributes-out", argc, argv);
-        if (this->station_attributes_out_.empty())
-        {
-            std::string message("Error.  --station-attributes-out FILE is required for ");
-            message += mode_values_[unsigned(this->mode_)];
-            message += " mode.\n";
-            throw error_message_t(error_code_t::STATION_ATTRIBUTES_OUT_MISSING, message);
+            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING);
         }
     }
     

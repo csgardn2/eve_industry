@@ -6,7 +6,7 @@
             "properties": {
                 "mode": {
                     "type": "string",
-                    "enum": ["fetch-item-attributes", "fetch-station-attributes"],
+                    "enum": ["fetch-item-attributes", "fetch-structure-attributes"],
                     "description": "The high-level operation that this tool is to perform."
                 },
                 "item_attributes_out": {

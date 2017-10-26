@@ -35,8 +35,8 @@ class args_t
             /// Pull the integral IDs of all the player owned and NPC structures
             /// in Eve.  This normally only has to be done once.
             /// * Inputs: EvE API
-            /// * Outputs: --station-attributes-out
-            FETCH_STATION_ATTRIBUTES,
+            /// * Outputs: --structure-attributes-out
+            FETCH_STRUCTURE_ATTRIBUTES,
             /// This must be last.
             NUM_ENUMS
         };
@@ -60,13 +60,9 @@ class args_t
         /// @brief The high-level operation to be performed by this tool.
         mode_t mode_;
         
-        /// @brief Filename of a JSON file containing the integral IDs used by
-        /// the EvE Swagger API for items.
+        /// @brief Filename of a JSON containing the integral IDs used by the
+        /// EvE API for items.
         std::string item_attributes_out_;
-        
-        /// @brief Filename of a JSON file containing the integral IDs used by
-        /// the EvE Swagger API for player owned structures and NPC stations.
-        std::string station_attributes_out_;
         
     // Public section 2 of 2.
     public:
@@ -88,7 +84,6 @@ class args_t
             MODE_MISSING,
             MODE_INVALID,
             ITEM_ATTRIBUTES_OUT_MISSING,
-            STATION_ATTRIBUTES_OUT_MISSING,
             /// This element must be last
             NUM_ENUMS
         };
@@ -163,11 +158,6 @@ class args_t
         inline const std::string& item_attributes_out() const
         {
             return this->item_attributes_out_;
-        }
-        
-        inline const std::string& station_attributes_out() const
-        {
-            return this->station_attributes_out_;
         }
         
         /// @brief See @ref decode(std::istream& file)

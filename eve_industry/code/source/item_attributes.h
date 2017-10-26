@@ -14,8 +14,9 @@
 
 #include "error.h"
 #include "item_attribute.h"
-#include "item_ids.h"
 #include "json.h"
+
+class item_ids_t;
 
 /// @brief A group of multiple item attributes.  Useful for bulk fetching,
 /// encoding, and decoding possibly using multiple threads.

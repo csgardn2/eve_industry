@@ -23,7 +23,10 @@ const std::vector<std::string_view> args_t::error_names_ =
     "JSON_SCHEMA_VIOLATION",
     "MODE_MISSING",
     "MODE_INVALID",
-    "ITEM_ATTRIBUTES_OUT_MISSING"
+    "ITEM_ATTRIBUTES_OUT_MISSING",
+    "ITEM_ATTRIBUTES_IN_MISSING",
+    "STATION_ATTRIBUTES_IN_MISSING",
+    "PRICES_OUT_MISSING"
 };
 
 const std::vector<std::string_view> args_t::default_error_messages_ =
@@ -32,21 +35,24 @@ const std::vector<std::string_view> args_t::default_error_messages_ =
     "Error.  Failed to read content from file.\n",
     "Error.  Failed to write content to file.\n",
     "Error.  Json input does not contain the correct fields.\n",
-    "Error.  Missing argument --mode {fetch-item-ids}.\n",
+    "Error.  Missing argument --mode {fetch-item-attributes}.\n",
     "Error.  Valid options for mode are {fetch-item-ids}\n.",
-    "Error.  Missing argument --item-attributes-out FILE.\n"
+    "Error.  Missing argument --item-attributes-out FILE.\n",
+    "Error.  Missing argument --item-attributes-in FILE.\n",
+    "Error.  Missing argument --station-attributes-in FILE.\n",
+    "Error.  Missing argument --prices-out FILE.\n"
 };
 
 const std::vector<std::string_view> args_t::mode_names_ =
 {
     "FETCH_ITEM_ATTRIBUTES",
-    "FETCH_STRUCTURE_ATTRIBUTES"
+    "FETCH_PRICES"
 };
 
 const std::vector<std::string_view> args_t::mode_values_ =
 {
     "fetch-item-attributes",
-    "fetch-structure-attributes"
+    "fetch-prices"
 };
 
 /// @brief Search for a particular argument within argv and extract that
@@ -103,6 +109,45 @@ void args_t::parse(unsigned argc, char const* const* argv)
         if (this->item_attributes_out_.empty())
         {
             std::string message("Error.  --item-attributes-out FILE is required for ");
+            message += mode_values_[unsigned(this->mode_)];
+            message += " mode.\n";
+            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING);
+        }
+    }
+    
+    // Parse --item-attributes-in
+    if (this->mode_ == mode_t::FETCH_PRICES)
+    {
+        this->item_attributes_in_ = search_argv("--item-attributes-in", argc, argv);
+        if (this->item_attributes_in_.empty())
+        {
+            std::string message("Error.  --item-attributes-in FILE is required for ");
+            message += mode_values_[unsigned(this->mode_)];
+            message += " mode.\n";
+            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING);
+        }
+    }
+    
+    // Parse --station-attributes-in
+    if (this->mode_ == mode_t::FETCH_PRICES)
+    {
+        this->station_attributes_in_ = search_argv("--station-attributes-in", argc, argv);
+        if (this->item_attributes_in_.empty())
+        {
+            std::string message("Error.  --station-attributes-in FILE is required for ");
+            message += mode_values_[unsigned(this->mode_)];
+            message += " mode.\n";
+            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING);
+        }
+    }
+    
+    // Parse --prices-out
+    if (this->mode_ == mode_t::FETCH_PRICES)
+    {
+        this->prices_out_ = search_argv("--prices-out", argc, argv);
+        if (this->item_attributes_in_.empty())
+        {
+            std::string message("Error.  --prices-out FILE is required for ");
             message += mode_values_[unsigned(this->mode_)];
             message += " mode.\n";
             throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING);
@@ -199,6 +244,24 @@ void args_t::decode(const Json::Value& json_root)
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/item_attributes_out was not found or not of type \"string\".\n");
     this->item_attributes_out_ = json_item_attributes_out.asString();
     
+    // Parse root/item_attributes_in
+    const Json::Value& json_item_attributes_in = json_root["item_attributes_in"];
+    if (!json_item_attributes_in.isString())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/item_attributes_in was not found or not of type \"string\".\n");
+    this->item_attributes_in_ = json_item_attributes_in.asString();
+    
+    // Parse root/station_attributes_in
+    const Json::Value& json_station_attributes_in = json_root["station_attributes_in"];
+    if (!json_station_attributes_in.isString())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/station_attributes_in was not found or not of type \"string\".\n");
+    this->station_attributes_in_ = json_station_attributes_in.asString();
+    
+    // Parse root/prices_out
+    const Json::Value& json_prices_out = json_root["prices_out"];
+    if (!json_prices_out.isString())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/prices_out was not found or not of type \"string\".\n");
+    this->prices_out_ = json_prices_out.asString();
+    
 }
 
 void args_t::encode(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
@@ -224,14 +287,37 @@ void args_t::encode(std::string& buffer, unsigned indent_start, unsigned spaces_
     buffer += args_t::mode_names_[unsigned(this->mode_)];
     buffer += "\"";
     
+    // Encode item_attributes_out
     buffer += ",\n";
     buffer += indent_1;
     buffer += "\"item_attributes_out\": \"";
     buffer += this->item_attributes_out_;
-    buffer += "\"\n";
+    buffer += "\"";
+    
+    // Encode item_attributes_in
+    buffer += ",\n";
+    buffer += indent_1;
+    buffer += "\"item_attributes_in\": \"";
+    buffer += this->item_attributes_in_;
+    buffer += "\"";
+    
+    // Encode station_attributes_in
+    buffer += ",\n";
+    buffer += indent_1;
+    buffer += "\"station_attributes_in\": \"";
+    buffer += this->station_attributes_in_;
+    buffer += "\"";
+    
+    // Encode prices_out
+    buffer += ",\n";
+    buffer += indent_1;
+    buffer += "\"prices_out\": \"";
+    buffer += this->prices_out_;
+    buffer += "\"";
     
     // It is recommended to not put a newline on the last brace to allow
     // comma chaining when this object is an element of an array.
+    buffer += '\n';
     buffer += indent_0;
     buffer += "}";
     

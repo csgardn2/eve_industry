@@ -32,11 +32,11 @@ class args_t
             /// * Inputs: EvE API
             /// * Outputs: --item-attributes-out
             FETCH_ITEM_ATTRIBUTES,
-            /// Pull the integral IDs of all the player owned and NPC structures
-            /// in Eve.  This normally only has to be done once.
-            /// * Inputs: EvE API
-            /// * Outputs: --structure-attributes-out
-            FETCH_STRUCTURE_ATTRIBUTES,
+            /// Pull market prices for all requested items for all requested
+            /// stations
+            /// * Inputs: EvE API, --item-attributes-in, --station-attributes-in
+            /// * Outputs: --prices-out
+            FETCH_PRICES,
             /// This must be last.
             NUM_ENUMS
         };
@@ -64,6 +64,20 @@ class args_t
         /// EvE API for items.
         std::string item_attributes_out_;
         
+        /// @brief Filename of a JSON containing the integral IDs used by the
+        /// EvE API for items.
+        std::string item_attributes_in_;
+        
+        /// @brief Filename of a JSON containing static information about
+        /// stations with markets such as the station's ID, name, solar system,
+        /// and region.
+        std::string station_attributes_in_;
+        
+        /// @brief Filename of a JSON containing live market prices for each
+        /// item specified by @ref item_attributes_in at all stations specified
+        /// by @ref station_attributes_in_.
+        std::string prices_out_;
+        
     // Public section 2 of 2.
     public:
         
@@ -84,6 +98,9 @@ class args_t
             MODE_MISSING,
             MODE_INVALID,
             ITEM_ATTRIBUTES_OUT_MISSING,
+            ITEM_ATTRIBUTES_IN_MISSING,
+            STATION_ATTRIBUTES_IN_MISSING,
+            PRICES_OUT_MISSING,
             /// This element must be last
             NUM_ENUMS
         };
@@ -158,6 +175,24 @@ class args_t
         inline const std::string& item_attributes_out() const
         {
             return this->item_attributes_out_;
+        }
+        
+        /// @brief Read access to @ref item_attributes_in_ member.
+        inline const std::string& item_attributes_in() const
+        {
+            return this->item_attributes_in_;
+        }
+        
+        /// @brief Read access to @ref station_attributes_in_ member.
+        inline const std::string& station_attributes_in() const
+        {
+            return this->station_attributes_in_;
+        }
+        
+        /// @brief Read access to @ref prices_out_ member.
+        inline const std::string& prices_out() const
+        {
+            return this->prices_out_;
         }
         
         /// @brief See @ref decode(std::istream& file)

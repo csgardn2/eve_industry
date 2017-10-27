@@ -13,9 +13,17 @@
                     "type": "string",
                     "description": "Name of a file to write info about all of the EvE inventory items to."
                 },
-                "structure_attributes_out": {
+                "item_attributes_in": {
                     "type": "string",
-                    "description": "Name of a file to write info about all of the player owned and NPC structures in EvE to."
+                    "description": "Name of a file to read info about all of the EvE inventory items to."
+                },
+                "station_attributes_in": {
+                    "type": "string",
+                    "description": "Name of a file to to read for static infomation about a market station such as its ID, region, and solar system."
+                },
+                "prices_out": {
+                    "type": "string",
+                    "description": "Live market buy and sell prices for specific items at specific stations."
                 }
             }
         },
@@ -75,7 +83,8 @@
                     "description": "The integral uniquifier for the region containing this station, as used by the EvE swagger ubterface,",
                     "minimum": 0
                 }
-            }
+            },
+            "required": ["id", "name", "system", "region"]
         },
         "station_attributes": {
             "type": "array",
@@ -83,6 +92,76 @@
             "items": {
                 "$ref": "#/definitions/station_attribute"
             }
+        },
+        "order": {
+            "type": "object",
+            "description": "A standing buy or sell offer at a specific station.",
+            "properties": {
+                "item_id": {
+                    "type": "integer",
+                    "description": "Integral uniquifier of an inventory item in EvE.",
+                    "minimum": 0
+                },
+                "station_id": {
+                    "type": "integer",
+                    "description": "Integral uniquifier of a station in EvE.",
+                    "minimum": 0
+                },
+                "type": {
+                    "type": "string",
+                    "enum": ["buy", "sell"]
+                },
+                "price": {
+                    "type": "number",
+                    "description": "The asking buy or sell price for this order.",
+                    "minimum": 0.0
+                }
+            },
+            "required": ["item_id", "station_id", "type", "price"]
+        },
+        "orders": {
+            "type": "array",
+            "description": "Collection of multiple orders from one or more stations and one or more regions.",
+            "items": {
+                "$ref": "#/definitions/station_attribute"
+            }
+        },
+        "price": {
+            "type": "object",
+            "description": "Market data for a specific item fetched from the EvE Swagger database",
+            "properties": {
+                "item": {
+                    "type": "integer",
+                    "description": "The integral uniquifier for this item, as used by the EvE swagger interface.",
+                    "minimum": 0
+                },
+                "orders": {
+                    "type": "array",
+                    "description": "Lists minimum sell orders ande maximum buy orders at each requested station.",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "station": {
+                                "type": "integer",
+                                "description": "Integral uniquifier of a station in EvE.",
+                                "minimum": 0
+                            },
+                            "min_sell_order": {
+                                "type": "number",
+                                "description": "Lowest sell bid for this item at this station.",
+                                "minimum": 0.0
+                            },
+                            "max_buy_order": {
+                                "type": "number",
+                                "description": "Highest buy bid for this item at this station.",
+                                "minimum": 0.0
+                            }
+                        },
+                        "required": ["station", "min_sell_order", "max_buy_order"]
+                    }
+                }
+            },
+            "required": ["item", "orders"]
         }
     }
 }

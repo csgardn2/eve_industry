@@ -59,7 +59,16 @@ Doxyfile:
 # Convenience targets
 
 fetch_item_attributes: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
-	$(BINDIR)/$(EXENAME) $(ARGS)
+	$(BINDIR)/$(EXENAME)                                            \
+        --mode fetch-item-attributes                                \
+        --item-attributes-out data/json/item_attributes.json
+
+fetch_prices: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
+	$(BINDIR)/$(EXENAME)                                            \
+        --mode fetch-prices                                         \
+        --item-attributes-in data/json/item_attributes.json         \
+        --station-attributes-in data/json/station_attributes.json   \
+        --prices-out data/json/prices.json
 
 clean:
 	@rm -fv $(BINDIR)/*.o $(BINDIR)/$(EXENAME)

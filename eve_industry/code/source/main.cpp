@@ -30,6 +30,7 @@ int main(int argc, char** argv)
     {
         switch (args.mode())
         {
+            
             case args_t::mode_t::FETCH_ITEM_ATTRIBUTES:
             {
                 
@@ -55,11 +56,15 @@ int main(int argc, char** argv)
                 break;
                 
             }
+            
+            // TODO The next step is to implement order fetching and price processing.
+            
             default:
             {
                 std::cerr << "Error.  Unimplemented mode \"" << args_t::enum_to_string(args.mode()) << "\".\n";
                 return -1;
             }
+            
         }
     } catch (Json::Exception error) {
         std::cerr << error.what() << "  Fatal.  Could not decode JSON input file.\n";

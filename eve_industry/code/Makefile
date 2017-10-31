@@ -21,6 +21,8 @@ $(BINDIR)/$(EXENAME):               \
     $(BINDIR)/item_ids.o            \
     $(BINDIR)/json.o                \
     $(BINDIR)/main.o                \
+    $(BINDIR)/station_attribute.o   \
+    $(BINDIR)/station_attributes.o  \
     
 	$(COMPILER) $(LINKFLAGS) -o $@ $^ $(LIBS)
 	@echo "*** COMPILE_SUCCESSFUL ***"
@@ -51,6 +53,12 @@ $(BINDIR)/json.o: $(SOURCEDIR)/jsoncpp.cpp $(SOURCEDIR)/json.h
 $(BINDIR)/main.o: $(SOURCEDIR)/main.cpp
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
+$(BINDIR)/station_attribute.o: $(SOURCEDIR)/station_attribute.cpp $(SOURCEDIR)/station_attribute.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/station_attributes.o: $(SOURCEDIR)/station_attributes.cpp $(SOURCEDIR)/station_attributes.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
 Doxyfile:
 	@echo "Couldn't find Doxyfile, generating default"
 	doxygen -g
@@ -79,18 +87,22 @@ run:  $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 valgrind:  $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 	valgrind --suppressions=$(DATADIR)/valgrind_suppressions.supp --leak-check=full $(BINDIR)/$(EXENAME) $(ARGS)
 
-$(DOCDIR)/html_out/index.html:      \
-    $(DOCDIR)/mainpage.md           \
-    $(DOCDIR)/Doxyfile              \
-    $(SOURCEDIR)/args.h             \
-    $(SOURCEDIR)/args.cpp           \
-    $(SOURCEDIR)/https_get.h        \
-    $(SOURCEDIR)/https_get.cpp      \
-    $(SOURCEDIR)/item_ids.h         \
-    $(SOURCEDIR)/item_ids.cpp       \
-    $(SOURCEDIR)/json.h             \
-    $(SOURCEDIR)/jsoncpp.cpp        \
-    $(SOURCEDIR)/main.cpp           \
+$(DOCDIR)/html_out/index.html:          \
+    $(DOCDIR)/mainpage.md               \
+    $(DOCDIR)/Doxyfile                  \
+    $(SOURCEDIR)/args.h                 \
+    $(SOURCEDIR)/args.cpp               \
+    $(SOURCEDIR)/https_get.h            \
+    $(SOURCEDIR)/https_get.cpp          \
+    $(SOURCEDIR)/item_ids.h             \
+    $(SOURCEDIR)/item_ids.cpp           \
+    $(SOURCEDIR)/json.h                 \
+    $(SOURCEDIR)/jsoncpp.cpp            \
+    $(SOURCEDIR)/main.cpp               \
+    $(SOURCEDIR)/station_attribute.h    \
+    $(SOURCEDIR)/station_attribute.cpp  \
+    $(SOURCEDIR)/station_attributes.h   \
+    $(SOURCEDIR)/station_attributes.cpp \
     
 	doxygen $(DOCDIR)/Doxyfile
 

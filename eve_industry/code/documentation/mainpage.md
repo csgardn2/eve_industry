@@ -24,48 +24,7 @@ The operation you choose to perform with the --mode argument determines which
 arguments are required.  This table below lists the required and optional
 command line arguments for each mode.
 
-<table>
-    <tr>
-        <th>Mode</th>
-        <th>Required Additional Arguments</th>
-        <th>Optional Additional Arguments</th>
-    </tr>
-    <tr>
-        <td>--fetch-prices</td>
-        <td>
-            <ul>
-                <li>--stations-in</li>
-                <li>--items-in</li>
-                <li>--prices-out</li>
-            </ul>
-        </td>
-        <td>None</td>
-    </tr>
-    <tr>
-        <td>--calculate-blueprint-profitability</td>
-        <td>
-            <ul>
-                <li>--prices-in</li>
-                <li>--blueprints-in</li>
-                <li>--profitability-out</li>
-            </ul>
-        </td>
-        <td>None</td>
-    </tr>
-    <tr>
-        <td>--generate-todo-list</td>
-        <td>
-            <ul>
-                <li>--assembly-lines-in</li>
-                <li>--profitability-in</li>
-                <li>--jobs-in</li>
-                <li>--jobs-out</li>
-                <li>--todo-list-out</li>
-            </ul>
-        </td>
-        <td>None</td>
-    </tr>
-</table>
+See @ref args_t::mode_t for additional command line usage.
 
 Dependencies
 ----

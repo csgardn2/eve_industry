@@ -10,6 +10,7 @@
 
 #include "args.h"
 #include "item_attributes.h"
+#include "station_attributes.h"
 #include "item_ids.h"
 
 /// @brief Code execution starts here
@@ -57,7 +58,21 @@ int main(int argc, char** argv)
                 
             }
             
-            // TODO The next step is to implement order fetching and price processing.
+            case args_t::mode_t::FETCH_PRICES:
+            {
+                
+                // Open and parse input files
+                std::ifstream item_attributes_in_file(args.item_attributes_in());
+                item_attributes_t item_attributes_in(item_attributes_in_file);
+                
+                std::ifstream station_attributes_in_file(args.station_attributes_in());
+                station_attributes_t station_attributes_in(station_attributes_in_file);
+                
+                // TODO Conor, you left off here.  Implement classes for fetching regional prices.
+                
+                break;
+                
+            }
             
             default:
             {

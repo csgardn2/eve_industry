@@ -102,6 +102,11 @@
                     "description": "Integral uniquifier of an inventory item in EvE.",
                     "minimum": 0
                 },
+                "price": {
+                    "type": "number",
+                    "description": "The asking buy or sell price for this order.",
+                    "minimum": 0.0
+                },
                 "station_id": {
                     "type": "integer",
                     "description": "Integral uniquifier of a station in EvE.",
@@ -110,11 +115,6 @@
                 "type": {
                     "type": "string",
                     "enum": ["buy", "sell"]
-                },
-                "price": {
-                    "type": "number",
-                    "description": "The asking buy or sell price for this order.",
-                    "minimum": 0.0
                 }
             },
             "required": ["item_id", "station_id", "type", "price"]

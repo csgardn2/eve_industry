@@ -10,12 +10,29 @@
 
 #include "args.h"
 #include "item_attributes.h"
-#include "station_attributes.h"
 #include "item_ids.h"
+#include "station_attributes.h"
+#include "order.h"
 
 /// @brief Code execution starts here
 int main(int argc, char** argv)
 {
+    
+    try
+    {
+        std::cout << order_t(std::string_view(
+            "{\n"
+            "    \"item_id\": 34,\n"
+            "    \"price\": 4.12,\n"
+            "    \"station_id\": 60008494,\n"
+            "    \"type\": \"sell\"\n"
+            "}\n"
+        )) << '\n';
+    } catch (order_t::error_message_t error) {
+        std::cerr << error;
+    }
+    
+    return 0;
     
     // Parse command line arguments
     args_t args;

@@ -21,6 +21,7 @@ $(BINDIR)/$(EXENAME):               \
     $(BINDIR)/item_ids.o            \
     $(BINDIR)/json.o                \
     $(BINDIR)/main.o                \
+    $(BINDIR)/order.o               \
     $(BINDIR)/station_attribute.o   \
     $(BINDIR)/station_attributes.o  \
     
@@ -51,6 +52,9 @@ $(BINDIR)/json.o: $(SOURCEDIR)/jsoncpp.cpp $(SOURCEDIR)/json.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/main.o: $(SOURCEDIR)/main.cpp
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/order.o: $(SOURCEDIR)/order.cpp $(SOURCEDIR)/order.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/station_attribute.o: $(SOURCEDIR)/station_attribute.cpp $(SOURCEDIR)/station_attribute.h
@@ -99,6 +103,8 @@ $(DOCDIR)/html_out/index.html:          \
     $(SOURCEDIR)/json.h                 \
     $(SOURCEDIR)/jsoncpp.cpp            \
     $(SOURCEDIR)/main.cpp               \
+    $(SOURCEDIR)/order.h                \
+    $(SOURCEDIR)/order.cpp              \
     $(SOURCEDIR)/station_attribute.h    \
     $(SOURCEDIR)/station_attribute.cpp  \
     $(SOURCEDIR)/station_attributes.h   \

@@ -37,12 +37,8 @@ const std::vector<std::string_view> item_attributes_t::default_error_messages_ =
     "Error.  Json input does not contain the correct fields.\n"
 };
 
-void item_attributes_t::fetch(const item_ids_t& lard)
+void item_attributes_t::fetch(const item_ids_t& item_ids)
 {
-    
-    item_ids_t item_ids = lard;
-    if (item_ids.size() > 1024)
-        item_ids.resize(1024);
     
     this->clear();
     

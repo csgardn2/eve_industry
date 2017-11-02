@@ -80,13 +80,8 @@ class order_t
         /// @brief Default constructor
         inline order_t() = default;
         
-        /// @brief Copy constructor
-        inline order_t(const order_t& source) = default;
-        
-        /// @brief Move constructor
-        inline order_t(order_t&& source) = default;
-        
         // Add member initialization constructors here
+        
         // Try to use initializer lists when possible.
         inline order_t(unsigned item_id, float price, unsigned station_id, order_type_t order_type)
           : item_id_(item_id),
@@ -95,70 +90,6 @@ class order_t
             order_type_(order_type)
         {
             // All work done in initializer list
-        }
-        
-        /// See @ref decode(std::istream& file)
-        ///
-        /// @exception error_message_t
-        /// @exception Json::Exception
-        inline order_t(std::istream& file)
-        {
-            this->decode(file);
-        }
-        
-        /// @brief See @ref decode(std::istream& file)
-        ///
-        /// @exception error_message_t
-        /// @exception Json::Exception
-        inline order_t(std::string_view buffer)
-        {
-            this->decode(buffer);
-        }
-        
-        /// @brief See @ref decode(const Json::Value& json_root)
-        ///
-        /// @exception error_message_t
-        inline order_t(const Json::Value& json_root)
-        {
-            this->decode(json_root);
-        }
-        
-        /// @brief Destructor
-        inline ~order_t() = default;
-        
-        /// @brief Assignment operator with deep copy.
-        inline order_t& operator=(const order_t& source) = default;
-        
-        /// @brief Assignment operator with shallow copy.
-        inline order_t& operator=(order_t&& source) = default;
-        
-        /// @brief See @ref decode(std::istream& file)
-        ///
-        /// @exception error_message_t
-        /// @exception Json::Exception
-        inline order_t& operator=(std::istream& file)
-        {
-            this->decode(file);
-            return *this;
-        }
-        
-        /// @brief See @ref decode(std::string_view buffer)
-        ///
-        /// @exception error_message_t
-        /// @exception Json::Exception
-        inline order_t& operator=(std::string_view buffer)
-        {
-            this->decode(buffer);
-            return *this;
-        }
-        
-        /// @brief See @ref decode(const Json::Value& json_root)
-        ///
-        /// @exception error_message_t
-        inline order_t& operator=(const Json::Value& json_root)
-        {
-            this->decode(json_root);
-            return *this;
         }
         
         // Add operators here if desired.
@@ -230,24 +161,24 @@ class order_t
         ///
         /// @exception error_message_t
         /// @exception Json::Exception
-        void decode(std::istream& file);
+        void read_from_file(std::istream& file);
         
         /// @brief Decode serialized content conforming to data/json/schema.json and use it
         /// to initialize this object, clearing previous content.
         ///
         /// @exception error_message_t
         /// @exception Json::Exception
-        void decode(std::string_view buffer);
+        void read_from_buffer(std::string_view buffer);
         
         /// @brief Extract required data fields from a pre-parsed JSON tree
         /// and use them to initialize this object, clearing previous content.
         ///
         /// @exception error_message_t
-        void decode(const Json::Value& json_root);
+        void read_from_json(const Json::Value& json_root);
         
         /// @brief Serialize the content of this file into a file that
         /// conforms to the schema data/json/schema.json.
-        void encode
+        void write_to_file
         (
             /// [out] Stream to append serialized object content to.
             std::ostream& file,
@@ -268,7 +199,7 @@ class order_t
         /// conforms to the schema data/json/schema.json.
         ///
         /// @exception error_message_t
-        void encode
+        void write_to_buffer
         (
             /// [out] This string is overwritten with serialzed JSON content.
             std::string& buffer,
@@ -287,7 +218,7 @@ class order_t
         
         /// @brief Convinence method for pretty initialize-on-construction
         /// syntax.
-        inline std::string encode
+        inline std::string write_to_buffer
         (
             /// [in] The number of space ' ' characters to prepend to each line
             /// in the serialized output.
@@ -302,7 +233,7 @@ class order_t
             unsigned spaces_per_tab = 4
         ) const {
             std::string buffer;
-            this->encode(buffer, indent_start, spaces_per_tab);
+            this->write_to_buffer(buffer, indent_start, spaces_per_tab);
             return buffer;
         }
         
@@ -325,14 +256,14 @@ inline std::ostream& operator<<(std::ostream& stream, const order_t::error_messa
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::ostream& operator<<(std::ostream& stream, const order_t& source)
 {
-    stream << source.encode();
+    source.write_to_file(stream);
     return stream;
 }
 
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::string& operator<<(std::string& buffer, const order_t& source)
 {
-    buffer += source.encode();
+    source.write_to_buffer(buffer);
     return buffer;
 }
 
@@ -342,14 +273,14 @@ std::istream& operator>>(std::istream& stream, order_t& destination);
 /// @brief Extraction operator for decoding.
 inline std::string_view operator>>(std::string_view& buffer, order_t& destination)
 {
-    destination.decode(buffer);
+    destination.read_from_buffer(buffer);
     return std::string_view();
 }
 
 /// @brief Extraction operator for decoding.
 inline Json::Value operator>>(const Json::Value& json_root, order_t& destination)
 {
-    destination.decode(json_root);
+    destination.read_from_json(json_root);
     return Json::Value();
 }
 

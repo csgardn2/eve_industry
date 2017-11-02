@@ -37,8 +37,12 @@ const std::vector<std::string_view> item_attributes_t::default_error_messages_ =
     "Error.  Json input does not contain the correct fields.\n"
 };
 
-void item_attributes_t::fetch(const item_ids_t& item_ids)
+void item_attributes_t::fetch(const item_ids_t& lard)
 {
+    
+    item_ids_t item_ids = lard;
+    if (item_ids.size() > 1024)
+        item_ids.resize(1024);
     
     this->clear();
     
@@ -70,7 +74,7 @@ void item_attributes_t::fetch(const item_ids_t& item_ids)
         unsigned thread_ix = omp_get_thread_num();
         
         // Fetch this item's attributes from EvE API (connect to network).
-        (*this)[ix] = item_attribute_t(item_ids[ix], readers[thread_ix].get());
+        (*this)[ix].fetch(item_ids[ix], readers[thread_ix].get());
         
         #pragma omp atomic
         num_items_processed++;
@@ -106,7 +110,7 @@ void item_attributes_t::fetch(const item_ids_t& item_ids)
     
 }
 
-void item_attributes_t::decode(std::istream& file)
+void item_attributes_t::read_from_file(std::istream& file)
 {
     
     // Get the number of characters in the input file.
@@ -121,11 +125,11 @@ void item_attributes_t::decode(std::istream& file)
     file.read(buffer.data(), file_size);
     if (!file.good())
         throw error_message_t(error_code_t::FILE_READ_FAILED);
-    this->decode(std::string_view(buffer));
+    this->read_from_buffer(std::string_view(buffer));
     
 }
 
-void item_attributes_t::decode(std::string_view buffer)
+void item_attributes_t::read_from_buffer(std::string_view buffer)
 {
     
     Json::CharReaderBuilder builder;
@@ -140,11 +144,11 @@ void item_attributes_t::decode(std::string_view buffer)
     
     // Now that the JSON syntax is parsed, extract the stat_list specific
     // data.
-    this->decode(json_root);
+    this->read_from_json(json_root);
     
 }
 
-void item_attributes_t::decode(const Json::Value& json_root)
+void item_attributes_t::read_from_json(const Json::Value& json_root)
 {
     
     // Parse root
@@ -156,19 +160,23 @@ void item_attributes_t::decode(const Json::Value& json_root)
     this->reserve(json_root.size());
     
     // Decode and store each element in the array.
-    for (const Json::Value& json_cur_attribute : json_root)
-        this->emplace_back(json_cur_attribute);
+    for (const Json::Value& cur_element : json_root)
+    {
+        unsigned last_ix = this->size();
+        this->resize(last_ix + 1);
+        (*this)[last_ix].read_from_json(cur_element);
+    }
     
 }
 
-void item_attributes_t::encode(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
+void item_attributes_t::write_to_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
 {
-    file << this->encode(indent_start, spaces_per_tab);
+    file << this->write_to_buffer(indent_start, spaces_per_tab);
     if (!file.good())
         throw error_message_t(error_code_t::FILE_WRITE_FAILED);
 }
 
-void item_attributes_t::encode(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
+void item_attributes_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
 {
     
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
@@ -183,7 +191,7 @@ void item_attributes_t::encode(std::string& buffer, unsigned indent_start, unsig
     for (signed ix = 0, last_ix = this->size() - 1; ix <= last_ix; ix++)
     {
         
-        buffer += (*this)[ix].encode(indent_start + spaces_per_tab, spaces_per_tab);
+        buffer += (*this)[ix].write_to_buffer(indent_start + spaces_per_tab, spaces_per_tab);
         
         if (ix != last_ix)
             buffer += ", ";
@@ -198,11 +206,11 @@ void item_attributes_t::encode(std::string& buffer, unsigned indent_start, unsig
     
 }
 
-std::istream& operator>>(std::istream& stream, item_attributes_t& decode)
+std::istream& operator>>(std::istream& stream, item_attributes_t& destination)
 {
     try
     {
-        decode.decode(stream);
+        destination.read_from_file(stream);
     } catch (item_attributes_t::error_message_t error) {
         stream.setstate(std::ios::failbit);
         throw error;

@@ -50,10 +50,11 @@ int main(int argc, char** argv)
                 item_ids.fetch();
                 
                 std::cout << "Fetching item attributes\n";
-                item_attributes_t item_attributes(item_ids);
+                item_attributes_t item_attributes;
+                item_attributes.fetch(item_ids);
                 
                 std::cout << "Writing output file.\n";
-                item_attributes.encode(item_attributes_out_file);
+                item_attributes.write_to_file(item_attributes_out_file);
                 
                 break;
                 
@@ -64,10 +65,12 @@ int main(int argc, char** argv)
                 
                 // Open and parse input files
                 std::ifstream item_attributes_in_file(args.item_attributes_in());
-                item_attributes_t item_attributes_in(item_attributes_in_file);
+                item_attributes_t item_attributes_in;
+                item_attributes_in.read_from_file(item_attributes_in_file);
                 
                 std::ifstream station_attributes_in_file(args.station_attributes_in());
-                station_attributes_t station_attributes_in(station_attributes_in_file);
+                station_attributes_t station_attributes_in;
+                station_attributes_in.read_from_file(station_attributes_in_file);
                 
                 // TODO Conor, you left off here.  Implement classes for fetching regional prices.
                 

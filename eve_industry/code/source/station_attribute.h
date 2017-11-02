@@ -67,16 +67,10 @@ class station_attribute_t
             default_error_messages_
         > error_message_t;
         
-        /// @brief Default constructor
         inline station_attribute_t() = default;
         
-        /// @brief Copy constructor
-        inline station_attribute_t(const station_attribute_t& source) = default;
-        
-        /// @brief Move constructor
-        inline station_attribute_t(station_attribute_t&& source) = default;
-        
         // Add member initialization constructors here
+        
         // Try to use initializer lists when possible.
         inline station_attribute_t(unsigned id, std::string_view name, unsigned system, unsigned region)
           : id_(id),
@@ -85,87 +79,6 @@ class station_attribute_t
             region_(region)
         {
             // All work done in initializer list
-        }
-        
-        /// See @ref decode(std::istream& file)
-        ///
-        /// @exception error_message_t
-        /// @exception Json::Exception
-        inline station_attribute_t(std::istream& file)
-        {
-            this->decode(file);
-        }
-        
-        /// @brief See @ref decode(std::istream& file)
-        ///
-        /// @exception error_message_t
-        /// @exception Json::Exception
-        inline station_attribute_t(std::string_view buffer)
-        {
-            this->decode(buffer);
-        }
-        
-        /// @brief See @ref decode(const Json::Value& json_root)
-        ///
-        /// @exception error_message_t
-        inline station_attribute_t(const Json::Value& json_root)
-        {
-            this->decode(json_root);
-        }
-        
-        /// @brief Destructor
-        inline ~station_attribute_t() = default;
-        
-        /// @brief Assignment operator with deep copy.
-        inline station_attribute_t& operator=(const station_attribute_t& source) = default;
-        
-        /// @brief Assignment operator with shallow copy.
-        inline station_attribute_t& operator=(station_attribute_t&& source) = default;
-        
-        /// @brief See @ref decode(std::istream& file)
-        ///
-        /// @exception error_message_t
-        /// @exception Json::Exception
-        inline station_attribute_t& operator=(std::istream& file)
-        {
-            this->decode(file);
-            return *this;
-        }
-        
-        /// @brief See @ref decode(std::string_view buffer)
-        ///
-        /// @exception error_message_t
-        /// @exception Json::Exception
-        inline station_attribute_t& operator=(std::string_view buffer)
-        {
-            this->decode(buffer);
-            return *this;
-        }
-        
-        /// @brief See @ref decode(const Json::Value& json_root)
-        ///
-        /// @exception error_message_t
-        inline station_attribute_t& operator=(const Json::Value& json_root)
-        {
-            this->decode(json_root);
-            return *this;
-        }
-        
-        // Add operators here if desired.
-        // inline type operator[](unsigned ix) const;
-        // inline type& operator[](unsigned ix);
-        
-        /// @brief Returns true if both item's @ref id_ members are equal.
-        /// Doesn't bother checking other stats for extra speed.
-        inline bool operator==(const station_attribute_t& source) const
-        {
-            return this->id_ == source.id_;
-        }
-        
-        /// @brief 1:1 inverse of @ref operator==(const station_attribute_t& source) const "operator==".
-        inline bool operator!=(const station_attribute_t& source) const
-        {
-            return !(*this == source);
         }
         
         // Add member read and write functions
@@ -217,24 +130,24 @@ class station_attribute_t
         ///
         /// @exception error_message_t
         /// @exception Json::Exception
-        void decode(std::istream& file);
+        void read_from_file(std::istream& file);
         
         /// @brief Decode serialized content conforming to data/json/schema.json and use it
         /// to initialize this object, clearing previous content.
         ///
         /// @exception error_message_t
         /// @exception Json::Exception
-        void decode(std::string_view buffer);
+        void read_from_buffer(std::string_view buffer);
         
         /// @brief Extract required data fields from a pre-parsed JSON tree
         /// and use them to initialize this object, clearing previous content.
         ///
         /// @exception error_message_t
-        void decode(const Json::Value& json_root);
+        void read_from_json(const Json::Value& json_root);
         
         /// @brief Serialize the content of this file into a file that
         /// conforms to the schema data/json/schema.json.
-        void encode
+        void write_to_file
         (
             /// [out] Stream to append serialized object content to.
             std::ostream& file,
@@ -255,7 +168,7 @@ class station_attribute_t
         /// conforms to the schema data/json/schema.json.
         ///
         /// @exception error_message_t
-        void encode
+        void write_to_buffer
         (
             /// [out] This string is overwritten with serialzed JSON content.
             std::string& buffer,
@@ -274,7 +187,7 @@ class station_attribute_t
         
         /// @brief Convinence method for pretty initialize-on-construction
         /// syntax.
-        inline std::string encode
+        inline std::string write_to_buffer
         (
             /// [in] The number of space ' ' characters to prepend to each line
             /// in the serialized output.
@@ -289,7 +202,7 @@ class station_attribute_t
             unsigned spaces_per_tab = 4
         ) const {
             std::string buffer;
-            this->encode(buffer, indent_start, spaces_per_tab);
+            this->write_to_buffer(buffer, indent_start, spaces_per_tab);
             return buffer;
         }
         
@@ -312,14 +225,14 @@ inline std::ostream& operator<<(std::ostream& stream, const station_attribute_t:
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::ostream& operator<<(std::ostream& stream, const station_attribute_t& source)
 {
-    stream << source.encode();
+    source.write_to_file(stream);
     return stream;
 }
 
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::string& operator<<(std::string& buffer, const station_attribute_t& source)
 {
-    buffer += source.encode();
+    source.write_to_buffer(buffer);
     return buffer;
 }
 
@@ -329,14 +242,14 @@ std::istream& operator>>(std::istream& stream, station_attribute_t& destination)
 /// @brief Extraction operator for decoding.
 inline std::string_view operator>>(std::string_view& buffer, station_attribute_t& destination)
 {
-    destination.decode(buffer);
+    destination.read_from_buffer(buffer);
     return std::string_view();
 }
 
 /// @brief Extraction operator for decoding.
 inline Json::Value operator>>(const Json::Value& json_root, station_attribute_t& destination)
 {
-    destination.decode(json_root);
+    destination.read_from_json(json_root);
     return Json::Value();
 }
 

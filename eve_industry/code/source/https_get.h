@@ -7,7 +7,7 @@
 /// Compiler:                       g++ \n
 /// Target OS:                      Ubuntu Linux 16.04 \n
 /// Target architecture:            x86 64-bit \n
-/// See html/index.html for documentation.
+/// See documentation/html_out/index.html for documentation.
  
 //***************************************************************************
 // *                                  _   _ ____  _

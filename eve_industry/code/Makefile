@@ -24,6 +24,7 @@ $(BINDIR)/$(EXENAME):               \
     $(BINDIR)/order.o               \
     $(BINDIR)/station_attribute.o   \
     $(BINDIR)/station_attributes.o  \
+    $(BINDIR)/util.o                \
     
 	$(COMPILER) $(LINKFLAGS) -o $@ $^ $(LIBS)
 	@echo "*** COMPILE_SUCCESSFUL ***"
@@ -61,6 +62,9 @@ $(BINDIR)/station_attribute.o: $(SOURCEDIR)/station_attribute.cpp $(SOURCEDIR)/s
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/station_attributes.o: $(SOURCEDIR)/station_attributes.cpp $(SOURCEDIR)/station_attributes.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/util.o: $(SOURCEDIR)/util.cpp $(SOURCEDIR)/util.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 Doxyfile:
@@ -109,6 +113,8 @@ $(DOCDIR)/html_out/index.html:          \
     $(SOURCEDIR)/station_attribute.cpp  \
     $(SOURCEDIR)/station_attributes.h   \
     $(SOURCEDIR)/station_attributes.cpp \
+    $(SOURCEDIR)/util.h                 \
+    $(SOURCEDIR)/util.cpp               \
     
 	doxygen $(DOCDIR)/Doxyfile
 

@@ -60,79 +60,6 @@ class item_ids_t
         /// @brief Default constructor
         inline item_ids_t() = default;
         
-        /// @brief Copy constructor
-        inline item_ids_t(const item_ids_t& source) = default;
-        
-        /// @brief Move constructor
-        inline item_ids_t(item_ids_t&& source) = default;
-        
-        // Add member initialization constructors here
-        // Try to use initializer lists when possible.
-        
-        /// See @ref decode(std::istream& file)
-        ///
-        /// @exception error_message_t
-        /// @exception Json::Exception
-        inline item_ids_t(std::istream& file)
-        {
-            this->decode(file);
-        }
-        
-        /// @brief See @ref decode(std::istream& file)
-        ///
-        /// @exception error_message_t
-        /// @exception Json::Exception
-        inline item_ids_t(std::string_view buffer)
-        {
-            this->decode(buffer);
-        }
-        
-        /// @brief See @ref decode(const Json::Value& json_root)
-        ///
-        /// @exception error_message_t
-        inline item_ids_t(const Json::Value& json_root)
-        {
-            this->decode(json_root);
-        }
-        
-        /// @brief Destructor
-        inline ~item_ids_t() = default;
-        
-        /// @brief Assignment operator with deep copy.
-        inline item_ids_t& operator=(const item_ids_t& source) = default;
-        
-        /// @brief Assignment operator with shallow copy.
-        inline item_ids_t& operator=(item_ids_t&& source) = default;
-        
-        /// @brief See @ref decode(std::istream& file)
-        ///
-        /// @exception error_message_t
-        /// @exception Json::Exception
-        inline item_ids_t& operator=(std::istream& file)
-        {
-            this->decode(file);
-            return *this;
-        }
-        
-        /// @brief See @ref decode(std::string_view buffer)
-        ///
-        /// @exception error_message_t
-        /// @exception Json::Exception
-        inline item_ids_t& operator=(std::string_view buffer)
-        {
-            this->decode(buffer);
-            return *this;
-        }
-        
-        /// @brief See @ref decode(const Json::Value& json_root)
-        ///
-        /// @exception error_message_t
-        inline item_ids_t& operator=(const Json::Value& json_root)
-        {
-            this->decode(json_root);
-            return *this;
-        }
-        
         // Add operator[] here if desired.
         // inline type operator[](unsigned ix) const;
         // inline type& operator[](unsigned ix);
@@ -223,24 +150,24 @@ class item_ids_t
         ///
         /// @exception error_message_t
         /// @exception Json::Exception
-        void decode(std::istream& file);
+        void read_from_file(std::istream& file);
         
         /// @brief Decode serialized content conforming to schema.json and use it
         /// to initialize this object, clearing previous content.
         ///
         /// @exception error_message_t
         /// @exception Json::Exception
-        void decode(std::string_view buffer);
+        void read_from_buffer(std::string_view buffer);
         
         /// @brief Extract required data fields from a pre-parsed JSON tree
         /// and use them to initialize this object, clearing previous content.
         ///
         /// @exception error_message_t
-        void decode(const Json::Value& json_root);
+        void read_from_json(const Json::Value& json_root);
         
         /// @brief Serialize the content of this file into a file that
         /// conforms to the schema schema.json.
-        void encode
+        void write_to_file
         (
             /// [out] Stream to append serialized object content to.
             std::ostream& file,
@@ -261,7 +188,7 @@ class item_ids_t
         /// conforms to the schema schema.json.
         ///
         /// @exception error_message_t
-        void encode
+        void write_to_buffer
         (
             /// [out] This string is overwritten with serialzed JSON content.
             std::string& buffer,
@@ -280,7 +207,7 @@ class item_ids_t
         
         /// @brief Convinence method for pretty initialize-on-construction
         /// syntax.
-        inline std::string encode
+        inline std::string write_to_buffer
         (
             /// [in] The number of space ' ' characters to prepend to each line
             /// in the serialized output.
@@ -295,7 +222,7 @@ class item_ids_t
             unsigned spaces_per_tab = 4
         ) const {
             std::string buffer;
-            this->encode(buffer, indent_start, spaces_per_tab);
+            this->write_to_buffer(buffer, indent_start, spaces_per_tab);
             return buffer;
         }
         
@@ -318,14 +245,14 @@ inline std::ostream& operator<<(std::ostream& stream, const item_ids_t::error_me
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::ostream& operator<<(std::ostream& stream, const item_ids_t& source)
 {
-    stream << source.encode();
+    source.write_to_file(stream);
     return stream;
 }
 
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::string& operator<<(std::string& buffer, const item_ids_t& source)
 {
-    buffer += source.encode();
+    source.write_to_buffer(buffer);
     return buffer;
 }
 
@@ -335,14 +262,14 @@ std::istream& operator>>(std::istream& stream, item_ids_t& destination);
 /// @brief Extraction operator for decoding.
 inline std::string_view operator>>(std::string_view& buffer, item_ids_t& destination)
 {
-    destination.decode(buffer);
+    destination.read_from_buffer(buffer);
     return std::string_view();
 }
 
 /// @brief Extraction operator for decoding.
 inline Json::Value operator>>(const Json::Value& json_root, item_ids_t& destination)
 {
-    destination.decode(json_root);
+    destination.read_from_json(json_root);
     return Json::Value();
 }
 

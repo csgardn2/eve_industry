@@ -1,4 +1,3 @@
-/// @file args.cpp
 /// @brief Implementation of @ref args_t class
 /// 
 /// * Contact conor.gardner@arm.com if you have questions about this code.
@@ -162,7 +161,7 @@ void args_t::clear()
     this->item_attributes_out_.clear();
 }
 
-void args_t::decode(std::istream& file)
+void args_t::read_from_file(std::istream& file)
 {
     
     // Get the number of characters in the input file.
@@ -177,11 +176,11 @@ void args_t::decode(std::istream& file)
     file.read(buffer.data(), file_size);
     if (!file.good())
         throw error_message_t(error_code_t::FILE_READ_FAILED);
-    this->decode(std::string_view(buffer));
+    this->read_from_buffer(std::string_view(buffer));
     
 }
 
-void args_t::decode(std::string_view buffer)
+void args_t::read_from_buffer(std::string_view buffer)
 {
     
     Json::CharReaderBuilder builder;
@@ -196,11 +195,11 @@ void args_t::decode(std::string_view buffer)
     
     // Now that the JSON syntax is parsed, extract the stat_list specific
     // data.
-    this->decode(json_root);
+    this->read_from_json(json_root);
     
 }
 
-void args_t::decode(const Json::Value& json_root)
+void args_t::read_from_json(const Json::Value& json_root)
 {
     
     this->clear();
@@ -264,14 +263,14 @@ void args_t::decode(const Json::Value& json_root)
     
 }
 
-void args_t::encode(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
+void args_t::write_to_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
 {
-    file << this->encode(indent_start, spaces_per_tab);
+    file << this->write_to_buffer(indent_start, spaces_per_tab);
     if (!file.good())
         throw error_message_t(error_code_t::FILE_WRITE_FAILED);
 }
 
-void args_t::encode(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
+void args_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
 {
     
     std::string indent_1(indent_start + spaces_per_tab, ' ');
@@ -323,11 +322,11 @@ void args_t::encode(std::string& buffer, unsigned indent_start, unsigned spaces_
     
 }
 
-std::istream& operator>>(std::istream& stream, args_t& decode)
+std::istream& operator>>(std::istream& stream, args_t& destination)
 {
     try
     {
-        decode.decode(stream);
+        destination.read_from_file(stream);
     } catch (args_t::error_message_t error) {
         stream.setstate(std::ios::failbit);
         throw error;

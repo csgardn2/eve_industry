@@ -21,36 +21,10 @@ class station_attributes_t : public std::vector<station_attribute_t>
         
     protected:
         
-        /// @brief String representations of enumeration symbols.
-        static const std::vector<std::string_view> error_names_;
-        
-        /// @brief Default error messages suitable for printing.  Note that
-        /// some of these are inherently vague without additional information.
-        static const std::vector<std::string_view> default_error_messages_;
-        
         // Try to make all your members protected, even if they don't
         // really need to be.
         
     public:
-        
-        /// @brief Error codes are defined to facilitate programmatic detection and
-        /// correction.
-        enum class error_code_t
-        {
-            FILE_SIZE_FAILED,
-            FILE_READ_FAILED,
-            FILE_WRITE_FAILED,
-            JSON_SCHEMA_VIOLATION,
-            /// This element must be last
-            NUM_ENUMS
-        };
-        
-        typedef error_message_template_t
-        <
-            error_code_t,
-            error_names_,
-            default_error_messages_
-        > error_message_t;
         
         /// @brief Default constructor
         inline station_attributes_t() = default;
@@ -145,20 +119,6 @@ class station_attributes_t : public std::vector<station_attribute_t>
         }
         
 };
-
-/// @brief Convenience alias to allow printing directly via cout or similar.
-inline std::ostream& operator<<(std::ostream& stream, station_attributes_t::error_code_t error_code)
-{
-    stream << station_attributes_t::error_message_t::enum_to_string(error_code);
-    return stream;
-}
-
-/// @brief Convenience alias to allow printing directly via cout or similar.
-inline std::ostream& operator<<(std::ostream& stream, const station_attributes_t::error_message_t& error_message)
-{
-    stream << error_message.message();
-    return stream;
-}
 
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::ostream& operator<<(std::ostream& stream, const station_attributes_t& source)

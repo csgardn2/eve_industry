@@ -11,72 +11,56 @@
 #include <string_view>
 #include <vector>
 
+/// @brief Error codes are defined to facilitate programmatic detection and
+/// correction.
+enum class error_code_t
+{
+    
+    FILE_SIZE_FAILED,
+    FILE_READ_FAILED,
+    FILE_WRITE_FAILED,
+    JSON_SCHEMA_VIOLATION,
+    
+    MODE_MISSING,
+    MODE_INVALID,
+    ITEM_ATTRIBUTES_OUT_MISSING,
+    ITEM_ATTRIBUTES_IN_MISSING,
+    STATION_ATTRIBUTES_IN_MISSING,
+    PRICES_OUT_MISSING,
+    
+    UNKNOWN_ORDER_TYPE,
+    
+    EVE_SUCKS,
+    
+    /// This element must be last
+    NUM_ENUMS
+    
+};
+
 /// @brief This is an object that gets thrown.  It contains an error code
 /// to allow the program to reliably check the type of error that occurred
 /// as well as a human readable message suitable for printing.
-template
-<
-    typename error_code_t,
-    const std::vector<std::string_view>& error_names,
-    const std::vector<std::string_view>& default_error_messages
->
-class error_message_template_t
+class error_message_t
 {
     
     public:
         
         /// @brief Default constructor
-        inline error_message_template_t() = default;
-        
-        /// @brief Copy constructor
-        inline error_message_template_t(const error_message_template_t& source) = default;
-        
-        /// @brief Move constructor
-        inline error_message_template_t(error_message_template_t&& source) = default;
+        inline error_message_t() = default;
         
         /// @brief Initialization constructor
-        inline error_message_template_t(error_code_t error_code)
-          : error_code_(error_code),
-            message_(default_error_messages[unsigned(error_code)])
+        inline error_message_t(error_code_t error_code)
+          : error_code_(error_code)
         {
             // All work done in initializer list
         }
         
         /// @brief Initialization constructor
-        inline error_message_template_t(error_code_t error_code, std::string_view error_message)
+        inline error_message_t(error_code_t error_code, std::string_view error_message)
           : error_code_(error_code),
             message_(error_message)
         {
             // All work done in initializer list
-        }
-        
-        /// @brief Destructor
-        inline ~error_message_template_t() = default;
-        
-        /// @brief Copy assignment operator
-        inline error_message_template_t& operator=(const error_message_template_t& source) = default;
-        
-        /// @brief Move assignment operator
-        inline error_message_template_t& operator=(error_message_template_t&& source) = default;
-        
-        /// @brief Overwrite an error code and assign default message string.
-        inline error_message_template_t& operator=(error_code_t error_code)
-        {
-            this->error_code_ = error_code;
-            this->message_ = default_error_messages[unsigned(error_code)];
-            return *this;
-        }
-        
-        /// @brief Read a specific character in the error message
-        inline char operator[](unsigned ix) const
-        {
-            return this->message_[ix];
-        }
-        
-        /// @brief Write a specific character in the error message
-        inline char& operator[](unsigned ix)
-        {
-            return this->message_[ix];
         }
         
         /// @brief Since the @ref message_ "message string" shall never be
@@ -94,7 +78,7 @@ class error_message_template_t
         /// code.
         ///
         /// @return true if error codes match and false otherwise.
-        inline bool operator==(const error_message_template_t& other) const
+        inline bool operator==(const error_message_t& other) const
         {
             return this->error_code_ == other.error_code_;
         }
@@ -106,40 +90,9 @@ class error_message_template_t
         }
         
         /// @brief 1:1 Inverse of equality operator
-        inline bool operator!=(const error_message_template_t& other) const
+        inline bool operator!=(const error_message_t& other) const
         {
             return !(*this == other);
-        }
-        
-        /// @brief Return the number of characters in the error message string
-        /// not including the null-terminator.
-        inline unsigned length() const
-        {
-            return this->message_.length();
-        }
-        
-        /// @brief Read access to first character in the error message
-        inline const char* begin() const
-        {
-            return this->message_.begin();
-        }
-        
-        /// @brief Write access to first character in the error message
-        inline char* begin()
-        {
-            return this->message_.begin();
-        }
-        
-        /// @brief Const Iterator past the last character in the error message.
-        inline const char* end() const
-        {
-            return this->message_.end();
-        }
-        
-        /// @brief Iterator past the last character in the error_message.
-        inline char* end()
-        {
-            return this->message_.end();
         }
         
         /// @brief Read access to @ref error_code_ member.
@@ -152,7 +105,6 @@ class error_message_template_t
         inline void error_code(error_code_t new_error_code)
         {
             this->error_code_ = new_error_code;
-            this->message_ = default_error_messages[unsigned(error_code)];
         }
         
         /// @brief Read access to @ref message_ member.
@@ -170,16 +122,13 @@ class error_message_template_t
         /// @brief Get the literal name of an enum symbol.
         inline static std::string_view enum_to_string(error_code_t error_code)
         {
-            return error_names[unsigned(error_code)];
-        }
-        
-        /// @brief Get the default message for an error code.
-        inline static std::string_view enum_to_message(error_code_t error_code)
-        {
-            return default_error_messages[unsigned(error_code)];
+            return error_names_[unsigned(error_code)];
         }
         
     protected:
+        
+        /// @brief Printable names for enums.
+        static const std::vector<std::string_view> error_names_;
         
         /// @brief Integral tag for this error.
         error_code_t error_code_;
@@ -190,6 +139,21 @@ class error_message_template_t
         std::string message_;
         
 };
+
+
+/// @brief Convenience alias to allow printing directly via cout or similar.
+inline std::ostream& operator<<(std::ostream& stream, error_code_t error_code)
+{
+    stream << error_message_t::enum_to_string(error_code);
+    return stream;
+}
+
+/// @brief Convenience alias to allow printing directly via cout or similar.
+inline std::ostream& operator<<(std::ostream& stream, const error_message_t& error_message)
+{
+    stream << error_message.message();
+    return stream;
+}
 
 #endif // header guard
 

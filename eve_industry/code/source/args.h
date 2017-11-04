@@ -43,13 +43,6 @@ class args_t
         
     protected:
         
-        /// @brief String representations of enumeration symbols.
-        static const std::vector<std::string_view> error_names_;
-        
-        /// @brief Default error messages suitable for printing.  Note that
-        /// some of these are inherently vague without additional information.
-        static const std::vector<std::string_view> default_error_messages_;
-        
         /// @brief String representations of enumeration symbols
         static const std::vector<std::string_view> mode_names_;
         
@@ -81,36 +74,11 @@ class args_t
     // Public section 2 of 2.
     public:
         
-        /// @brief Return a printable representation of this enum.
+        /// @brief Make modes human readable.
         inline static std::string_view enum_to_string(mode_t mode)
         {
             return args_t::mode_names_[unsigned(mode)];
         }
-        
-        /// @brief Error codes are defined to facilitate programmatic detection and
-        /// correction.
-        enum class error_code_t
-        {
-            FILE_SIZE_FAILED,
-            FILE_READ_FAILED,
-            FILE_WRITE_FAILED,
-            JSON_SCHEMA_VIOLATION,
-            MODE_MISSING,
-            MODE_INVALID,
-            ITEM_ATTRIBUTES_OUT_MISSING,
-            ITEM_ATTRIBUTES_IN_MISSING,
-            STATION_ATTRIBUTES_IN_MISSING,
-            PRICES_OUT_MISSING,
-            /// This element must be last
-            NUM_ENUMS
-        };
-        
-        typedef error_message_template_t
-        <
-            error_code_t,
-            error_names_,
-            default_error_messages_
-        > error_message_t;
         
         /// @brief Default constructor
         inline args_t() = default;
@@ -246,20 +214,6 @@ class args_t
         }
         
 };
-
-/// @brief Convenience alias to allow printing directly via cout or similar.
-inline std::ostream& operator<<(std::ostream& stream, args_t::error_code_t error_code)
-{
-    stream << args_t::error_message_t::enum_to_string(error_code);
-    return stream;
-}
-
-/// @brief Convenience alias to allow printing directly via cout or similar.
-inline std::ostream& operator<<(std::ostream& stream, const args_t::error_message_t& error_message)
-{
-    stream << error_message.message();
-    return stream;
-}
 
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::ostream& operator<<(std::ostream& stream, const args_t& source)

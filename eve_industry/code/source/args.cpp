@@ -14,34 +14,6 @@
 #include "error.h"
 #include "json.h"
 
-const std::vector<std::string_view> args_t::error_names_ =
-{
-    "FILE_SIZE_FAILED",
-    "FILE_READ_FAILED",
-    "FILE_WRITE_FAILED",
-    "JSON_SCHEMA_VIOLATION",
-    "MODE_MISSING",
-    "MODE_INVALID",
-    "ITEM_ATTRIBUTES_OUT_MISSING",
-    "ITEM_ATTRIBUTES_IN_MISSING",
-    "STATION_ATTRIBUTES_IN_MISSING",
-    "PRICES_OUT_MISSING"
-};
-
-const std::vector<std::string_view> args_t::default_error_messages_ =
-{
-    "Error.  Failed to determine size of input file.\n",
-    "Error.  Failed to read content from file.\n",
-    "Error.  Failed to write content to file.\n",
-    "Error.  Json input does not contain the correct fields.\n",
-    "Error.  Missing argument --mode {fetch-item-attributes}.\n",
-    "Error.  Valid options for mode are {fetch-item-ids}\n.",
-    "Error.  Missing argument --item-attributes-out FILE.\n",
-    "Error.  Missing argument --item-attributes-in FILE.\n",
-    "Error.  Missing argument --station-attributes-in FILE.\n",
-    "Error.  Missing argument --prices-out FILE.\n"
-};
-
 const std::vector<std::string_view> args_t::mode_names_ =
 {
     "FETCH_ITEM_ATTRIBUTES",
@@ -327,7 +299,7 @@ std::istream& operator>>(std::istream& stream, args_t& destination)
     try
     {
         destination.read_from_file(stream);
-    } catch (args_t::error_message_t error) {
+    } catch (error_message_t error) {
         stream.setstate(std::ios::failbit);
         throw error;
     } catch (Json::Exception error) {

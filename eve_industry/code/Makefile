@@ -15,6 +15,7 @@ all: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 # Add additional .o files on the line below (after main.o)
 $(BINDIR)/$(EXENAME):                   \
     $(BINDIR)/args.o                    \
+    $(BINDIR)/error.o                   \
     $(BINDIR)/https_get.o               \
     $(BINDIR)/item_attribute.o          \
     $(BINDIR)/item_attributes.o         \
@@ -36,6 +37,9 @@ $(BINDIR)/$(EXENAME):                   \
 # Add more .cpp -> .o compile commands here
 
 $(BINDIR)/args.o: $(SOURCEDIR)/args.cpp $(SOURCEDIR)/args.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/error.o: $(SOURCEDIR)/error.cpp $(SOURCEDIR)/error.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/https_get.o: $(SOURCEDIR)/https_get.cpp $(SOURCEDIR)/https_get.h
@@ -104,6 +108,8 @@ $(DOCDIR)/html_out/index.html:              \
     $(DOCDIR)/Doxyfile                      \
     $(SOURCEDIR)/args.h                     \
     $(SOURCEDIR)/args.cpp                   \
+    $(SOURCEDIR)/error.h                    \
+    $(SOURCEDIR)/error.cpp                  \
     $(SOURCEDIR)/https_get.h                \
     $(SOURCEDIR)/https_get.cpp              \
     $(SOURCEDIR)/item_ids.h                 \

@@ -14,27 +14,6 @@
 #include "error.h"
 #include "json.h"
 
-/// @brief String representations of enumeration symbols.
-const std::vector<std::string_view> order_t::error_names_ =
-{
-    "FILE_SIZE_FAILED",
-    "FILE_READ_FAILED",
-    "FILE_WRITE_FAILED",
-    "JSON_SCHEMA_VIOLATION",
-    "UNKNOWN_ORDER_TYPE"
-};
-
-/// @brief Default error messages suitable for printing.  Note that
-/// some of these are inherently vague without additional information.
-const std::vector<std::string_view> order_t::default_error_messages_ =
-{
-    "Error.  Failed to determine size of input file.\n",
-    "Error.  Failed to read content from file.\n",
-    "Error.  Failed to write content to file.\n",
-    "Error.  Json input does not contain the correct fields.\n",
-    "Error.  Encountered an unknown value for enum order_type_t.\n"
-};
-
 void order_t::read_from_file(std::istream& file)
 {
     
@@ -191,7 +170,7 @@ std::istream& operator>>(std::istream& stream, order_t& destination)
     try
     {
         destination.read_from_file(stream);
-    } catch (order_t::error_message_t error) {
+    } catch (error_message_t error) {
         stream.setstate(std::ios::failbit);
         throw error;
     } catch (Json::Exception error) {

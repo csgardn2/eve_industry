@@ -9,6 +9,7 @@
 #include <iostream>
 
 #include "args.h"
+#include "error.h"
 #include "item_attributes.h"
 #include "item_ids.h"
 #include "station_attributes.h"
@@ -18,18 +19,12 @@
 int main(int argc, char** argv)
 {
     
-    // Parse command line arguments
-    args_t args;
     try
     {
+        
+        args_t args;
         args.parse(argc, argv);
-    } catch (args_t::error_message_t error) {
-        std::cerr << error.message();
-        return -1;
-    }
-    
-    try
-    {
+        
         switch (args.mode())
         {
             
@@ -76,6 +71,7 @@ int main(int argc, char** argv)
                 regional_market_orders_t regional_market_orders;
                 regional_market_orders.fetch(10000043);
                 
+                
                 // TODO Conor, you left off here.  Convert regional market to prices
                 regional_market_orders.write_to_file(prices_out_file);
                 
@@ -93,28 +89,7 @@ int main(int argc, char** argv)
     } catch (Json::Exception error) {
         std::cerr << error.what() << "  Fatal.  Could not decode JSON input file.\n";
         return -1;
-    } catch (args_t::error_message_t error) {
-        std::cerr << error;
-        return -1;
-    } catch (item_ids_t::error_message_t error) {
-        std::cerr << error;
-        return -1;
-    } catch (item_attribute_t::error_message_t error) {
-        std::cerr << error;
-        return -1;
-    } catch (item_attributes_t::error_message_t error) {
-        std::cerr << error;
-        return -1;
-    } catch (order_t::error_message_t error) {
-        std::cerr << error;
-        return -1;
-    } catch (regional_market_orders_t::error_message_t error) {
-        std::cerr << error;
-        return -1;
-    } catch (station_attribute_t::error_message_t error) {
-        std::cerr << error;
-        return -1;
-    } catch (station_attributes_t::error_message_t error) {
+    } catch (error_message_t error) {
         std::cerr << error;
         return -1;
     }

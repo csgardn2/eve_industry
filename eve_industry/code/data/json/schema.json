@@ -135,23 +135,39 @@
                     "description": "The integral uniquifier for this item, as used by the EvE swagger interface.",
                     "minimum": 0
                 },
-                "station_id": {
-                    "type": "integer",
-                    "description": "Integral uniquifier of a station in EvE.",
-                    "minimum": 0
-                },
-                "min_sell_order": {
-                    "type": "number",
-                    "description": "Lowest sell bid for this item at this station.",
-                    "minimum": 0.0
-                },
-                "max_buy_order": {
-                    "type": "number",
-                    "description": "Highest buy bid for this item at this station.",
-                    "minimum": 0.0
+                "bid_summary": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "station_id": {
+                                "type": "integer",
+                                "description": "Integral uniquifier of a station in EvE.",
+                                "minimum": 0
+                            },
+                            "min_sell_order": {
+                                "type": "number",
+                                "description": "Lowest sell bid for this item at this station.",
+                                "minimum": 0.0
+                            },
+                            "max_buy_order": {
+                                "type": "number",
+                                "description": "Highest buy bid for this item at this station.",
+                                "minimum": 0.0
+                            }
+                        },
+                        "required": ["station_id", "min_sell_order", "max_buy_order"]
+                    }
                 }
             },
-            "required": ["item_id", "station_id", "min_sell_price", "max_buy_price"]
+            "required": ["item_id", "orders"]
+        },
+        "prices": {
+             "type": "array",
+            "description": "Collection of multiple orders from one or more stations and one or more regions.",
+            "items": {
+                "$ref": "#/definitions/price"
+            }
         }
-    }
+   }
 }

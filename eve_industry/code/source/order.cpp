@@ -82,6 +82,7 @@ void order_t::read_from_json(const Json::Value& json_root)
     
     // Parse root/item_id
     const Json::Value& json_item_id = json_root["item_id"];
+    
     if (!json_item_id.isUInt())
         throw error_message_t
         (
@@ -111,14 +112,14 @@ void order_t::read_from_json(const Json::Value& json_root)
     this->station_id_ = json_station_id.asUInt();
     
     // Parse root/type
-    const Json::Value& json_type = json_root["type"];
-    if (!json_type.isString())
+    const Json::Value& json_order_type = json_root["order_type"];
+    if (!json_order_type.isString())
         throw error_message_t
         (
             error_code_t::JSON_SCHEMA_VIOLATION,
-            "Error.  <order>/type was not found or not of type \"string\".\n"
+            "Error.  <order>/order_type was not found or not of type \"string\".\n"
         );
-    const std::string& str_type = json_type.asString();
+    const std::string& str_type = json_order_type.asString();
     if (str_type == "buy")
         this->order_type_ = order_type_t::BUY;
     else if (str_type == "sell")
@@ -150,16 +151,16 @@ void order_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsign
     // enable chaining.
     buffer += "{\n";
     
-    // Encode item_id
-    buffer += indent_1;
-    buffer += "\"item_id\": ";
-    buffer += std::to_string(this->item_id_);
-    buffer += ",\n";
-    
     // Encode price
     buffer += indent_1;
     buffer += "\"price\": ";
     buffer += std::to_string(this->price_);
+    buffer += ",\n";
+    
+    // Encode item_id
+    buffer += indent_1;
+    buffer += "\"item_id\": ";
+    buffer += std::to_string(this->item_id_);
     buffer += ",\n";
     
     // Encode station_id
@@ -170,7 +171,7 @@ void order_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsign
     
     // Encode type
     buffer += indent_1;
-    buffer += "\"type\": \"";
+    buffer += "\"order_type\": \"";
     if (this->order_type_ == order_type_t::BUY)
         buffer += "buy\"\n";
     else if (this->order_type_ == order_type_t::SELL)

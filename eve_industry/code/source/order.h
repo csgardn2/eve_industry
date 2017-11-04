@@ -42,12 +42,12 @@ class order_t
         // Try to make all your members protected, even if they don't
         // really need to be.
         
+        /// @brief The asking price for this bid.
+        float price_;
+        
         /// @brief The integral uniquifier of the inventory item associated
         /// with these bid.
         unsigned item_id_;
-        
-        /// @brief The asking price for this bid.
-        float price_;
         
         /// @brief The integral uniquifier of the NPC station of this bid.
         unsigned station_id_;
@@ -83,9 +83,9 @@ class order_t
         // Add member initialization constructors here
         
         // Try to use initializer lists when possible.
-        inline order_t(unsigned item_id, float price, unsigned station_id, order_type_t order_type)
-          : item_id_(item_id),
-            price_(price),
+        inline order_t(float price, unsigned item_id, unsigned station_id, order_type_t order_type)
+          : price_(price),
+            item_id_(item_id),
             station_id_(station_id),
             order_type_(order_type)
         {
@@ -100,8 +100,8 @@ class order_t
         inline bool operator==(const order_t& source) const
         {
             return
-                this->item_id_ == source.item_id_
-             && this->price_ == source.price_
+                this->price_ == source.price_
+             && this->item_id_ == source.item_id_
              && this->station_id_ == source.station_id_
              && this->order_type_ == source.order_type_;
         }
@@ -116,16 +116,6 @@ class order_t
         // inline type member() const;
         // inline void member(const type& t);
         
-        inline unsigned item_id() const
-        {
-            return this->item_id_;
-        }
-        
-        inline void item_id(unsigned new_item_id)
-        {
-            this->item_id_ = new_item_id;
-        }
-        
         inline float price() const
         {
             return this->price_;
@@ -134,6 +124,16 @@ class order_t
         inline void price(float new_price)
         {
             this->price_ = new_price;
+        }
+        
+        inline unsigned item_id() const
+        {
+            return this->item_id_;
+        }
+        
+        inline void item_id(unsigned new_item_id)
+        {
+            this->item_id_ = new_item_id;
         }
         
         inline unsigned station_id() const

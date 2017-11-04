@@ -12,7 +12,7 @@
 #include "item_attributes.h"
 #include "item_ids.h"
 #include "station_attributes.h"
-#include "order.h"
+#include "regional_market_orders.h"
 
 /// @brief Code execution starts here
 int main(int argc, char** argv)
@@ -72,7 +72,12 @@ int main(int argc, char** argv)
                 station_attributes_t station_attributes_in;
                 station_attributes_in.read_from_file(station_attributes_in_file);
                 
-                // TODO Conor, you left off here.  Implement classes for fetching regional prices.
+                std::ofstream prices_out_file(args.prices_out());
+                regional_market_orders_t regional_market_orders;
+                regional_market_orders.fetch(10000043);
+                
+                // TODO Conor, you left off here.  Convert regional market to prices
+                regional_market_orders.write_to_file(prices_out_file);
                 
                 break;
                 
@@ -98,6 +103,18 @@ int main(int argc, char** argv)
         std::cerr << error;
         return -1;
     } catch (item_attributes_t::error_message_t error) {
+        std::cerr << error;
+        return -1;
+    } catch (order_t::error_message_t error) {
+        std::cerr << error;
+        return -1;
+    } catch (regional_market_orders_t::error_message_t error) {
+        std::cerr << error;
+        return -1;
+    } catch (station_attribute_t::error_message_t error) {
+        std::cerr << error;
+        return -1;
+    } catch (station_attributes_t::error_message_t error) {
         std::cerr << error;
         return -1;
     }

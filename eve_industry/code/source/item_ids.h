@@ -17,7 +17,7 @@
 
 /// @brief List of integral uniquifiers used by inventory items in the EvE
 /// universe.  These are only the IDs, not the attributes for any items.
-class item_ids_t
+class item_ids_t : public std::vector<unsigned>
 {
         
     protected:
@@ -31,9 +31,6 @@ class item_ids_t
         
         // Try to make all your members protected, even if they don't
         // really need to be.
-        
-        /// @brief See @ref item_ids_t
-        std::vector<unsigned> data_;
         
     public:
         
@@ -64,82 +61,9 @@ class item_ids_t
         // inline type operator[](unsigned ix) const;
         // inline type& operator[](unsigned ix);
         
-        inline const unsigned& operator[](unsigned ix) const
-        {
-            return this->data_[ix];
-        }
-        
-        inline unsigned& operator[](unsigned ix)
-        {
-            return this->data_[ix];
-        }
-        
         // Add member read and write functions
         // inline type member() const;
         // inline void member(const type& t);
-        
-        /// @brief Return the number of item ids stored in this
-        /// object.
-        inline unsigned size() const
-        {
-            return this->data_.size();
-        }
-        
-        /// @brief Remove or add new elements starting at the end of storage.
-        inline void resize(unsigned new_size)
-        {
-            this->data_.resize(new_size);
-        }
-        
-        /// @brief Request an increase in storage space.  Does not de-allocate
-        /// existing storage.
-        inline void reserve(unsigned requested_size)
-        {
-            this->data_.reserve(requested_size);
-        }
-        
-        /// @brief Extend storage by 1 and insert a new element at the end
-        /// of storage.
-        inline void emplace_back(const unsigned& new_element)
-        {
-            this->data_.emplace_back(new_element);
-        }
-        
-        /// @brief Destroy all member elements and set size to zero.
-        inline void clear()
-        {
-            this->data_.clear();
-        }
-        
-        /// @return true if there are no elements in storage.
-        inline bool empty() const
-        {
-            return this->data_.empty();
-        }
-        
-        /// @brief Iterator to the first element in this container.
-        inline const unsigned* begin() const
-        {
-            return &(this->data_[0]);
-        }
-        
-        /// @brief Iterator to the first element in this container.
-        inline unsigned* begin()
-        {
-            return &(this->data_[0]);
-        }
-        
-        /// @brief Iterator one past the end of this container
-        inline const unsigned* end() const
-        {
-            return this->begin() + this->size();
-        }
-        
-        /// @brief Iterator one past the end of this container
-        inline unsigned* end()
-        {
-            return this->begin() + this->size();
-        }
         
         /// @brief Pull as many item IDs from the EvE API as possible.  All
         /// previous content is cleared.

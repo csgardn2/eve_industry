@@ -79,15 +79,6 @@ void station_attribute_t::read_from_json(const Json::Value& json_root)
     if (!json_root.isObject())
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of station_attribute_t is not of type \"object\".\n");
     
-    // Decode id
-    const Json::Value& json_id = json_root["id"];
-    if (!json_id.isUInt())
-    {
-        std::string message("Error.  <station_attribute>/id was not found or not of type \"unsigned int\".\n");
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, message);
-    }
-    this->id_ = json_id.asUInt();
-    
     // Decode name
     const Json::Value& json_name = json_root["name"];
     if (!json_name.isString())
@@ -97,23 +88,32 @@ void station_attribute_t::read_from_json(const Json::Value& json_root)
     }
     this->name_ = json_name.asString();
     
-    // Decode system
-    const Json::Value& json_system = json_root["system"];
-    if (!json_system.isUInt())
+    // Decode id
+    const Json::Value& json_station_id = json_root["station_id"];
+    if (!json_station_id.isUInt())
     {
-        std::string message("Error.  <station_attribute>/system was not found or not of type \"unsigned int\".\n");
+        std::string message("Error.  <station_attribute>/station_id was not found or not of type \"unsigned int\".\n");
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, message);
     }
-    this->system_ = json_system.asUInt();
+    this->station_id_ = json_station_id.asUInt();
+    
+    // Decode system
+    const Json::Value& json_system_id = json_root["system_id"];
+    if (!json_system_id.isUInt())
+    {
+        std::string message("Error.  <station_attribute>/system_id was not found or not of type \"unsigned int\".\n");
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, message);
+    }
+    this->system_id_ = json_system_id.asUInt();
     
     // Decode region
-    const Json::Value& json_region = json_root["region"];
-    if (!json_region.isUInt())
+    const Json::Value& json_region_id = json_root["region_id"];
+    if (!json_region_id.isUInt())
     {
-        std::string message("Error.  <station_attribute>/region was not found or not of type \"unsigned int\".\n");
+        std::string message("Error.  <station_attribute>/region_id was not found or not of type \"unsigned int\".\n");
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, message);
     }
-    this->region_ = json_region.asUInt();
+    this->region_id_ = json_region_id.asUInt();
     
 }
 
@@ -134,28 +134,28 @@ void station_attribute_t::write_to_buffer(std::string& buffer, unsigned indent_s
     // enable chaining.
     buffer += "{\n";
     
-    // Encode id
-    buffer += indent_1;
-    buffer += "\"id\": ";
-    buffer += std::to_string(this->id_);
-    buffer += ",\n";
-    
     // Encode name
     buffer += indent_1;
     buffer += "\"name\": \"";
     buffer += escape_quotes(this->name_);
     buffer += "\"\n";
     
+    // Encode id
+    buffer += indent_1;
+    buffer += "\"station_id\": ";
+    buffer += std::to_string(this->station_id_);
+    buffer += ",\n";
+    
     // Encode system
     buffer += indent_1;
-    buffer += "\"system\": ";
-    buffer += std::to_string(this->system_);
+    buffer += "\"system_id\": ";
+    buffer += std::to_string(this->system_id_);
     buffer += ",\n";
     
     // Encode region
     buffer += indent_1;
-    buffer += "\"region\": ";
-    buffer += std::to_string(this->region_);
+    buffer += "\"region_id\": ";
+    buffer += std::to_string(this->region_id_);
     buffer += '\n';
     
     // It is recommended to not put a newline on the last brace to allow

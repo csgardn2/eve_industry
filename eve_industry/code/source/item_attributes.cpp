@@ -158,9 +158,9 @@ void item_attributes_t::read_from_json(const Json::Value& json_root)
     // Decode and store each element in the array.
     for (const Json::Value& cur_element : json_root)
     {
-        unsigned last_ix = this->size();
-        this->resize(last_ix + 1);
-        (*this)[last_ix].read_from_json(cur_element);
+        item_attribute_t new_item_attribute;
+        new_item_attribute.read_from_json(cur_element);
+        this->emplace_back(new_item_attribute);
     }
     
 }

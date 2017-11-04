@@ -86,9 +86,9 @@ void station_attributes_t::read_from_json(const Json::Value& json_root)
     // Iterate through each element in the array, decode it, and store it.
     for (const Json::Value& cur_element : json_root)
     {
-        unsigned last_ix = this->size();
-        this->resize(last_ix + 1);
-        (*this)[last_ix].read_from_json(cur_element);
+        station_attribute_t new_station_attribute;
+        new_station_attribute.read_from_json(cur_element);
+        this->emplace_back(std::move(new_station_attribute));
     }
     
 }

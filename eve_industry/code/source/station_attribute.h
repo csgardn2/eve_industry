@@ -32,19 +32,19 @@ class station_attribute_t
         // Try to make all your members protected, even if they don't
         // really need to be.
         
-        /// @brief The integral ID of this station, as used by the EvE swagger
-        /// interface.
-        unsigned id_;
-        
         /// @brief The full name of a station such as
         /// "Jita IV - Moon 4 - Caldari Navy Assembly Plant".
         std::string name_;
         
+        /// @brief The integral ID of this station, as used by the EvE swagger
+        /// interface.
+        unsigned station_id_;
+        
         /// @brief Integral ID of the solar system that this station is in.
-        unsigned system_;
+        unsigned system_id_;
         
         /// @brief Integral ID of the region that this station is in.
-        unsigned region_;
+        unsigned region_id_;
         
     public:
         
@@ -72,11 +72,11 @@ class station_attribute_t
         // Add member initialization constructors here
         
         // Try to use initializer lists when possible.
-        inline station_attribute_t(unsigned id, std::string_view name, unsigned system, unsigned region)
-          : id_(id),
-            name_(name),
-            system_(system),
-            region_(region)
+        inline station_attribute_t(std::string_view name, unsigned station_id, unsigned system_id, unsigned region_id)
+          : name_(name),
+            station_id_(station_id),
+            system_id_(system_id),
+            region_id_(region_id)
         {
             // All work done in initializer list
         }
@@ -84,16 +84,6 @@ class station_attribute_t
         // Add member read and write functions
         // inline type member() const;
         // inline void member(const type& t);
-        
-        inline unsigned id() const
-        {
-            return this->id_;
-        }
-        
-        inline void id(unsigned new_id)
-        {
-            this->id_ = new_id;
-        }
         
         inline const std::string& name() const
         {
@@ -105,24 +95,34 @@ class station_attribute_t
             this->name_ = new_name;
         }
         
-        inline unsigned system() const
+        inline unsigned station_id() const
         {
-            return this->system_;
+            return this->station_id_;
         }
         
-        inline void system(unsigned new_system)
+        inline void id(unsigned new_station_id)
         {
-            this->system_ = new_system;
+            this->station_id_ = new_station_id;
         }
         
-        inline unsigned region() const
+        inline unsigned system_id() const
         {
-            return this->region_;
+            return this->system_id_;
         }
         
-        inline void region(unsigned new_region)
+        inline void system(unsigned new_system_id)
         {
-            this->region_ = new_region;
+            this->system_id_ = new_system_id;
+        }
+        
+        inline unsigned region_id() const
+        {
+            return this->region_id_;
+        }
+        
+        inline void region(unsigned new_region_id)
+        {
+            this->region_id_ = new_region_id;
         }
         
         /// @brief Open a file conforming to data/json/schema.json and use it to initialize

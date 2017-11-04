@@ -63,28 +63,28 @@
             "type": "object",
             "description": "Static information about an NPC station in EvE",
             "properties": {
-                "id": {
-                    "type": "integer",
-                    "description": "The integral uniquifier for this station, as used by the EvE swagger interface.",
-                    "minimum": 0
-                },
                 "name": {
                     "type": "string",
                     "description": "The name of a station, such as 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'",
                     "minLength": 1
                 },
-                "system": {
+                "station_id": {
+                    "type": "integer",
+                    "description": "The integral uniquifier for this station, as used by the EvE swagger interface.",
+                    "minimum": 0
+                },
+                "system_id": {
                     "type": "integer",
                     "description": "The integral uniquifier for the solar system containing this station, as used by the EvE swagger interface.",
                     "minimum": 0
                 },
-                "region": {
+                "region_id": {
                     "type": "integer",
                     "description": "The integral uniquifier for the region containing this station, as used by the EvE swagger ubterface,",
                     "minimum": 0
                 }
             },
-            "required": ["id", "name", "system", "region"]
+            "required": ["name", "id", "system", "region"]
         },
         "station_attributes": {
             "type": "array",
@@ -97,71 +97,61 @@
             "type": "object",
             "description": "A standing buy or sell offer at a specific station.",
             "properties": {
-                "item_id": {
-                    "type": "integer",
-                    "description": "Integral uniquifier of an inventory item in EvE.",
-                    "minimum": 0
-                },
                 "price": {
                     "type": "number",
                     "description": "The asking buy or sell price for this order.",
                     "minimum": 0.0
+                },
+                "item_id": {
+                    "type": "integer",
+                    "description": "Integral uniquifier of an inventory item in EvE.",
+                    "minimum": 0
                 },
                 "station_id": {
                     "type": "integer",
                     "description": "Integral uniquifier of a station in EvE.",
                     "minimum": 0
                 },
-                "type": {
+                "order_type": {
                     "type": "string",
                     "enum": ["buy", "sell"]
                 }
             },
-            "required": ["item_id", "station_id", "type", "price"]
+            "required": ["price", "item_id", "station_id", "order_type"]
         },
-        "orders": {
+        "regional_market_orders": {
             "type": "array",
             "description": "Collection of multiple orders from one or more stations and one or more regions.",
             "items": {
-                "$ref": "#/definitions/station_attribute"
+                "$ref": "#/definitions/order"
             }
         },
         "price": {
             "type": "object",
             "description": "Market data for a specific item fetched from the EvE Swagger database",
             "properties": {
-                "item": {
+                "item_id": {
                     "type": "integer",
                     "description": "The integral uniquifier for this item, as used by the EvE swagger interface.",
                     "minimum": 0
                 },
-                "orders": {
-                    "type": "array",
-                    "description": "Lists minimum sell orders ande maximum buy orders at each requested station.",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "station": {
-                                "type": "integer",
-                                "description": "Integral uniquifier of a station in EvE.",
-                                "minimum": 0
-                            },
-                            "min_sell_order": {
-                                "type": "number",
-                                "description": "Lowest sell bid for this item at this station.",
-                                "minimum": 0.0
-                            },
-                            "max_buy_order": {
-                                "type": "number",
-                                "description": "Highest buy bid for this item at this station.",
-                                "minimum": 0.0
-                            }
-                        },
-                        "required": ["station", "min_sell_order", "max_buy_order"]
-                    }
+                "station_id": {
+                    "type": "integer",
+                    "description": "Integral uniquifier of a station in EvE.",
+                    "minimum": 0
+                },
+                "min_sell_order": {
+                    "type": "number",
+                    "description": "Lowest sell bid for this item at this station.",
+                    "minimum": 0.0
+                },
+                "max_buy_order": {
+                    "type": "number",
+                    "description": "Highest buy bid for this item at this station.",
+                    "minimum": 0.0
                 }
             },
-            "required": ["item", "orders"]
+            "required": ["item_id", "station_id", "min_sell_price", "max_buy_price"]
         }
     }
 }

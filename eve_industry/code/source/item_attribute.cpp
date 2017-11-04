@@ -38,7 +38,7 @@ const std::vector<std::string_view> item_attribute_t::default_error_messages_ =
     "Error.  CCP changed something that used to work.\n"
 };
 
-void item_attribute_t::fetch(unsigned id)
+void item_attribute_t::fetch(unsigned long id)
 {
     
     // Automatically de-allocate memory when this function returns or throws
@@ -50,7 +50,7 @@ void item_attribute_t::fetch(unsigned id)
     
 }
 
-void item_attribute_t::fetch(unsigned id, Json::CharReader* reader)
+void item_attribute_t::fetch(unsigned long id, Json::CharReader* reader)
 {
     
     // Prepare a query

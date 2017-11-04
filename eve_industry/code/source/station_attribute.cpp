@@ -90,30 +90,30 @@ void station_attribute_t::read_from_json(const Json::Value& json_root)
     
     // Decode id
     const Json::Value& json_station_id = json_root["station_id"];
-    if (!json_station_id.isUInt())
+    if (!json_station_id.isUInt64())
     {
         std::string message("Error.  <station_attribute>/station_id was not found or not of type \"unsigned int\".\n");
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, message);
     }
-    this->station_id_ = json_station_id.asUInt();
+    this->station_id_ = json_station_id.asUInt64();
     
     // Decode system
     const Json::Value& json_system_id = json_root["system_id"];
-    if (!json_system_id.isUInt())
+    if (!json_system_id.isUInt64())
     {
         std::string message("Error.  <station_attribute>/system_id was not found or not of type \"unsigned int\".\n");
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, message);
     }
-    this->system_id_ = json_system_id.asUInt();
+    this->system_id_ = json_system_id.asUInt64();
     
     // Decode region
     const Json::Value& json_region_id = json_root["region_id"];
-    if (!json_region_id.isUInt())
+    if (!json_region_id.isUInt64())
     {
         std::string message("Error.  <station_attribute>/region_id was not found or not of type \"unsigned int\".\n");
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, message);
     }
-    this->region_id_ = json_region_id.asUInt();
+    this->region_id_ = json_region_id.asUInt64();
     
 }
 

@@ -38,13 +38,13 @@ class station_attribute_t
         
         /// @brief The integral ID of this station, as used by the EvE swagger
         /// interface.
-        unsigned station_id_;
+        uint64_t station_id_;
         
         /// @brief Integral ID of the solar system that this station is in.
-        unsigned system_id_;
+        uint64_t system_id_;
         
         /// @brief Integral ID of the region that this station is in.
-        unsigned region_id_;
+        uint64_t region_id_;
         
     public:
         
@@ -72,7 +72,7 @@ class station_attribute_t
         // Add member initialization constructors here
         
         // Try to use initializer lists when possible.
-        inline station_attribute_t(std::string_view name, unsigned station_id, unsigned system_id, unsigned region_id)
+        inline station_attribute_t(std::string_view name, uint64_t station_id, uint64_t system_id, uint64_t region_id)
           : name_(name),
             station_id_(station_id),
             system_id_(system_id),
@@ -95,32 +95,32 @@ class station_attribute_t
             this->name_ = new_name;
         }
         
-        inline unsigned station_id() const
+        inline uint64_t station_id() const
         {
             return this->station_id_;
         }
         
-        inline void id(unsigned new_station_id)
+        inline void id(uint64_t new_station_id)
         {
             this->station_id_ = new_station_id;
         }
         
-        inline unsigned system_id() const
+        inline uint64_t system_id() const
         {
             return this->system_id_;
         }
         
-        inline void system(unsigned new_system_id)
+        inline void system(uint64_t new_system_id)
         {
             this->system_id_ = new_system_id;
         }
         
-        inline unsigned region_id() const
+        inline uint64_t region_id() const
         {
             return this->region_id_;
         }
         
-        inline void region(unsigned new_region_id)
+        inline void region(uint64_t new_region_id)
         {
             this->region_id_ = new_region_id;
         }

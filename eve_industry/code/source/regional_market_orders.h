@@ -65,7 +65,7 @@ class regional_market_orders_t : public std::vector<order_t>
         
         /// @brief Pull all of the market orders from all NPC stations in a
         /// region in EvE.
-        void fetch(unsigned region_id);
+        void fetch(uint64_t region_id);
         
         /// @brief Open a file conforming to data/json/schema.json and use it to initialize
         /// this object, clearing previous content.

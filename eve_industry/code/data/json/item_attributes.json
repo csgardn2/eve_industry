@@ -3760,7 +3760,7 @@
         "name": "Oceanic Command Center"
     }, {
         "id": 2528,
-        "name": "SpaceAnchor"
+        "name": "QA SpaceAnchor"
     }, {
         "id": 2529,
         "name": "Explosive Deflection Amplifier I"
@@ -5518,10 +5518,10 @@
         "name": "Zainou 'Snapshot' Heavy Assault Missiles AM-706"
     }, {
         "id": 3160,
-        "name": "Zainou 'Snapshot' FOF Explosion Radius FR-1002"
+        "name": "Zainou 'Snapshot' Auto-Targeting Explosion Radius FR-1002"
     }, {
         "id": 3161,
-        "name": "Zainou 'Snapshot' FOF Explosion Radius FR-1004"
+        "name": "Zainou 'Snapshot' Auto-Targeting Explosion Radius FR-1004"
     }, {
         "id": 3162,
         "name": "Light Electron Blaster II"
@@ -5530,7 +5530,7 @@
         "name": "Light Electron Blaster II Blueprint"
     }, {
         "id": 3164,
-        "name": "Zainou 'Snapshot' FOF Explosion Radius FR-1006"
+        "name": "Zainou 'Snapshot' Auto-Targeting Explosion Radius FR-1006"
     }, {
         "id": 3165,
         "name": "Zainou 'Snapshot' Heavy Missiles HM-702"
@@ -7744,7 +7744,7 @@
         "name": "Men's 'Precision' Boots"
     }, {
         "id": 3967,
-        "name": "Fortified Gallente Station 7"
+        "name": "Gallente Logistics Station"
     }, {
         "id": 3970,
         "name": "Federation Administrative Outpost"
@@ -10957,28 +10957,28 @@
         "name": "Caldari Station Ruins - Industry Drill"
     }, {
         "id": 9885,
-        "name": "Gallente Station Ruins - Disc"
+        "name": "Gallente Disc Station Ruins"
     }, {
         "id": 9886,
-        "name": "Gallente Station Ruins - Fathom"
+        "name": "Gallente Fathom Station Ruins"
     }, {
         "id": 9887,
-        "name": "Gallente Station Ruins - Ugly Industrial"
+        "name": "Gallente Industrial Station Ruins"
     }, {
         "id": 9888,
-        "name": "Gallente Station Ruins - Biodomes"
+        "name": "Gallente Biodome Station Ruins"
     }, {
         "id": 9889,
-        "name": "Gallente Station Ruins - Factory"
+        "name": "Gallente Station Factory Ruins"
     }, {
         "id": 9890,
-        "name": "Gallente Station Ruins - Military"
+        "name": "Gallente Military Station Ruins"
     }, {
         "id": 9891,
-        "name": "Gallente Station Ruins - Research"
+        "name": "Gallente Research Station Ruins"
     }, {
         "id": 9892,
-        "name": "Gallente Station Ruins - Commercial"
+        "name": "Gallente Commercial Station Ruins"
     }, {
         "id": 9893,
         "name": "Minmatar Commercial Station Ruins"
@@ -15538,7 +15538,7 @@
         "name": "Zainou 'Snapshot' Defender Missiles DM-803"
     }, {
         "id": 13228,
-        "name": "Zainou 'Snapshot' FOF Explosion Radius FR-1003"
+        "name": "Zainou 'Snapshot' Auto-Targeting Explosion Radius FR-1003"
     }, {
         "id": 13229,
         "name": "Zainou 'Snapshot' Heavy Missiles HM-703"
@@ -41071,7 +41071,7 @@
         "name": "Okelle's Pleasure Hub"
     }, {
         "id": 26173,
-        "name": "Demo Probe Launcher"
+        "name": "QA Probe Launcher"
     }, {
         "id": 26174,
         "name": "Demo Probe Launcher Blueprint"
@@ -41254,13 +41254,13 @@
         "name": "Caldari Station Ruins - Huge & Sprawling"
     }, {
         "id": 26237,
-        "name": "Fortified Gallente Station Ruins - Fathom"
+        "name": "Gallente Fathom Station Ruins"
     }, {
         "id": 26238,
         "name": "Fortified Gallente Station Ruins - Military"
     }, {
         "id": 26239,
-        "name": "Fortified Gallente Station Ruins - Ugly Industrial"
+        "name": "Fortified Gallente Industrial Station Ruins"
     }, {
         "id": 26240,
         "name": "Weapon's Storage Facility"
@@ -43603,10 +43603,10 @@
         "name": "Zainou 'Snapshot' Heavy Assault Missiles AM-701"
     }, {
         "id": 27247,
-        "name": "Zainou 'Snapshot' FOF Explosion Radius FR-1005"
+        "name": "Zainou 'Snapshot' Auto-Targeting Explosion Radius FR-1005"
     }, {
         "id": 27249,
-        "name": "Zainou 'Snapshot' FOF Explosion Radius FR-1001"
+        "name": "Zainou 'Snapshot' Auto-Targeting Explosion Radius FR-1001"
     }, {
         "id": 27250,
         "name": "Zainou 'Snapshot' Heavy Missiles HM-705"
@@ -65776,10 +65776,10 @@
         "name": "Generic Fuel Block"
     }, {
         "id": 36946,
-        "name": "Expired Blood Raider Cerebral Accelerator"
+        "name": "Expired Cerebral Accelerator"
     }, {
         "id": 36948,
-        "name": "Expired Blood Raider Advanced Cerebral Accelerator"
+        "name": "Expired Cerebral Accelerator"
     }, {
         "id": 36949,
         "name": "Coalesced Element Blueprint"
@@ -65992,7 +65992,7 @@
         "name": "Structure Compression Plant Blueprint"
     }, {
         "id": 37034,
-        "name": "Structure Moon Drilling Blueprint"
+        "name": "Standup Moon Drill I Blueprint"
     }, {
         "id": 37037,
         "name": "Structure Drone Link Augmentor Blueprint"
@@ -66628,22 +66628,22 @@
         "name": "Standup XL-Set Extinction Level Weapons Suite II"
     }, {
         "id": 37280,
-        "name": "Standup M-Set HS Materials Reclamation I"
+        "name": "OLD M-Set HS Materials Reclamation I"
     }, {
         "id": 37281,
-        "name": "Standup M-Set HS Materials Reclamation II"
+        "name": "OLD M-Set HS Materials Reclamation II"
     }, {
         "id": 37282,
-        "name": "Standup L-Set Ore Grading Processor I"
+        "name": "OLD L-Set Ore Grading Processor I"
     }, {
         "id": 37283,
-        "name": "Standup L-Set Ore Grading Processor II"
+        "name": "OLD L-Set Ore Grading Processor II"
     }, {
         "id": 37284,
-        "name": "Standup XL-Set Reprocessing Monitor I"
+        "name": "OLD XL-Set Reprocessing Monitor I"
     }, {
         "id": 37285,
-        "name": "Standup XL-Set Reprocessing Monitor II"
+        "name": "OLD XL-Set Reprocessing Monitor II"
     }, {
         "id": 37287,
         "name": "Medium Tech I Small Ship Manufacturing I Blueprint"
@@ -67093,22 +67093,22 @@
         "name": "X-Large Office, Jump Clone, Planetary, Customs Office and Market Improvement II Blueprint"
     }, {
         "id": 37443,
-        "name": "Standup M-Set HS Materials Reclamation I Blueprint"
+        "name": "OLD M-Set HS Materials Reclamation I Blueprint"
     }, {
         "id": 37444,
-        "name": "Standup M-Set HS Materials Reclamation II Blueprint"
+        "name": "OLD M-Set HS Materials Reclamation II Blueprint"
     }, {
         "id": 37445,
-        "name": "Standup L-Set Ore Grading Processor I Blueprint"
+        "name": "OLD L-Set Ore Grading Processor I Blueprint"
     }, {
         "id": 37446,
-        "name": "Standup L-Set Ore Grading Processor II Blueprint"
+        "name": "OLD L-Set Ore Grading Processor II Blueprint"
     }, {
         "id": 37447,
-        "name": "Standup XL-Set Reprocessing Monitor I Blueprint"
+        "name": "OLD XL-Set Reprocessing Monitor I Blueprint"
     }, {
         "id": 37448,
-        "name": "Standup XL-Set Reprocessing Monitor II Blueprint"
+        "name": "OLD XL-Set Reprocessing Monitor II Blueprint"
     }, {
         "id": 37449,
         "name": "Medium Tech I Large Ship Research I Blueprint"
@@ -78589,52 +78589,52 @@
         "name": "Moa Valkyrie SKIN (Permanent)"
     }, {
         "id": 41422,
-        "name": "Standup M-Set LNS Materials Reclamation I"
+        "name": "OLD M-Set LNS Materials Reclamation I"
     }, {
         "id": 41423,
-        "name": "Standup M-Set LNS Materials Reclamation II"
+        "name": "OLD M-Set LNS Materials Reclamation II"
     }, {
         "id": 41424,
-        "name": "Standup M-Set I1 Materials Reclamation I"
+        "name": "OLD M-Set I1 Materials Reclamation I"
     }, {
         "id": 41425,
-        "name": "Standup M-Set I1 Materials Reclamation II"
+        "name": "OLD M-Set I1 Materials Reclamation II"
     }, {
         "id": 41426,
-        "name": "Standup M-Set I2 Materials Reclamation I"
+        "name": "OLD M-Set I2 Materials Reclamation I"
     }, {
         "id": 41427,
-        "name": "Standup M-Set I2 Materials Reclamation II"
+        "name": "OLD M-Set I2 Materials Reclamation II"
     }, {
         "id": 41428,
-        "name": "Standup L-Set Ice Grading Processor I"
+        "name": "OLD L-Set Ice Grading Processor I"
     }, {
         "id": 41429,
-        "name": "Standup L-Set Ice Grading Processor II"
+        "name": "OLD L-Set Ice Grading Processor II"
     }, {
         "id": 41430,
-        "name": "Standup M-Set LNS Materials Reclamation II Blueprint"
+        "name": "OLD M-Set LNS Materials Reclamation II Blueprint"
     }, {
         "id": 41431,
-        "name": "Standup M-Set I1 Materials Reclamation I Blueprint"
+        "name": "OLD M-Set I1 Materials Reclamation I Blueprint"
     }, {
         "id": 41432,
-        "name": "Standup M-Set I1 Materials Reclamation II Blueprint"
+        "name": "OLD M-Set I1 Materials Reclamation II Blueprint"
     }, {
         "id": 41433,
-        "name": "Standup M-Set I2 Materials Reclamation I Blueprint"
+        "name": "OLD M-Set I2 Materials Reclamation I Blueprint"
     }, {
         "id": 41434,
-        "name": "Standup M-Set I2 Materials Reclamation II Blueprint"
+        "name": "OLD M-Set I2 Materials Reclamation II Blueprint"
     }, {
         "id": 41435,
-        "name": "Standup L-Set Ice Grading Processor I Blueprint"
+        "name": "OLD L-Set Ice Grading Processor I Blueprint"
     }, {
         "id": 41436,
-        "name": "Standup L-Set Ice Grading Processor II Blueprint"
+        "name": "OLD L-Set Ice Grading Processor II Blueprint"
     }, {
         "id": 41437,
-        "name": "Standup M-Set LNS Materials Reclamation I Blueprint"
+        "name": "OLD M-Set LNS Materials Reclamation I Blueprint"
     }, {
         "id": 41438,
         "name": "Gravitational Transportation Field Oscillator Blueprint"
@@ -80674,13 +80674,13 @@
         "name": "Gold Ouroboros"
     }, {
         "id": 42232,
-        "name": "Gold Ouroboros Accelerator"
+        "name": "Expired Cerebral Accelerator"
     }, {
         "id": 42233,
-        "name": "Silver Ouroboros Accelerator"
+        "name": "Expired Cerebral Accelerator"
     }, {
         "id": 42234,
-        "name": "Copper Ouroboros Accelerator"
+        "name": "Expired Cerebral Accelerator"
     }, {
         "id": 42235,
         "name": "Blood Raider Patroller"
@@ -81571,7 +81571,7 @@
         "name": "Skirmish Command Burst I"
     }, {
         "id": 42531,
-        "name": "Blood Raider Cerebral Accelerator"
+        "name": "Expired Cerebral Accelerator"
     }, {
         "id": 42532,
         "name": "Effect NPE Vortex"
@@ -81595,7 +81595,7 @@
         "name": "Drifter Battleship"
     }, {
         "id": 42541,
-        "name": "Advanced Blood Raider Cerebral Accelerator"
+        "name": "Expired Cerebral Accelerator"
     }, {
         "id": 42542,
         "name": "Amarr Shuttle Purity of the Throne SKIN (Permanent)"
@@ -82060,7 +82060,7 @@
         "name": "Cap Female Guristas"
     }, {
         "id": 42723,
-        "name": "Cap Male Black"
+        "name": "Men's 'Sable' Cap (Black)"
     }, {
         "id": 42724,
         "name": "Beret Male Concord"
@@ -82093,7 +82093,7 @@
         "name": "Women's Beret (Blood Raiders)"
     }, {
         "id": 42734,
-        "name": "Cap Female Black"
+        "name": "Women's 'Sable' Cap (Black)"
     }, {
         "id": 42735,
         "name": "Cap Female Orange"
@@ -85891,7 +85891,7 @@
         "name": "Armor Plating From TES Seraph"
     }, {
         "id": 44217,
-        "name": "YC119 Yoiul Festival Accelerator"
+        "name": "Expired Cerebral Accelerator"
     }, {
         "id": 44218,
         "name": "Stratios SOE Fire Cell (Defense) SKIN (Permanent)"
@@ -88090,7 +88090,7 @@
         "name": "♦ Sotiyo"
     }, {
         "id": 45008,
-        "name": "Chunk Medium"
+        "name": "Moon Chunk"
     }, {
         "id": 45009,
         "name": "Standup Moon Drill I"
@@ -88726,7 +88726,7 @@
         "name": "Loki Core - Immobility Drivers"
     }, {
         "id": 45634,
-        "name": "Rogue Swarm Accelerator"
+        "name": "Expired Cerebral Accelerator"
     }, {
         "id": 45635,
         "name": "Small Skill Injector"
@@ -88753,22 +88753,22 @@
         "name": "Standup L-Set Thukker Advanced Component Manufacturing Efficiency Blueprint"
     }, {
         "id": 45644,
-        "name": "GuristasFAuxBlueprint_PLACEHOLDER"
+        "name": "Loggerhead Blueprint"
     }, {
         "id": 45645,
-        "name": "GuristasFAux_PLACEHOLDER"
+        "name": "Loggerhead"
     }, {
         "id": 45646,
-        "name": "GuristasDreadBlueprint_PLACEHOLDER"
+        "name": "Caiman Blueprint"
     }, {
         "id": 45647,
-        "name": "GuristasDread_PLACEHOLDER"
+        "name": "Caiman"
     }, {
         "id": 45648,
-        "name": "GuristasTitanBlueprint_PLACEHOLDER"
+        "name": "Komodo Blueprint"
     }, {
         "id": 45649,
-        "name": "GuristasTitan_PLACEHOLDER"
+        "name": "Komodo"
     }, {
         "id": 45650,
         "name": "AbleBlueprint_PLACEHOLDER"
@@ -89839,10 +89839,10 @@
         "name": "Agency Speed Booster III"
     }, {
         "id": 46007,
-        "name": "Valkyrie Cerebral Accelerator"
+        "name": "Expired Cerebral Accelerator"
     }, {
         "id": 46008,
-        "name": "Crimson Harvest Accelerator"
+        "name": "Crimson Harvest Cerebral Accelerator"
     }, {
         "id": 46009,
         "name": "Youil Festival Accelerator"
@@ -89899,13 +89899,13 @@
         "name": "Redtail Shark"
     }, {
         "id": 46030,
-        "name": "Chunk Small"
+        "name": "Moon Chunk"
     }, {
         "id": 46031,
-        "name": "Chunk Large"
+        "name": "Moon Chunk"
     }, {
         "id": 46032,
-        "name": "Chunk Extra Large"
+        "name": "Moon Chunk"
     }, {
         "id": 46038,
         "name": "Men's IGC Location Scout Suit"
@@ -89932,16 +89932,16 @@
         "name": "Vanquisher IGC SKIN (Permanent)"
     }, {
         "id": 46046,
-        "name": "♦ Providence"
+        "name": "♦ Orca"
     }, {
         "id": 46047,
-        "name": "♦ Charon"
+        "name": "♦ Orca"
     }, {
         "id": 46048,
-        "name": "♦ Obelisk"
+        "name": "♦ Orca"
     }, {
         "id": 46049,
-        "name": "♦ Fenrir"
+        "name": "♦ Orca"
     }, {
         "id": 46050,
         "name": "Superior Exoplanets Hunter Reward Crate"
@@ -90670,7 +90670,7 @@
         "name": "Shimmering Sperrylite"
     }, {
         "id": 46300,
-        "name": "[no messageID: 529181]"
+        "name": "Lavish Vanadinite"
     }, {
         "id": 46301,
         "name": "Shimmering Vanadinite"
@@ -90757,16 +90757,16 @@
         "name": "Compromised Stasis Vault"
     }, {
         "id": 46338,
-        "name": "Amarr Freighter Wreck"
+        "name": "Orca Wreck"
     }, {
         "id": 46339,
-        "name": "Caldari Freighter Wreck"
+        "name": "Orca Wreck"
     }, {
         "id": 46341,
-        "name": "Gallente Freighter Wreck"
+        "name": "Orca Wreck"
     }, {
         "id": 46342,
-        "name": "Minmatar Freighter Wreck"
+        "name": "Orca Wreck"
     }, {
         "id": 46343,
         "name": "Eosian Preserver"
@@ -90789,6 +90789,72 @@
         "id": 46349,
         "name": "Eosian Upholder"
     }, {
+        "id": 46350,
+        "name": "Ubiquitous Moon Ore Mining Crystal I Blueprint"
+    }, {
+        "id": 46351,
+        "name": "Ubiquitous Moon Ore Mining Crystal II Blueprint"
+    }, {
+        "id": 46352,
+        "name": "Common Moon Ore Mining Crystal I Blueprint"
+    }, {
+        "id": 46353,
+        "name": "Common Moon Ore Mining Crystal II Blueprint"
+    }, {
+        "id": 46355,
+        "name": "Ubiquitous Moon Ore Mining Crystal I"
+    }, {
+        "id": 46356,
+        "name": "Ubiquitous Moon Ore Mining Crystal II"
+    }, {
+        "id": 46357,
+        "name": "Uncommon Moon Ore Mining Crystal I Blueprint"
+    }, {
+        "id": 46358,
+        "name": "Uncommon Moon Ore Mining Crystal II Blueprint"
+    }, {
+        "id": 46359,
+        "name": "Rare Moon Ore Mining Crystal I Blueprint"
+    }, {
+        "id": 46360,
+        "name": "Rare Moon Ore Mining Crystal II Blueprint"
+    }, {
+        "id": 46361,
+        "name": "Exceptional Moon Ore Mining Crystal I Blueprint"
+    }, {
+        "id": 46362,
+        "name": "Exceptional Moon Ore Mining Crystal II Blueprint"
+    }, {
+        "id": 46363,
+        "name": "Guristas Forward Operating Base"
+    }, {
+        "id": 46364,
+        "name": "Blood Raider Forward Operating Base"
+    }, {
+        "id": 46365,
+        "name": "Common Moon Ore Mining Crystal I"
+    }, {
+        "id": 46366,
+        "name": "Common Moon Ore Mining Crystal II"
+    }, {
+        "id": 46367,
+        "name": "Uncommon Moon Ore Mining Crystal I"
+    }, {
+        "id": 46368,
+        "name": "Uncommon Moon Ore Mining Crystal II"
+    }, {
+        "id": 46369,
+        "name": "Rare Moon Ore Mining Crystal I"
+    }, {
+        "id": 46370,
+        "name": "Rare Moon Ore Mining Crystal II"
+    }, {
+        "id": 46371,
+        "name": "Exceptional Moon Ore Mining Crystal I"
+    }, {
+        "id": 46372,
+        "name": "Exceptional Moon Ore Mining Crystal II"
+    }, {
         "id": 46376,
         "name": "Raven Valkyrie SKIN (Permanent)"
     }, {
@@ -90806,6 +90872,9 @@
     }, {
         "id": 46381,
         "name": "Agency Support Kit"
+    }, {
+        "id": 46382,
+        "name": "♦ Kestrel"
     }, {
         "id": 46383,
         "name": "Atron Kopis Edge SKIN (Permanent)"
@@ -90990,6 +91059,228 @@
         "id": 46443,
         "name": "Ninazu Kopis Edge SKIN (Permanent)"
     }, {
+        "id": 46444,
+        "name": "Punisher Imperial War Reserves Pack "
+    }, {
+        "id": 46445,
+        "name": "Merlin State Military Stockpile Pack"
+    }, {
+        "id": 46446,
+        "name": "Incursus Federal Strategic Materiel Pack"
+    }, {
+        "id": 46447,
+        "name": "Rifter Republic Fleet Ordnance Pack"
+    }, {
+        "id": 46448,
+        "name": "Omen Imperial War Reserves Pack"
+    }, {
+        "id": 46449,
+        "name": "Harbinger Imperial War Reserves Pack"
+    }, {
+        "id": 46450,
+        "name": "Apocalypse Imperial War Reserves Pack"
+    }, {
+        "id": 46451,
+        "name": "Imperial War Reserves Package 5"
+    }, {
+        "id": 46452,
+        "name": "Imperial War Reserves Package 6"
+    }, {
+        "id": 46453,
+        "name": "Imperial War Reserves Package 7"
+    }, {
+        "id": 46454,
+        "name": "Imperial War Reserves Package 8"
+    }, {
+        "id": 46455,
+        "name": "Imperial War Reserves Package 9"
+    }, {
+        "id": 46456,
+        "name": "Imperial War Reserves Package 10"
+    }, {
+        "id": 46457,
+        "name": "Caracal State Military Stockpile Pack"
+    }, {
+        "id": 46458,
+        "name": "Drake State Military Stockpile Pack"
+    }, {
+        "id": 46459,
+        "name": "Raven State Military Stockpile Pack"
+    }, {
+        "id": 46460,
+        "name": "State Military Stockpile Package 5"
+    }, {
+        "id": 46461,
+        "name": "State Military Stockpile Package 6"
+    }, {
+        "id": 46462,
+        "name": "State Military Stockpile Package 7"
+    }, {
+        "id": 46463,
+        "name": "State Military Stockpile Package 8"
+    }, {
+        "id": 46464,
+        "name": "State Military Stockpile Package 9"
+    }, {
+        "id": 46465,
+        "name": "State Military Stockpile Package 10"
+    }, {
+        "id": 46466,
+        "name": "Thorax Federal Strategic Materiel Pack"
+    }, {
+        "id": 46467,
+        "name": "Brutix Federal Strategic Materiel Pack"
+    }, {
+        "id": 46468,
+        "name": "Megathron Federal Strategic Materiel Pack"
+    }, {
+        "id": 46469,
+        "name": "Federal Strategic Materiel Package 5"
+    }, {
+        "id": 46470,
+        "name": "Federal Strategic Materiel Package 6"
+    }, {
+        "id": 46471,
+        "name": "Federal Strategic Materiel Package 7"
+    }, {
+        "id": 46472,
+        "name": "Federal Strategic Materiel Package 8"
+    }, {
+        "id": 46473,
+        "name": "Federal Strategic Materiel Package 9"
+    }, {
+        "id": 46474,
+        "name": "Federal Strategic Materiel Package 10"
+    }, {
+        "id": 46475,
+        "name": "Rupture Republic Fleet Ordnance Pack"
+    }, {
+        "id": 46476,
+        "name": "Hurricane Republic Fleet Ordnance Pack"
+    }, {
+        "id": 46477,
+        "name": "Tempest Republic Fleet Ordnance Pack"
+    }, {
+        "id": 46478,
+        "name": "Republic Fleet Ordnance Package 5"
+    }, {
+        "id": 46479,
+        "name": "Republic Fleet Ordnance Package 6"
+    }, {
+        "id": 46480,
+        "name": "Republic Fleet Ordnance Package 7"
+    }, {
+        "id": 46481,
+        "name": "Republic Fleet Ordnance Package 8"
+    }, {
+        "id": 46482,
+        "name": "Republic Fleet Ordnance Package 9"
+    }, {
+        "id": 46483,
+        "name": "Republic Fleet Ordnance Package 10"
+    }, {
+        "id": 46484,
+        "name": "Standup M-Set Composite Reactor Time Efficiency I"
+    }, {
+        "id": 46485,
+        "name": "Standup M-Set Composite Reactor Time Efficiency II"
+    }, {
+        "id": 46486,
+        "name": "Standup M-Set Composite Reactor Material Efficiency I"
+    }, {
+        "id": 46487,
+        "name": "Standup M-Set Composite Reactor Material Efficiency II"
+    }, {
+        "id": 46488,
+        "name": "Standup M-Set Hybrid Reactor Time Efficiency I"
+    }, {
+        "id": 46489,
+        "name": "Standup M-Set Hybrid Reactor Time Efficiency II"
+    }, {
+        "id": 46490,
+        "name": "Standup M-Set Hybrid Reactor Material Efficiency I"
+    }, {
+        "id": 46491,
+        "name": "Standup M-Set Hybrid Reactor Material Efficiency II"
+    }, {
+        "id": 46492,
+        "name": "Standup M-Set Biochemical Reactor Time Efficiency I"
+    }, {
+        "id": 46493,
+        "name": "Standup M-Set Biochemical Reactor Time Efficiency II"
+    }, {
+        "id": 46494,
+        "name": "Standup M-Set Biochemical Reactor Material Efficiency I"
+    }, {
+        "id": 46495,
+        "name": "Standup M-Set Biochemical Reactor Material Efficiency II"
+    }, {
+        "id": 46496,
+        "name": "Standup L-Set Reactor Efficiency I"
+    }, {
+        "id": 46497,
+        "name": "Standup L-Set Reactor Efficiency II"
+    }, {
+        "id": 46500,
+        "name": "Standup L-Set Moon Drilling Proficiency II Blueprint"
+    }, {
+        "id": 46501,
+        "name": "Standup L-Set Moon Drilling Proficiency I Blueprint"
+    }, {
+        "id": 46502,
+        "name": "Standup M-Set Moon Drilling Stability II Blueprint"
+    }, {
+        "id": 46503,
+        "name": "Standup M-Set Moon Drilling Stability I Blueprint"
+    }, {
+        "id": 46504,
+        "name": "Standup M-Set Moon Drilling Efficiency II Blueprint"
+    }, {
+        "id": 46505,
+        "name": "Standup M-Set Moon Drilling Efficiency I Blueprint"
+    }, {
+        "id": 46506,
+        "name": "Standup M-Set Composite Reactor Time Efficiency I Blueprint"
+    }, {
+        "id": 46507,
+        "name": "Standup M-Set Composite Reactor Time Efficiency II Blueprint"
+    }, {
+        "id": 46508,
+        "name": "Standup M-Set Composite Reactor Material Efficiency I Blueprint"
+    }, {
+        "id": 46509,
+        "name": "Standup M-Set Composite Reactor Material Efficiency II Blueprint"
+    }, {
+        "id": 46510,
+        "name": "Standup M-Set Hybrid Reactor Time Efficiency I Blueprint"
+    }, {
+        "id": 46511,
+        "name": "Standup M-Set Hybrid Reactor Time Efficiency II Blueprint"
+    }, {
+        "id": 46512,
+        "name": "Standup M-Set Hybrid Reactor Material Efficiency I Blueprint"
+    }, {
+        "id": 46513,
+        "name": "Standup M-Set Hybrid Reactor Material Efficiency II Blueprint"
+    }, {
+        "id": 46514,
+        "name": "Standup M-Set Biochemical Reactor Time Efficiency I Blueprint"
+    }, {
+        "id": 46515,
+        "name": "Standup M-Set Biochemical Reactor Time Efficiency II Blueprint"
+    }, {
+        "id": 46516,
+        "name": "Standup M-Set Biochemical Reactor Material Efficiency I Blueprint"
+    }, {
+        "id": 46517,
+        "name": "Standup M-Set Biochemical Reactor Material Efficiency II Blueprint"
+    }, {
+        "id": 46518,
+        "name": "Standup L-Set Reactor Efficiency I Blueprint"
+    }, {
+        "id": 46519,
+        "name": "Standup L-Set Reactor Efficiency II Blueprint"
+    }, {
         "id": 46520,
         "name": "Astero Spectral Shift SKIN (Permanent)"
     }, {
@@ -90998,6 +91289,12 @@
     }, {
         "id": 46522,
         "name": "Nestor Spectral Shift SKIN (Permanent)"
+    }, {
+        "id": 46523,
+        "name": "♦ Rattlesnake"
+    }, {
+        "id": 46524,
+        "name": "♦ Raven"
     }, {
         "id": 46525,
         "name": "Purifier Imperial Jubilee SKIN (Permanent)"
@@ -91046,6 +91343,24 @@
     }, {
         "id": 46540,
         "name": "Avatar Imperial Jubilee SKIN (Permanent)"
+    }, {
+        "id": 46541,
+        "name": "SITE 1"
+    }, {
+        "id": 46542,
+        "name": "SITE 2"
+    }, {
+        "id": 46543,
+        "name": "SITE 3"
+    }, {
+        "id": 46544,
+        "name": "SITE 4"
+    }, {
+        "id": 46545,
+        "name": "SITE 5"
+    }, {
+        "id": 46546,
+        "name": "SITE 6"
     }, {
         "id": 46547,
         "name": "Rorqual Forgemaster SKIN (Permanent)"
@@ -91101,17 +91416,491 @@
         "id": 46564,
         "name": "Vexor Sapphire Sungrazer SKIN (Permanent)"
     }, {
+        "id": 46565,
+        "name": "Spawner1"
+    }, {
+        "id": 46566,
+        "name": "Spawner2"
+    }, {
+        "id": 46567,
+        "name": "Spawner3"
+    }, {
+        "id": 46568,
+        "name": "Spawner4"
+    }, {
+        "id": 46569,
+        "name": "Spawner5"
+    }, {
+        "id": 46570,
+        "name": "Spawner6"
+    }, {
+        "id": 46571,
+        "name": "Spawner7"
+    }, {
+        "id": 46572,
+        "name": "Spawner8"
+    }, {
+        "id": 46573,
+        "name": "Spawner9"
+    }, {
+        "id": 46574,
+        "name": "Spawner10"
+    }, {
+        "id": 46575,
+        "name": "Dark Blood Standup Heavy Energy Neutralizer"
+    }, {
+        "id": 46576,
+        "name": "Dark Blood Standup Heavy Energy Neutralizer Blueprint"
+    }, {
+        "id": 46577,
+        "name": "Dread Guristas Standup Variable Spectrum ECM"
+    }, {
+        "id": 46578,
+        "name": "Dread Guristas Standup Variable Spectrum ECM Blueprint"
+    }, {
+        "id": 46579,
+        "name": "Blood Raider Standup Module Blueprint Armored Cache"
+    }, {
+        "id": 46580,
+        "name": "Guristas Standup Module Blueprint Armored Cache"
+    }, {
+        "id": 46581,
+        "name": "♦ Caracal"
+    }, {
         "id": 46582,
         "name": "Serpentis Victory SKIN (Permanent)"
+    }, {
+        "id": 46583,
+        "name": "Depleted Asteroid Field"
     }, {
         "id": 46584,
         "name": "Daredevil Serpentis Victory SKIN (Permanent)"
     }, {
+        "id": 46585,
+        "name": "Punisher War Reserves Lieutenant SKIN (Volatile)"
+    }, {
+        "id": 46586,
+        "name": "Omen War Reserves Lieutenant SKIN (Volatile)"
+    }, {
+        "id": 46587,
+        "name": "Harbinger War Reserves Lieutenant SKIN (Volatile)"
+    }, {
+        "id": 46588,
+        "name": "Apocalypse War Reserves Lieutenant SKIN (Volatile)"
+    }, {
+        "id": 46589,
+        "name": "Merlin Military Stockpile Captain SKIN (Volatile)"
+    }, {
+        "id": 46590,
+        "name": "Caracal Military Stockpile Captain SKIN (Volatile)"
+    }, {
+        "id": 46591,
+        "name": "Drake Military Stockpile Captain SKIN (Volatile)"
+    }, {
+        "id": 46592,
+        "name": "Raven Military Stockpile Captain SKIN (Volatile)"
+    }, {
+        "id": 46593,
+        "name": "Incursus Strategic Materiel Defender SKIN (Volatile)"
+    }, {
+        "id": 46594,
+        "name": "Thorax Strategic Materiel Defender SKIN (Volatile)"
+    }, {
+        "id": 46595,
+        "name": "Brutix Strategic Materiel Defender SKIN (Volatile)"
+    }, {
+        "id": 46596,
+        "name": "Megathron Strategic Materiel Defender SKIN (Volatile)"
+    }, {
+        "id": 46597,
+        "name": "Rifter Fleet Ordnance Spike SKIN (Volatile)"
+    }, {
+        "id": 46598,
+        "name": "Rupture Fleet Ordnance Spike SKIN (Volatile)"
+    }, {
+        "id": 46599,
+        "name": "Hurricane Fleet Ordnance Spike SKIN (Volatile)"
+    }, {
+        "id": 46600,
+        "name": "Tempest Fleet Ordnance Spike SKIN (Volatile)"
+    }, {
+        "id": 46601,
+        "name": "Guristas Loggerhead Blueprint Armored Cache"
+    }, {
+        "id": 46602,
+        "name": "Guristas Caiman Blueprint Armored Cache"
+    }, {
+        "id": 46603,
+        "name": "Guristas Komodo Blueprint Armored Cache"
+    }, {
         "id": 46604,
         "name": "Sleeper Medium Wreck "
     }, {
-        "id": 441265,
-        "name": ""
+        "id": 46605,
+        "name": "Guristas Forward Operating Base Wreck"
+    }, {
+        "id": 46606,
+        "name": "Blood Raiders Forward Operating Base Wreck"
+    }, {
+        "id": 46633,
+        "name": "Standup M-Set Asteroid Ore Grading Processor I"
+    }, {
+        "id": 46634,
+        "name": "Standup M-Set Asteroid Ore Grading Processor II"
+    }, {
+        "id": 46635,
+        "name": "Standup M-Set Ice Grading Processor I"
+    }, {
+        "id": 46636,
+        "name": "Standup M-Set Ice Grading Processor II"
+    }, {
+        "id": 46637,
+        "name": "Standup M-Set Moon Ore Grading Processor I"
+    }, {
+        "id": 46638,
+        "name": "Standup M-Set Moon Ore Grading Processor II"
+    }, {
+        "id": 46639,
+        "name": "Standup L-Set Reprocessing Monitor I"
+    }, {
+        "id": 46640,
+        "name": "Standup L-Set Reprocessing Monitor II"
+    }, {
+        "id": 46641,
+        "name": "Standup XL-Set Reprocessing Monitor I"
+    }, {
+        "id": 46642,
+        "name": "Standup XL-Set Reprocessing Monitor II"
+    }, {
+        "id": 46643,
+        "name": "Standup M-Set Asteroid Ore Grading Processor I Blueprint"
+    }, {
+        "id": 46644,
+        "name": "Standup M-Set Asteroid Ore Grading Processor II Blueprint"
+    }, {
+        "id": 46645,
+        "name": "Standup M-Set Ice Grading Processor I Blueprint"
+    }, {
+        "id": 46646,
+        "name": "Standup M-Set Ice Grading Processor II Blueprint"
+    }, {
+        "id": 46647,
+        "name": "Standup M-Set Moon Ore Grading Processor I Blueprint"
+    }, {
+        "id": 46648,
+        "name": "Standup M-Set Moon Ore Grading Processor II Blueprint"
+    }, {
+        "id": 46649,
+        "name": "Standup L-Set Reprocessing Monitor I Blueprint"
+    }, {
+        "id": 46650,
+        "name": "Standup L-Set Reprocessing Monitor II Blueprint"
+    }, {
+        "id": 46651,
+        "name": "Standup XL-Set Reprocessing Monitor I Blueprint"
+    }, {
+        "id": 46652,
+        "name": "Standup XL-Set Reprocessing Monitor II Blueprint"
+    }, {
+        "id": 46653,
+        "name": "♦ Caiman"
+    }, {
+        "id": 46654,
+        "name": "♦ Caiman"
+    }, {
+        "id": 46658,
+        "name": "JacketAGF01_Gallente_RW.type"
+    }, {
+        "id": 46659,
+        "name": "JacketCMM01_Caldari.type"
+    }, {
+        "id": 46660,
+        "name": "JacketAGF01_Gallente.type"
+    }, {
+        "id": 46661,
+        "name": "JacketCMF01_Minmatar_RW.type"
+    }, {
+        "id": 46662,
+        "name": "JacketAGM01_Amarr.type"
+    }, {
+        "id": 46663,
+        "name": "JacketAGF01_Amarr.type"
+    }, {
+        "id": 46664,
+        "name": "JacketCMM01_Minmatar.type"
+    }, {
+        "id": 46665,
+        "name": "JacketAGM01_Gallente.type"
+    }, {
+        "id": 46666,
+        "name": "JacketAGM01_Amarr_RW.type"
+    }, {
+        "id": 46667,
+        "name": "JacketAGM01_Gallente_RW.type"
+    }, {
+        "id": 46668,
+        "name": "JacketAGF01_Amarr_RW.type"
+    }, {
+        "id": 46669,
+        "name": "JacketCMF01_Caldari.type"
+    }, {
+        "id": 46671,
+        "name": "JacketCMF01_Caldari_RW.type"
+    }, {
+        "id": 46672,
+        "name": "JacketCMM01_Caldari_RW.type"
+    }, {
+        "id": 46673,
+        "name": "JacketCMF01_Minmatar.type"
+    }, {
+        "id": 46674,
+        "name": "JacketCMM01_Minmatar_RW.type"
+    }, {
+        "id": 46675,
+        "name": "Jet Ochre"
+    }, {
+        "id": 46676,
+        "name": "Cubic Bistot"
+    }, {
+        "id": 46677,
+        "name": "Pellucid Crokite"
+    }, {
+        "id": 46678,
+        "name": "Flawless Arkonor"
+    }, {
+        "id": 46679,
+        "name": "Brilliant Gneiss"
+    }, {
+        "id": 46680,
+        "name": "Lustrous Hedbergite"
+    }, {
+        "id": 46681,
+        "name": "Scintillating Hemorphite"
+    }, {
+        "id": 46682,
+        "name": "Immaculate Jaspet"
+    }, {
+        "id": 46683,
+        "name": "Resplendant Kernite"
+    }, {
+        "id": 46684,
+        "name": "Platinoid Omber"
+    }, {
+        "id": 46685,
+        "name": "Sparkling Plagioclase"
+    }, {
+        "id": 46686,
+        "name": "Opulent Pyroxeres"
+    }, {
+        "id": 46687,
+        "name": "Glossy Scordite"
+    }, {
+        "id": 46688,
+        "name": "Dazzling Spodumain"
+    }, {
+        "id": 46689,
+        "name": "Stable Veldspar"
+    }, {
+        "id": 46690,
+        "name": "QA Scanning Module"
+    }, {
+        "id": 46691,
+        "name": "Compressed Flawless Arkonor"
+    }, {
+        "id": 46692,
+        "name": "Compressed Cubic Bistot"
+    }, {
+        "id": 46693,
+        "name": "Compressed Pellucid Crokite"
+    }, {
+        "id": 46694,
+        "name": "Compressed Jet Ochre"
+    }, {
+        "id": 46695,
+        "name": "Compressed Brilliant Gneiss"
+    }, {
+        "id": 46696,
+        "name": "Compressed Lustrous Hedbergite"
+    }, {
+        "id": 46697,
+        "name": "Compressed Scintillating Hemorphite"
+    }, {
+        "id": 46698,
+        "name": "Compressed Immaculate Jaspet"
+    }, {
+        "id": 46699,
+        "name": "Compressed Resplendant Kernite"
+    }, {
+        "id": 46700,
+        "name": "Compressed Platinoid Omber"
+    }, {
+        "id": 46701,
+        "name": "Compressed Sparkling Plagioclase"
+    }, {
+        "id": 46702,
+        "name": "Compressed Opulent Pyroxeres"
+    }, {
+        "id": 46703,
+        "name": "Compressed Glossy Scordite"
+    }, {
+        "id": 46704,
+        "name": "Compressed Dazzling Spodumain"
+    }, {
+        "id": 46705,
+        "name": "Compressed Stable Veldspar"
+    }, {
+        "id": 46707,
+        "name": "Magnate Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46708,
+        "name": "Omen Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46709,
+        "name": "Oracle Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46710,
+        "name": "Abaddon Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46711,
+        "name": "Avatar Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46712,
+        "name": "Merlin Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46713,
+        "name": "Caracal Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46714,
+        "name": "Drake Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46715,
+        "name": "Raven Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46716,
+        "name": "Phoenix Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46717,
+        "name": "Tristan Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46718,
+        "name": "Vexor Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46719,
+        "name": "Talos Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46720,
+        "name": "Dominix Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46721,
+        "name": "Nyx Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46722,
+        "name": "Slasher Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46723,
+        "name": "Rupture Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46724,
+        "name": "Hurricane Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46725,
+        "name": "Typhoon Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46726,
+        "name": "Hel Headhunter SKIN (Permanent)"
+    }, {
+        "id": 46727,
+        "name": "Cormorant Octopus Red Flight SKIN (Permanent)"
+    }, {
+        "id": 46728,
+        "name": "Jackdaw Octopus Red Flight SKIN (Permanent)"
+    }, {
+        "id": 46729,
+        "name": "Caracal Octopus Red Flight SKIN (Permanent)"
+    }, {
+        "id": 46730,
+        "name": "Cerberus Octopus Red Flight SKIN (Permanent)"
+    }, {
+        "id": 46731,
+        "name": "Drake Octopus Red Flight SKIN (Permanent)"
+    }, {
+        "id": 46732,
+        "name": "Raven Octopus Red Flight SKIN (Permanent)"
+    }, {
+        "id": 46733,
+        "name": "Golem Octopus Red Flight SKIN (Permanent)"
+    }, {
+        "id": 46734,
+        "name": "Venture Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46735,
+        "name": "Procurer Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46736,
+        "name": "Retriever Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46737,
+        "name": "Covetor Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46738,
+        "name": "Skiff Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46739,
+        "name": "Mackinaw Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46740,
+        "name": "Hulk Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46741,
+        "name": "Orca Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46742,
+        "name": "Rorqual Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46743,
+        "name": "Noctis Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46744,
+        "name": "Bestower Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46745,
+        "name": "Prorator Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46746,
+        "name": "Impel Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46747,
+        "name": "Mammoth Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46748,
+        "name": "Prowler Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46749,
+        "name": "Mastodon Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46750,
+        "name": "Iteron Mark V Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46751,
+        "name": "Viator Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46752,
+        "name": "Occator Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46753,
+        "name": "Tayra Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46754,
+        "name": "Crane Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46755,
+        "name": "Bustard Lodestrike SKIN (Permanent)"
+    }, {
+        "id": 46756,
+        "name": "Headhunter Crate"
+    }, {
+        "id": 46760,
+        "name": "♦ Moa"
     }, {
         "id": 350916,
         "name": "Plasma Cannon"

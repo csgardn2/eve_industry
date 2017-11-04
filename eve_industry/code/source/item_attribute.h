@@ -34,7 +34,7 @@ class item_attribute_t
         // really need to be.
         
         /// @brief Integral uniqueifier used by the EvE API
-        unsigned long id_;
+        uint64_t id_;
         
         /// @brief The name of this item as it appears in the EvE universe, such
         /// as "Tritanium"
@@ -69,7 +69,7 @@ class item_attribute_t
         // Try to use initializer lists when possible.
         
         /// @brief Initialization constructor
-        inline item_attribute_t(unsigned long id, std::string_view name)
+        inline item_attribute_t(uint64_t id, std::string_view name)
           : id_(id),
             name_(name)
         {
@@ -88,7 +88,7 @@ class item_attribute_t
         }
         
         /// @brief Return true if the item ID of this object matches a given ID.
-        inline bool operator==(unsigned long id) const
+        inline bool operator==(uint64_t id) const
         {
             return this->id_ == id;
         }
@@ -99,7 +99,7 @@ class item_attribute_t
             return !(*this == source);
         }
         
-        inline bool operator!=(unsigned long id) const
+        inline bool operator!=(uint64_t id) const
         {
             return !(*this == id);
         }
@@ -109,13 +109,13 @@ class item_attribute_t
         // inline void member(const type& t);
         
         /// @brief Read access to @ref id_.
-        inline unsigned long id() const
+        inline uint64_t id() const
         {
             return this->id_;
         }
         
         /// @brief Write access to @ref id_.
-        inline void id(unsigned long id)
+        inline void id(uint64_t id)
         {
             this->id_ = id;
         }
@@ -141,11 +141,11 @@ class item_attribute_t
         /// @brief Connect to the EvE API and pull all of the data associated
         /// with a given item id.
         
-        void fetch(unsigned long id);
+        void fetch(uint64_t id);
         
-        /// @brief Same as @ref fetch(unsigned long id) but re-uses a reader object
+        /// @brief Same as @ref fetch(uint64_t id) but re-uses a reader object
         /// for efficiency.
-        void fetch(unsigned long id, Json::CharReader* reader);
+        void fetch(uint64_t id, Json::CharReader* reader);
         
         /// @brief Open a file conforming to schema.json and use it to initialize
         /// this object, clearing previous content.

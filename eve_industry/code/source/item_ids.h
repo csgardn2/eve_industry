@@ -17,7 +17,7 @@
 
 /// @brief List of integral uniquifiers used by inventory items in the EvE
 /// universe.  These are only the IDs, not the attributes for any items.
-class item_ids_t : public std::vector<unsigned>
+class item_ids_t : public std::vector<uint64_t>
 {
         
     protected:

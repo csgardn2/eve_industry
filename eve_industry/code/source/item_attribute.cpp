@@ -38,7 +38,7 @@ const std::vector<std::string_view> item_attribute_t::default_error_messages_ =
     "Error.  CCP changed something that used to work.\n"
 };
 
-void item_attribute_t::fetch(unsigned long id)
+void item_attribute_t::fetch(uint64_t id)
 {
     
     // Automatically de-allocate memory when this function returns or throws
@@ -50,7 +50,7 @@ void item_attribute_t::fetch(unsigned long id)
     
 }
 
-void item_attribute_t::fetch(unsigned long id, Json::CharReader* reader)
+void item_attribute_t::fetch(uint64_t id, Json::CharReader* reader)
 {
     
     // Prepare a query
@@ -132,9 +132,9 @@ void item_attribute_t::read_from_json(const Json::Value& json_root)
     
     // Extract id_ member.
     const Json::Value& json_id = json_root["id"];
-    if (!json_id.isUInt())
+    if (!json_id.isUInt64())
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <item_attribute>/id was not found or not of type \"unsigned integer\".\n");
-    this->id_ = json_id.asUInt();
+    this->id_ = json_id.asUInt64();
     
     // Extract name_ member.
     const Json::Value& json_name = json_root["name"];

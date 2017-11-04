@@ -38,7 +38,7 @@ const std::vector<std::string_view> regional_market_orders_t::default_error_mess
     "Error.  CCP changed something that used to work.\n"
 };
 
-void regional_market_orders_t::fetch(unsigned region_id)
+void regional_market_orders_t::fetch(uint64_t region_id)
 {
     
     this->clear();
@@ -125,7 +125,7 @@ void regional_market_orders_t::fetch(unsigned region_id)
             new_order.price(json_cur_price.asFloat());
             
             const Json::Value& json_cur_item_id = json_cur_element["type_id"];
-            if (!json_cur_item_id.isUInt())
+            if (!json_cur_item_id.isUInt64())
             {
                 std::string message("Element ");
                 message += std::to_string(read_ix);
@@ -134,12 +134,12 @@ void regional_market_orders_t::fetch(unsigned region_id)
                 message += "\" did not contain a valid unsigned named \"type_id\".\n";
                 throw error_message_t(error_code_t::EVE_SUCKS, message);
             }
-            new_order.item_id(json_cur_item_id.asUInt());
+            new_order.item_id(json_cur_item_id.asUInt64());
             
             // Conor, you need to change all EvE related ints to long ints.
             
             const Json::Value& json_cur_station_id = json_cur_element["location_id"];
-            if (!json_cur_station_id.isUInt())
+            if (!json_cur_station_id.isUInt64())
             {
                 std::string message("Element ");
                 message += std::to_string(read_ix);
@@ -148,7 +148,7 @@ void regional_market_orders_t::fetch(unsigned region_id)
                 message += "\" did not contain a valid unsigned named \"location_id\".\n";
                 throw error_message_t(error_code_t::EVE_SUCKS, message);
             }
-            new_order.station_id(json_cur_station_id.asUInt());
+            new_order.station_id(json_cur_station_id.asUInt64());
             
             const Json::Value& json_cur_order_type = json_cur_element["is_buy_order"];
             if (!json_cur_order_type.isBool())

@@ -83,13 +83,13 @@ void order_t::read_from_json(const Json::Value& json_root)
     // Parse root/item_id
     const Json::Value& json_item_id = json_root["item_id"];
     
-    if (!json_item_id.isUInt())
+    if (!json_item_id.isUInt64())
         throw error_message_t
         (
             error_code_t::JSON_SCHEMA_VIOLATION,
             "Error.  <order>/item_id was not found or not of type \"unsigned int\".\n"
         );
-    this->item_id_ = json_item_id.asUInt();
+    this->item_id_ = json_item_id.asUInt64();
     
     // Parse root/price
     const Json::Value& json_price = json_root["price"];
@@ -103,13 +103,13 @@ void order_t::read_from_json(const Json::Value& json_root)
     
     // Parse root/station_id
     const Json::Value& json_station_id = json_root["station_id"];
-    if (!json_station_id.isUInt())
+    if (!json_station_id.isUInt64())
         throw error_message_t
         (
             error_code_t::JSON_SCHEMA_VIOLATION,
             "Error.  <order>/station_id was not found or not of type \"unsigned int\".\n"
         );
-    this->station_id_ = json_station_id.asUInt();
+    this->station_id_ = json_station_id.asUInt64();
     
     // Parse root/type
     const Json::Value& json_order_type = json_root["order_type"];

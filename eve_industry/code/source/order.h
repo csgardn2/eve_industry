@@ -47,10 +47,10 @@ class order_t
         
         /// @brief The integral uniquifier of the inventory item associated
         /// with these bid.
-        unsigned item_id_;
+        uint64_t item_id_;
         
         /// @brief The integral uniquifier of the NPC station of this bid.
-        unsigned station_id_;
+        uint64_t station_id_;
         
         /// @brief Indicates if this order is a buy or sell order.
         order_type_t order_type_;
@@ -83,7 +83,7 @@ class order_t
         // Add member initialization constructors here
         
         // Try to use initializer lists when possible.
-        inline order_t(float price, unsigned item_id, unsigned station_id, order_type_t order_type)
+        inline order_t(float price, uint64_t item_id, uint64_t station_id, order_type_t order_type)
           : price_(price),
             item_id_(item_id),
             station_id_(station_id),
@@ -126,22 +126,22 @@ class order_t
             this->price_ = new_price;
         }
         
-        inline unsigned item_id() const
+        inline uint64_t item_id() const
         {
             return this->item_id_;
         }
         
-        inline void item_id(unsigned new_item_id)
+        inline void item_id(uint64_t new_item_id)
         {
             this->item_id_ = new_item_id;
         }
         
-        inline unsigned station_id() const
+        inline uint64_t station_id() const
         {
             return this->station_id_;
         }
         
-        inline void station_id(unsigned new_station_id)
+        inline void station_id(uint64_t new_station_id)
         {
             this->station_id_ = new_station_id;
         }

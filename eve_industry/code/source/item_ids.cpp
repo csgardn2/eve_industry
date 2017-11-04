@@ -98,7 +98,7 @@ void item_ids_t::fetch()
             
             const Json::Value& json_cur_element = json_item_ids[read_ix];
             
-            if (!json_cur_element.isUInt())
+            if (!json_cur_element.isUInt64())
             {
                 std::string message("Error.  Element ");
                 message += std::to_string(read_ix);
@@ -108,7 +108,7 @@ void item_ids_t::fetch()
                 throw error_message_t(error_code_t::EVE_SUCKS, message);
             }
             
-            (*this)[write_ix] = json_cur_element.asUInt();
+            (*this)[write_ix] = json_cur_element.asUInt64();
             
         }
         
@@ -177,7 +177,7 @@ void item_ids_t::read_from_json(const Json::Value& json_root)
     {
         
         const Json::Value& json_cur_element = json_root[ix];
-        if (!json_cur_element.isUInt())
+        if (!json_cur_element.isUInt64())
         {
             std::string message("Error.  <item_ids>[");
             message += std::to_string(ix);
@@ -185,7 +185,7 @@ void item_ids_t::read_from_json(const Json::Value& json_root)
             throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, message);
         }
         
-        (*this)[ix] = json_cur_element.asUInt();
+        (*this)[ix] = json_cur_element.asUInt64();
         
     }
     

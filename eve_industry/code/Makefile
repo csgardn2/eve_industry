@@ -23,7 +23,7 @@ $(BINDIR)/$(EXENAME):                   \
     $(BINDIR)/json.o                    \
     $(BINDIR)/main.o                    \
     $(BINDIR)/order.o                   \
-    $(BINDIR)/regional_market_orders.o  \
+    $(BINDIR)/raw_regional_market.o  \
     $(BINDIR)/station_attribute.o       \
     $(BINDIR)/station_attributes.o      \
     $(BINDIR)/util.o                    \
@@ -63,7 +63,7 @@ $(BINDIR)/main.o: $(SOURCEDIR)/main.cpp
 $(BINDIR)/order.o: $(SOURCEDIR)/order.cpp $(SOURCEDIR)/order.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
-$(BINDIR)/regional_market_orders.o: $(SOURCEDIR)/regional_market_orders.cpp $(SOURCEDIR)/regional_market_orders.h
+$(BINDIR)/raw_regional_market.o: $(SOURCEDIR)/raw_regional_market.cpp $(SOURCEDIR)/raw_regional_market.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/station_attribute.o: $(SOURCEDIR)/station_attribute.cpp $(SOURCEDIR)/station_attribute.h
@@ -119,8 +119,8 @@ $(DOCDIR)/html_out/index.html:              \
     $(SOURCEDIR)/main.cpp                   \
     $(SOURCEDIR)/order.h                    \
     $(SOURCEDIR)/order.cpp                  \
-    $(SOURCEDIR)/regional_market_orders.h   \
-    $(SOURCEDIR)/regional_market_orders.cpp \
+    $(SOURCEDIR)/raw_regional_market.h   \
+    $(SOURCEDIR)/raw_regional_market.cpp \
     $(SOURCEDIR)/station_attribute.h        \
     $(SOURCEDIR)/station_attribute.cpp      \
     $(SOURCEDIR)/station_attributes.h       \

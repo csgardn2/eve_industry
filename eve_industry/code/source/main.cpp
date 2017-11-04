@@ -13,7 +13,7 @@
 #include "item_attributes.h"
 #include "item_ids.h"
 #include "station_attributes.h"
-#include "regional_market_orders.h"
+#include "raw_regional_market.h"
 
 /// @brief Code execution starts here
 int main(int argc, char** argv)
@@ -68,12 +68,11 @@ int main(int argc, char** argv)
                 station_attributes_in.read_from_file(station_attributes_in_file);
                 
                 std::ofstream prices_out_file(args.prices_out());
-                regional_market_orders_t regional_market_orders;
-                regional_market_orders.fetch(10000043);
-                
+                raw_regional_market_t raw_regional_market;
+                raw_regional_market.fetch(10000043);
                 
                 // TODO Conor, you left off here.  Convert regional market to prices
-                regional_market_orders.write_to_file(prices_out_file);
+                raw_regional_market.write_to_file(prices_out_file);
                 
                 break;
                 

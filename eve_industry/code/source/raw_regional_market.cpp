@@ -1,5 +1,5 @@
-/// @file regional_market_orders.cpp
-/// @brief Implementation of @ref regional_market_orders_t class
+/// @file raw_regional_market.cpp
+/// @brief Implementation of @ref raw_regional_market_t class
 /// 
 /// * Contact conor.gardner@arm.com if you have questions about this code.
 /// * Date Created = Friday November 3 2017
@@ -15,9 +15,9 @@
 #include "error.h"
 #include "https_get.h"
 #include "json.h"
-#include "regional_market_orders.h"
+#include "raw_regional_market.h"
 
-void regional_market_orders_t::fetch(uint64_t region_id)
+void raw_regional_market_t::fetch(uint64_t region_id)
 {
     
     this->clear();
@@ -169,7 +169,7 @@ void regional_market_orders_t::fetch(uint64_t region_id)
 
 }
 
-void regional_market_orders_t::read_from_file(std::istream& file)
+void raw_regional_market_t::read_from_file(std::istream& file)
 {
     
     // Get the number of characters in the input file.
@@ -188,7 +188,7 @@ void regional_market_orders_t::read_from_file(std::istream& file)
     
 }
 
-void regional_market_orders_t::read_from_buffer(std::string_view buffer)
+void raw_regional_market_t::read_from_buffer(std::string_view buffer)
 {
     
     Json::CharReaderBuilder builder;
@@ -207,12 +207,12 @@ void regional_market_orders_t::read_from_buffer(std::string_view buffer)
     
 }
 
-void regional_market_orders_t::read_from_json(const Json::Value& json_root)
+void raw_regional_market_t::read_from_json(const Json::Value& json_root)
 {
     
     // Parse root
     if (!json_root.isArray())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of regional_market_orders is not of type \"array\".\n");
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of raw_regional_market is not of type \"array\".\n");
     
     // Re-allocate storage
     this->clear();
@@ -228,14 +228,14 @@ void regional_market_orders_t::read_from_json(const Json::Value& json_root)
     
 }
 
-void regional_market_orders_t::write_to_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
+void raw_regional_market_t::write_to_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
 {
     file << this->write_to_buffer(indent_start, spaces_per_tab);
     if (!file.good())
         throw error_message_t(error_code_t::FILE_WRITE_FAILED);
 }
 
-void regional_market_orders_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
+void raw_regional_market_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
 {
     
     // Pretty formatting for empty array
@@ -275,7 +275,7 @@ void regional_market_orders_t::write_to_buffer(std::string& buffer, unsigned ind
     
 }
 
-std::istream& operator>>(std::istream& stream, regional_market_orders_t& destination)
+std::istream& operator>>(std::istream& stream, raw_regional_market_t& destination)
 {
     try
     {

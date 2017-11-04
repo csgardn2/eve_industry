@@ -8,26 +8,20 @@
 #include <vector>
 
 #include "error.h"
-#include "json.h"
 
 const std::vector<std::string_view> error_message_t::error_names_ =
 {
-    
     "FILE_SIZE_FAILED",
     "FILE_READ_FAILED",
     "FILE_WRITE_FAILED",
     "JSON_SCHEMA_VIOLATION",
-    
     "MODE_MISSING",
     "MODE_INVALID",
     "ITEM_ATTRIBUTES_OUT_MISSING",
     "ITEM_ATTRIBUTES_IN_MISSING",
     "STATION_ATTRIBUTES_IN_MISSING",
     "PRICES_OUT_MISSING",
-    
     "UNKNOWN_ORDER_TYPE",
-    
     "EVE_SUCKS"
-    
 };
 

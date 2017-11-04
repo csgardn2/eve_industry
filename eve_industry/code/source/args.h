@@ -223,41 +223,13 @@ inline std::ostream& operator<<(std::ostream& stream, const args_t& source)
 }
 
 /// @brief Convenience alias to allow printing directly via cout or similar.
-inline std::string& operator<<(std::string& buffer, const args_t& source)
-{
-    source.write_to_buffer(buffer);
-    return buffer;
-}
-
-/// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::ostream& operator<<(std::ostream& stream, args_t::mode_t mode)
 {
     stream << args_t::enum_to_string(mode);
     return stream;
 }
 
-/// @brief Convenience alias to allow printing directly via cout or similar.
-inline std::string& operator<<(std::string& buffer, args_t::mode_t mode)
-{
-    buffer += args_t::enum_to_string(mode);
-    return buffer;
-}
-
 /// @brief Extraction operator for decoding.
 std::istream& operator>>(std::istream& stream, args_t& destination);
-
-/// @brief Extraction operator for decoding.
-inline std::string_view operator>>(std::string_view& buffer, args_t& destination)
-{
-    destination.read_from_buffer(buffer);
-    return std::string_view();
-}
-
-/// @brief Extraction operator for decoding.
-inline Json::Value operator>>(const Json::Value& json_root, args_t& destination)
-{
-    destination.read_from_json(json_root);
-    return Json::Value();
-}
 
 #endif // Header Guard

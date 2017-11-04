@@ -189,29 +189,8 @@ inline std::ostream& operator<<(std::ostream& stream, const station_attribute_t&
     return stream;
 }
 
-/// @brief Convenience alias to allow printing directly via cout or similar.
-inline std::string& operator<<(std::string& buffer, const station_attribute_t& source)
-{
-    source.write_to_buffer(buffer);
-    return buffer;
-}
-
 /// @brief Extraction operator for decoding.
 std::istream& operator>>(std::istream& stream, station_attribute_t& destination);
-
-/// @brief Extraction operator for decoding.
-inline std::string_view operator>>(std::string_view& buffer, station_attribute_t& destination)
-{
-    destination.read_from_buffer(buffer);
-    return std::string_view();
-}
-
-/// @brief Extraction operator for decoding.
-inline Json::Value operator>>(const Json::Value& json_root, station_attribute_t& destination)
-{
-    destination.read_from_json(json_root);
-    return Json::Value();
-}
 
 #endif // Header Guard
 

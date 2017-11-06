@@ -20,13 +20,8 @@ class item_ids_t;
 
 /// @brief A group of multiple item attributes.  Useful for bulk fetching,
 /// encoding, and decoding possibly using multiple threads.
-class item_attributes_t : public std::vector<item_attribute_t>
+class item_attributes_t
 {
-        
-    protected:
-        
-        // Try to make all your members protected, even if they don't
-        // really need to be.
         
     public:
         
@@ -131,6 +126,13 @@ class item_attributes_t : public std::vector<item_attribute_t>
             this->write_to_buffer(buffer, indent_start, spaces_per_tab);
             return buffer;
         }
+        
+    protected:
+        
+        // Try to make all your members protected, even if they don't
+        // really need to be.
+        
+        std::vector<item_attribute_t> items_;
         
 };
 

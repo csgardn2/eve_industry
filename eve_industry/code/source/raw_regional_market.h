@@ -19,13 +19,8 @@
 /// @brief These are raw orders fetched from the EvE swagger API with minimal
 /// pre-processing.  These are typically sorted into a @ref galactic_market_t
 /// object later.
-class raw_regional_market_t : public std::vector<order_t>
+class raw_regional_market_t
 {
-        
-    protected:
-        
-        // Try to make all your members protected, even if they don't
-        // really need to be.
         
     public:
         
@@ -36,8 +31,21 @@ class raw_regional_market_t : public std::vector<order_t>
         // Try to use initializer lists when possible.
         
         // Add operators here if desired.
-        // inline type operator[](unsigned ix) const;
-        // inline type& operator[](unsigned ix);
+        
+        // Add member access here
+        
+        const std::vector<order_t>& orders() const
+        {
+            return this->orders_;
+        }
+        
+        // Add special-purpose member functions here
+        
+        /// @brief Reset to default-constructed state with zero orders.
+        void clear()
+        {
+            this->orders_.clear();
+        }
         
         /// @brief Pull all of the market orders from all NPC stations in a
         /// region in EvE.
@@ -123,6 +131,11 @@ class raw_regional_market_t : public std::vector<order_t>
             this->write_to_buffer(buffer, indent_start, spaces_per_tab);
             return buffer;
         }
+        
+    protected:
+        
+        /// @brief All of the orders pulled from the EvE API for this region.
+        std::vector<order_t> orders_;
         
 };
 

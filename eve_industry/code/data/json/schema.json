@@ -93,6 +93,48 @@
                 "$ref": "#/definitions/station_attribute"
             }
         },
+        "raw_regional_market": {
+            "type": "object",
+            "description": "Orders fetched directly from the Swagger API with minimal post-processing.  These are post-processed into galactic_market objects later.",
+            "properties": {
+                "region_id": {
+                    "type": "unsigned",
+                    "minimum": 0
+                },
+                "orders": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/raw_order"
+                    }
+                }
+            },
+            "required": ["region_id", "orders"]
+        },
+        "raw_order": {
+            "type": "object",
+            "description": "A standing buy or sell offer at a specific station fetched directly from the swagger API with minimal post-processing.",
+            "properties": {
+                "price": {
+                    "type": "number",
+                    "description": "The asking buy or sell price for this order.",
+                    "minimum": 0.0
+                },
+                "item_id": {
+                    "type": "integer",
+                    "description": "Integral uniquifier of an inventory item in EvE.",
+                    "minimum": 0
+                },
+                "order_type": {
+                    "type": "string",
+                    "enum": ["buy", "sell"]
+                },
+                "station_id": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "required": ["price", "item_id", "station_id", "order_type"]
+        },
         "galactic_market": {
             "type": "array",
             "description": "Zero or more regions containing market hubs",
@@ -102,7 +144,7 @@
         },
         "regional_market": {
             "type": "object",
-            "description": "Zero or more market bearing stations within a single region.",
+            "description": "Zero or more market bearing stations within a single region.  These are post-processed orders.",
             "properties": {
                 "region_id": {
                     "type": "integer",
@@ -145,35 +187,20 @@
                     "description": "Integral uniquifier of this item as used by the EvE Swagger interface",
                     "minimum": 0
                 },
-                "orders": {
+                "buy_orders": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/order"
+                        "type": "float"
+                    }
+                },
+                "sell_orders": {
+                    "type": "array",
+                    "items": {
+                        "type": "float"
                     }
                 }
             },
-            "required": ["item_id", "orders"]
-        },
-        "order": {
-            "type": "object",
-            "description": "A standing buy or sell offer at a specific station.",
-            "properties": {
-                "price": {
-                    "type": "number",
-                    "description": "The asking buy or sell price for this order.",
-                    "minimum": 0.0
-                },
-                "item_id": {
-                    "type": "integer",
-                    "description": "Integral uniquifier of an inventory item in EvE.",
-                    "minimum": 0
-                },
-                "order_type": {
-                    "type": "string",
-                    "enum": ["buy", "sell"]
-                }
-            },
-            "required": ["price", "item_id", "station_id", "order_type"]
+            "required": ["item_id", "buy_orders", "sell_orders"]
         }
         
    }

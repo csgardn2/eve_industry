@@ -19,11 +19,6 @@
 class station_attributes_t : public std::vector<station_attribute_t>
 {
         
-    protected:
-        
-        // Try to make all your members protected, even if they don't
-        // really need to be.
-        
     public:
         
         /// @brief Default constructor
@@ -36,6 +31,11 @@ class station_attributes_t : public std::vector<station_attribute_t>
         // Add member read and write functions
         // inline type member() const;
         // inline void member(const type& t);
+        
+        inline const std::vector<station_attribute_t>& stations() const
+        {
+            return this->stations_;
+        }
         
         /// @brief Open a file conforming to data/json/schema.json and use it to initialize
         /// this object, clearing previous content.
@@ -117,6 +117,13 @@ class station_attributes_t : public std::vector<station_attribute_t>
             this->write_to_buffer(buffer, indent_start, spaces_per_tab);
             return buffer;
         }
+        
+    protected:
+        
+        // Try to make all your members protected, even if they don't
+        // really need to be.
+        
+        std::vector<station_attribute_t> stations_;
         
 };
 

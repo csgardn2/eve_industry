@@ -68,9 +68,9 @@ void raw_regional_market_t::fetch(uint64_t region_id)
         }
         
         // Append fetched data to internal storage
-        unsigned old_size = this->size();
+        unsigned old_size = this->orders_.size();
         unsigned new_size = old_size + json_regional_market_page.size();
-        this->resize(new_size);
+        this->orders_.resize(new_size);
         for
         (
             unsigned read_ix = 0, write_ix = old_size;
@@ -78,6 +78,7 @@ void raw_regional_market_t::fetch(uint64_t region_id)
             read_ix++, write_ix++
         ){
             
+            // Accumulate fields for each order in this structure
             order_t new_order;
             
             const Json::Value& json_cur_element = json_regional_market_page[read_ix];
@@ -115,8 +116,6 @@ void raw_regional_market_t::fetch(uint64_t region_id)
             }
             new_order.item_id(json_cur_item_id.asUInt64());
             
-            // Conor, you need to change all EvE related ints to long ints.
-            
             const Json::Value& json_cur_station_id = json_cur_element["location_id"];
             if (!json_cur_station_id.isUInt64())
             {
@@ -144,21 +143,10 @@ void raw_regional_market_t::fetch(uint64_t region_id)
             else
                 new_order.order_type(order_type_t::SELL);
             
-            (*this)[write_ix] = new_order;
+            this->orders_[write_ix] = new_order;
             
         }
-        /*
-        std::cout
-            << "Page = "
-            << std::to_string(page)
-            << " Query = "
-            << query
-            << " "
-            << std::to_string(json_regional_market_page.size())
-            << "\n"
-            << progress_message
-            << this->back() << '\n';
-        */
+        
         if (json_regional_market_page.empty())
         {
             std::cout << '\n';
@@ -215,15 +203,15 @@ void raw_regional_market_t::read_from_json(const Json::Value& json_root)
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of raw_regional_market is not of type \"array\".\n");
     
     // Re-allocate storage
-    this->clear();
-    this->reserve(json_root.size());
+    this->orders_.clear();
+    this->orders_.reserve(json_root.size());
     
     // Parse each order in the input array
     for (const Json::Value& json_cur_order : json_root)
     {
         order_t new_order;
         new_order.read_from_json(json_cur_order);
-        this->emplace_back(std::move(new_order));
+        this->orders_.emplace_back(std::move(new_order));
     }
     
 }
@@ -239,7 +227,7 @@ void raw_regional_market_t::write_to_buffer(std::string& buffer, unsigned indent
 {
     
     // Pretty formatting for empty array
-    if (this->empty())
+    if (this->orders_.empty())
     {
         buffer += "[]";
         return;
@@ -254,11 +242,11 @@ void raw_regional_market_t::write_to_buffer(std::string& buffer, unsigned indent
     buffer += indent_1;
     
     // Encode each object in this array.
-    for (unsigned ix = 0, last_ix = this->size() - 1; ix <= last_ix; ix++)
+    for (unsigned ix = 0, last_ix = this->orders_.size() - 1; ix <= last_ix; ix++)
     {
         
         // Encode an order
-        (*this)[ix].write_to_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
+        this->orders_[ix].write_to_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
         
         // Prepare for next order
         if (ix == last_ix)

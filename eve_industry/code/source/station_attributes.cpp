@@ -61,15 +61,15 @@ void station_attributes_t::read_from_json(const Json::Value& json_root)
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of station_attributes is not of type \"array\".\n");
     
     // Pre-allocate storage
-    this->clear();
-    this->reserve(json_root.size());
+    this->stations_.clear();
+    this->stations_.reserve(json_root.size());
     
     // Iterate through each element in the array, decode it, and store it.
     for (const Json::Value& cur_element : json_root)
     {
         station_attribute_t new_station_attribute;
         new_station_attribute.read_from_json(cur_element);
-        this->emplace_back(std::move(new_station_attribute));
+        this->stations_.emplace_back(std::move(new_station_attribute));
     }
     
 }
@@ -88,7 +88,7 @@ void station_attributes_t::write_to_buffer(std::string& buffer, unsigned indent_
     std::string_view indent_0(indent_1.data(), indent_start);
     
     // Prettify empty arrays.
-    if (this->empty())
+    if (this->stations_.empty())
     {
         buffer += "[]";
         return;
@@ -99,7 +99,7 @@ void station_attributes_t::write_to_buffer(std::string& buffer, unsigned indent_
     buffer += "[\n";
     
     // Encode each member
-    for (unsigned ix = 0, last_ix = this->size() - 1; ix <= last_ix; ix++)
+    for (unsigned ix = 0, last_ix = this->stations_.size() - 1; ix <= last_ix; ix++)
     {
         
         buffer += indent_1;

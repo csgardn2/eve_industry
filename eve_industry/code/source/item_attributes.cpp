@@ -21,13 +21,13 @@
 void item_attributes_t::fetch(const item_ids_t& item_ids)
 {
     
-    this->clear();
+    this->items_.clear();
     
     unsigned num_item_ids = item_ids.size();
     
     // Pre-allocate all storage so re-allocation won't happen while multiple omp
     // threads are writing to it.
-    this->resize(num_item_ids);
+    this->items_.resize(num_item_ids);
     
     // This JSON library is kindof weird.  Allocate a json parser outside the
     // loop to avoid constructing a new one each iteration.
@@ -51,7 +51,7 @@ void item_attributes_t::fetch(const item_ids_t& item_ids)
         unsigned thread_ix = omp_get_thread_num();
         
         // Fetch this item's attributes from EvE API (connect to network).
-        (*this)[ix].fetch(item_ids[ix], readers[thread_ix].get());
+        this->items_[ix].fetch(item_ids[ix], readers[thread_ix].get());
         
         #pragma omp atomic
         num_items_processed++;
@@ -133,15 +133,15 @@ void item_attributes_t::read_from_json(const Json::Value& json_root)
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of item_attributes is not of type \"array\".\n");
     
     // Clear previous content
-    this->clear();
-    this->reserve(json_root.size());
+    this->items_.clear();
+    this->items_.reserve(json_root.size());
     
     // Decode and store each element in the array.
     for (const Json::Value& cur_element : json_root)
     {
         item_attribute_t new_item_attribute;
         new_item_attribute.read_from_json(cur_element);
-        this->emplace_back(new_item_attribute);
+        this->items_.emplace_back(new_item_attribute);
     }
     
 }
@@ -165,10 +165,10 @@ void item_attributes_t::write_to_buffer(std::string& buffer, unsigned indent_sta
     buffer += indent_1;
     
     // Encode member variables.
-    for (signed ix = 0, last_ix = this->size() - 1; ix <= last_ix; ix++)
+    for (signed ix = 0, last_ix = this->items_.size() - 1; ix <= last_ix; ix++)
     {
         
-        buffer += (*this)[ix].write_to_buffer(indent_start + spaces_per_tab, spaces_per_tab);
+        buffer += this->items_[ix].write_to_buffer(indent_start + spaces_per_tab, spaces_per_tab);
         
         if (ix != last_ix)
             buffer += ", ";

@@ -14,7 +14,7 @@
 
 #include "error.h"
 #include "json.h"
-#include "order.h"
+#include "raw_order.h"
 
 /// @brief These are raw orders fetched from the EvE swagger API with minimal
 /// pre-processing.  These are typically sorted into a @ref galactic_market_t
@@ -34,7 +34,12 @@ class raw_regional_market_t
         
         // Add member access here
         
-        const std::vector<order_t>& orders() const
+        uint64_t region_id() const
+        {
+            return this->region_id_;
+        }
+        
+        const std::vector<raw_order_t>& orders() const
         {
             return this->orders_;
         }
@@ -134,8 +139,13 @@ class raw_regional_market_t
         
     protected:
         
+        /// @brief Integral uniquifier used by the EvE Swagger interface for
+        /// this region.  For example,/ 10000002 for "The Forge" or
+        /// 10000043 for "Domain".
+        uint64_t region_id_;
+        
         /// @brief All of the orders pulled from the EvE API for this region.
-        std::vector<order_t> orders_;
+        std::vector<raw_order_t> orders_;
         
 };
 

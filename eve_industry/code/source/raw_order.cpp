@@ -1,5 +1,5 @@
-/// @file order.cpp
-/// @brief Implementation of @ref order_t class
+/// @file raw_order.cpp
+/// @brief Implementation of @ref raw_order_t class
 /// 
 /// * Contact conor.gardner@arm.com if you have questions about this code.
 /// * Date Created = Tuesday October 31 2017
@@ -10,11 +10,11 @@
 #include <string_view>
 #include <vector>
 
-#include "order.h"
+#include "raw_order.h"
 #include "error.h"
 #include "json.h"
 
-void order_t::read_from_file(std::istream& file)
+void raw_order_t::read_from_file(std::istream& file)
 {
     
     // Get the number of characters in the input file.
@@ -33,7 +33,7 @@ void order_t::read_from_file(std::istream& file)
     
 }
 
-void order_t::read_from_buffer(std::string_view buffer)
+void raw_order_t::read_from_buffer(std::string_view buffer)
 {
     
     Json::CharReaderBuilder builder;
@@ -52,7 +52,7 @@ void order_t::read_from_buffer(std::string_view buffer)
     
 }
 
-void order_t::read_from_json(const Json::Value& json_root)
+void raw_order_t::read_from_json(const Json::Value& json_root)
 {
     
     // Parse root
@@ -91,14 +91,14 @@ void order_t::read_from_json(const Json::Value& json_root)
     this->station_id_ = json_station_id.asUInt64();
     
     // Parse root/type
-    const Json::Value& json_order_type = json_root["order_type"];
-    if (!json_order_type.isString())
+    const Json::Value& json_raw_order_type = json_root["raw_order_type"];
+    if (!json_raw_order_type.isString())
         throw error_message_t
         (
             error_code_t::JSON_SCHEMA_VIOLATION,
-            "Error.  <order>/order_type was not found or not of type \"string\".\n"
+            "Error.  <order>/raw_order_type was not found or not of type \"string\".\n"
         );
-    const std::string& str_type = json_order_type.asString();
+    const std::string& str_type = json_raw_order_type.asString();
     if (str_type == "buy")
         this->order_type_ = order_type_t::BUY;
     else if (str_type == "sell")
@@ -113,14 +113,14 @@ void order_t::read_from_json(const Json::Value& json_root)
     
 }
 
-void order_t::write_to_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
+void raw_order_t::write_to_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
 {
     file << this->write_to_buffer(indent_start, spaces_per_tab);
     if (!file.good())
         throw error_message_t(error_code_t::FILE_WRITE_FAILED);
 }
 
-void order_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
+void raw_order_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
 {
     
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
@@ -150,13 +150,13 @@ void order_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsign
     
     // Encode type
     buffer += indent_1;
-    buffer += "\"order_type\": \"";
+    buffer += "\"raw_order_type\": \"";
     if (this->order_type_ == order_type_t::BUY)
         buffer += "buy\"\n";
     else if (this->order_type_ == order_type_t::SELL)
         buffer += "sell\"\n";
     else
-        throw error_message_t(error_code_t::UNKNOWN_ORDER_TYPE);
+        throw error_message_t(error_code_t::UNKNOWN_ORDER_TYPE, "Error.  Could not encode order with unknown order_type.\n");
     
     // It is recommended to not put a newline on the last brace to allow
     // comma chaining when this object is an element of an array.
@@ -165,7 +165,7 @@ void order_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsign
     
 }
 
-std::istream& operator>>(std::istream& stream, order_t& destination)
+std::istream& operator>>(std::istream& stream, raw_order_t& destination)
 {
     try
     {

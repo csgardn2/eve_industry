@@ -15,12 +15,14 @@
 #include "error.h"
 #include "https_get.h"
 #include "json.h"
+#include "raw_order.h"
 #include "raw_regional_market.h"
 
 void raw_regional_market_t::fetch(uint64_t region_id)
 {
     
     this->clear();
+    this->region_id_ = region_id;
     
     // Automatically de-allocate memory when this function returns or throws
     // an error.
@@ -79,7 +81,7 @@ void raw_regional_market_t::fetch(uint64_t region_id)
         ){
             
             // Accumulate fields for each order in this structure
-            order_t new_order;
+            raw_order_t new_order;
             
             const Json::Value& json_cur_element = json_regional_market_page[read_ix];
             if (!json_cur_element.isObject())
@@ -198,18 +200,30 @@ void raw_regional_market_t::read_from_buffer(std::string_view buffer)
 void raw_regional_market_t::read_from_json(const Json::Value& json_root)
 {
     
+    this->orders_.clear();
+    
     // Parse root
-    if (!json_root.isArray())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of raw_regional_market is not of type \"array\".\n");
+    if (!json_root.isObject())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of raw_regional_market is not of type \"object\".\n");
+    
+    // Parse region_id
+    const Json::Value& json_region_id = json_root["region_id"];
+    if (!json_region_id.isUInt64())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <raw_regional_market>/region_id was not found or not of type \"unsigned integer\".\n");
+    this->region_id_ = json_region_id.asUInt64();
+    
+    // Parse orders
+    const Json::Value& json_orders = json_root["orders"];
+    if (!json_orders.isArray())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <raw_regional_market>/orders was not found or not of type \"object\".\n");
     
     // Re-allocate storage
-    this->orders_.clear();
-    this->orders_.reserve(json_root.size());
+    this->orders_.reserve(json_orders.size());
     
     // Parse each order in the input array
-    for (const Json::Value& json_cur_order : json_root)
+    for (const Json::Value& json_cur_order : json_orders)
     {
-        order_t new_order;
+        raw_order_t new_order;
         new_order.read_from_json(json_cur_order);
         this->orders_.emplace_back(std::move(new_order));
     }
@@ -226,40 +240,48 @@ void raw_regional_market_t::write_to_file(std::ostream& file, unsigned indent_st
 void raw_regional_market_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
 {
     
-    // Pretty formatting for empty array
-    if (this->orders_.empty())
-    {
-        buffer += "[]";
-        return;
-    }
+    std::string indent_2(indent_start + 2 * spaces_per_tab, ' ');
+    std::string_view indent_1(indent_2.data(), indent_start + spaces_per_tab);
+    std::string_view indent_0(indent_2.data(), indent_start);
     
-    std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
-    std::string_view indent_0(indent_1.data(), indent_start);
+    buffer += "{\n";
     
-    // It is recommended not to start a new line before the opening brace, to
-    // enable chaining.
-    buffer += "[\n";
+    // Encode Region ID
     buffer += indent_1;
+    buffer += "\"region_id\": ";
+    buffer += std::to_string(this->region_id_);
+    buffer += ",\n";
     
-    // Encode each object in this array.
-    for (unsigned ix = 0, last_ix = this->orders_.size() - 1; ix <= last_ix; ix++)
+    // Call encoder for each order.
+    buffer += indent_1;
+    unsigned num_orders = this->orders_.size();
+    if (num_orders == 0)
     {
+        buffer += "\"orders\": []\n";
+    } else {
         
-        // Encode an order
-        this->orders_[ix].write_to_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
+        buffer += "\"orders\": [\n";
         
-        // Prepare for next order
-        if (ix == last_ix)
-            buffer += '\n';
-        else
-            buffer += ", ";
+        buffer += indent_2;
+        for (unsigned ix = 0, last_ix = num_orders - 1; ix <= last_ix; ix++)
+        {
+            
+            this->orders_[ix].write_to_buffer(buffer, indent_start + 2 * spaces_per_tab, spaces_per_tab);
+            
+            if (ix == last_ix)
+                buffer += '\n';
+            else
+                buffer += ", ";
+            
+        }
+        
+        buffer += indent_1;
+        buffer += "]\n";
         
     }
     
-    // It is recommended to not put a newline on the last brace to allow
-    // comma chaining when this object is an element of an array.
     buffer += indent_0;
-    buffer += ']';
+    buffer += '}';
     
 }
 

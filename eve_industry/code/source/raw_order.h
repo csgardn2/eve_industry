@@ -1,5 +1,5 @@
-/// @file order.h
-/// @brief Declaration of @ref order_t class
+/// @file raw_order.h
+/// @brief Declaration of @ref raw_order_t class
 /// 
 /// * Contact conor.gardner@arm.com if you have questions about this code.
 /// * Date Created = Tuesday October 31 2017
@@ -26,37 +26,20 @@ enum class order_type_t
     NUM_ENUMS
 };
 
-/// @brief A market bid 
-class order_t
+/// @brief A market bid fetched from the EvE Swagger API with minimal
+/// post-processing.
+class raw_order_t
 {
-        
-    protected:
-        
-        // Try to make all your members protected, even if they don't
-        // really need to be.
-        
-        /// @brief The asking price for this bid.
-        float price_;
-        
-        /// @brief The integral uniquifier of the inventory item associated
-        /// with these bid.
-        uint64_t item_id_;
-        
-        /// @brief The integral uniquifier of the NPC station of this bid.
-        uint64_t station_id_;
-        
-        /// @brief Indicates if this order is a buy or sell order.
-        order_type_t order_type_;
         
     public:
         
         /// @brief Default constructor
-        inline order_t() = default;
+        inline raw_order_t() = default;
         
         // Add member initialization constructors here
         
         // Try to use initializer lists when possible.
-        inline order_t(float price, uint64_t item_id, uint64_t station_id, order_type_t order_type)
+        inline raw_order_t(float price, uint64_t item_id, uint64_t station_id, order_type_t order_type)
           : price_(price),
             item_id_(item_id),
             station_id_(station_id),
@@ -70,7 +53,7 @@ class order_t
         // inline type& operator[](unsigned ix);
         
         /// @brief Returns true if all members are equal
-        inline bool operator==(const order_t& source) const
+        inline bool operator==(const raw_order_t& source) const
         {
             return
                 this->price_ == source.price_
@@ -79,8 +62,8 @@ class order_t
              && this->order_type_ == source.order_type_;
         }
         
-        /// @brief 1:1 inverse of @ref operator==(const order_t& source) const "operator==".
-        inline bool operator!=(const order_t& source) const
+        /// @brief 1:1 inverse of @ref operator==(const raw_order_t& source) const "operator==".
+        inline bool operator!=(const raw_order_t& source) const
         {
             return !(*this == source);
         }
@@ -210,17 +193,35 @@ class order_t
             return buffer;
         }
         
+    protected:
+        
+        // Try to make all your members protected, even if they don't
+        // really need to be.
+        
+        /// @brief The asking price for this bid.
+        float price_;
+        
+        /// @brief The integral uniquifier of the inventory item associated
+        /// with these bid.
+        uint64_t item_id_;
+        
+        /// @brief The integral uniquifier of the NPC station of this bid.
+        uint64_t station_id_;
+        
+        /// @brief Indicates if this order is a buy or sell order.
+        order_type_t order_type_;
+        
 };
 
 /// @brief Convenience alias to allow printing directly via cout or similar.
-inline std::ostream& operator<<(std::ostream& stream, const order_t& source)
+inline std::ostream& operator<<(std::ostream& stream, const raw_order_t& source)
 {
     source.write_to_file(stream);
     return stream;
 }
 
 /// @brief Extraction operator for decoding.
-std::istream& operator>>(std::istream& stream, order_t& destination);
+std::istream& operator>>(std::istream& stream, raw_order_t& destination);
 
 #endif // Header Guard
 

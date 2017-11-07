@@ -58,20 +58,39 @@ int main(int argc, char** argv)
             case args_t::mode_t::FETCH_PRICES:
             {
                 
-                // Open and parse input files
+                // Open item attributes from file
                 std::ifstream item_attributes_in_file(args.item_attributes_in());
+                if (!item_attributes_in_file.good())
+                {
+                    std::cerr << "Error.  Failed to open \"" << args.item_attributes_in() << "\" for reading.\n";
+                    return -1;
+                }
                 item_attributes_t item_attributes_in;
                 item_attributes_in.read_from_file(item_attributes_in_file);
                 
+                // Open station attributes from file
                 std::ifstream station_attributes_in_file(args.station_attributes_in());
+                if (!station_attributes_in_file.good())
+                {
+                    std::cerr << "Error.  Failed to open \"" << args.station_attributes_in() << "\" for reading.\n";
+                    return -1;
+                }
                 station_attributes_t station_attributes_in;
                 station_attributes_in.read_from_file(station_attributes_in_file);
                 
+                // Open file to output market data to
                 std::ofstream prices_out_file(args.prices_out());
+                if (!prices_out_file.good())
+                {
+                    std::cerr << "Error.  Failed to open \"" << args.prices_out() << "\" for writing.\n";
+                    return -1;
+                }
+                
+                // Fetch market data
                 raw_regional_market_t raw_regional_market;
                 raw_regional_market.fetch(10000043);
                 
-                // TODO Conor, you left off here.  Convert regional market to prices
+                // Write market data to file
                 raw_regional_market.write_to_file(prices_out_file);
                 
                 break;

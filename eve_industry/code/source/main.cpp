@@ -7,9 +7,11 @@
 
 #include <fstream>
 #include <iostream>
+#include <unordered_set>
 
 #include "args.h"
 #include "error.h"
+#include "galactic_market.h"
 #include "item_attributes.h"
 #include "item_ids.h"
 #include "station_attributes.h"
@@ -96,23 +98,41 @@ int main(int argc, char** argv)
                     return -1;
                 }
                 
-                // Fetch market data
-                uint64_t cur_region = 10000043;
-                if (args.debug_mode().verbose())
-                    std::cout << "Fetching all market orders from region " << cur_region << '\n';
-                raw_regional_market_t raw_regional_market;
-                raw_regional_market.fetch(cur_region);
-                
-                // Post-process market data
-                if (args.debug_mode().verbose())
-                    std::cout << "Post-processing regional market for region" << cur_region << '\n';
-                regional_market_t regional_market;
-                regional_market.initialize_from_raw_regional_market(raw_regional_market);
+                // Fetch market data for the regions of all requested stations.
+                galactic_market_t galactic_market;
+                for (const station_attribute_t& cur_station : station_attributes_in.stations())
+                {
+                    
+                    if (args.debug_mode().verbose())
+                        std::cout << "Fetching market data for station \"" << cur_station.name() << "\".\n";
+                    
+                    // Do not re-fetch data for the same region if we've already fetched it.
+                    if (galactic_market.regions().count(cur_station.station_id()))
+                        continue;
+                    
+                    uint64_t cur_region_id = cur_station.region_id();
+                    if (args.debug_mode().verbose())
+                        std::cout << "Fetching all market orders from region " << cur_region_id << '\n';
+                    raw_regional_market_t raw_regional_market;
+                    raw_regional_market.fetch(cur_region_id);
+                    
+                    // Post-process market data
+                    if (args.debug_mode().verbose())
+                        std::cout << "Post-processing regional market for region " << cur_region_id << '\n';
+                    regional_market_t regional_market;
+                    regional_market.initialize_from_raw_regional_market(raw_regional_market);
+                    
+                    // Augmenting galactic market
+                    if (args.debug_mode().verbose())
+                        std::cout << "Augmenting galactic market data.\n";
+                    galactic_market.add_new_regional_market(std::move(regional_market));
+                    
+                }
                 
                 // Write market data to file
                 if (args.debug_mode().verbose())
-                    std::cout << "Writing post-processed market data to file \"" << args.prices_out() << "\".\n";
-                regional_market.write_to_file(prices_out_file);
+                    std::cout << "Writing galactic market data to file \"" << args.prices_out() << "\".\n";
+                galactic_market.write_to_file(prices_out_file);
                 
                 break;
                 

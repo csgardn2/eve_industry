@@ -20,7 +20,7 @@
 void item_ids_t::fetch()
 {
     
-    this->clear();
+    this->ids_.clear();
     
     // Automatically de-allocate memory when this function returns or throws
     // an error.
@@ -37,12 +37,14 @@ void item_ids_t::fetch()
     {
         
         // Print progress message, erasing previous one if it existed
-        for (unsigned ix = 0, bound = progress_message.length(); ix < bound; ix++)
-            std::cout << '\b';
-        progress_message = "Page ";
-        progress_message += std::to_string(page);
-        std::cout << progress_message << std::flush;
-        
+        if (this->debug_mode_.verbose())
+        {
+            for (unsigned ix = 0, bound = progress_message.length(); ix < bound; ix++)
+                std::cout << '\b';
+            progress_message = "Page ";
+            progress_message += std::to_string(page);
+            std::cout << progress_message << std::flush;
+        }
         // Prepare a request URL
         std::string query(query_prefix);
         query += std::to_string(page);
@@ -65,9 +67,9 @@ void item_ids_t::fetch()
         }
         
         // Append fetched data to internal storage
-        unsigned old_size = this->size();
+        unsigned old_size = this->ids_.size();
         unsigned new_size = old_size + json_item_ids.size();
-        this->resize(new_size);
+        this->ids_.resize(new_size);
         for
         (
             unsigned read_ix = 0, write_ix = old_size;
@@ -87,13 +89,14 @@ void item_ids_t::fetch()
                 throw error_message_t(error_code_t::EVE_SUCKS, message);
             }
             
-            (*this)[write_ix] = json_cur_element.asUInt64();
+            this->ids_[write_ix] = json_cur_element.asUInt64();
             
         }
         
         if (json_item_ids.empty())
         {
-            std::cout << '\n';
+            if (this->debug_mode_.verbose())
+                std::cout << '\n';
             return;
         }
         
@@ -106,7 +109,7 @@ void item_ids_t::read_from_file(std::istream& file)
     
     // Get the number of characters in the input file.
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_SIZE_FAILED);
+        throw error_message_t(error_code_t::FILE_SIZE_FAILED, "Error.  Failed to determine file size when decoding item_ids_t object.\n");
     file.seekg(0, std::ios_base::end);
     unsigned file_size = file.tellg();
     file.seekg(0, std::ios_base::beg);
@@ -115,7 +118,7 @@ void item_ids_t::read_from_file(std::istream& file)
     std::string buffer(file_size, '\0');
     file.read(buffer.data(), file_size);
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_READ_FAILED);
+        throw error_message_t(error_code_t::FILE_READ_FAILED, "Error.  Failed to read file when decoding item_ids object.\n");
     this->read_from_buffer(std::string_view(buffer));
     
 }
@@ -148,8 +151,8 @@ void item_ids_t::read_from_json(const Json::Value& json_root)
     
     // Allocate memory
     unsigned size = json_root.size();
-    this->clear();
-    this->resize(size);
+    this->ids_.clear();
+    this->ids_.resize(size);
     
     // Copy each ID
     for (unsigned ix = 0; ix < size; ix++)
@@ -164,7 +167,7 @@ void item_ids_t::read_from_json(const Json::Value& json_root)
             throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, message);
         }
         
-        (*this)[ix] = json_cur_element.asUInt64();
+        this->ids_[ix] = json_cur_element.asUInt64();
         
     }
     
@@ -174,7 +177,7 @@ void item_ids_t::write_to_file(std::ostream& file, unsigned indent_start, unsign
 {
     file << this->write_to_buffer(indent_start, spaces_per_tab);
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_WRITE_FAILED);
+        throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding item_ids_t object.");
 }
 
 void item_ids_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
@@ -188,11 +191,11 @@ void item_ids_t::write_to_buffer(std::string& buffer, unsigned indent_start, uns
     buffer += "[\n";
     
     // Encode member variables.
-    for (signed ix = 0, last_ix = this->size() - 1; ix <= last_ix; ix++)
+    for (signed ix = 0, last_ix = this->ids_.size() - 1; ix <= last_ix; ix++)
     {
         
         buffer += indent_1;
-        buffer += std::to_string((*this)[ix]);
+        buffer += std::to_string(this->ids_[ix]);
         
         if (ix != last_ix)
             buffer += ',';

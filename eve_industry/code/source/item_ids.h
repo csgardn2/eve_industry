@@ -12,31 +12,38 @@
 #include <string_view>
 #include <vector>
 
+#include "debug_mode.h"
 #include "error.h"
 #include "json.h"
 
 /// @brief List of integral uniquifiers used by inventory items in the EvE
 /// universe.  These are only the IDs, not the attributes for any items.
-class item_ids_t : public std::vector<uint64_t>
+class item_ids_t
 {
-        
-    protected:
-        
-        // Try to make all your members protected, even if they don't
-        // really need to be.
         
     public:
         
         /// @brief Default constructor
         inline item_ids_t() = default;
         
-        // Add operator[] here if desired.
-        // inline type operator[](unsigned ix) const;
-        // inline type& operator[](unsigned ix);
+        // Add operators here if desired.
         
-        // Add member read and write functions
-        // inline type member() const;
-        // inline void member(const type& t);
+        // Add member read and write functions here
+        
+        inline const std::vector<uint64_t>& ids() const
+        {
+            return this->ids_;
+        }
+        
+        inline const debug_mode_t& debug_mode() const
+        {
+            return this->debug_mode_;
+        }
+         
+        inline void debug_mode(const debug_mode_t& new_debug_mode)
+        {
+            this->debug_mode_ = new_debug_mode;
+        }
         
         /// @brief Pull as many item IDs from the EvE API as possible.  All
         /// previous content is cleared.
@@ -122,6 +129,17 @@ class item_ids_t : public std::vector<uint64_t>
             this->write_to_buffer(buffer, indent_start, spaces_per_tab);
             return buffer;
         }
+        
+    protected:
+        
+        // Try to make all your members protected, even if they don't
+        // really need to be.
+        
+        /// @brief Set of valid values for @ref item_attribute_t::id_.
+        std::vector<uint64_t> ids_;
+        
+        /// @brief Enables printing of diagnostics.
+        debug_mode_t debug_mode_;
         
 };
 

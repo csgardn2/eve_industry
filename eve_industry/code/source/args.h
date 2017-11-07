@@ -12,6 +12,7 @@
 #include <string_view>
 #include <vector>
 
+#include "debug_mode.h"
 #include "error.h"
 #include "json.h"
 
@@ -20,7 +21,6 @@
 class args_t
 {
     
-    /// Public section 1 of 2.
     public:
         
         /// @brief Specifies the high level operation to be performed by
@@ -41,39 +41,6 @@ class args_t
             NUM_ENUMS
         };
         
-    protected:
-        
-        /// @brief String representations of enumeration symbols
-        static const std::vector<std::string_view> mode_names_;
-        
-        /// @brief These are valid values that can be passed to --mode on the
-        /// command line.
-        static const std::vector<std::string_view> mode_values_;
-        
-        /// @brief The high-level operation to be performed by this tool.
-        mode_t mode_;
-        
-        /// @brief Filename of a JSON containing the integral IDs used by the
-        /// EvE API for items.
-        std::string item_attributes_out_;
-        
-        /// @brief Filename of a JSON containing the integral IDs used by the
-        /// EvE API for items.
-        std::string item_attributes_in_;
-        
-        /// @brief Filename of a JSON containing static information about
-        /// stations with markets such as the station's ID, name, solar system,
-        /// and region.
-        std::string station_attributes_in_;
-        
-        /// @brief Filename of a JSON containing live market prices for each
-        /// item specified by @ref item_attributes_in at all stations specified
-        /// by @ref station_attributes_in_.
-        std::string prices_out_;
-        
-    // Public section 2 of 2.
-    public:
-        
         /// @brief Make modes human readable.
         inline static std::string_view enum_to_string(mode_t mode)
         {
@@ -83,31 +50,31 @@ class args_t
         /// @brief Default constructor
         inline args_t() = default;
         
-        /// @brief Read access to @ref mode_ member.
         inline mode_t mode() const
         {
             return this->mode_;
         }
         
-        /// @brief Read access to @ref item_attributes_out_ member.
+        inline const debug_mode_t& debug_mode() const
+        {
+            return this->debug_mode_;
+        }
+        
         inline const std::string& item_attributes_out() const
         {
             return this->item_attributes_out_;
         }
         
-        /// @brief Read access to @ref item_attributes_in_ member.
         inline const std::string& item_attributes_in() const
         {
             return this->item_attributes_in_;
         }
         
-        /// @brief Read access to @ref station_attributes_in_ member.
         inline const std::string& station_attributes_in() const
         {
             return this->station_attributes_in_;
         }
         
-        /// @brief Read access to @ref prices_out_ member.
         inline const std::string& prices_out() const
         {
             return this->prices_out_;
@@ -212,6 +179,42 @@ class args_t
             this->write_to_buffer(buffer, indent_start, spaces_per_tab);
             return buffer;
         }
+        
+    protected:
+        
+        /// @brief Return a printable string of all values in mode_values.
+        std::string valid_mode_values() const;
+        
+        /// @brief String representations of enumeration symbols
+        static const std::vector<std::string_view> mode_names_;
+        
+        /// @brief These are valid values that can be passed to --mode on the
+        /// command line.
+        static const std::vector<std::string_view> mode_values_;
+        
+        /// @brief The high-level operation to be performed by this tool.
+        mode_t mode_;
+        
+        /// @brief see @ref debug_mode_t.
+        debug_mode_t debug_mode_;
+        
+        /// @brief Filename of a JSON containing the integral IDs used by the
+        /// EvE API for items.
+        std::string item_attributes_out_;
+        
+        /// @brief Filename of a JSON containing the integral IDs used by the
+        /// EvE API for items.
+        std::string item_attributes_in_;
+        
+        /// @brief Filename of a JSON containing static information about
+        /// stations with markets such as the station's ID, name, solar system,
+        /// and region.
+        std::string station_attributes_in_;
+        
+        /// @brief Filename of a JSON containing live market prices for each
+        /// item specified by @ref item_attributes_in at all stations specified
+        /// by @ref station_attributes_in_.
+        std::string prices_out_;
         
 };
 

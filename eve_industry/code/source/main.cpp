@@ -41,15 +41,20 @@ int main(int argc, char** argv)
                     return -1;
                 }
                 
-                std::cout << "Fetching item ids...\n";
+                if (args.debug_mode().verbose())
+                    std::cout << "Fetching item ids...\n";
                 item_ids_t item_ids;
+                item_ids.debug_mode(args.debug_mode());
                 item_ids.fetch();
                 
-                std::cout << "Fetching item attributes\n";
+                if (args.debug_mode().verbose())
+                    std::cout << "Fetching item attributes\n";
                 item_attributes_t item_attributes;
+                item_attributes.debug_mode(args.debug_mode());
                 item_attributes.fetch(item_ids);
                 
-                std::cout << "Writing output file.\n";
+                if (args.debug_mode().verbose())
+                    std::cout << "Writing item attributes to file.\n";
                 item_attributes.write_to_file(item_attributes_out_file);
                 
                 break;
@@ -60,6 +65,8 @@ int main(int argc, char** argv)
             {
                 
                 // Open item attributes from file
+                if (args.debug_mode().verbose())
+                    std::cout << "Parsing item-attributes-in file \"" << args.item_attributes_in() << "\".\n";
                 std::ifstream item_attributes_in_file(args.item_attributes_in());
                 if (!item_attributes_in_file.good())
                 {
@@ -70,6 +77,8 @@ int main(int argc, char** argv)
                 item_attributes_in.read_from_file(item_attributes_in_file);
                 
                 // Open station attributes from file
+                if (args.debug_mode().verbose())
+                    std::cout << "Parsing station-attributes-in file\"" << args.station_attributes_in() << "\".\n";
                 std::ifstream station_attributes_in_file(args.station_attributes_in());
                 if (!station_attributes_in_file.good())
                 {
@@ -88,14 +97,21 @@ int main(int argc, char** argv)
                 }
                 
                 // Fetch market data
+                uint64_t cur_region = 10000043;
+                if (args.debug_mode().verbose())
+                    std::cout << "Fetching all market orders from region " << cur_region << '\n';
                 raw_regional_market_t raw_regional_market;
-                raw_regional_market.fetch(10000043);
+                raw_regional_market.fetch(cur_region);
                 
                 // Post-process market data
+                if (args.debug_mode().verbose())
+                    std::cout << "Post-processing regional market for region" << cur_region << '\n';
                 regional_market_t regional_market;
                 regional_market.initialize_from_raw_regional_market(raw_regional_market);
                 
                 // Write market data to file
+                if (args.debug_mode().verbose())
+                    std::cout << "Writing post-processed market data to file \"" << args.prices_out() << "\".\n";
                 regional_market.write_to_file(prices_out_file);
                 
                 break;

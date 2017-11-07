@@ -2,3 +2,4 @@
 *.html
 bin/eve_industry
 documentation/html_out
+data/json/prices.json

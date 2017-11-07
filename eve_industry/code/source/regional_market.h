@@ -1,4 +1,4 @@
-/// @file region_market.h
+/// @file regional_market.h
 /// @brief Declaration of @ref regional_market_t class
 /// 
 /// * Contact conor.gardner@arm.com if you have questions about this code.

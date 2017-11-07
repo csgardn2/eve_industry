@@ -26,6 +26,24 @@ const std::vector<std::string_view> args_t::mode_values_ =
     "fetch-prices"
 };
 
+std::string args_t::valid_mode_values() const
+{
+    
+    std::string ret("{");
+    
+    for (unsigned ix = 0, last_ix = args_t::mode_values_.size() - 1; ix <= last_ix; ix++)
+    {
+        ret += args_t::mode_values_[ix];
+        if (ix == last_ix)
+            ret += '}';
+        else
+            ret += ", ";
+    }
+    
+    return ret;
+    
+}
+
 /// @brief Search for a particular argument within argv and extract that
 /// argument's parameter.
 ///
@@ -33,7 +51,7 @@ const std::vector<std::string_view> args_t::mode_values_ =
 ///     *   If a string matching search_for was found in argv, the string
 ///         immediatly after the match is returned.
 ///     *   If a match wasn't found, an empty string view is returned.
-std::string_view search_argv
+std::string_view find_argument
 (
     /// [in] This is the string you are looking for within argv
     const std::string_view search_for,
@@ -51,6 +69,26 @@ std::string_view search_argv
     return std::string_view();
 }
 
+/// @brief Search for a particular argument within argv and return true if it
+/// was found.
+bool find_existence
+(
+    /// [in] This is the string you are looking for within argv
+    const std::string_view search_for,
+    /// [in] Passed from main.  The number of strings in argv
+    unsigned argc,
+    /// [in] Passed from main.  Tokenized arguments passed to this program on
+    /// the command line.
+    char const* const* argv
+){
+    for (unsigned ix = 0; ix < argc; ix++)
+    {
+        if (search_for == argv[ix])
+            return true;
+    }
+    return false;
+}
+
 void args_t::parse(unsigned argc, char const* const* argv)
 {
     
@@ -58,9 +96,14 @@ void args_t::parse(unsigned argc, char const* const* argv)
     this->clear();
     
     // Parse --mode
-    std::string_view mode = search_argv("--mode", argc, argv);
+    std::string_view mode = find_argument("--mode", argc, argv);
     if (mode.empty())
-        throw error_message_t(error_code_t::MODE_MISSING);
+    {
+        std::string message("Error.  Missing argument --mode ");
+        message += valid_mode_values();
+        message += ".\n";
+        throw error_message_t(error_code_t::MODE_MISSING, message);
+    }
     this->mode_ = mode_t::NUM_ENUMS;
     for (unsigned ix = 0; ix < unsigned(mode_t::NUM_ENUMS); ix++)
     {
@@ -71,57 +114,67 @@ void args_t::parse(unsigned argc, char const* const* argv)
         }
     }
     if (this->mode_ == mode_t::NUM_ENUMS)
-        throw error_message_t(error_code_t::MODE_INVALID);
+    {
+        std::string message("Error.  Invalid argument \"");
+        message += mode;
+        message += "\" for mode.  Use one of ";
+        message += valid_mode_values();
+        message += ".\n";
+        throw error_message_t(error_code_t::MODE_INVALID, message);
+    }
+    
+    // Parse --quiet
+    this->debug_mode_.verbose(!find_existence("--quiet", argc, argv));
     
     // Parse --item-attributes-out
     if (this->mode_ == mode_t::FETCH_ITEM_ATTRIBUTES)
     {
-        this->item_attributes_out_ = search_argv("--item-attributes-out", argc, argv);
+        this->item_attributes_out_ = find_argument("--item-attributes-out", argc, argv);
         if (this->item_attributes_out_.empty())
         {
             std::string message("Error.  --item-attributes-out FILE is required for ");
             message += mode_values_[unsigned(this->mode_)];
             message += " mode.\n";
-            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING);
+            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING, message);
         }
     }
     
     // Parse --item-attributes-in
     if (this->mode_ == mode_t::FETCH_PRICES)
     {
-        this->item_attributes_in_ = search_argv("--item-attributes-in", argc, argv);
+        this->item_attributes_in_ = find_argument("--item-attributes-in", argc, argv);
         if (this->item_attributes_in_.empty())
         {
             std::string message("Error.  --item-attributes-in FILE is required for ");
             message += mode_values_[unsigned(this->mode_)];
             message += " mode.\n";
-            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING);
+            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING, message);
         }
     }
     
     // Parse --station-attributes-in
     if (this->mode_ == mode_t::FETCH_PRICES)
     {
-        this->station_attributes_in_ = search_argv("--station-attributes-in", argc, argv);
+        this->station_attributes_in_ = find_argument("--station-attributes-in", argc, argv);
         if (this->item_attributes_in_.empty())
         {
             std::string message("Error.  --station-attributes-in FILE is required for ");
             message += mode_values_[unsigned(this->mode_)];
             message += " mode.\n";
-            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING);
+            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING, message);
         }
     }
     
     // Parse --prices-out
     if (this->mode_ == mode_t::FETCH_PRICES)
     {
-        this->prices_out_ = search_argv("--prices-out", argc, argv);
+        this->prices_out_ = find_argument("--prices-out", argc, argv);
         if (this->item_attributes_in_.empty())
         {
             std::string message("Error.  --prices-out FILE is required for ");
             message += mode_values_[unsigned(this->mode_)];
             message += " mode.\n";
-            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING);
+            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING, message);
         }
     }
     
@@ -131,6 +184,10 @@ void args_t::clear()
 {
     this->mode_ = mode_t::NUM_ENUMS;
     this->item_attributes_out_.clear();
+    this->item_attributes_in_.clear();
+    this->station_attributes_in_.clear();
+    this->prices_out_.clear();
+    this->debug_mode_.verbose(true);
 }
 
 void args_t::read_from_file(std::istream& file)
@@ -138,7 +195,7 @@ void args_t::read_from_file(std::istream& file)
     
     // Get the number of characters in the input file.
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_SIZE_FAILED);
+        throw error_message_t(error_code_t::FILE_SIZE_FAILED, "Error.  Failed to determine file size when decoding args_t object.\n");
     file.seekg(0, std::ios_base::end);
     unsigned file_size = file.tellg();
     file.seekg(0, std::ios_base::beg);
@@ -147,7 +204,7 @@ void args_t::read_from_file(std::istream& file)
     std::string buffer(file_size, '\0');
     file.read(buffer.data(), file_size);
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_READ_FAILED);
+        throw error_message_t(error_code_t::FILE_READ_FAILED, "Error.  Failed to read file when decoding args_t object.\n");
     this->read_from_buffer(std::string_view(buffer));
     
 }
@@ -198,14 +255,9 @@ void args_t::read_from_json(const Json::Value& json_root)
     }
     if (this->mode_ == mode_t::NUM_ENUMS)
     {
-        std::string message("Error.  Value for <args>/mode must be one of the values {");
-        for (signed ix = 0, last_ix = signed(mode_t::NUM_ENUMS) - 1; ix <= last_ix; ix++)
-        {
-            message += args_t::mode_names_[ix];
-            if (ix != last_ix)
-                message += ", ";
-        }
-        message += "}.\n";
+        std::string message("Error.  Value for <args>/mode must be one of the values ");
+        message += valid_mode_values();
+        message += ".\n";
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, message);
     }
     
@@ -239,7 +291,7 @@ void args_t::write_to_file(std::ostream& file, unsigned indent_start, unsigned s
 {
     file << this->write_to_buffer(indent_start, spaces_per_tab);
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_WRITE_FAILED);
+        throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding args_t object.");
 }
 
 void args_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const

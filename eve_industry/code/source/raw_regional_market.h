@@ -12,6 +12,7 @@
 #include <string_view>
 #include <vector>
 
+#include "debug_mode.h"
 #include "error.h"
 #include "json.h"
 #include "raw_order.h"
@@ -39,9 +40,24 @@ class raw_regional_market_t
             return this->region_id_;
         }
         
+        void region_id(uint64_t new_region_id)
+        {
+            this->region_id_ = new_region_id;
+        }
+        
         const std::vector<raw_order_t>& orders() const
         {
             return this->orders_;
+        }
+        
+        inline const debug_mode_t& debug_mode() const
+        {
+            return this->debug_mode_;
+        }
+         
+        inline void debug_mode(const debug_mode_t& new_debug_mode)
+        {
+            this->debug_mode_ = new_debug_mode;
         }
         
         // Add special-purpose member functions here
@@ -140,12 +156,15 @@ class raw_regional_market_t
     protected:
         
         /// @brief Integral uniquifier used by the EvE Swagger interface for
-        /// this region.  For example,/ 10000002 for "The Forge" or
+        /// this region.  For example, 10000002 for "The Forge" or
         /// 10000043 for "Domain".
         uint64_t region_id_;
         
         /// @brief All of the orders pulled from the EvE API for this region.
         std::vector<raw_order_t> orders_;
+        
+        /// @brief Controls verbose printing and progress messages
+        debug_mode_t debug_mode_;
         
 };
 

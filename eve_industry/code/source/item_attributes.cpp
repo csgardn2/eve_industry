@@ -23,7 +23,7 @@ void item_attributes_t::fetch(const item_ids_t& item_ids)
     
     this->items_.clear();
     
-    unsigned num_item_ids = item_ids.size();
+    unsigned num_item_ids = item_ids.ids().size();
     
     // Pre-allocate all storage so re-allocation won't happen while multiple omp
     // threads are writing to it.
@@ -33,7 +33,11 @@ void item_attributes_t::fetch(const item_ids_t& item_ids)
     // loop to avoid constructing a new one each iteration.
     // The smart pointer allows proper de-allocation if an exception is thrown.
     Json::CharReaderBuilder builder;
+    
     unsigned num_threads = omp_get_max_threads();
+    if (this->debug_mode_.verbose())
+        std::cout << "Fetching item attributes using " << num_threads << " threads.\n";
+    
     std::vector< std::unique_ptr<Json::CharReader> > readers;
     for (unsigned ix = 0; ix < num_threads; ix++)
         readers.emplace_back(builder.newCharReader());
@@ -51,13 +55,13 @@ void item_attributes_t::fetch(const item_ids_t& item_ids)
         unsigned thread_ix = omp_get_thread_num();
         
         // Fetch this item's attributes from EvE API (connect to network).
-        this->items_[ix].fetch(item_ids[ix], readers[thread_ix].get());
+        this->items_[ix].fetch(item_ids.ids()[ix], readers[thread_ix].get());
         
         #pragma omp atomic
         num_items_processed++;
         
         // Print progress bar
-        if (num_items_processed == progress_threshold)
+        if (this->debug_mode_.verbose() && num_items_processed == progress_threshold)
         {
             
             // Clear previous message
@@ -83,7 +87,8 @@ void item_attributes_t::fetch(const item_ids_t& item_ids)
         
     }
     
-    std::cout << '\n';
+    if (this->debug_mode_.verbose())
+        std::cout << '\n';
     
 }
 
@@ -92,7 +97,7 @@ void item_attributes_t::read_from_file(std::istream& file)
     
     // Get the number of characters in the input file.
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_SIZE_FAILED);
+        throw error_message_t(error_code_t::FILE_SIZE_FAILED, "Error.  Failed to determine file size when decoding item_attributes_t object.\n");
     file.seekg(0, std::ios_base::end);
     unsigned file_size = file.tellg();
     file.seekg(0, std::ios_base::beg);
@@ -101,7 +106,7 @@ void item_attributes_t::read_from_file(std::istream& file)
     std::string buffer(file_size, '\0');
     file.read(buffer.data(), file_size);
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_READ_FAILED);
+        throw error_message_t(error_code_t::FILE_READ_FAILED, "Error.  Failed to read file when decoding item_attributes_t object.\n");
     this->read_from_buffer(std::string_view(buffer));
     
 }
@@ -150,7 +155,7 @@ void item_attributes_t::write_to_file(std::ostream& file, unsigned indent_start,
 {
     file << this->write_to_buffer(indent_start, spaces_per_tab);
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_WRITE_FAILED);
+        throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding item_attributes_t object.");
 }
 
 void item_attributes_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const

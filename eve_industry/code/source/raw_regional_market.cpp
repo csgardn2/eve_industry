@@ -42,11 +42,14 @@ void raw_regional_market_t::fetch(uint64_t region_id)
     {
         
         // Print progress message, erasing previous one if it existed
-        for (unsigned ix = 0, bound = progress_message.length(); ix < bound; ix++)
-            std::cout << '\b';
-        progress_message = "Page ";
-        progress_message += std::to_string(page);
-        std::cout << progress_message << std::flush;
+        if (this->debug_mode_.verbose())
+        {
+            for (unsigned ix = 0, bound = progress_message.length(); ix < bound; ix++)
+                std::cout << '\b';
+            progress_message = "Page ";
+            progress_message += std::to_string(page);
+            std::cout << progress_message << std::flush;
+        }
         
         // Prepare a request URL
         std::string query(query_prefix);
@@ -151,7 +154,8 @@ void raw_regional_market_t::fetch(uint64_t region_id)
         
         if (json_regional_market_page.empty())
         {
-            std::cout << '\n';
+            if (this->debug_mode_.verbose())
+                std::cout << '\n';
             return;
         }
         
@@ -164,7 +168,7 @@ void raw_regional_market_t::read_from_file(std::istream& file)
     
     // Get the number of characters in the input file.
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_SIZE_FAILED);
+        throw error_message_t(error_code_t::FILE_SIZE_FAILED, "Error.  Failed to determine file size when decoding raw_regional_market_t object.\n");
     file.seekg(0, std::ios_base::end);
     unsigned file_size = file.tellg();
     file.seekg(0, std::ios_base::beg);
@@ -173,7 +177,7 @@ void raw_regional_market_t::read_from_file(std::istream& file)
     std::string buffer(file_size, '\0');
     file.read(buffer.data(), file_size);
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_READ_FAILED);
+        throw error_message_t(error_code_t::FILE_READ_FAILED, "Error.  Failed to read file when decoding raw_regional_market object.\n");
     this->read_from_buffer(std::string_view(buffer));
     
 }
@@ -234,7 +238,7 @@ void raw_regional_market_t::write_to_file(std::ostream& file, unsigned indent_st
 {
     file << this->write_to_buffer(indent_start, spaces_per_tab);
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_WRITE_FAILED);
+        throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding raw_regional_market object.");
 }
 
 void raw_regional_market_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const

@@ -10,11 +10,11 @@
 #include <string_view>
 #include <vector>
 
-#include "station_market.h"
-#include "raw_regional_market.h"
-#include "regional_market.h"
 #include "error.h"
 #include "json.h"
+#include "raw_regional_market.h"
+#include "regional_market.h"
+#include "station_market.h"
 
 void regional_market_t::initialize_from_raw_regional_market
 (
@@ -60,7 +60,7 @@ void regional_market_t::read_from_file(std::istream& file)
     
     // Get the number of characters in the input file.
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_SIZE_FAILED);
+        throw error_message_t(error_code_t::FILE_SIZE_FAILED, "Error.  Failed to determine file size when decoding regional_market_t object.\n");
     file.seekg(0, std::ios_base::end);
     unsigned file_size = file.tellg();
     file.seekg(0, std::ios_base::beg);
@@ -69,7 +69,7 @@ void regional_market_t::read_from_file(std::istream& file)
     std::string buffer(file_size, '\0');
     file.read(buffer.data(), file_size);
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_READ_FAILED);
+        throw error_message_t(error_code_t::FILE_READ_FAILED, "Error.  Failed to read file when decoding regional_market object.\n");
     this->read_from_buffer(std::string_view(buffer));
     
 }
@@ -127,7 +127,7 @@ void regional_market_t::write_to_file(std::ostream& file, unsigned indent_start,
 {
     file << this->write_to_buffer(indent_start, spaces_per_tab);
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_WRITE_FAILED);
+        throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding regional_market_t object.");
 }
 
 void regional_market_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const

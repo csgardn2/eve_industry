@@ -14,6 +14,7 @@
 #include "item_ids.h"
 #include "station_attributes.h"
 #include "raw_regional_market.h"
+#include "regional_market.h"
 
 /// @brief Code execution starts here
 int main(int argc, char** argv)
@@ -90,8 +91,12 @@ int main(int argc, char** argv)
                 raw_regional_market_t raw_regional_market;
                 raw_regional_market.fetch(10000043);
                 
+                // Post-process market data
+                regional_market_t regional_market;
+                regional_market.initialize_from_raw_regional_market(raw_regional_market);
+                
                 // Write market data to file
-                raw_regional_market.write_to_file(prices_out_file);
+                regional_market.write_to_file(prices_out_file);
                 
                 break;
                 

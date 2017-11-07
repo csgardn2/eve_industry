@@ -86,6 +86,15 @@ class station_market_t
             this->items_.emplace(new_item_market.item_id(), new_item_market);
         }
         
+        /// @brief Search for an item with a given ID.  If that item market
+        /// already existed, return a reference to that item.  If the item didn't
+        /// exist, allocate a new empty market for that item and return a reference
+        /// to the empty market.
+        inline item_market_t& find_or_allocate(uint64_t item_id)
+        {
+            return this->items_[item_id];
+        }
+        
         /// @brief Open a file conforming to data/json/schema.json and use it to initialize
         /// this object, clearing previous content.
         ///

@@ -98,7 +98,7 @@
             "description": "Orders fetched directly from the Swagger API with minimal post-processing.  These are post-processed into galactic_market objects later.",
             "properties": {
                 "region_id": {
-                    "type": "unsigned",
+                    "type": "integer",
                     "minimum": 0
                 },
                 "orders": {
@@ -190,13 +190,13 @@
                 "buy_orders": {
                     "type": "array",
                     "items": {
-                        "type": "float"
+                        "type": "number"
                     }
                 },
                 "sell_orders": {
                     "type": "array",
                     "items": {
-                        "type": "float"
+                        "type": "number"
                     }
                 }
             },

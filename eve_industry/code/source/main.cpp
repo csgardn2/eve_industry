@@ -12,6 +12,7 @@
 #include "error.h"
 #include "item_attributes.h"
 #include "item_ids.h"
+#include "item_market.h"
 #include "station_attributes.h"
 #include "raw_regional_market.h"
 

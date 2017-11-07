@@ -22,6 +22,7 @@ const std::vector<std::string_view> error_message_t::error_names_ =
     "STATION_ATTRIBUTES_IN_MISSING",
     "PRICES_OUT_MISSING",
     "UNKNOWN_ORDER_TYPE",
-    "EVE_SUCKS"
+    "EVE_SUCKS",
+    "NO_ORDERS"
 };
 

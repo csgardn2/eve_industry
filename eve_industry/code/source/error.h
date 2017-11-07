@@ -28,6 +28,7 @@ enum class error_code_t
     PRICES_OUT_MISSING,
     UNKNOWN_ORDER_TYPE,
     EVE_SUCKS,
+    NO_ORDERS,
     
     /// This element must be last
     NUM_ENUMS

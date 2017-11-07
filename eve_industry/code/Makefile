@@ -20,6 +20,7 @@ $(BINDIR)/$(EXENAME):                   \
     $(BINDIR)/item_attribute.o          \
     $(BINDIR)/item_attributes.o         \
     $(BINDIR)/item_ids.o                \
+    $(BINDIR)/item_market.o             \
     $(BINDIR)/json.o                    \
     $(BINDIR)/main.o                    \
     $(BINDIR)/raw_order.o               \
@@ -52,6 +53,9 @@ $(BINDIR)/item_attributes.o: $(SOURCEDIR)/item_attributes.cpp $(SOURCEDIR)/item_
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/item_ids.o: $(SOURCEDIR)/item_ids.cpp $(SOURCEDIR)/item_ids.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/item_market.o: $(SOURCEDIR)/item_market.cpp $(SOURCEDIR)/item_market.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/json.o: $(SOURCEDIR)/jsoncpp.cpp $(SOURCEDIR)/json.h
@@ -114,6 +118,12 @@ $(DOCDIR)/html_out/index.html:              \
     $(SOURCEDIR)/https_get.cpp              \
     $(SOURCEDIR)/item_ids.h                 \
     $(SOURCEDIR)/item_ids.cpp               \
+    $(SOURCEDIR)/item_attribute.h           \
+    $(SOURCEDIR)/item_attribute.cpp         \
+    $(SOURCEDIR)/item_attributes.h          \
+    $(SOURCEDIR)/item_attributes.cpp        \
+    $(SOURCEDIR)/item_market.h              \
+    $(SOURCEDIR)/item_market.cpp            \
     $(SOURCEDIR)/json.h                     \
     $(SOURCEDIR)/jsoncpp.cpp                \
     $(SOURCEDIR)/main.cpp                   \

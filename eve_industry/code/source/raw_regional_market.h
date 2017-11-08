@@ -8,7 +8,9 @@
 #ifndef HEADER_GUARD_RAW_REGIONAL_MARKET
 #define HEADER_GUARD_RAW_REGIONAL_MARKET
 
+#include <atomic>
 #include <fstream>
+#include <mutex>
 #include <string_view>
 #include <vector>
 

@@ -44,7 +44,7 @@ int main(int argc, char** argv)
                 }
                 
                 if (args.debug_mode().verbose())
-                    std::cout << "Fetching item ids...\n";
+                    std::cout << "Fetching item ids\n";
                 item_ids_t item_ids;
                 item_ids.debug_mode(args.debug_mode());
                 item_ids.fetch();
@@ -77,6 +77,7 @@ int main(int argc, char** argv)
                 }
                 item_attributes_t item_attributes_in;
                 item_attributes_in.read_from_file(item_attributes_in_file);
+                item_attributes_in_file.close();
                 
                 // Open station attributes from file
                 if (args.debug_mode().verbose())
@@ -89,6 +90,7 @@ int main(int argc, char** argv)
                 }
                 station_attributes_t station_attributes_in;
                 station_attributes_in.read_from_file(station_attributes_in_file);
+                station_attributes_in_file.close();
                 
                 // Open file to output market data to
                 std::ofstream prices_out_file(args.prices_out());

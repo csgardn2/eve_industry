@@ -141,9 +141,9 @@ void regional_market_t::write_to_buffer(std::string& buffer, unsigned indent_sta
     // enable chaining.
     buffer += "{\n";
     
-    // Encode regional_id
+    // Encode region_id
     buffer += indent_1;
-    buffer += "\"regional_id\": ";
+    buffer += "\"region_id\": ";
     buffer += std::to_string(this->region_id_);
     buffer += ",\n";
     

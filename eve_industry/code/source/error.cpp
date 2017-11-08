@@ -23,6 +23,8 @@ const std::vector<std::string_view> error_message_t::error_names_ =
     "PRICES_OUT_MISSING",
     "UNKNOWN_ORDER_TYPE",
     "EVE_SUCKS",
-    "NO_ORDERS"
+    "NO_ORDERS",
+    "HTTPS_GET_FAILED",
+    "MISSING_MARKET_PAGE"
 };
 

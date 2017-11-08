@@ -35,6 +35,8 @@
 #include <iostream>
 #include <string>
 
+#include "error.h"
+
 /// \brief Recieve a burst of data from the network and append it to a more
 /// permanent buffer.
 static size_t recieve_burst(void* buffer, size_t size, size_t nmemb, void* str)
@@ -60,8 +62,7 @@ std::string https_get(const std::string& url)
     {
         curl_easy_cleanup(curl);
         curl_global_cleanup();
-        std::cerr << "Error.  Failed to initialize CURL library\n";
-        return "";
+        throw error_message_t(error_code_t::HTTPS_GET_FAILED, "Error.  Failed to initialize CURL library\n");
     }
     
     // Set the URL to request data from
@@ -84,14 +85,18 @@ std::string https_get(const std::string& url)
     CURLcode error_code = curl_easy_perform(curl);
     if (error_code != CURLE_OK)
     {
-        std::cerr
-            << "Error.  Failed to complete HTTPS GET request from URL \""
-            << url
-            << "\".  Curl returned error code "
-            << error_code << '\n';
+        
         curl_easy_cleanup(curl);
         curl_global_cleanup();
-        return "";
+        
+        std::string message("Error.  Failed to complete HTTPS GET request from URL \"");
+        message += url;
+        message += "\".  Curl returned error code ";
+        message += std::to_string(error_code);
+        message += '\n';
+        
+        throw error_message_t(error_code_t::HTTPS_GET_FAILED, message);
+        
     }
     
     // always cleanup

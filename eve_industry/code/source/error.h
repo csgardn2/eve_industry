@@ -29,7 +29,8 @@ enum class error_code_t
     UNKNOWN_ORDER_TYPE,
     EVE_SUCKS,
     NO_ORDERS,
-    
+    HTTPS_GET_FAILED,
+    MISSING_MARKET_PAGE,
     /// This element must be last
     NUM_ENUMS
     

@@ -25,6 +25,7 @@ $(BINDIR)/$(EXENAME):                   \
     $(BINDIR)/item_market.o             \
     $(BINDIR)/json.o                    \
     $(BINDIR)/main.o                    \
+    $(BINDIR)/page_fetcher.o            \
     $(BINDIR)/raw_order.o               \
     $(BINDIR)/raw_regional_market.o     \
     $(BINDIR)/regional_market.o         \
@@ -72,6 +73,9 @@ $(BINDIR)/json.o: $(SOURCEDIR)/jsoncpp.cpp $(SOURCEDIR)/json.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/main.o: $(SOURCEDIR)/main.cpp
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/page_fetcher.o: $(SOURCEDIR)/page_fetcher.cpp $(SOURCEDIR)/page_fetcher.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/raw_order.o: $(SOURCEDIR)/raw_order.cpp $(SOURCEDIR)/raw_order.h
@@ -147,6 +151,8 @@ $(DOCDIR)/html_out/index.html:              \
     $(SOURCEDIR)/json.h                     \
     $(SOURCEDIR)/jsoncpp.cpp                \
     $(SOURCEDIR)/main.cpp                   \
+    $(SOURCEDIR)/page_fetcher.h             \
+    $(SOURCEDIR)/page_fetcher.cpp           \
     $(SOURCEDIR)/raw_order.h                \
     $(SOURCEDIR)/raw_order.cpp              \
     $(SOURCEDIR)/raw_regional_market.h      \

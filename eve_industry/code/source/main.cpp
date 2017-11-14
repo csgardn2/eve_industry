@@ -57,7 +57,7 @@ int main(int argc, char** argv)
                 
                 if (args.debug_mode().verbose())
                     std::cout << "Writing item attributes to file.\n";
-                item_attributes.write_to_file(item_attributes_out_file);
+                item_attributes.write_to_json_file(item_attributes_out_file);
                 
                 break;
                 
@@ -76,7 +76,7 @@ int main(int argc, char** argv)
                     return -1;
                 }
                 item_attributes_t item_attributes_in;
-                item_attributes_in.read_from_file(item_attributes_in_file);
+                item_attributes_in.read_from_json_file(item_attributes_in_file);
                 item_attributes_in_file.close();
                 
                 // Open station attributes from file
@@ -89,7 +89,7 @@ int main(int argc, char** argv)
                     return -1;
                 }
                 station_attributes_t station_attributes_in;
-                station_attributes_in.read_from_file(station_attributes_in_file);
+                station_attributes_in.read_from_json_file(station_attributes_in_file);
                 station_attributes_in_file.close();
                 
                 // Open file to output market data to
@@ -131,10 +131,30 @@ int main(int argc, char** argv)
                     
                 }
                 
+                // Remove market data for stations we aren't interested in
+                if (args.cull_stations())
+                {
+                    
+                    if (args.debug_mode().verbose())
+                        std::cout << "Culling orders from non-requested stations.\n";
+                    
+                    // Build list of stations to keep
+                    std::unordered_set<uint64_t> stations_to_keep;
+                    const std::vector<station_attribute_t>& stations = station_attributes_in.stations();
+                    unsigned num_stations = stations.size();
+                    stations_to_keep.reserve(num_stations);
+                    for (unsigned ix = 0; ix < num_stations; ix++)
+                        stations_to_keep.emplace(stations[ix].station_id());
+                    
+                    // Strip away orders for stations that we didn't ask for
+                    galactic_market.cull_by_station(stations_to_keep);
+                    
+                }
+                
                 // Write market data to file
                 if (args.debug_mode().verbose())
                     std::cout << "Writing galactic market data to file \"" << args.prices_out() << "\".\n";
-                galactic_market.write_to_file(prices_out_file);
+                galactic_market.write_to_json_file(prices_out_file);
                 
                 break;
                 

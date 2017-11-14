@@ -63,24 +63,24 @@ class item_attributes_t
         ///
         /// @exception error_message_t
         /// @exception Json::Exception
-        void read_from_file(std::istream& file);
+        void read_from_json_file(std::istream& file);
         
         /// @brief Decode serialized content conforming to schema.json and use it
         /// to initialize this object, clearing previous content.
         ///
         /// @exception error_message_t
         /// @exception Json::Exception
-        void read_from_buffer(std::string_view buffer);
+        void read_from_json_buffer(std::string_view buffer);
         
         /// @brief Extract required data fields from a pre-parsed JSON tree
         /// and use them to initialize this object, clearing previous content.
         ///
         /// @exception error_message_t
-        void read_from_json(const Json::Value& json_root);
+        void read_from_json_json(const Json::Value& json_root);
         
         /// @brief Serialize the content of this file into a file that
         /// conforms to the schema schema.json.
-        void write_to_file
+        void write_to_json_file
         (
             /// [out] Stream to append serialized object content to.
             std::ostream& file,
@@ -101,7 +101,7 @@ class item_attributes_t
         /// conforms to the schema schema.json.
         ///
         /// @exception error_message_t
-        void write_to_buffer
+        void write_to_json_buffer
         (
             /// [out] This string is overwritten with serialzed JSON content.
             std::string& buffer,
@@ -120,7 +120,7 @@ class item_attributes_t
         
         /// @brief Convinence method for pretty initialize-on-construction
         /// syntax.
-        inline std::string write_to_buffer
+        inline std::string write_to_json_buffer
         (
             /// [in] The number of space ' ' characters to prepend to each line
             /// in the serialized output.
@@ -135,7 +135,7 @@ class item_attributes_t
             unsigned spaces_per_tab = 4
         ) const {
             std::string buffer;
-            this->write_to_buffer(buffer, indent_start, spaces_per_tab);
+            this->write_to_json_buffer(buffer, indent_start, spaces_per_tab);
             return buffer;
         }
         
@@ -154,7 +154,7 @@ class item_attributes_t
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::ostream& operator<<(std::ostream& stream, const item_attributes_t& source)
 {
-    source.write_to_file(stream);
+    source.write_to_json_file(stream);
     return stream;
 }
 

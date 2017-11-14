@@ -92,7 +92,7 @@ void item_attributes_t::fetch(const item_ids_t& item_ids)
     
 }
 
-void item_attributes_t::read_from_file(std::istream& file)
+void item_attributes_t::read_from_json_file(std::istream& file)
 {
     
     // Get the number of characters in the input file.
@@ -107,11 +107,11 @@ void item_attributes_t::read_from_file(std::istream& file)
     file.read(buffer.data(), file_size);
     if (!file.good())
         throw error_message_t(error_code_t::FILE_READ_FAILED, "Error.  Failed to read file when decoding item_attributes_t object.\n");
-    this->read_from_buffer(std::string_view(buffer));
+    this->read_from_json_buffer(std::string_view(buffer));
     
 }
 
-void item_attributes_t::read_from_buffer(std::string_view buffer)
+void item_attributes_t::read_from_json_buffer(std::string_view buffer)
 {
     
     Json::CharReaderBuilder builder;
@@ -126,11 +126,11 @@ void item_attributes_t::read_from_buffer(std::string_view buffer)
     
     // Now that the JSON syntax is parsed, extract the stat_list specific
     // data.
-    this->read_from_json(json_root);
+    this->read_from_json_json(json_root);
     
 }
 
-void item_attributes_t::read_from_json(const Json::Value& json_root)
+void item_attributes_t::read_from_json_json(const Json::Value& json_root)
 {
     
     // Parse root
@@ -145,20 +145,20 @@ void item_attributes_t::read_from_json(const Json::Value& json_root)
     for (const Json::Value& cur_element : json_root)
     {
         item_attribute_t new_item_attribute;
-        new_item_attribute.read_from_json(cur_element);
+        new_item_attribute.read_from_json_json(cur_element);
         this->items_.emplace_back(new_item_attribute);
     }
     
 }
 
-void item_attributes_t::write_to_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
+void item_attributes_t::write_to_json_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
 {
-    file << this->write_to_buffer(indent_start, spaces_per_tab);
+    file << this->write_to_json_buffer(indent_start, spaces_per_tab);
     if (!file.good())
         throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding item_attributes_t object.");
 }
 
-void item_attributes_t::write_to_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
+void item_attributes_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
 {
     
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
@@ -173,7 +173,7 @@ void item_attributes_t::write_to_buffer(std::string& buffer, unsigned indent_sta
     for (signed ix = 0, last_ix = this->items_.size() - 1; ix <= last_ix; ix++)
     {
         
-        buffer += this->items_[ix].write_to_buffer(indent_start + spaces_per_tab, spaces_per_tab);
+        buffer += this->items_[ix].write_to_json_buffer(indent_start + spaces_per_tab, spaces_per_tab);
         
         if (ix != last_ix)
             buffer += ", ";
@@ -192,7 +192,7 @@ std::istream& operator>>(std::istream& stream, item_attributes_t& destination)
 {
     try
     {
-        destination.read_from_file(stream);
+        destination.read_from_json_file(stream);
     } catch (error_message_t error) {
         stream.setstate(std::ios::failbit);
         throw error;

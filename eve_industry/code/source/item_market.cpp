@@ -110,6 +110,28 @@ float item_market_t::max_sell_order() const
     
 }
 
+void item_market_t::cull_unavailable_orders()
+{
+    
+    // Cull buy orders
+    if (!this->buy_orders_.empty())
+    {
+        float max = this->max_buy_order();
+        this->buy_orders_.clear();
+        this->buy_orders_.emplace_back(max);
+    }
+    
+    // Cull sell orders
+    if (!this->sell_orders_.empty())
+    {
+        float min = this->min_sell_order();
+        this->sell_orders_.clear();
+        this->sell_orders_.emplace_back(min);
+    }
+    
+}
+
+
 void item_market_t::read_from_json_file(std::istream& file)
 {
     

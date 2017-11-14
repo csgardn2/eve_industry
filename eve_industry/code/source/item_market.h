@@ -78,6 +78,9 @@ class item_market_t
             this->sell_orders_.emplace_back(sell_price);
         }
         
+        /// @brief Remove all orders that are not the minimum sell order.
+        void cull_unavailable_orders();
+        
         /// @brief Open a file conforming to data/json/schema.json and use it to initialize
         /// this object, clearing previous content.
         ///

@@ -151,6 +151,13 @@ int main(int argc, char** argv)
                     
                 }
                 
+                if (args.cull_orders())
+                {
+                    if (args.debug_mode().verbose())
+                        std::cout << "Culling all except minimum sell and maximum buy orders.\n";
+                    galactic_market.cull_unavailable_orders();
+                }
+                
                 // Write market data to file
                 if (args.debug_mode().verbose())
                     std::cout << "Writing galactic market data to file \"" << args.prices_out() << "\".\n";

@@ -95,6 +95,15 @@ class galactic_market_t
                 cur_region_node.second.cull_by_station(stations_to_keep);
         }
         
+        /// @brief Remove all orders that are not the minimum sell order for each
+        /// item at each station.
+        void cull_unavailable_orders()
+        {
+            // Iterate through each regional market
+            for (std::pair<const uint64_t, regional_market_t>& cur_region_node : this->regions_)
+                cur_region_node.second.cull_unavailable_orders();
+        }
+        
         /// @brief Open a file conforming to data/json/schema.json and use it to initialize
         /// this object, clearing previous content.
         ///

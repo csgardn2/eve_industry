@@ -106,6 +106,15 @@ class regional_market_t
         /// we're interested in
         void cull_by_station(const std::unordered_set<uint64_t>& stations_to_keep);
         
+        /// @brief Remove all orders that are not the minimum sell order for each
+        /// item at each station.
+        void cull_unavailable_orders()
+        {
+            // Iterate through each regional market
+            for (std::pair<const uint64_t, station_market_t>& cur_station_node : this->stations_)
+                cur_station_node.second.cull_unavailable_orders();
+        }
+        
         /// @brief Open a file conforming to data/json/schema.json and use it to initialize
         /// this object, clearing previous content.
         ///

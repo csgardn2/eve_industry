@@ -95,6 +95,15 @@ class station_market_t
             return this->items_[item_id];
         }
         
+        /// @brief Remove all orders that are not the minimum sell order for each
+        /// item at this station.
+        void cull_unavailable_orders()
+        {
+            // Iterate through each regional market
+            for (std::pair<const uint64_t, item_market_t>& cur_item_node : this->items_)
+                cur_item_node.second.cull_unavailable_orders();
+        }
+        
         /// @brief Open a file conforming to data/json/schema.json and use it to initialize
         /// this object, clearing previous content.
         ///

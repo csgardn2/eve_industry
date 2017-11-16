@@ -16,9 +16,12 @@ all: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 $(BINDIR)/$(EXENAME):                   \
     $(BINDIR)/args.o                    \
     $(BINDIR)/blueprint.o               \
+    $(BINDIR)/blueprints.o              \
+    $(BINDIR)/blueprint_profit.o        \
     $(BINDIR)/debug_mode.o              \
     $(BINDIR)/error.o                   \
     $(BINDIR)/galactic_market.o         \
+    $(BINDIR)/galactic_profits.o        \
     $(BINDIR)/https_get.o               \
     $(BINDIR)/item_attribute.o          \
     $(BINDIR)/item_attributes.o         \
@@ -33,6 +36,7 @@ $(BINDIR)/$(EXENAME):                   \
     $(BINDIR)/station_attribute.o       \
     $(BINDIR)/station_attributes.o      \
     $(BINDIR)/station_market.o          \
+    $(BINDIR)/station_profits.o         \
     $(BINDIR)/util.o                    \
     
 	$(COMPILER) $(LINKFLAGS) -o $@ $^ $(LIBS)
@@ -49,6 +53,12 @@ $(BINDIR)/args.o: $(SOURCEDIR)/args.cpp $(SOURCEDIR)/args.h
 $(BINDIR)/blueprint.o: $(SOURCEDIR)/blueprint.cpp $(SOURCEDIR)/blueprint.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
+$(BINDIR)/blueprints.o: $(SOURCEDIR)/blueprints.cpp $(SOURCEDIR)/blueprints.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/blueprint_profit.o: $(SOURCEDIR)/blueprint_profit.cpp $(SOURCEDIR)/blueprint_profit.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
 $(BINDIR)/debug_mode.o: $(SOURCEDIR)/debug_mode.cpp $(SOURCEDIR)/debug_mode.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
@@ -56,6 +66,9 @@ $(BINDIR)/error.o: $(SOURCEDIR)/error.cpp $(SOURCEDIR)/error.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/galactic_market.o: $(SOURCEDIR)/galactic_market.cpp $(SOURCEDIR)/galactic_market.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/galactic_profits.o: $(SOURCEDIR)/galactic_profits.cpp $(SOURCEDIR)/galactic_profits.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/https_get.o: $(SOURCEDIR)/https_get.cpp $(SOURCEDIR)/https_get.h
@@ -100,6 +113,9 @@ $(BINDIR)/station_attributes.o: $(SOURCEDIR)/station_attributes.cpp $(SOURCEDIR)
 $(BINDIR)/station_market.o: $(SOURCEDIR)/station_market.cpp $(SOURCEDIR)/station_market.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
+$(BINDIR)/station_profits.o: $(SOURCEDIR)/station_profits.cpp $(SOURCEDIR)/station_profits.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
 $(BINDIR)/util.o: $(SOURCEDIR)/util.cpp $(SOURCEDIR)/util.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
@@ -122,6 +138,13 @@ fetch_prices: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
         --station-attributes-in data/json/station_attributes.json   \
         --prices-out data/json/prices.json
 
+calculate_blueprint_profits: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
+	$(BINDIR)/$(EXENAME)                                            \
+        --mode calculate-blueprint-profits                          \
+        --blueprints-in data/json/blueprints.json                   \
+        --prices-in data/json/prices.json                           \
+        --profits-out data/json/profits.json
+
 clean:
 	@rm -fv $(BINDIR)/*.o $(BINDIR)/$(EXENAME)
 
@@ -138,12 +161,18 @@ $(DOCDIR)/html_out/index.html:              \
     $(SOURCEDIR)/args.cpp                   \
     $(SOURCEDIR)/blueprint.h                \
     $(SOURCEDIR)/blueprint.cpp              \
+    $(SOURCEDIR)/blueprints.h               \
+    $(SOURCEDIR)/blueprints.cpp             \
+    $(SOURCEDIR)/blueprint_profit.h         \
+    $(SOURCEDIR)/blueprint_profit.cpp       \
     $(SOURCEDIR)/debug_mode.h               \
     $(SOURCEDIR)/debug_mode.cpp             \
     $(SOURCEDIR)/error.h                    \
     $(SOURCEDIR)/error.cpp                  \
     $(SOURCEDIR)/galactic_market.h          \
     $(SOURCEDIR)/galactic_market.cpp        \
+    $(SOURCEDIR)/galactic_profits.h         \
+    $(SOURCEDIR)/galactic_profits.cpp       \
     $(SOURCEDIR)/https_get.h                \
     $(SOURCEDIR)/https_get.cpp              \
     $(SOURCEDIR)/item_ids.h                 \
@@ -171,6 +200,8 @@ $(DOCDIR)/html_out/index.html:              \
     $(SOURCEDIR)/station_attributes.cpp     \
     $(SOURCEDIR)/station_market.h           \
     $(SOURCEDIR)/station_market.cpp         \
+    $(SOURCEDIR)/station_profits.h          \
+    $(SOURCEDIR)/station_profits.cpp        \
     $(SOURCEDIR)/util.h                     \
     $(SOURCEDIR)/util.cpp                   \
     

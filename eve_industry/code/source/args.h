@@ -37,6 +37,12 @@ class args_t
             /// * Inputs: EvE API, --item-attributes-in, --station-attributes-in
             /// * Outputs: --prices-out
             FETCH_PRICES,
+            /// Read market data from a previous FETCH_PRICES operation and
+            /// calculate the ratios on (output material value) / (input material value)
+            /// for each blueprint.
+            /// * Inputs: --prices-in, --blueprints-in
+            /// * Outputs: --profits-out
+            CALCULATE_BLUEPRINT_PROFITS,
             /// This must be last.
             NUM_ENUMS
         };
@@ -78,6 +84,21 @@ class args_t
         inline const std::string& prices_out() const
         {
             return this->prices_out_;
+        }
+        
+        inline const std::string& prices_in() const
+        {
+            return this->prices_in_;
+        }
+        
+        inline const std::string& blueprints_in() const
+        {
+            return this->blueprints_in_;
+        }
+        
+        inline const std::string& profits_out() const
+        {
+            return this->profits_out_;
         }
         
         inline bool cull_stations() const
@@ -212,8 +233,7 @@ class args_t
         /// EvE API for items.
         std::string item_attributes_out_;
         
-        /// @brief Filename of a JSON containing the integral IDs used by the
-        /// EvE API for items.
+        /// @brief See item_attributes_out_.
         std::string item_attributes_in_;
         
         /// @brief Filename of a JSON containing static information about
@@ -225,6 +245,16 @@ class args_t
         /// item specified by @ref item_attributes_in at all stations specified
         /// by @ref station_attributes_in_.
         std::string prices_out_;
+        
+        /// @brief See @ref prices_out_.
+        std::string prices_in_;
+        
+        /// @brief Filename of a JSON file containing info about blueprints such
+        /// as input materials and invention probabilities.
+        std::string blueprints_in_;
+        
+        /// @brief Filename of a JSON file to report profits to.
+        std::string profits_out_;
         
         /// @brief If true, strips out market orders from stations that weren't
         /// requested by @ref station_attributes_in

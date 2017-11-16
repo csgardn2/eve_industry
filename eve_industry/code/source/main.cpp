@@ -10,13 +10,14 @@
 #include <unordered_set>
 
 #include "args.h"
+#include "blueprints.h"
 #include "error.h"
 #include "galactic_market.h"
 #include "item_attributes.h"
 #include "item_ids.h"
+#include "galactic_profits.h"
 #include "station_attributes.h"
 #include "raw_regional_market.h"
-#include "regional_market.h"
 
 /// @brief Code execution starts here
 int main(int argc, char** argv)
@@ -54,10 +55,11 @@ int main(int argc, char** argv)
                 item_attributes_t item_attributes;
                 item_attributes.debug_mode(args.debug_mode());
                 item_attributes.fetch(item_ids);
-                
+                    
                 if (args.debug_mode().verbose())
                     std::cout << "Writing item attributes to file.\n";
                 item_attributes.write_to_json_file(item_attributes_out_file);
+                item_attributes_out_file.close();
                 
                 break;
                 
@@ -162,6 +164,56 @@ int main(int argc, char** argv)
                 if (args.debug_mode().verbose())
                     std::cout << "Writing galactic market data to file \"" << args.prices_out() << "\".\n";
                 galactic_market.write_to_json_file(prices_out_file);
+                prices_out_file.close();
+                
+                break;
+                
+            }
+            
+            case args_t::mode_t::CALCULATE_BLUEPRINT_PROFITS:
+            {
+                
+                // Open prices file for reading
+                if (args.debug_mode().verbose())
+                    std::cout << "Parsing prices-in file \"" << args.prices_in() << "\".\n";
+                std::ifstream prices_in_file(args.prices_in());
+                if (!prices_in_file.good())
+                {
+                    std::cerr << "Error.  Failed to open \"" << args.prices_in() << "\" for reading.\n";
+                    return -1;
+                }
+                galactic_market_t galactic_market;
+                galactic_market.read_from_json_file(prices_in_file);
+                
+                // Open blueprints file for reading
+                if (args.debug_mode().verbose())
+                    std::cout << "Parsing blueprints-in file \"" << args.blueprints_in() << "\".\n";
+                std::ifstream blueprints_in_file(args.blueprints_in());
+                if (!blueprints_in_file.good())
+                {
+                    std::cerr << "Error.  Failed to open \"" << args.blueprints_in() << "\" for reading.\n";
+                    return -1;
+                }
+                blueprints_t blueprints_in;
+                blueprints_in.read_from_json_file(blueprints_in_file);
+                
+                // Calculate blueprint profit at each station
+                if (args.debug_mode().verbose())
+                    std::cout << "Calculating blueprint profitability.\n";
+                galactic_profits_t galactic_profits_out;
+                galactic_profits_out.caclulate_blueprint_profits(blueprints_in, galactic_market);
+                
+                // Write profits report to file.
+                if (args.debug_mode().verbose())
+                    std::cout << "Writing profits-out file \"" << args.profits_out() << "\".\n";
+                std::ofstream profits_out_file(args.profits_out());
+                if (!profits_out_file.good())
+                {
+                    std::cerr << "Error.  Failed to open \"" << args.profits_out() << "\" for reading.\n";
+                    return -1;
+                }
+                galactic_profits_out.write_to_json_file(profits_out_file);
+                profits_out_file.close();
                 
                 break;
                 

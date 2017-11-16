@@ -3,3 +3,4 @@
 bin/eve_industry
 documentation/html_out
 data/json/prices.json
+data/json/profits.json

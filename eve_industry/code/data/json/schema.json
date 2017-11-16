@@ -206,10 +206,14 @@
             "type": "object",
             "description": "Stores all of the manufacture, copy, and invention attributes of a blueprint.",
             "properties": {
-                "blueprint_original_input_id": {
+                "blueprint_id": {
                     "type": "integer",
                     "description": "The integral ID of this blueprint original, not its output product.",
                     "minimum": 0
+                },
+                "requires_invention": {
+                    "type": "boolean",
+                    "description": "Set this to true if you can only acquire this blueprint via invention and want to include the average invention costs will be included in profitability reports."
                 },
                 "manufacture": {
                     "type": "object",
@@ -291,14 +295,9 @@
                                 },
                                 "required": ["item_id", "quantity"]
                             }
-                        },
-                        "blueprint_copy_output_id": {
-                            "type": "integer",
-                            "description": "Integral ID of a 0ME 0TE blueprint copy produced after one copy run.",
-                            "minimum": 0
                         }
                     },
-                    "required": ["time", "input_materials", "blueprint_copy_output_id"]
+                    "required": ["time", "input_materials"]
                 },
                 "invent": {
                     "type": "array",
@@ -335,7 +334,7 @@
                                     "required": ["item_id", "quantity"]
                                 }
                             },
-                            "blueprint_copy_output_id": {
+                            "blueprint_id": {
                                 "type": "integer",
                                 "description": "Integral ID of the T2 blueprint copy produced after an invention run.",
                                 "minimum": 0
@@ -358,12 +357,86 @@
                                 "minimum": 0
                             }
                         },
-                        "required": ["time", "probability", "input_materials", "bluerpint_copy_output_id", "material_efficiency", "time_efficiency", "runs"]
+                        "required": ["time", "probability", "input_materials", "bluerpint_id", "material_efficiency", "time_efficiency", "runs"]
                     }
                 }
             },
-            "required": ["blueprint_original_input_id", "manufacture", "copy", "invent"]
+            "required": ["blueprint_id", "requires_invention", "manufacture", "copy", "invent"]
+        },
+        "blueprints": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/blueprint"
+            }
+        },
+        "blueprint_profit": {
+            "type": "object",
+            "description": "Reports various profit margins and scores for a particular blueprint.",
+            "properties": {
+                "blueprint_id": {
+                    "type": "integer",
+                    "description": "This profitability report was generated for the blueprint with this ID.",
+                    "minimum": 0
+                },
+                "time": {
+                    "type": "integer",
+                    "description": "Total time to produce 1 final output item including copy and invention time.  Assumes that all input materials are purchased and not manufactured.  Invention time is weighted using the invention probability.",
+                    "minimum": 0
+                },
+                "total_cost": {
+                    "type": "number",
+                    "description": "Sum of all costs including input materials, datacores, decryptors.  Invention costs are weighted by the probability of success.",
+                    "minimum": 0.0
+                },
+                "output_value": {
+                    "type": "number",
+                    "description": "Value of the output items produced by one manufacturing run.  For example, a mjolnir fury light missil run produces 5000 missiles.  If these missiles sell for 87 ISK each then this value would be 435000.",
+                    "minimum": 0
+                },
+                "optimal_decryptor_id": {
+                    "type": "integer",
+                    "description": "If manufacturing this item reqires invention, these decryptor will maximize your profit amount.  Can be null.",
+                    "minimum": 0
+                },
+                "profit_amount": {
+                    "type": "number",
+                    "description": "Calculated using output_value - total_cost."
+                },
+                "profit_percent": {
+                    "type": "number",
+                    "description": "Calculated using output_value / total_cost."
+                },
+                "profit_per_second": {
+                    "type": "number",
+                    "description": "Calculated using (output_value - total_cost) / time."
+                }
+            },
+            "required": ["blueprint_id", "time", "total_cost", "output_value", "optimal_decryptor_id"]
+        },
+        "station_profits": {
+            "type": "object",
+            "description": "Blueprint profitabilities based on the lowest sell orders at this station.",
+            "properties": {
+                "station_id": {
+                    "type": "integer",
+                    "description": "Indicates which station's prices were used for these profit calculations.",
+                    "minimum": 0
+                },
+                "profits": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/blueprint_profit"
+                    }
+                }
+            },
+            "required": ["station_id", "profits"]
+        },
+        "galactic_profits": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/station_profits"
+            }
         }
-   }
+    }
 }
 

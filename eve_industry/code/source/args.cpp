@@ -17,13 +17,15 @@
 const std::vector<std::string_view> args_t::mode_names_ =
 {
     "FETCH_ITEM_ATTRIBUTES",
-    "FETCH_PRICES"
+    "FETCH_PRICES",
+    "CALCULATE_BLUEPRINT_PROFITS"
 };
 
 const std::vector<std::string_view> args_t::mode_values_ =
 {
     "fetch-item-attributes",
-    "fetch-prices"
+    "fetch-prices",
+    "calculate-blueprint-profits"
 };
 
 std::string args_t::valid_mode_values() const
@@ -169,12 +171,51 @@ void args_t::parse(unsigned argc, char const* const* argv)
     if (this->mode_ == mode_t::FETCH_PRICES)
     {
         this->prices_out_ = find_argument("--prices-out", argc, argv);
-        if (this->item_attributes_in_.empty())
+        if (this->prices_out_.empty())
         {
             std::string message("Error.  --prices-out FILE is required for ");
             message += mode_values_[unsigned(this->mode_)];
             message += " mode.\n";
-            throw error_message_t(error_code_t::ITEM_ATTRIBUTES_OUT_MISSING, message);
+            throw error_message_t(error_code_t::PRICES_OUT_MISSING, message);
+        }
+    }
+    
+    // Parse --prices-in
+    if (this->mode_ == mode_t::CALCULATE_BLUEPRINT_PROFITS)
+    {
+        this->prices_in_ = find_argument("--prices-in", argc, argv);
+        if (this->prices_in_.empty())
+        {
+            std::string message("Error.  --prices-in FILE is required for ");
+            message += mode_values_[unsigned(this->mode_)];
+            message += " mode.\n";
+            throw error_message_t(error_code_t::PRICES_IN_MISSING, message);
+        }
+    }
+    
+    // Parse --blueprints-in
+    if (this->mode_ == mode_t::CALCULATE_BLUEPRINT_PROFITS)
+    {
+        this->blueprints_in_ = find_argument("--blueprints-in", argc, argv);
+        if (this->blueprints_in_.empty())
+        {
+            std::string message("Error.  --blueprints-in FILE is required for ");
+            message += mode_values_[unsigned(this->mode_)];
+            message += " mode.\n";
+            throw error_message_t(error_code_t::BLUEPRINTS_IN_MISSING, message);
+        }
+    }
+    
+    // Parse --profits-out
+    if (this->mode_ == mode_t::CALCULATE_BLUEPRINT_PROFITS)
+    {
+        this->profits_out_ = find_argument("--profits-out", argc, argv);
+        if (this->profits_out_.empty())
+        {
+            std::string message("Error.  --profits-out FILE is required for ");
+            message += mode_values_[unsigned(this->mode_)];
+            message += " mode.\n";
+            throw error_message_t(error_code_t::PROFITS_OUT_MISSING, message);
         }
     }
     
@@ -194,6 +235,9 @@ void args_t::clear()
     this->item_attributes_in_.clear();
     this->station_attributes_in_.clear();
     this->prices_out_.clear();
+    this->prices_in_.clear();
+    this->blueprints_in_.clear();
+    this->profits_out_.clear();
     this->cull_stations_ = false;
     this->cull_orders_ = false;
 }

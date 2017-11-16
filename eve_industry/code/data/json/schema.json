@@ -61,11 +61,11 @@
         },
         "station_attribute": {
             "type": "object",
-            "description": "Static information about an NPC station in EvE",
+            "description": "Static information about an NPC station in EvE.",
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "The name of a station, such as 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'",
+                    "description": "The name of a station, such as 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'.",
                     "minLength": 1
                 },
                 "station_id": {
@@ -80,7 +80,7 @@
                 },
                 "region_id": {
                     "type": "integer",
-                    "description": "The integral uniquifier for the region containing this station, as used by the EvE swagger ubterface,",
+                    "description": "The integral uniquifier for the region containing this station, as used by the EvE swagger interface.",
                     "minimum": 0
                 }
             },
@@ -137,7 +137,7 @@
         },
         "galactic_market": {
             "type": "array",
-            "description": "Zero or more regions containing market hubs",
+            "description": "Zero or more regions containing market hubs.",
             "items": {
                 "$ref": "#/definitions/regional_market"
             }
@@ -148,7 +148,7 @@
             "properties": {
                 "region_id": {
                     "type": "integer",
-                    "description": "Integral uniquifier of this region as used by the EvE Swagger interface",
+                    "description": "Integral uniquifier of this region as used by the EvE Swagger interface.",
                     "minimum": 0
                 },
                 "stations": {
@@ -166,7 +166,7 @@
             "properties": {
                 "station_id": {
                     "type": "integer",
-                    "description": "Integral uniquifier of this station as used by the EvE Swagger interface",
+                    "description": "Integral uniquifier of this station as used by the EvE Swagger interface.",
                     "minimum": 0
                 },
                 "items": {
@@ -184,7 +184,7 @@
             "properties": {
                 "item_id": {
                     "type": "integer",
-                    "description": "Integral uniquifier of this item as used by the EvE Swagger interface",
+                    "description": "Integral uniquifier of this item as used by the EvE Swagger interface.",
                     "minimum": 0
                 },
                 "buy_orders": {
@@ -201,9 +201,169 @@
                 }
             },
             "required": ["item_id", "buy_orders", "sell_orders"]
+        },
+        "blueprint": {
+            "type": "object",
+            "description": "Stores all of the manufacture, copy, and invention attributes of a blueprint.",
+            "properties": {
+                "blueprint_original_input_id": {
+                    "type": "integer",
+                    "description": "The integral ID of this blueprint original, not its output product.",
+                    "minimum": 0
+                },
+                "manufacture": {
+                    "type": "object",
+                    "properties": {
+                        "time": {
+                            "type": "integer",
+                            "description": "The number of seconds required for 1 manufacturing run at 0 TE."
+                        },
+                        "input_materials": {
+                            "type": "array",
+                            "description": "List of materials and quantities consumed during 1 manufacturing run at 0 ME.",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "item_id": {
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "minimum": 0
+                                    }
+                                },
+                                "required": ["item_id", "quantity"]
+                            }
+                        },
+                        "output_materials": {
+                            "type": "array",
+                            "properties": {
+                                "item_id": {
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "quantity": {
+                                    "type": "integer",
+                                    "description": "The amount of this item produced by a single manufacturing run.",
+                                    "minimum": 0
+                                }
+                            },
+                            "required": ["item_id", "quantity"]
+                        },
+                        "material_efficiency": {
+                            "type": "integer",
+                            "description": "Percent reduction in required input materials.",
+                            "minimum": 0,
+                            "maximum": 10
+                        },
+                        "time_efficiency": {
+                            "type": "integer",
+                            "description": "Percent reduction in the time required for manufacture.",
+                            "minimum": 0,
+                            "maximum": 20
+                        }
+                    },
+                    "required": ["time", "input_materials", "output_materials", "material_efficiency", "time_efficiency"]
+                },
+                "copy": {
+                    "type": "object",
+                    "properties": {
+                        "time": {
+                            "type": "integer",
+                            "description": "The amount of time to create a single 1-run copy of this blueprint at 0TE.",
+                            "minimum": 0
+                        },
+                        "input_materials": {
+                            "type": "array",
+                            "description": "List of materials and quantities consumed during 1 copy run at 0 ME.",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "item_id": {
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "minimum": 0
+                                    }
+                                },
+                                "required": ["item_id", "quantity"]
+                            }
+                        },
+                        "blueprint_copy_output_id": {
+                            "type": "integer",
+                            "description": "Integral ID of a 0ME 0TE blueprint copy produced after one copy run.",
+                            "minimum": 0
+                        }
+                    },
+                    "required": ["time", "input_materials", "blueprint_copy_output_id"]
+                },
+                "invent": {
+                    "type": "array",
+                    "description": "This is an array because some T1 blueprints have multiple choices for what you'd like ti invent.",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "time": {
+                                "type": "integer",
+                                "description": "The time required to perform an invention run on a single 1-run input blueprint copy.",
+                                "minimum": 0
+                            },
+                            "probability": {
+                                "type": "number",
+                                "description": "The probability of successfully inventing this blueprint with no skills, bonuses, or decryptors.",
+                                "minimum": 0.0,
+                                "maximum": 1.0
+                            },
+                            "input_materials": {
+                                "type": "array",
+                                "description": "List of materials and datacores but NOT decryptors and their quantities consumed when inventing a single 1-run BPC.",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "item_id": {
+                                            "type": "integer",
+                                            "minimum": 0
+                                        },
+                                        "quantity": {
+                                            "type": "integer",
+                                            "minimum": 0
+                                        }
+                                    },
+                                    "required": ["item_id", "quantity"]
+                                }
+                            },
+                            "blueprint_copy_output_id": {
+                                "type": "integer",
+                                "description": "Integral ID of the T2 blueprint copy produced after an invention run.",
+                                "minimum": 0
+                            },
+                            "material_efficiency": {
+                                "type": "integer",
+                                "description": "Material efficiency of the resultant T2 blueprint with no decryptors.",
+                                "minimum": 0,
+                                "maximum": 10
+                            },
+                            "time_efficiency": {
+                                "type": "integer",
+                                "description": "Time efficiency of the resultant T2 blueprint with no decryptors.",
+                                "minimum": 0,
+                                "maximum": 20
+                            },
+                            "runs": {
+                                "type": "integer",
+                                "description": "Runs per copy for a single output T2 blueprint with no decryptors.",
+                                "minimum": 0
+                            }
+                        },
+                        "required": ["time", "probability", "input_materials", "bluerpint_copy_output_id", "material_efficiency", "time_efficiency", "runs"]
+                    }
+                }
+            },
+            "required": ["blueprint_original_input_id", "manufacture", "copy", "invent"]
         }
-        
    }
-   
 }
 

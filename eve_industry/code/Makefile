@@ -15,6 +15,7 @@ all: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 # Add additional .o files on the line below (after main.o)
 $(BINDIR)/$(EXENAME):                   \
     $(BINDIR)/args.o                    \
+    $(BINDIR)/blueprint.o               \
     $(BINDIR)/debug_mode.o              \
     $(BINDIR)/error.o                   \
     $(BINDIR)/galactic_market.o         \
@@ -43,6 +44,9 @@ $(BINDIR)/$(EXENAME):                   \
 # Add more .cpp -> .o compile commands here
 
 $(BINDIR)/args.o: $(SOURCEDIR)/args.cpp $(SOURCEDIR)/args.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/blueprint.o: $(SOURCEDIR)/blueprint.cpp $(SOURCEDIR)/blueprint.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/debug_mode.o: $(SOURCEDIR)/debug_mode.cpp $(SOURCEDIR)/debug_mode.h
@@ -132,6 +136,8 @@ $(DOCDIR)/html_out/index.html:              \
     $(DOCDIR)/Doxyfile                      \
     $(SOURCEDIR)/args.h                     \
     $(SOURCEDIR)/args.cpp                   \
+    $(SOURCEDIR)/blueprint.h                \
+    $(SOURCEDIR)/blueprint.cpp              \
     $(SOURCEDIR)/debug_mode.h               \
     $(SOURCEDIR)/debug_mode.cpp             \
     $(SOURCEDIR)/error.h                    \

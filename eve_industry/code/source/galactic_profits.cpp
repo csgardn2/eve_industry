@@ -65,10 +65,20 @@ void galactic_profits_t::read_from_json_structure(const Json::Value& json_root)
 {
     
     // Parse root
-    if (!json_root.isObject())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of TODO is not of type \"object\".\n");
+    if (!json_root.isArray())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of galactic_profits_t is not of type \"array\".\n");
     
-    // TODO Decode the rest of your member variables here.
+    // Re-Allocate storage
+    this->station_profits_.clear();
+    this->station_profits_.reserve(json_root.size());
+    
+    // Decode each element of the array
+    for (const Json::Value& cur_json_element : json_root)
+    {
+        station_profits_t station_profits;
+        station_profits.read_from_json_structure(cur_json_element);
+        this->station_profits_.emplace_back(std::move(station_profits));
+    }
     
 }
 
@@ -86,18 +96,33 @@ void galactic_profits_t::write_to_json_buffer(std::string& buffer, unsigned inde
     
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
     std::string_view indent_0(indent_1.data(), indent_start);
-    // TODO Create as many indent levels as needed using string_view.
+    
+    // Use compact notation for an empty object
+    unsigned num_stations = this->station_profits_.size();
+    if (num_stations == 0)
+    {
+        buffer += "[]";
+        return;
+    }
     
     // It is recommended not to start a new line before the opening brace, to
     // enable chaining.
-    buffer += "{\n";
+    buffer += "[\n";
     
-    // TODO Encode member variables.
+    // Encode each station's profit report.
+    for (unsigned ix = 0, last_ix = num_stations - 1; ix <= num_stations; ix++)
+    {
+        this->station_profits_[ix].write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
+        if (ix == last_ix)
+            buffer += '\n';
+        else
+            buffer += ", ";
+    }
     
     // It is recommended to not put a newline on the last brace to allow
     // comma chaining when this object is an element of an array.
     buffer += indent_0;
-    buffer += '}';
+    buffer += ']';
     
 }
 

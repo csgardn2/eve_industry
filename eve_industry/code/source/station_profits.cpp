@@ -10,6 +10,7 @@
 #include <string_view>
 #include <vector>
 
+#include"blueprint_profit.h"
 #include "error.h"
 #include "json.h"
 #include "station_market.h"
@@ -65,16 +66,30 @@ void station_profits_t::read_from_json_structure(const Json::Value& json_root)
 {
     
     // Parse root
-    if (!json_root.isArray())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of station_profits_t is not of type \"array\".\n");
+    if (!json_root.isObject())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of station_profits_t is not of type \"object\".\n");
     
-    // Allocate storage for all station_profits
-    unsigned num_station_profits = json_root.size();
-    this->blueprint_profits_.resize(num_station_profits);
+    // Parse station_id
+    const Json::Value& json_station_id = json_root["station_id"];
+    if (!json_station_id.isUInt())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <station_profits>/station_id was not found or not of type \"unsigned int\".\n");
+    this->station_id_ = json_station_id.asUInt();
     
-    // Overwrite previous content
-    for (unsigned ix = 0; ix < num_station_profits; ix++)
-        this->blueprint_profits_[ix].read_from_json_structure(json_root[ix]);
+    // Parse profits array
+    const Json::Value& json_profits = json_root["profits"];
+    if (!json_profits.isArray())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <station_profits>/profits was not found or not of type \"array\".\n");
+    
+    // Parse each element of profits array
+    unsigned num_blueprint_profits = json_profits.size();
+    this->blueprint_profits_.clear();
+    this->blueprint_profits_.reserve(num_blueprint_profits);
+    for (const Json::Value& json_cur_array_element : json_profits)
+    {
+        blueprint_profit_t new_blueprint_profit;
+        new_blueprint_profit.read_from_json_structure(json_cur_array_element);
+        this->blueprint_profits_.emplace_back(std::move(new_blueprint_profit));
+    }
     
 }
 
@@ -90,36 +105,51 @@ void station_profits_t::write_to_json_file(std::ostream& file, unsigned indent_s
 void station_profits_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
 {
     
-    std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
-    std::string_view indent_0(indent_1.data(), indent_start);
-    
-    // Use compact notation for empty vectors
-    unsigned num_station_profits = this->blueprint_profits_.size();
-    if (num_station_profits == 0)
-    {
-        buffer += "[]";
-        return;
-    }
+    std::string indent_2(indent_start + 2 * spaces_per_tab, ' ');
+    std::string_view indent_1(indent_2.data(), indent_start + spaces_per_tab);
+    std::string_view indent_0(indent_2.data(), indent_start);
     
     // It is recommended not to start a new line before the opening brace, to
     // enable chaining.
-    buffer += "[\n";
+    buffer += "{\n";
     
-    // Encode each profit as an element of an array.
+    // Encode station_id
     buffer += indent_1;
-    for (unsigned ix = 0, last_ix = num_station_profits - 1; ix <= last_ix; last_ix++)
-    {
-        this->blueprint_profits_[ix].write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
-        if (ix == last_ix)
-            buffer += '\n';
-        else
-            buffer += ", ";
-    }
+    buffer += "\"station_id\": ";
+    buffer += std::to_string(this->station_id_);
+    buffer += ",\n";
     
+    // Encode profits array
+    buffer += indent_1;
+    buffer += "\"profits\": ";
+    
+    unsigned num_station_profits = this->blueprint_profits_.size();
+    if (num_station_profits == 0)
+    {
+        
+        // Use compact notation for empty vectors
+        buffer += "[]\n";
+        
+    } else {
+        
+        buffer += "[\n";
+        
+        // Encode each profit as an element of an array.
+        buffer += indent_2;
+        for (unsigned ix = 0, last_ix = num_station_profits - 1; ix <= last_ix; ix++)
+        {
+            this->blueprint_profits_[ix].write_to_json_buffer(buffer, indent_start + 2 * spaces_per_tab, spaces_per_tab);
+            if (ix == last_ix)
+                buffer += '\n';
+            else
+                buffer += ", ";
+        }
+    
+    }
     // It is recommended to not put a newline on the last brace to allow
     // comma chaining when this object is an element of an array.
     buffer += indent_0;
-    buffer += ']';
+    buffer += '}';
     
 }
 

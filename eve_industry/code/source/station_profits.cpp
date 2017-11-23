@@ -71,9 +71,9 @@ void station_profits_t::read_from_json_structure(const Json::Value& json_root)
     
     // Parse station_id
     const Json::Value& json_station_id = json_root["station_id"];
-    if (!json_station_id.isUInt())
+    if (!json_station_id.isUInt64())
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <station_profits>/station_id was not found or not of type \"unsigned int\".\n");
-    this->station_id_ = json_station_id.asUInt();
+    this->station_id_ = json_station_id.asUInt64();
     
     // Parse profits array
     const Json::Value& json_profits = json_root["profits"];

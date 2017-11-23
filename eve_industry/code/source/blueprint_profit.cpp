@@ -66,9 +66,39 @@ void blueprint_profit_t::read_from_json_structure(const Json::Value& json_root)
     
     // Parse root
     if (!json_root.isObject())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of TODO is not of type \"object\".\n");
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of blueprint_profit is not of type \"object\".\n");
     
-    // TODO Decode the rest of your member variables here.
+    // Parse blueprint_id
+    const Json::Value& json_blueprint_id = json_root["blueprint_id"];
+    if (!json_blueprint_id.isUInt64())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/blueprint_id was not found or not of type \"unsigned integer\".\n");
+    this->blueprint_id_ = json_blueprint_id.asUInt64();
+    
+    // Parse time
+    const Json::Value& json_time = json_root["time"];
+    if (!json_time.isUInt())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/time was not found or not of type \"unsigned integer\".\n");
+    this->time_ = json_time.asUInt();
+    
+    // Parse total_cost
+    const Json::Value& json_total_cost = json_root["total_cost"];
+    if (!json_total_cost.isNumeric())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/total_cost was not found or not of type \"float\".\n");
+    this->total_cost_ = json_total_cost.asFloat();
+    
+    // Parse output_value
+    const Json::Value& json_output_value = json_root["output_value"];
+    if (!json_output_value.isNumeric())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/output_value was not found or not of type \"float\".\n");
+    this->output_value_ = json_output_value.asFloat();
+    
+    // Parse optimal_decryptor_id
+    const Json::Value& json_optimal_decryptor_id = json_root["optimal_decryptor_id"];
+    if (!json_optimal_decryptor_id.isUInt64())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/optimal_decryptor_id was not found or not of type \"unsigned integer\".\n");
+    this->optimal_decryptor_id_ = json_optimal_decryptor_id.asUInt64();
+    
+    // Ignore derivable stats like profit_amount
     
 }
 
@@ -86,13 +116,52 @@ void blueprint_profit_t::write_to_json_buffer(std::string& buffer, unsigned inde
     
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
     std::string_view indent_0(indent_1.data(), indent_start);
-    // TODO Create as many indent levels as needed using string_view.
     
     // It is recommended not to start a new line before the opening brace, to
     // enable chaining.
     buffer += "{\n";
     
-    // TODO Encode member variables.
+    // Encode base statistics
+    buffer += indent_1;
+    buffer += "\"blueprint_id\": ";
+    buffer += std::to_string(this->blueprint_id_);
+    buffer += ",\n";
+    
+    buffer += indent_1;
+    buffer += "\"time\": ";
+    buffer += std::to_string(this->time_);
+    buffer += ",\n";
+    
+    buffer += indent_1;
+    buffer += "\"total_cost\": ";
+    buffer += std::to_string(this->total_cost_);
+    buffer += ",\n";
+    
+    buffer += indent_1;
+    buffer += "\"output_value\": ";
+    buffer += std::to_string(this->output_value_);
+    buffer += ",\n";
+    
+    buffer += indent_1;
+    buffer += "\"optimal_decryptor_id\": ";
+    buffer += std::to_string(this->optimal_decryptor_id_);
+    buffer += ",\n";
+    
+    // Encode optional, derived stats.
+    buffer += indent_1;
+    buffer += "\"profit_amount\": ";
+    buffer += std::to_string(this->profit_amount());
+    buffer += ",\n";
+    
+    buffer += indent_1;
+    buffer += "\"profit_percent\": ";
+    buffer += std::to_string(this->profit_percent());
+    buffer += ",\n";
+    
+    buffer += indent_1;
+    buffer += "\"profit_per_second\": ";
+    buffer += std::to_string(this->profit_per_second());
+    buffer += '\n';
     
     // It is recommended to not put a newline on the last brace to allow
     // comma chaining when this object is an element of an array.

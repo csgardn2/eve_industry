@@ -34,6 +34,8 @@ enum class error_code_t
     NO_ORDERS,
     HTTPS_GET_FAILED,
     MISSING_MARKET_PAGE,
+    INVALID_MATERIAL_EFFICIENCY,
+    INVALID_TIME_EFFICIENCY,
     /// This element must be last
     NUM_ENUMS
     

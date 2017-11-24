@@ -28,6 +28,8 @@ const std::vector<std::string_view> error_message_t::error_names_ =
     "EVE_SUCKS",
     "NO_ORDERS",
     "HTTPS_GET_FAILED",
-    "MISSING_MARKET_PAGE"
+    "MISSING_MARKET_PAGE",
+    "INVALID_MATERIAL_EFFICIENCY",
+    "INVALID_TIME_EFFICIENCY"
 };
 

@@ -10,7 +10,8 @@
 #include <string_view>
 #include <vector>
 
-#include"blueprint_profit.h"
+#include "blueprints.h"
+#include "blueprint_profit.h"
 #include "error.h"
 #include "json.h"
 #include "station_market.h"
@@ -21,7 +22,21 @@ void station_profits_t::calculate_blueprint_profits
     const blueprints_t& blueprints_in,
     const station_market_t& station_market
 ){
-    /// TODO
+    
+    // Clear previous content
+    this->blueprint_profits_.clear();
+    this->blueprint_profits_.reserve(blueprints_in.storage().size());
+    
+    this->station_id_ = station_market.station_id();
+    
+    // Calculate profitability for each blueprint using this station's prices
+    for (const blueprint_t& cur_blueprint : blueprints_in.storage())
+    {
+        blueprint_profit_t new_blueprint_profit;
+        new_blueprint_profit.initialize_from_market(cur_blueprint.blueprint_id(), station_market);
+        this->blueprint_profits_.emplace_back(std::move(new_blueprint_profit));
+    }
+    
 }
 
 void station_profits_t::read_from_json_file(std::istream& file)

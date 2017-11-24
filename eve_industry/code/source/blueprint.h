@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "error.h"
+#include "item_quantity.h"
 #include "json.h"
 
 /// @brief Specifies required input materials, material quantities, material
@@ -23,6 +24,8 @@ class blueprint_t
         
     public:
         
+        class manufacture_t;
+        
         /// @brief Default constructor
         inline blueprint_t() = default;
         
@@ -32,6 +35,26 @@ class blueprint_t
         // Add operators here if desired.
         
         // Add member read and write functions
+        
+        inline uint64_t blueprint_id() const
+        {
+            return this->blueprint_id_;
+        }
+        
+        inline void blueprint_id(uint64_t new_blueprint_id)
+        {
+            this->blueprint_id_ = new_blueprint_id;
+        }
+        
+        inline bool requires_invention() const
+        {
+            return this->requires_invention_;
+        }
+        
+        inline void requires_invention(bool new_requires_invention)
+        {
+            this->requires_invention_ = new_requires_invention;
+        }
         
         // Add special-purpose functions here
         
@@ -101,7 +124,15 @@ class blueprint_t
         
         // Try to make your members protected, even if they don't have to be.
         
-        /// @todo Create classes for manufacture, copy, and invent.
+        /// @brief The integral ID of this blueprint original, not its output product.
+        uint64_t blueprint_id_;
+        
+        /// @brief Set this to true if you can only acquire this blueprint via
+        // invention and want to include the average invention costs will be
+        /// included in profitability reports.
+        bool requires_invention_;
+        
+        // TODO add structures for manufacture, copy, and invent
         
 };
 

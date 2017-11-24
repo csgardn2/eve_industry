@@ -242,6 +242,7 @@
                         },
                         "output_materials": {
                             "type": "array",
+                            "description": "The items produced by a single successfull manufacturing run of this blueprint.",
                             "properties": {
                                 "item_id": {
                                     "type": "integer",

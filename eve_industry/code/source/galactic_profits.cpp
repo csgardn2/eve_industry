@@ -15,12 +15,26 @@
 #include "galactic_profits.h"
 #include "json.h"
 
-void galactic_profits_t::caclulate_blueprint_profits
+void galactic_profits_t::caclulate_station_profits
 (
     const blueprints_t& blueprints,
     const galactic_market_t& galactic_market
 ){
-    /// TODO
+    
+    // Clear previous content
+    this->station_profits_.clear();
+    
+    // Iterate through each station with a market hub
+    for (const std::pair<uint64_t, regional_market_t>& cur_regional_market : galactic_market.regions())
+    {
+        for (const std::pair<uint64_t, station_market_t>& cur_station_market : cur_regional_market.second.stations())
+        {
+            station_profits_t new_station_profits;
+            new_station_profits.calculate_blueprint_profits(blueprints, cur_station_market.second);
+            this->station_profits_.emplace_back(std::move(new_station_profits));
+        }
+    }
+    
 }
 
 void galactic_profits_t::read_from_json_file(std::istream& file)
@@ -94,6 +108,7 @@ void galactic_profits_t::write_to_json_file(std::ostream& file, unsigned indent_
 void galactic_profits_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
 {
     
+    
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
     std::string_view indent_0(indent_1.data(), indent_start);
     
@@ -110,7 +125,8 @@ void galactic_profits_t::write_to_json_buffer(std::string& buffer, unsigned inde
     buffer += "[\n";
     
     // Encode each station's profit report.
-    for (unsigned ix = 0, last_ix = num_stations - 1; ix <= num_stations; ix++)
+    buffer += indent_1;
+    for (unsigned ix = 0, last_ix = num_stations - 1; ix <= last_ix; ix++)
     {
         this->station_profits_[ix].write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
         if (ix == last_ix)

@@ -27,6 +27,7 @@ $(BINDIR)/$(EXENAME):                   \
     $(BINDIR)/item_attributes.o         \
     $(BINDIR)/item_ids.o                \
     $(BINDIR)/item_market.o             \
+    $(BINDIR)/item_quantity.o           \
     $(BINDIR)/json.o                    \
     $(BINDIR)/main.o                    \
     $(BINDIR)/page_fetcher.o            \
@@ -84,6 +85,9 @@ $(BINDIR)/item_ids.o: $(SOURCEDIR)/item_ids.cpp $(SOURCEDIR)/item_ids.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/item_market.o: $(SOURCEDIR)/item_market.cpp $(SOURCEDIR)/item_market.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/item_quantity.o: $(SOURCEDIR)/item_quantity.cpp $(SOURCEDIR)/item_quantity.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/json.o: $(SOURCEDIR)/jsoncpp.cpp $(SOURCEDIR)/json.h
@@ -183,6 +187,8 @@ $(DOCDIR)/html_out/index.html:              \
     $(SOURCEDIR)/item_attributes.cpp        \
     $(SOURCEDIR)/item_market.h              \
     $(SOURCEDIR)/item_market.cpp            \
+    $(SOURCEDIR)/item_quantity.h            \
+    $(SOURCEDIR)/item_quantity.cpp          \
     $(SOURCEDIR)/json.h                     \
     $(SOURCEDIR)/jsoncpp.cpp                \
     $(SOURCEDIR)/main.cpp                   \

@@ -36,6 +36,7 @@ enum class error_code_t
     MISSING_MARKET_PAGE,
     INVALID_MATERIAL_EFFICIENCY,
     INVALID_TIME_EFFICIENCY,
+    INVALID_PROBABILITY,
     /// This element must be last
     NUM_ENUMS
     

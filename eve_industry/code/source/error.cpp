@@ -30,6 +30,7 @@ const std::vector<std::string_view> error_message_t::error_names_ =
     "HTTPS_GET_FAILED",
     "MISSING_MARKET_PAGE",
     "INVALID_MATERIAL_EFFICIENCY",
-    "INVALID_TIME_EFFICIENCY"
+    "INVALID_TIME_EFFICIENCY",
+    "INVALID_PROBABILITY"
 };
 

@@ -19,15 +19,18 @@ $(BINDIR)/$(EXENAME):                   \
     $(BINDIR)/blueprints.o              \
     $(BINDIR)/blueprint_profit.o        \
     $(BINDIR)/debug_mode.o              \
+    $(BINDIR)/copy.o                    \
     $(BINDIR)/error.o                   \
     $(BINDIR)/galactic_market.o         \
     $(BINDIR)/galactic_profits.o        \
     $(BINDIR)/https_get.o               \
+    $(BINDIR)/invent.o                  \
     $(BINDIR)/item_attribute.o          \
     $(BINDIR)/item_attributes.o         \
     $(BINDIR)/item_ids.o                \
     $(BINDIR)/item_market.o             \
     $(BINDIR)/item_quantity.o           \
+    $(BINDIR)/item_quantities.o         \
     $(BINDIR)/json.o                    \
     $(BINDIR)/main.o                    \
     $(BINDIR)/manufacture.o             \
@@ -61,6 +64,9 @@ $(BINDIR)/blueprints.o: $(SOURCEDIR)/blueprints.cpp $(SOURCEDIR)/blueprints.h
 $(BINDIR)/blueprint_profit.o: $(SOURCEDIR)/blueprint_profit.cpp $(SOURCEDIR)/blueprint_profit.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
+$(BINDIR)/copy.o: $(SOURCEDIR)/copy.cpp $(SOURCEDIR)/copy.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
 $(BINDIR)/debug_mode.o: $(SOURCEDIR)/debug_mode.cpp $(SOURCEDIR)/debug_mode.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
@@ -76,6 +82,9 @@ $(BINDIR)/galactic_profits.o: $(SOURCEDIR)/galactic_profits.cpp $(SOURCEDIR)/gal
 $(BINDIR)/https_get.o: $(SOURCEDIR)/https_get.cpp $(SOURCEDIR)/https_get.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
+$(BINDIR)/invent.o: $(SOURCEDIR)/invent.cpp $(SOURCEDIR)/invent.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
 $(BINDIR)/item_attribute.o: $(SOURCEDIR)/item_attribute.cpp $(SOURCEDIR)/item_attribute.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
@@ -89,6 +98,9 @@ $(BINDIR)/item_market.o: $(SOURCEDIR)/item_market.cpp $(SOURCEDIR)/item_market.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/item_quantity.o: $(SOURCEDIR)/item_quantity.cpp $(SOURCEDIR)/item_quantity.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/item_quantities.o: $(SOURCEDIR)/item_quantities.cpp $(SOURCEDIR)/item_quantities.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/json.o: $(SOURCEDIR)/jsoncpp.cpp $(SOURCEDIR)/json.h
@@ -173,6 +185,8 @@ $(DOCDIR)/html_out/index.html:              \
     $(SOURCEDIR)/blueprints.cpp             \
     $(SOURCEDIR)/blueprint_profit.h         \
     $(SOURCEDIR)/blueprint_profit.cpp       \
+    $(SOURCEDIR)/copy.h                     \
+    $(SOURCEDIR)/copy.cpp                   \
     $(SOURCEDIR)/debug_mode.h               \
     $(SOURCEDIR)/debug_mode.cpp             \
     $(SOURCEDIR)/error.h                    \
@@ -183,6 +197,8 @@ $(DOCDIR)/html_out/index.html:              \
     $(SOURCEDIR)/galactic_profits.cpp       \
     $(SOURCEDIR)/https_get.h                \
     $(SOURCEDIR)/https_get.cpp              \
+    $(SOURCEDIR)/invent.h                   \
+    $(SOURCEDIR)/invent.cpp                 \
     $(SOURCEDIR)/item_ids.h                 \
     $(SOURCEDIR)/item_ids.cpp               \
     $(SOURCEDIR)/item_attribute.h           \
@@ -193,6 +209,8 @@ $(DOCDIR)/html_out/index.html:              \
     $(SOURCEDIR)/item_market.cpp            \
     $(SOURCEDIR)/item_quantity.h            \
     $(SOURCEDIR)/item_quantity.cpp          \
+    $(SOURCEDIR)/item_quantities.h          \
+    $(SOURCEDIR)/item_quantities.cpp        \
     $(SOURCEDIR)/json.h                     \
     $(SOURCEDIR)/jsoncpp.cpp                \
     $(SOURCEDIR)/main.cpp                   \

@@ -202,6 +202,27 @@
             },
             "required": ["item_id", "buy_orders", "sell_orders"]
         },
+        "item_quantity": {
+            "type": "object",
+            "properties": {
+                "item_id": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "quantity": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "required": ["item_id", "quantity"]
+        },
+        "item_quantities": {
+            "type": "array",
+            "description": "Zero or more regions containing market hubs.",
+            "items": {
+                "$ref": "#/definitions/item_quantity"
+            }
+        },
         "blueprint": {
             "type": "object",
             "description": "Stores all of the manufacture, copy, and invention attributes of a blueprint.",
@@ -223,38 +244,12 @@
                             "description": "The number of seconds required for 1 manufacturing run at 0 TE."
                         },
                         "input_materials": {
-                            "type": "array",
                             "description": "List of materials and quantities consumed during 1 manufacturing run at 0 ME.",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "item_id": {
-                                        "type": "integer",
-                                        "minimum": 0
-                                    },
-                                    "quantity": {
-                                        "type": "integer",
-                                        "minimum": 0
-                                    }
-                                },
-                                "required": ["item_id", "quantity"]
-                            }
+                            "$ref": "#/definitions/item_quantities"
                         },
                         "output_materials": {
-                            "type": "array",
                             "description": "The items produced by a single successfull manufacturing run of this blueprint.",
-                            "properties": {
-                                "item_id": {
-                                    "type": "integer",
-                                    "minimum": 0
-                                },
-                                "quantity": {
-                                    "type": "integer",
-                                    "description": "The amount of this item produced by a single manufacturing run.",
-                                    "minimum": 0
-                                }
-                            },
-                            "required": ["item_id", "quantity"]
+                            "$ref": "#/definitions/item_quantities"
                         },
                         "material_efficiency": {
                             "type": "integer",
@@ -276,31 +271,17 @@
                     "properties": {
                         "time": {
                             "type": "integer",
-                            "description": "The amount of time to create a single 1-run copy of this blueprint at 0TE.",
+                            "description": "The number of seconds to create a single 1-run copy of this blueprint at 0TE.",
                             "minimum": 0
                         },
                         "input_materials": {
-                            "type": "array",
-                            "description": "List of materials and quantities consumed during 1 copy run at 0 ME.",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "item_id": {
-                                        "type": "integer",
-                                        "minimum": 0
-                                    },
-                                    "quantity": {
-                                        "type": "integer",
-                                        "minimum": 0
-                                    }
-                                },
-                                "required": ["item_id", "quantity"]
-                            }
+                            "description": "List of materials and quantities consumed during 1 copy run at 0 ME.  Usually empty.",
+                            "$ref": "#/definitions/item_quantities"
                         }
                     },
                     "required": ["time", "input_materials"]
                 },
-                "invent": {
+                "invention_choices": {
                     "type": "array",
                     "description": "This is an array because some T1 blueprints have multiple choices for what you'd like ti invent.",
                     "items": {
@@ -308,7 +289,7 @@
                         "properties": {
                             "time": {
                                 "type": "integer",
-                                "description": "The time required to perform an invention run on a single 1-run input blueprint copy.",
+                                "description": "The number of seconds required to perform an invention run on a single 1-run input blueprint.",
                                 "minimum": 0
                             },
                             "probability": {
@@ -318,24 +299,10 @@
                                 "maximum": 1.0
                             },
                             "input_materials": {
-                                "type": "array",
                                 "description": "List of materials and datacores but NOT decryptors and their quantities consumed when inventing a single 1-run BPC.",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "item_id": {
-                                            "type": "integer",
-                                            "minimum": 0
-                                        },
-                                        "quantity": {
-                                            "type": "integer",
-                                            "minimum": 0
-                                        }
-                                    },
-                                    "required": ["item_id", "quantity"]
-                                }
+                                "$ref": "#/definitions/item_quantities"
                             },
-                            "blueprint_id": {
+                            "output_id": {
                                 "type": "integer",
                                 "description": "Integral ID of the T2 blueprint copy produced after an invention run.",
                                 "minimum": 0

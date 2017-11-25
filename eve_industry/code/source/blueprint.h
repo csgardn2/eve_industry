@@ -14,6 +14,7 @@
 
 #include "error.h"
 #include "item_quantity.h"
+#include "item_quantities.h"
 #include "json.h"
 
 /// @brief Specifies required input materials, material quantities, material
@@ -24,7 +25,9 @@ class blueprint_t
         
     public:
         
-        class manufacture_t;
+        #include "copy.h"
+        #include "invent.h"
+        #include "manufacture.h"
         
         /// @brief Default constructor
         inline blueprint_t() = default;
@@ -54,6 +57,36 @@ class blueprint_t
         inline void requires_invention(bool new_requires_invention)
         {
             this->requires_invention_ = new_requires_invention;
+        }
+        
+        inline const manufacture_t& manufacture() const
+        {
+            return this->manufacture_;
+        }
+        
+        inline manufacture_t& manufacture()
+        {
+            return this->manufacture_;
+        }
+        
+        inline const copy_t& copy() const
+        {
+            return this->copy_;
+        }
+        
+        inline copy_t& copy()
+        {
+            return this->copy_;
+        }
+        
+        inline const std::vector<invent_t>& invention_choices() const
+        {
+            return this->invention_choices_;
+        }
+        
+        inline std::vector<invent_t>& invention_choices()
+        {
+            return this->invention_choices_;
         }
         
         // Add special-purpose functions here
@@ -132,9 +165,59 @@ class blueprint_t
         /// included in profitability reports.
         bool requires_invention_;
         
-        // TODO add structures for manufacture, copy, and invent
+        /// @brief See @ref manufacture_t.
+        manufacture_t manufacture_;
+        
+        /// @brief See @ref copy
+        copy_t copy_;
+        
+        /// @brief This is a vector since many T1 blueprints offer a choice of
+        /// what T2 blueprint you'd like to invent from it.
+        std::vector<invent_t> invention_choices_;
+        
+        /// @brief Makes sure that a material efficiency value is within a valid
+        /// range, and throws an error if it's not.
+        /// 
+        /// @exception error_message_t
+        static void validate_material_efficiency(unsigned candidate_time_efficiency);
+        
+        /// @brief Makes sure that a time efficiency value is within a valid
+        /// range, and throws an error if it's not.
+        /// 
+        /// @exception error_message_t
+        static void validate_time_efficiency(unsigned candidate_time_efficiency);
         
 };
+
+/// @brief Convenience alias to allow printing directly via cout or similar.
+inline std::ostream& operator<<(std::ostream& stream, const blueprint_t::manufacture_t& source)
+{
+    source.write_to_json_file(stream);
+    return stream;
+}
+
+/// @brief Extraction operator for decoding.
+std::istream& operator>>(std::istream& stream, blueprint_t::manufacture_t& destination);
+
+/// @brief Convenience alias to allow printing directly via cout or similar.
+inline std::ostream& operator<<(std::ostream& stream, const blueprint_t::copy_t& source)
+{
+    source.write_to_json_file(stream);
+    return stream;
+}
+
+/// @brief Extraction operator for decoding.
+std::istream& operator>>(std::istream& stream, blueprint_t::copy_t& destination);
+
+/// @brief Convenience alias to allow printing directly via cout or similar.
+inline std::ostream& operator<<(std::ostream& stream, const blueprint_t::invent_t& source)
+{
+    source.write_to_json_file(stream);
+    return stream;
+}
+
+/// @brief Extraction operator for decoding.
+std::istream& operator>>(std::istream& stream, blueprint_t::invent_t& destination);
 
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::ostream& operator<<(std::ostream& stream, const blueprint_t& source)

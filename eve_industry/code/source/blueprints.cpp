@@ -99,7 +99,7 @@ void blueprints_t::write_to_json_buffer(std::string& buffer, unsigned indent_sta
     
     // Encode each blueprint as an element of an array.
     buffer += indent_1;
-    for (unsigned ix = 0, last_ix = num_blueprints - 1; ix <= last_ix; last_ix++)
+    for (unsigned ix = 0, last_ix = num_blueprints - 1; ix <= last_ix; ix++)
     {
         this->storage_[ix].write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
         if (ix == last_ix)

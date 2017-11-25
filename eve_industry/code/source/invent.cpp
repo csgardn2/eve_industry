@@ -1,5 +1,5 @@
-/// @file manufacture.cpp
-/// @brief Implementation of @ref blueprint_t::manufacture_t class
+/// @file invent.cpp
+/// @brief Implementation of @ref invent_t class
 /// 
 /// * Contact conor.gardner@arm.com if you have questions about this code.
 /// * Date Created = Friday November 24 2017
@@ -12,17 +12,30 @@
 
 #include "blueprint.h"
 #include "error.h"
-#include "item_quantities.h"
+#include "invent.h"
 #include "json.h"
-#include "manufacture.h"
-#include "util.h"
 
-void blueprint_t::manufacture_t::read_from_json_file(std::istream& file)
+void blueprint_t::invent_t::probability(float new_probability)
+{
+    
+    if (new_probability < 0.0f || new_probability > 1.0f)
+    {
+        std::string message("Error.  Assigned invalid invention probability ");
+        message += std::to_string(new_probability);
+        message += ".  Valid values lie in the range [0 to 1].\n";
+        throw error_message_t(error_code_t::INVALID_PROBABILITY, message);
+    }
+    
+    this->probability_ = new_probability;
+    
+}
+
+void blueprint_t::invent_t::read_from_json_file(std::istream& file)
 {
     
     // Get the number of characters in the input file.
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_SIZE_FAILED, "Error.  Failed to determine file size when encoding manufacture_t object.\n");
+        throw error_message_t(error_code_t::FILE_SIZE_FAILED, "Error.  Failed to determine file size when encoding invent_t object.\n");
     file.seekg(0, std::ios_base::end);
     unsigned file_size = file.tellg();
     file.seekg(0, std::ios_base::beg);
@@ -31,12 +44,12 @@ void blueprint_t::manufacture_t::read_from_json_file(std::istream& file)
     std::string buffer(file_size, '\0');
     file.read(buffer.data(), file_size);
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_READ_FAILED, "Error.  Failed to read file when decoding manufacture_t object.\n");
+        throw error_message_t(error_code_t::FILE_READ_FAILED, "Error.  Failed to read file when decoding invent_t object.\n");
     this->read_from_json_buffer(std::string_view(buffer));
     
 }
 
-void blueprint_t::manufacture_t::read_from_json_buffer(std::string_view buffer)
+void blueprint_t::invent_t::read_from_json_buffer(std::string_view buffer)
 {
     
     Json::CharReaderBuilder builder;
@@ -55,18 +68,24 @@ void blueprint_t::manufacture_t::read_from_json_buffer(std::string_view buffer)
     
 }
 
-void blueprint_t::manufacture_t::read_from_json_structure(const Json::Value& json_root)
+void blueprint_t::invent_t::read_from_json_structure(const Json::Value& json_root)
 {
     
     // Parse root
     if (!json_root.isObject())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of manufacture is not of type \"object\".\n");
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of invent_t is not of type \"object\".\n");
     
     // Decode time
     const Json::Value& json_time = json_root["time"];
     if (!json_time.isUInt())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <manufacture>/time was not found or not of type \"unsigned integer\".\n");
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error. <invent>/time was not found or not of type \"unsigned integer\".\n");
     this->time_ = json_time.asUInt();
+    
+    // Decode probability
+    const Json::Value& json_probability = json_root["probability"];
+    if (!json_probability.isNumeric())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error. <invent>/probability was not found or not of type \"unsigned integer\".\n");
+    this->probability_ = json_probability.asFloat();
     
     // Decode input_materials
     const Json::Value& json_input_materials = json_root["input_materials"];
@@ -74,18 +93,18 @@ void blueprint_t::manufacture_t::read_from_json_structure(const Json::Value& jso
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <manufacture>/input_materials was not found or not of type \"array\".\n");
     this->input_materials_.read_from_json_structure(json_input_materials);
     
-    // Decode output_materials
-    const Json::Value& json_output_materials = json_root["output_materials"];
-    if (!json_output_materials.isArray())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <manufacture>/output_materials was not found or not of type \"array\".\n");
-    this->output_materials_.read_from_json_structure(json_output_materials);
+    // Decode output_id
+    const Json::Value& json_output_id = json_root["output_id"];
+    if (!json_output_id.isUInt64())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error. <invent>/output_id was not found or not of type \"unsigned integer\".\n");
+    this->output_id_ = json_output_id.asUInt64();
     
     // Decode material efficiency
     const Json::Value& json_material_efficiency = json_root["material_efficiency"];
     if (!json_material_efficiency.isUInt())
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <manufacture>/material_efficiency was not found or not of type \"unsigned integer\".\n");
     unsigned candidate_material_efficiency = json_material_efficiency.asUInt();
-    validate_material_efficiency(candidate_material_efficiency);
+    blueprint_t::validate_material_efficiency(candidate_material_efficiency);
     this->material_efficiency_ = candidate_material_efficiency;
     
     // Decode time efficiency
@@ -93,21 +112,27 @@ void blueprint_t::manufacture_t::read_from_json_structure(const Json::Value& jso
     if (!json_time_efficiency.isUInt())
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <manufacture>/time_efficiency was not found or not of type \"unsigned integer\".\n");
     unsigned candidate_time_efficiency = json_time_efficiency.asUInt();
-    validate_time_efficiency(candidate_time_efficiency);
+    blueprint_t::validate_time_efficiency(candidate_time_efficiency);
     this->time_efficiency_ = candidate_time_efficiency;
+    
+    // Decode runs
+    const Json::Value& json_runs = json_root["runs"];
+    if (!json_runs.isUInt())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error. <invent>/runs was not found or not of type \"unsigned integer\".\n");
+    this->runs_ = json_runs.asUInt();
     
 }
 
-void blueprint_t::manufacture_t::write_to_json_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
+void blueprint_t::invent_t::write_to_json_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
 {
     std::string buffer;
     this->write_to_json_buffer(buffer, indent_start, spaces_per_tab);
     file << buffer;
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding manufacture_t object.\n");
+        throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding invent_t object.\n");
 }
 
-void blueprint_t::manufacture_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
+void blueprint_t::invent_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
 {
     
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
@@ -117,9 +142,16 @@ void blueprint_t::manufacture_t::write_to_json_buffer(std::string& buffer, unsig
     // enable chaining.
     buffer += "{\n";
     
+    // Encode time
     buffer += indent_1;
     buffer += "\"time\": ";
     buffer += std::to_string(this->time_);
+    buffer += ",\n";
+    
+    // Encode probability
+    buffer += indent_1;
+    buffer += "\"probability\": ";
+    buffer += std::to_string(this->probability_);
     buffer += ",\n";
     
     // Encode input_materials
@@ -128,10 +160,10 @@ void blueprint_t::manufacture_t::write_to_json_buffer(std::string& buffer, unsig
     this->input_materials_.write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
     buffer += ",\n";
     
-    // Encode output_materials
+    // Encode output_id
     buffer += indent_1;
-    buffer += "\"output_materials\": ";
-    this->output_materials_.write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
+    buffer += "\"output_id\": ";
+    buffer += std::to_string(this->output_id_);
     buffer += ",\n";
     
     // Encode material efficiency
@@ -144,6 +176,12 @@ void blueprint_t::manufacture_t::write_to_json_buffer(std::string& buffer, unsig
     buffer += indent_1;
     buffer += "\"time_efficiency\": ";
     buffer += std::to_string(this->time_efficiency_);
+    buffer += ",\n";
+    
+    // Encode runs
+    buffer += indent_1;
+    buffer += "\"runs\": ";
+    buffer += std::to_string(this->runs_);
     buffer += '\n';
     
     // It is recommended to not put a newline on the last brace to allow
@@ -153,7 +191,7 @@ void blueprint_t::manufacture_t::write_to_json_buffer(std::string& buffer, unsig
     
 }
 
-std::istream& operator>>(std::istream& stream, blueprint_t::manufacture_t& destination)
+std::istream& operator>>(std::istream& stream, blueprint_t::invent_t& destination)
 {
     try
     {

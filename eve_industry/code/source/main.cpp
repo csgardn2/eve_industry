@@ -19,8 +19,6 @@
 #include "station_attributes.h"
 #include "raw_regional_market.h"
 
-#include "manufacture.h"
-
 /// @brief Code execution starts here
 int main(int argc, char** argv)
 {

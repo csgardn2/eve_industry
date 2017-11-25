@@ -41,7 +41,7 @@
             "time": 9600,
             "input_materials": []
         },
-        "invent": [
+        "invention_choices": [
             {
                 "time": 128100,
                 "probability": 0.26,
@@ -54,7 +54,7 @@
                         "quantity": 20410
                     }
                 ],
-                "blueprint_id":22545,
+                "output_id": 22545,
                 "material_efficiency": 2,
                 "time_efficiency": 4,
                 "runs": 1

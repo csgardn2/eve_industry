@@ -1,7 +1,6 @@
 [
     {
         "blueprint_id": 17477,
-        "requires_invention": false,
         "manufacture": {
             "time": 12000,
             "input_materials": [
@@ -40,25 +39,72 @@
         "copy": {
             "time": 9600,
             "input_materials": []
+        }
+    }, {
+        "blueprint_id": 22545,
+        "manufacture": {
+            "time": 240000,
+            "input_materials": [
+                {
+                    "item_id": 11553,
+                    "quantity": 600
+                }, {
+                    "item_id": 11399,
+                    "quantity": 108
+                }, {
+                    "item_id": 11556,
+                    "quantity": 225
+                }, {
+                    "item_id": 11535,
+                    "quantity": 225
+                }, {
+                    "item_id": 3828,
+                    "quantity": 150
+                }, {
+                    "item_id": 11541,
+                    "quantity": 3000
+                }, {
+                    "item_id": 11478,
+                    "quantity": 15
+                }, {
+                    "item_id": 11545,
+                    "quantity": 3000
+                }, {
+                    "item_id": 11531,
+                    "quantity": 60
+                }, {
+                    "item_id": 17476,
+                    "quantity": 1
+                }, {
+                    "item_id": 11547,
+                    "quantity": 45
+                }
+            ],
+            "output_materials": [
+                {
+                    "item_id": 22544,
+                    "quantity": 1
+                }
+            ],
+            "material_efficiency": 10,
+            "time_efficiency": 20
         },
-        "invention_choices": [
-            {
-                "time": 128100,
-                "probability": 0.26,
-                "input_materials": [
-                    {
-                        "item_id": 20413,
-                        "quantity": 8
-                    }, {
-                        "item_id": 20410,
-                        "quantity": 20410
-                    }
-                ],
-                "output_id": 22545,
-                "material_efficiency": 2,
-                "time_efficiency": 4,
-                "runs": 1
-            }
-        ]
+        "invent": {
+            "time": 128100,
+            "probability": 0.26,
+            "input_materials": [
+                {
+                    "item_id": 20413,
+                    "quantity": 8
+                }, {
+                    "item_id": 20410,
+                    "quantity": 20410
+                }
+            ],
+            "invented_from_blueprint_id": 17477,
+            "material_efficiency": 2,
+            "time_efficiency": 4,
+            "runs": 1
+        }
     }
 ]

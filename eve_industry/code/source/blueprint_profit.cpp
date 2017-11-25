@@ -10,17 +10,30 @@
 #include <string_view>
 #include <vector>
 
+#include "blueprint.h"
 #include "blueprint_profit.h"
 #include "error.h"
 #include "json.h"
 #include "station_market.h"
 
+float calculate_time(const blueprint_t& blueprint)
+{
+    
+    /// TODO
+    return 0.0f;
+    
+}
+
 void blueprint_profit_t::initialize_from_market
 (
-    uint64_t blueprint_id,
+    const blueprint_t& blueprint,
     const station_market_t& station_market
 ){
+    
+    this->time_ = calculate_time(blueprint);
+    
     /// TODO
+    
 }
 
 void blueprint_profit_t::read_from_json_file(std::istream& file)

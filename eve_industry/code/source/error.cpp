@@ -31,6 +31,8 @@ const std::vector<std::string_view> error_message_t::error_names_ =
     "MISSING_MARKET_PAGE",
     "INVALID_MATERIAL_EFFICIENCY",
     "INVALID_TIME_EFFICIENCY",
-    "INVALID_PROBABILITY"
+    "INVALID_PROBABILITY",
+    "READ_INVALID_INVENT",
+    "READ_INVALID_COPY"
 };
 

@@ -28,8 +28,20 @@ class invent_t
         
         // Add member read and write functions
         
+        inline bool valid() const
+        {
+            return this->valid_;
+        }
+        
+        inline void valid(bool new_valid)
+        {
+            this->valid_ = new_valid;
+        }
+        
         inline unsigned time() const
         {
+            if (!this->valid_)
+                throw error_message_t(error_code_t::READ_INVALID_INVENT, "Error.  Tried to read blueprint_t::invent_t::time_ from an invalid object.\n");
             return this->time_;
         }
         
@@ -40,6 +52,8 @@ class invent_t
         
         inline float probability() const
         {
+            if (!this->valid_)
+                throw error_message_t(error_code_t::READ_INVALID_INVENT, "Error.  Tried to read blueprint_t::invent_t::probability_ from an invalid object.\n");
             return this->probability_;
         }
         
@@ -47,6 +61,8 @@ class invent_t
         
         inline const item_quantities_t& input_materials() const
         {
+            if (!this->valid_)
+                throw error_message_t(error_code_t::READ_INVALID_INVENT, "Error.  Tried to read blueprint_t::invent_t::input_materials_ from an invalid object.\n");
             return this->input_materials_;
         }
         
@@ -55,18 +71,22 @@ class invent_t
             return this->input_materials_;
         }
         
-        inline uint64_t output_id() const
+        inline uint64_t invented_from_blueprint_id() const
         {
-            return this->output_id_;
+            if (!this->valid_)
+                throw error_message_t(error_code_t::READ_INVALID_INVENT, "Error.  Tried to read blueprint_t::invent_t::invented_from_blueprint_id_ from an invalid object.\n");
+            return this->invented_from_blueprint_id_;
         }
         
-        inline void output_id(uint64_t new_output_id)
+        inline void invented_from_blueprint_id(uint64_t new_invented_from_blueprint_id)
         {
-            this->output_id_ = new_output_id;
+            this->invented_from_blueprint_id_ = new_invented_from_blueprint_id;
         }
         
         inline unsigned material_efficiency() const
         {
+            if (!this->valid_)
+                throw error_message_t(error_code_t::READ_INVALID_INVENT, "Error.  Tried to read blueprint_t::invent_t::material_efficiency_ from an invalid object.\n");
             return this->material_efficiency_;
         }
         
@@ -78,6 +98,8 @@ class invent_t
         
         inline unsigned time_efficiency() const
         {
+            if (!this->valid_)
+                throw error_message_t(error_code_t::READ_INVALID_INVENT, "Error.  Tried to read blueprint_t::invent_t::time_efficiency_ from an invalid object.\n");
             return this->time_efficiency_;
         }
         
@@ -89,6 +111,8 @@ class invent_t
         
         inline unsigned runs() const
         {
+            if (!this->valid_)
+                throw error_message_t(error_code_t::READ_INVALID_INVENT, "Error.  Tried to read blueprint_t::invent_t::runs_ from an invalid object.\n");
             return this->runs_;
         }
         
@@ -165,6 +189,16 @@ class invent_t
         
         // Try to make your members protected, even if they don't have to be.
         
+        /// @brief Set to true if this is a T2 blueprint that can be invented
+        /// from a T1 blueprint.  False otherwise.
+        ///
+        /// A value of false indicates that an invent field was not found while
+        /// decoding a @ref blueprint_t.
+        ///
+        /// A value of false also indicates that this invent field should not be
+        /// encoded when writing a blueprint_t.
+        bool valid_;
+        
         /// @brief The number of seconds required to perform an invention run on
         /// a single 1-run input blueprint.
         unsigned time_;
@@ -179,8 +213,8 @@ class invent_t
         /// quantities consumed when inventing a single 1-run BPC.
         item_quantities_t input_materials_;
         
-        /// @brief Integral ID of the T2 blueprint copy produced after an invention run.
-        uint64_t output_id_;
+        /// @brief Integral ID of the T1 blueprint copy used to produce this T2 blueprint.
+        uint64_t invented_from_blueprint_id_;
         
         /// @brief Material efficiency of the resultant T2 blueprint with no decryptors.
         ///

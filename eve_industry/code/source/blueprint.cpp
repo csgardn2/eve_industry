@@ -68,30 +68,14 @@ void blueprint_t::read_from_json_structure(const Json::Value& json_root)
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <blueprint>/blueprint_id was not found or not of type \"unsigned integer\".\n");
     this->blueprint_id_ = json_blueprint_id.asUInt64();
     
-    // Decode requires_invention
-    const Json::Value& json_requires_invention = json_root["requires_invention"];
-    if (!json_requires_invention.isBool())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <blueprint>/requires_invention was not found or not of type \"bool\".\n");
-    this->requires_invention_ = json_requires_invention.asBool();
-    
     // Decode manufacture  Validation done by callee.
     this->manufacture_.read_from_json_structure(json_root["manufacture"]);
     
     // Decode copy.  Validation done by callee.
     this->copy_.read_from_json_structure(json_root["copy"]);
     
-    // Decode invention_choices
-    const Json::Value& json_invention_choices = json_root["invention_choices"];
-    if (!json_invention_choices.isArray())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <blueprint>/invention_choices was not found or not of type \"array\".\n");
-    this->invention_choices_.clear();
-    this->invention_choices_.reserve(json_invention_choices.size());
-    for (const Json::Value& json_cur_array_element : json_invention_choices)
-    {
-        invent_t new_invent;
-        new_invent.read_from_json_structure(json_cur_array_element);
-        this->invention_choices_.emplace_back(std::move(new_invent));
-    }
+    // Decode invent.  Validation done by callee.
+    this->invent_.read_from_json_structure(json_root["invent"]);
     
 }
 
@@ -121,54 +105,31 @@ void blueprint_t::write_to_json_buffer(std::string& buffer, unsigned indent_star
     buffer += std::to_string(this->blueprint_id_);
     buffer += ",\n";
     
-    // Encode requires_invention
-    buffer += indent_1;
-    buffer += "\"requires_invention\": ";
-    buffer += this->requires_invention_ ? "true,\n" : "false,\n";
-    
     // Encode manufacture
     buffer += indent_1;
     buffer += "\"manufacture\": ";
     this->manufacture_.write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
-    buffer += ",\n";
     
     // Encode copy
-    buffer += indent_1;
-    buffer += "\"copy\": ";
-    this->copy_.write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
-    buffer += ",\n";
-    
-    // Encode invention_choices
-    buffer += indent_1;
-    buffer += "\"invention_choices\": ";
-    
-    unsigned num_invention_choices = this->invention_choices_.size();
-    if (num_invention_choices == 0)
+    if (this->copy_.valid())
     {
-        
-        buffer += "[]\n";
-        
-    } else {
-        
-        buffer += "[\n";
-        
-        buffer += indent_2;
-        for (unsigned ix = 0, last_ix = num_invention_choices - 1; ix <= last_ix; ix++)
-        {
-            
-            this->invention_choices_[ix].write_to_json_buffer(buffer, indent_start + 2 * spaces_per_tab, spaces_per_tab);
-            
-            if (ix == last_ix)
-                buffer += '\n';
-            else
-                buffer += ", ";
-            
-        }
-        
+        buffer += ",\n";
         buffer += indent_1;
-        buffer += "]\n";
-        
+        buffer += "\"copy\": ";
+        this->copy_.write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
     }
+    
+    // Encode invent
+    if (this->invent_.valid())
+    {
+        buffer += ",\n";
+        buffer += indent_1;
+        buffer += "\"invent\": ";
+        this->invent_.write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
+        buffer += '\n';
+    }
+    
+    buffer += '\n';
     
     // It is recommended to not put a newline on the last brace to allow
     // comma chaining when this object is an element of an array.

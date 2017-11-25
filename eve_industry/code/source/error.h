@@ -37,6 +37,8 @@ enum class error_code_t
     INVALID_MATERIAL_EFFICIENCY,
     INVALID_TIME_EFFICIENCY,
     INVALID_PROBABILITY,
+    READ_INVALID_INVENT,
+    READ_INVALID_COPY,
     /// This element must be last
     NUM_ENUMS
     

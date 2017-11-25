@@ -232,10 +232,6 @@
                     "description": "The integral ID of this blueprint original, not its output product.",
                     "minimum": 0
                 },
-                "requires_invention": {
-                    "type": "boolean",
-                    "description": "Set this to true if you can only acquire this blueprint via invention and want to include the average invention costs will be included in profitability reports."
-                },
                 "manufacture": {
                     "type": "object",
                     "properties": {
@@ -268,6 +264,7 @@
                 },
                 "copy": {
                     "type": "object",
+                    "description": "This field is only valid for original blueprints (those which are copyable).",
                     "properties": {
                         "time": {
                             "type": "integer",
@@ -281,55 +278,52 @@
                     },
                     "required": ["time", "input_materials"]
                 },
-                "invention_choices": {
-                    "type": "array",
-                    "description": "This is an array because some T1 blueprints have multiple choices for what you'd like ti invent.",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "time": {
-                                "type": "integer",
-                                "description": "The number of seconds required to perform an invention run on a single 1-run input blueprint.",
-                                "minimum": 0
-                            },
-                            "probability": {
-                                "type": "number",
-                                "description": "The probability of successfully inventing this blueprint with no skills, bonuses, or decryptors.",
-                                "minimum": 0.0,
-                                "maximum": 1.0
-                            },
-                            "input_materials": {
-                                "description": "List of materials and datacores but NOT decryptors and their quantities consumed when inventing a single 1-run BPC.",
-                                "$ref": "#/definitions/item_quantities"
-                            },
-                            "output_id": {
-                                "type": "integer",
-                                "description": "Integral ID of the T2 blueprint copy produced after an invention run.",
-                                "minimum": 0
-                            },
-                            "material_efficiency": {
-                                "type": "integer",
-                                "description": "Material efficiency of the resultant T2 blueprint with no decryptors.",
-                                "minimum": 0,
-                                "maximum": 10
-                            },
-                            "time_efficiency": {
-                                "type": "integer",
-                                "description": "Time efficiency of the resultant T2 blueprint with no decryptors.",
-                                "minimum": 0,
-                                "maximum": 20
-                            },
-                            "runs": {
-                                "type": "integer",
-                                "description": "Runs per copy for a single output T2 blueprint with no decryptors.",
-                                "minimum": 0
-                            }
+                "invent": {
+                    "type": "object",
+                    "description": "This field is only valid for T2 blueprints (those which are inventable).",
+                    "properties": {
+                        "time": {
+                            "type": "integer",
+                            "description": "The number of seconds required to perform an invention run on a single 1-run input blueprint.",
+                            "minimum": 0
                         },
-                        "required": ["time", "probability", "input_materials", "bluerpint_id", "material_efficiency", "time_efficiency", "runs"]
-                    }
+                        "probability": {
+                            "type": "number",
+                            "description": "The probability of successfully inventing this blueprint with no skills, bonuses, or decryptors.",
+                            "minimum": 0.0,
+                            "maximum": 1.0
+                        },
+                        "input_materials": {
+                            "description": "List of materials and datacores but NOT decryptors and their quantities consumed when inventing a single 1-run BPC.",
+                            "$ref": "#/definitions/item_quantities"
+                        },
+                        "invented_from_blueprint_id": {
+                            "type": "integer",
+                            "description": "Integral ID of the T1 blueprint copy used to produce this T2 blueprint.",
+                            "minimum": 0
+                        },
+                        "material_efficiency": {
+                            "type": "integer",
+                            "description": "Material efficiency of the resultant T2 blueprint with no decryptors.",
+                            "minimum": 0,
+                            "maximum": 10
+                        },
+                        "time_efficiency": {
+                            "type": "integer",
+                            "description": "Time efficiency of the resultant T2 blueprint with no decryptors.",
+                            "minimum": 0,
+                            "maximum": 20
+                        },
+                        "runs": {
+                            "type": "integer",
+                            "description": "Runs per copy for a single output T2 blueprint with no decryptors.",
+                            "minimum": 0
+                        }
+                    },
+                    "required": ["time", "probability", "input_materials", "bluerpint_id", "material_efficiency", "time_efficiency", "runs"]
                 }
             },
-            "required": ["blueprint_id", "requires_invention", "manufacture", "copy", "invent"]
+            "required": ["blueprint_id", "manufacture"]
         },
         "blueprints": {
             "type": "array",

@@ -28,8 +28,19 @@ class copy_t
 
         // Add member read and write functions
         
+        inline bool valid() const
+        {
+            return this->valid_;
+        }
+        
+        inline void valid(bool new_valid) {
+            this->valid_ = new_valid;
+        }
+        
         unsigned time() const
         {
+            if (!this->valid_)
+                throw error_message_t(error_code_t::READ_INVALID_COPY, "Error.  Tried to read blueprint_t::copy_t::time_ from an invalid object.\n");
             return this->time_;
         }
         
@@ -40,6 +51,8 @@ class copy_t
         
         const item_quantities_t& input_materials() const
         {
+            if (!this->valid_)
+                throw error_message_t(error_code_t::READ_INVALID_COPY, "Error.  Tried to read blueprint_t::copy_t::input_materials_ from an invalid object.\n");
             return this->input_materials_;
         }
         
@@ -115,6 +128,16 @@ class copy_t
     protected:
         
         // Try to make your members protected, even if they don't have to be.
+        
+        /// @brief Set to true if this is a blueprint original that can be copied
+        /// False if you can only acquire copies of this blueprint.
+        ///
+        /// A value of false indicates that an copy field was not found while
+        /// decoding a @ref blueprint_t.
+        ///
+        /// A value of false also indicates that this copy field should not be
+        /// encoded when writing a blueprint_t.
+        bool valid_;
         
         /// @brief The number of seconds to create a single 1-run copy of this
         /// blueprint at 0TE.

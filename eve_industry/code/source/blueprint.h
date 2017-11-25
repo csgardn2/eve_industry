@@ -49,16 +49,6 @@ class blueprint_t
             this->blueprint_id_ = new_blueprint_id;
         }
         
-        inline bool requires_invention() const
-        {
-            return this->requires_invention_;
-        }
-        
-        inline void requires_invention(bool new_requires_invention)
-        {
-            this->requires_invention_ = new_requires_invention;
-        }
-        
         inline const manufacture_t& manufacture() const
         {
             return this->manufacture_;
@@ -79,14 +69,14 @@ class blueprint_t
             return this->copy_;
         }
         
-        inline const std::vector<invent_t>& invention_choices() const
+        inline const invent_t& invent() const
         {
-            return this->invention_choices_;
+            return this->invent_;
         }
         
-        inline std::vector<invent_t>& invention_choices()
+        inline invent_t& invent()
         {
-            return this->invention_choices_;
+            return this->invent_;
         }
         
         // Add special-purpose functions here
@@ -160,20 +150,14 @@ class blueprint_t
         /// @brief The integral ID of this blueprint original, not its output product.
         uint64_t blueprint_id_;
         
-        /// @brief Set this to true if you can only acquire this blueprint via
-        // invention and want to include the average invention costs will be
-        /// included in profitability reports.
-        bool requires_invention_;
-        
         /// @brief See @ref manufacture_t.
         manufacture_t manufacture_;
         
-        /// @brief See @ref copy
+        /// @brief See @ref copy_t
         copy_t copy_;
         
-        /// @brief This is a vector since many T1 blueprints offer a choice of
-        /// what T2 blueprint you'd like to invent from it.
-        std::vector<invent_t> invention_choices_;
+        /// @brief See @ref invent_t
+        invent_t invent_;
         
         /// @brief Makes sure that a material efficiency value is within a valid
         /// range, and throws an error if it's not.

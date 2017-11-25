@@ -15,6 +15,7 @@
 #include "error.h"
 #include "json.h"
 
+class blueprint_t;
 class station_market_t;
 
 /// @brief This is a final profitability report for a specific blueprint.
@@ -64,7 +65,7 @@ class blueprint_profit_t
         
         void initialize_from_market
         (
-            uint64_t blueprint_id,
+            const blueprint_t& blueprint,
             const station_market_t& station_market
         );
         

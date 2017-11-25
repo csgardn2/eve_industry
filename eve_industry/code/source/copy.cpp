@@ -57,6 +57,13 @@ void blueprint_t::copy_t::read_from_json_buffer(std::string_view buffer)
 void blueprint_t::copy_t::read_from_json_structure(const Json::Value& json_root)
 {
     
+    this->valid_ = false;
+    
+    // Since this is an optional field in a @ref blueprint_t, it can safely exist
+    // in a null state.
+    if (json_root.isNull())
+        return;
+    
     // Parse root
     if (!json_root.isObject())
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of copy_t is not of type \"object\".\n");
@@ -73,6 +80,8 @@ void blueprint_t::copy_t::read_from_json_structure(const Json::Value& json_root)
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <manufacture>/input_materials was not found or not of type \"array\".\n");
     this->input_materials_.read_from_json_structure(json_input_materials);
     
+    this->valid_ = true;
+    
 }
 
 void blueprint_t::copy_t::write_to_json_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
@@ -86,6 +95,9 @@ void blueprint_t::copy_t::write_to_json_file(std::ostream& file, unsigned indent
 
 void blueprint_t::copy_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
 {
+    
+    if (!this->valid_)
+        throw error_message_t(error_code_t::READ_INVALID_COPY, "Error.  Tried to encode an invalid copy field.\n");
     
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
     std::string_view indent_0(indent_1.data(), indent_start);

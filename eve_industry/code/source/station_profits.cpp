@@ -33,7 +33,7 @@ void station_profits_t::calculate_blueprint_profits
     for (const blueprint_t& cur_blueprint : blueprints_in.storage())
     {
         blueprint_profit_t new_blueprint_profit;
-        new_blueprint_profit.initialize_from_market(cur_blueprint.blueprint_id(), station_market);
+        new_blueprint_profit.initialize_from_market(cur_blueprint, station_market);
         this->blueprint_profits_.emplace_back(std::move(new_blueprint_profit));
     }
     

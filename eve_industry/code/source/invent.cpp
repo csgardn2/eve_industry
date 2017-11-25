@@ -71,6 +71,13 @@ void blueprint_t::invent_t::read_from_json_buffer(std::string_view buffer)
 void blueprint_t::invent_t::read_from_json_structure(const Json::Value& json_root)
 {
     
+    this->valid_ = false;
+    
+    // Since this is an optional field in a @ref blueprint_t, it can safely exist
+    // in a null state.
+    if (json_root.isNull())
+        return;
+    
     // Parse root
     if (!json_root.isObject())
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of invent_t is not of type \"object\".\n");
@@ -93,11 +100,11 @@ void blueprint_t::invent_t::read_from_json_structure(const Json::Value& json_roo
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <manufacture>/input_materials was not found or not of type \"array\".\n");
     this->input_materials_.read_from_json_structure(json_input_materials);
     
-    // Decode output_id
-    const Json::Value& json_output_id = json_root["output_id"];
-    if (!json_output_id.isUInt64())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error. <invent>/output_id was not found or not of type \"unsigned integer\".\n");
-    this->output_id_ = json_output_id.asUInt64();
+    // Decode invented_from_blueprint_id
+    const Json::Value& json_invented_from_blueprint_id = json_root["invented_from_blueprint_id"];
+    if (!json_invented_from_blueprint_id.isUInt64())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error. <invent>/invented_from_blueprint_id was not found or not of type \"unsigned integer\".\n");
+    this->invented_from_blueprint_id_ = json_invented_from_blueprint_id.asUInt64();
     
     // Decode material efficiency
     const Json::Value& json_material_efficiency = json_root["material_efficiency"];
@@ -121,6 +128,8 @@ void blueprint_t::invent_t::read_from_json_structure(const Json::Value& json_roo
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error. <invent>/runs was not found or not of type \"unsigned integer\".\n");
     this->runs_ = json_runs.asUInt();
     
+    this->valid_ = true;
+    
 }
 
 void blueprint_t::invent_t::write_to_json_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
@@ -137,6 +146,9 @@ void blueprint_t::invent_t::write_to_json_buffer(std::string& buffer, unsigned i
     
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
     std::string_view indent_0(indent_1.data(), indent_start);
+    
+    if (!this->valid_)
+        throw error_message_t(error_code_t::READ_INVALID_INVENT, "Error.  Tried to encode an invalid invent field.\n");
     
     // It is recommended not to start a new line before the opening brace, to
     // enable chaining.
@@ -160,10 +172,10 @@ void blueprint_t::invent_t::write_to_json_buffer(std::string& buffer, unsigned i
     this->input_materials_.write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
     buffer += ",\n";
     
-    // Encode output_id
+    // Encode invented_from_blueprint_id
     buffer += indent_1;
-    buffer += "\"output_id\": ";
-    buffer += std::to_string(this->output_id_);
+    buffer += "\"invented_from_blueprint_id\": ";
+    buffer += std::to_string(this->invented_from_blueprint_id_);
     buffer += ",\n";
     
     // Encode material efficiency

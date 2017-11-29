@@ -35,6 +35,7 @@ $(BINDIR)/$(EXENAME):                   \
     $(BINDIR)/json.o                    \
     $(BINDIR)/main.o                    \
     $(BINDIR)/manufacture.o             \
+    $(BINDIR)/manufacturability.o       \
     $(BINDIR)/page_fetcher.o            \
     $(BINDIR)/raw_order.o               \
     $(BINDIR)/raw_regional_market.o     \
@@ -114,6 +115,9 @@ $(BINDIR)/main.o: $(SOURCEDIR)/main.cpp
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/manufacture.o: $(SOURCEDIR)/manufacture.cpp $(SOURCEDIR)/manufacture.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/manufacturability.o: $(SOURCEDIR)/manufacturability.cpp $(SOURCEDIR)/manufacturability.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/page_fetcher.o: $(SOURCEDIR)/page_fetcher.cpp $(SOURCEDIR)/page_fetcher.h
@@ -222,6 +226,8 @@ $(DOCDIR)/html_out/index.html:              \
     $(SOURCEDIR)/main.cpp                   \
     $(SOURCEDIR)/manufacture.h              \
     $(SOURCEDIR)/manufacture.cpp            \
+    $(SOURCEDIR)/manufacturability.h        \
+    $(SOURCEDIR)/manufacturability.cpp      \
     $(SOURCEDIR)/page_fetcher.h             \
     $(SOURCEDIR)/page_fetcher.cpp           \
     $(SOURCEDIR)/raw_order.h                \

@@ -8,7 +8,6 @@
 #include <fstream>
 #include <string>
 #include <string_view>
-#include <vector>
 
 #include "item_quantities.h"
 #include "error.h"

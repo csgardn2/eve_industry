@@ -8,7 +8,6 @@
 #include <fstream>
 #include <string>
 #include <string_view>
-#include <vector>
 
 #include "error.h"
 #include "galactic_market.h"

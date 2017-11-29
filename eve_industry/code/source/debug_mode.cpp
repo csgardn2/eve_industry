@@ -8,7 +8,6 @@
 #include <fstream>
 #include <string>
 #include <string_view>
-#include <vector>
 
 #include "debug_mode.h"
 #include "error.h"

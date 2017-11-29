@@ -40,6 +40,7 @@ enum class error_code_t
     READ_INVALID_INVENT,
     READ_INVALID_COPY,
     UNKNOWN_DECRYPTOR_TYPE,
+    UNKNOWN_MANUFACTURABILITY_STATUS,
     /// This element must be last
     NUM_ENUMS
     

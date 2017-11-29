@@ -10,10 +10,11 @@
 
 #include <fstream>
 #include <string_view>
-#include <vector>
 
+#include "decryptor.h"
 #include "error.h"
 #include "json.h"
+#include "manufacturability.h"
 
 class blueprint_t;
 class blueprints_t;
@@ -24,17 +25,6 @@ class blueprint_profit_t
 {
         
     public:
-        
-        /// @brief Indicates if a blueprint can be manufactured or if there is
-        /// a problem at a specific point in the supply chain.
-        enum class manufacturability_t {
-            SUCCESS,
-            // NUM_ENUMS element must be last
-            NUM_ENUMS
-        };
-        
-        /// @brief See @ref optimal_decryptor_id_.
-        static const uint64_t NO_DECRYPTOR = 0;
         
         /// @brief Default constructor
         inline blueprint_profit_t() = default;
@@ -65,9 +55,9 @@ class blueprint_profit_t
             return this->output_value_;
         }
         
-        uint64_t optimal_decryptor_id() const
+        decryptor_t optimal_decryptor() const
         {
-            return this->optimal_decryptor_id_;
+            return this->optimal_decryptor_;
         }
         
         // Add special-purpose functions here
@@ -164,6 +154,9 @@ class blueprint_profit_t
         
         // Try to make your members protected, even if they don't have to be.
         
+        /// @brief See @ref manufacturability_t.
+        manufacturability_t manufacturability_;
+        
         /// @brief This profitability report was generated for the blueprint
         /// with this ID.
         uint64_t blueprint_id_;
@@ -173,6 +166,8 @@ class blueprint_profit_t
         ///
         /// Assumes that all input materials are purchased and not manufactured.
         /// Invention time is weighted using the invention probability.
+        ///
+        /// Only valid if @ref manufacturability_t::is_ok() == true
         unsigned time_;
         
         /// @brief Sum of all costs including input materials, datacores,
@@ -180,17 +175,23 @@ class blueprint_profit_t
         ///
         /// Invention costs are weighted by the probability of
         /// success.
+        ///
+        /// Only valid if @ref manufacturability_t::is_ok() == true
         float total_cost_;
         
         /// @brief Value of the output items produced by one manufacturing run.
         /// 
         /// For example, a mjolnir fury light missil run produces 5000 missiles.
         /// If these missiles sell for 87 ISK each then this value would be 435000.
+        ///
+        /// Only valid if @ref manufacturability_t::is_ok() == true
         float output_value_;
         
         /// @brief If manufacturing this item reqires invention, these decryptor
         /// will maximize your average profit.
-        uint64_t optimal_decryptor_id_;
+        ///
+        /// Only valid if @ref manufacturability_t::is_ok() == true
+        decryptor_t optimal_decryptor_;
         
 };
 

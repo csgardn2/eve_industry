@@ -8,12 +8,12 @@
 #include <fstream>
 #include <string>
 #include <string_view>
-#include <vector>
 
 #include "blueprint.h"
 #include "blueprint_profit.h"
 #include "error.h"
 #include "json.h"
+#include "manufacturability.h"
 #include "station_market.h"
 
 float calculate_time(const blueprint_t& blueprint_of_interest, const blueprints_t& all_blueprints)
@@ -84,35 +84,42 @@ void blueprint_profit_t::read_from_json_structure(const Json::Value& json_root)
     if (!json_root.isObject())
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of blueprint_profit is not of type \"object\".\n");
     
+    // Parse manufacturability
+    const Json::Value& json_manufacturability = json_root["manufacturability"];
+    this->manufacturability_.read_from_json_structure(json_manufacturability);
+    
     // Parse blueprint_id
     const Json::Value& json_blueprint_id = json_root["blueprint_id"];
     if (!json_blueprint_id.isUInt64())
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/blueprint_id was not found or not of type \"unsigned integer\".\n");
     this->blueprint_id_ = json_blueprint_id.asUInt64();
     
-    // Parse time
-    const Json::Value& json_time = json_root["time"];
-    if (!json_time.isUInt())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/time was not found or not of type \"unsigned integer\".\n");
-    this->time_ = json_time.asUInt();
-    
-    // Parse total_cost
-    const Json::Value& json_total_cost = json_root["total_cost"];
-    if (!json_total_cost.isNumeric())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/total_cost was not found or not of type \"float\".\n");
-    this->total_cost_ = json_total_cost.asFloat();
-    
-    // Parse output_value
-    const Json::Value& json_output_value = json_root["output_value"];
-    if (!json_output_value.isNumeric())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/output_value was not found or not of type \"float\".\n");
-    this->output_value_ = json_output_value.asFloat();
-    
-    // Parse optimal_decryptor_id
-    const Json::Value& json_optimal_decryptor_id = json_root["optimal_decryptor_id"];
-    if (!json_optimal_decryptor_id.isUInt64())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/optimal_decryptor_id was not found or not of type \"unsigned integer\".\n");
-    this->optimal_decryptor_id_ = json_optimal_decryptor_id.asUInt64();
+    // If this blueprint cannot be manufactured, then all other fields are invalid
+    if (this->manufacturability_.is_ok())
+    {
+        
+        // Parse time
+        const Json::Value& json_time = json_root["time"];
+        if (!json_time.isUInt())
+            throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/time was not found or not of type \"unsigned integer\".\n");
+        this->time_ = json_time.asUInt();
+        
+        // Parse total_cost
+        const Json::Value& json_total_cost = json_root["total_cost"];
+        if (!json_total_cost.isNumeric())
+            throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/total_cost was not found or not of type \"float\".\n");
+        this->total_cost_ = json_total_cost.asFloat();
+        
+        // Parse output_value
+        const Json::Value& json_output_value = json_root["output_value"];
+        if (!json_output_value.isNumeric())
+            throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <blueprint_profit>/output_value was not found or not of type \"float\".\n");
+        this->output_value_ = json_output_value.asFloat();
+        
+        // Parse optimal_decryptor_id
+        this->optimal_decryptor_.read_from_json_structure(json_root["optimal_decryptor"]);
+        
+    }
     
     // Ignore derivable stats like profit_amount
     
@@ -137,47 +144,64 @@ void blueprint_profit_t::write_to_json_buffer(std::string& buffer, unsigned inde
     // enable chaining.
     buffer += "{\n";
     
-    // Encode base statistics
+    buffer += indent_1;
+    buffer += "\"manufacturability\": ";
+    this->manufacturability_.write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
+    buffer += ",\n";
+    
     buffer += indent_1;
     buffer += "\"blueprint_id\": ";
     buffer += std::to_string(this->blueprint_id_);
-    buffer += ",\n";
     
-    buffer += indent_1;
-    buffer += "\"time\": ";
-    buffer += std::to_string(this->time_);
-    buffer += ",\n";
+    // All other members are only valid if this blueprint is manufacturable.
+    if (this->manufacturability_.is_ok())
+    {
+        
+        buffer += ",\n";
+        
+        // Encode base statistics
+        
+        buffer += indent_1;
+        buffer += "\"time\": ";
+        buffer += std::to_string(this->time_);
+        buffer += ",\n";
+        
+        buffer += indent_1;
+        buffer += "\"total_cost\": ";
+        buffer += std::to_string(this->total_cost_);
+        buffer += ",\n";
+        
+        buffer += indent_1;
+        buffer += "\"output_value\": ";
+        buffer += std::to_string(this->output_value_);
+        buffer += ",\n";
+        
+        buffer += indent_1;
+        buffer += "\"optimal_decryptor\": ";
+        this->optimal_decryptor_.write_to_json_buffer(buffer);
+        buffer += ",\n";
+        
+        // Encode optional, derived stats.
+        buffer += indent_1;
+        buffer += "\"profit_amount\": ";
+        buffer += std::to_string(this->profit_amount());
+        buffer += ",\n";
+        
+        buffer += indent_1;
+        buffer += "\"profit_percent\": ";
+        buffer += std::to_string(this->profit_percent());
+        buffer += ",\n";
+        
+        buffer += indent_1;
+        buffer += "\"profit_per_second\": ";
+        buffer += std::to_string(this->profit_per_second());
+        buffer += '\n';
     
-    buffer += indent_1;
-    buffer += "\"total_cost\": ";
-    buffer += std::to_string(this->total_cost_);
-    buffer += ",\n";
-    
-    buffer += indent_1;
-    buffer += "\"output_value\": ";
-    buffer += std::to_string(this->output_value_);
-    buffer += ",\n";
-    
-    buffer += indent_1;
-    buffer += "\"optimal_decryptor_id\": ";
-    buffer += std::to_string(this->optimal_decryptor_id_);
-    buffer += ",\n";
-    
-    // Encode optional, derived stats.
-    buffer += indent_1;
-    buffer += "\"profit_amount\": ";
-    buffer += std::to_string(this->profit_amount());
-    buffer += ",\n";
-    
-    buffer += indent_1;
-    buffer += "\"profit_percent\": ";
-    buffer += std::to_string(this->profit_percent());
-    buffer += ",\n";
-    
-    buffer += indent_1;
-    buffer += "\"profit_per_second\": ";
-    buffer += std::to_string(this->profit_per_second());
-    buffer += '\n';
+    } else {
+        
+        buffer += '\n';
+        
+    }
     
     // It is recommended to not put a newline on the last brace to allow
     // comma chaining when this object is an element of an array.

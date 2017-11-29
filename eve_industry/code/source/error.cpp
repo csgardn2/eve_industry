@@ -34,6 +34,7 @@ const std::vector<std::string_view> error_message_t::error_names_ =
     "INVALID_PROBABILITY",
     "READ_INVALID_INVENT",
     "READ_INVALID_COPY",
-    "UNKNOWN_DECRYPTOR_TYPE"
+    "UNKNOWN_DECRYPTOR_TYPE",
+    "UNKNOWN_MANUFACTURABILITY_STATUS"
 };
 

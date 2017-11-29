@@ -9,7 +9,6 @@
 #include <memory>
 #include <string>
 #include <string_view>
-#include <vector>
 
 #include "item_attribute.h"
 #include "error.h"

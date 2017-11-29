@@ -331,49 +331,111 @@
                 "$ref": "#/definitions/blueprint"
             }
         },
-        "blueprint_profit": {
+        "manufacturability": {
             "type": "object",
-            "description": "Reports various profit margins and scores for a particular blueprint.",
+            "description": "Indicates if a blueprint can be manufactured (and invented if it's a T2 blueprint).",
             "properties": {
-                "blueprint_id": {
-                    "type": "integer",
-                    "description": "This profitability report was generated for the blueprint with this ID.",
-                    "minimum": 0
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "ok",
+                        "missing_market_data",
+                        "invent_cannot_find_requisite_t1",
+                        "invent_cannot_copy_requisite_t1"
+                    ]
                 },
-                "time": {
-                    "type": "integer",
-                    "description": "Total time to produce 1 final output item including copy and invention time.  Assumes that all input materials are purchased and not manufactured.  Invention time is weighted using the invention probability.",
-                    "minimum": 0
-                },
-                "total_cost": {
-                    "type": "number",
-                    "description": "Sum of all costs including input materials, datacores, decryptors.  Invention costs are weighted by the probability of success.",
-                    "minimum": 0.0
-                },
-                "output_value": {
-                    "type": "number",
-                    "description": "Value of the output items produced by one manufacturing run.  For example, a mjolnir fury light missil run produces 5000 missiles.  If these missiles sell for 87 ISK each then this value would be 435000.",
-                    "minimum": 0
-                },
-                "optimal_decryptor_id": {
-                    "type": "integer",
-                    "description": "If manufacturing this item reqires invention, these decryptor will maximize your profit amount.  Can be null.",
-                    "minimum": 0
-                },
-                "profit_amount": {
-                    "type": "number",
-                    "description": "Calculated using output_value - total_cost."
-                },
-                "profit_percent": {
-                    "type": "number",
-                    "description": "Calculated using output_value / total_cost."
-                },
-                "profit_per_second": {
-                    "type": "number",
-                    "description": "Calculated using (output_value - total_cost) / time."
+                "message": {
+                    "type": "string",
+                    "description": "Optional human readable message for diagnosing a specific issue that caused @ref status_ to be anything other than OK."
                 }
             },
-            "required": ["blueprint_id", "time", "total_cost", "output_value", "optimal_decryptor_id"]
+            "required": ["status"]
+        },
+        "blueprint_profit": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "description": "Reports various profit margins and scores for a particular blueprint.",
+                    "properties": {
+                        "manufacturability": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "enum": ["ok"]
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["status"]
+                        },
+                        "blueprint_id": {
+                            "type": "integer",
+                            "description": "This profitability report was generated for the blueprint with this ID.",
+                            "minimum": 0
+                        },
+                        "time": {
+                            "type": "integer",
+                            "description": "Total time to produce 1 final output item including copy and invention time.  Assumes that all input materials are purchased and not manufactured.  Invention time is weighted using the invention probability.",
+                            "minimum": 0
+                        },
+                        "total_cost": {
+                            "type": "number",
+                            "description": "Sum of all costs including input materials, datacores, decryptors.  Invention costs are weighted by the probability of success.",
+                            "minimum": 0.0
+                        },
+                        "output_value": {
+                            "type": "number",
+                            "description": "Value of the output items produced by one manufacturing run.  For example, a mjolnir fury light missil run produces 5000 missiles.  If these missiles sell for 87 ISK each then this value would be 435000.",
+                            "minimum": 0
+                        },
+                        "optimal_decryptor": {
+                            "$ref": "#/definitions/decryptor"
+                        },
+                        "profit_amount": {
+                            "type": "number",
+                            "description": "Calculated using output_value - total_cost."
+                        },
+                        "profit_percent": {
+                            "type": "number",
+                            "description": "Calculated using output_value / total_cost."
+                        },
+                        "profit_per_second": {
+                            "type": "number",
+                            "description": "Calculated using (output_value - total_cost) / time."
+                        }
+                    },
+                    "required": ["manufacturability", "blueprint_id", "time", "total_cost", "output_value", "optimal_decryptor"]
+                }, {
+                    "type": "object",
+                    "properties": {
+                        "manufacturability": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "enum": [
+                                        "missing_market_data",
+                                        "invent_cannot_find_requisite_t1",
+                                        "invent_cannot_copy_requisite_t1"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["status"]
+                        },
+                        "blueprint_id": {
+                            "type": "integer",
+                            "description": "This profitability report was generated for the blueprint with this ID.",
+                            "minimum": 0
+                        }
+                    },
+                    "required": ["manufacturability", "blueprint_id"]
+                }
+            ]
         },
         "station_profits": {
             "type": "object",
@@ -399,10 +461,10 @@
                 "$ref": "#/definitions/station_profits"
             }
         },
-        "decryptor":
-        {
-            "type": "string",
+        "decryptor": {
+            "type": ["string"],
             "enum": [
+                "no_decryptor",
                 "augmentation",
                 "optimized_augmentation",
                 "symmetry",
@@ -413,6 +475,72 @@
                 "optimized_attainment"
             ],
             "description": "A missing or null value is valid and indicates 'do not use a decryptor'.  Indicates a decryptor to be used during an invention run."
+        }
+    },
+    "type": "object",
+    "properties": {
+        "args": {
+            "$ref": "#/definitions/args"
+        },
+        "item_attribute": {
+            "$ref": "#/definitions/item_attribute"
+        },
+        "item_attributes": {
+            "$ref": "#/definitions/item_attributes"
+        },
+        "item_ids": {
+            "$ref": "#/definitions/item_ids"
+        },
+        "station_attribute": {
+            "$ref": "#/definitions/station_attribute"
+        },
+        "station_attributes": {
+            "$ref": "#/definitions/station_attributes"
+        },
+        "raw_regional_market": {
+            "$ref": "#/definitions/raw_regional_market"
+        },
+        "raw_order": {
+            "$ref": "#/definitions/raw_order"
+        },
+        "galactic_market": {
+            "$ref": "#/definitions/galactic_market"
+        },
+        "regional_market": {
+            "$ref": "#/definitions/regional_market"
+        },
+        "station_market": {
+            "$ref": "#/definitions/station_market"
+        },
+        "item_market": {
+            "$ref": "#/definitions/item_market"
+        },
+        "item_quantity": {
+            "$ref": "#/definitions/item_quantity"
+        },
+        "item_quantities": {
+            "$ref": "#/definitions/item_quantities"
+        },
+        "blueprint": {
+            "$ref": "#/definitions/blueprint"
+        },
+        "blueprints": {
+            "$ref": "#/definitions/blueprints"
+        },
+        "manufacturability": {
+            "$ref": "#/definitions/manufacturability"
+        },
+        "blueprint_profit": {
+            "$ref": "#/definitions/blueprint_profit"
+        },
+        "station_profits": {
+            "$ref": "#/definitions/station_profits"
+        },
+        "galactic_profits": {
+            "$ref": "#/definitions/galactic_profits"
+        },
+        "decryptor": {
+            "$ref": "#/definitions/decryptor"
         }
     }
 }

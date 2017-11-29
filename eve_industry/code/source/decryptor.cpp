@@ -8,7 +8,6 @@
 #include <fstream>
 #include <string>
 #include <string_view>
-#include <vector>
 
 #include "decryptor.h"
 #include "error.h"
@@ -177,7 +176,9 @@ void decryptor_t::read_from_json_structure(const Json::Value& json_root)
     std::string_view value = json_root.asString();
     
     // Decode Enum
-    if (value == "augmentation")
+    if (value == "no_decryptor")
+        this->type_ = type_t::NO_DECRYPTOR;
+    else if (value == "augmentation")
         this->type_ = type_t::AUGMENTATION;
     else if (value == "optimized_augmentation")
         this->type_ = type_t::OPTIMIZED_AUGMENTATION;
@@ -217,7 +218,7 @@ void decryptor_t::write_to_json_buffer(std::string& buffer) const
     switch (this->type_)
     {
         case type_t::NO_DECRYPTOR:
-            buffer += "null";
+            buffer += "\"no_decryptor\"";
             return;
         case type_t::AUGMENTATION:
             buffer += "\"augmentation\"";

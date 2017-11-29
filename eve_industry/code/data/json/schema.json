@@ -398,6 +398,21 @@
             "items": {
                 "$ref": "#/definitions/station_profits"
             }
+        },
+        "decryptor":
+        {
+            "type": "string",
+            "enum": [
+                "augmentation",
+                "optimized_augmentation",
+                "symmetry",
+                "process",
+                "accelerant",
+                "parity",
+                "attainment",
+                "optimized_attainment"
+            ],
+            "description": "A missing or null value is valid and indicates 'do not use a decryptor'.  Indicates a decryptor to be used during an invention run."
         }
     }
 }

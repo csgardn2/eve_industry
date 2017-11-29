@@ -1,46 +1,5 @@
 [
     {
-        "blueprint_id": 17477,
-        "manufacture": {
-            "time": 12000,
-            "input_materials": [
-                {
-                    "item_id": 34,
-                    "quantity": 2222222
-                }, {
-                    "item_id": 35,
-                    "quantity": 666667
-                }, {
-                    "item_id": 36,
-                    "quantity": 66667
-                }, {
-                    "item_id": 37,
-                    "quantity": 44444
-                }, {
-                    "item_id": 38,
-                    "quantity": 4444
-                }, {
-                    "item_id": 39,
-                    "quantity": 2222
-                }, {
-                    "item_id": 40,
-                    "quantity": 666
-                }
-            ],
-            "output_materials": [
-                {
-                    "item_id": 17476,
-                    "quantity": 1
-                }
-            ],
-            "material_efficiency": 10,
-            "time_efficiency": 20
-        },
-        "copy": {
-            "time": 9600,
-            "input_materials": []
-        }
-    }, {
         "blueprint_id": 22545,
         "manufacture": {
             "time": 240000,
@@ -91,7 +50,7 @@
         },
         "invent": {
             "time": 128100,
-            "probability": 0.26,
+            "probability": 0.260000,
             "input_materials": [
                 {
                     "item_id": 20413,
@@ -106,5 +65,47 @@
             "time_efficiency": 4,
             "runs": 1
         }
+    }, {
+        "blueprint_id": 17477,
+        "manufacture": {
+            "time": 12000,
+            "input_materials": [
+                {
+                    "item_id": 34,
+                    "quantity": 2222222
+                }, {
+                    "item_id": 35,
+                    "quantity": 666667
+                }, {
+                    "item_id": 36,
+                    "quantity": 66667
+                }, {
+                    "item_id": 37,
+                    "quantity": 44444
+                }, {
+                    "item_id": 38,
+                    "quantity": 4444
+                }, {
+                    "item_id": 39,
+                    "quantity": 2222
+                }, {
+                    "item_id": 40,
+                    "quantity": 666
+                }
+            ],
+            "output_materials": [
+                {
+                    "item_id": 17476,
+                    "quantity": 1
+                }
+            ],
+            "material_efficiency": 10,
+            "time_efficiency": 20
+        },
+        "copy": {
+            "time": 9600,
+            "input_materials": []
+        }
     }
 ]
+

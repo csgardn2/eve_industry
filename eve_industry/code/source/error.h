@@ -39,6 +39,7 @@ enum class error_code_t
     INVALID_PROBABILITY,
     READ_INVALID_INVENT,
     READ_INVALID_COPY,
+    UNKNOWN_DECRYPTOR_TYPE,
     /// This element must be last
     NUM_ENUMS
     

@@ -1,6 +1,6 @@
 EXENAME=eve_industry
 COMPILEFLAGS=-Wall -Wextra -ansi -Wfatal-errors -std=c++1z -g -fopenmp
-LINKFLAGS=-Wall -Wextra -ansi -Wfatal-errors
+LINKFLAGS=-Wall -Wextra -ansi -Wfatal-errors -g
 LIBS=-lcurl -fopenmp
 ARGS=--mode fetch-item-attributes --item-attributes-out data/json/item_attributes.json
 
@@ -20,6 +20,7 @@ $(BINDIR)/$(EXENAME):                   \
     $(BINDIR)/blueprint_profit.o        \
     $(BINDIR)/debug_mode.o              \
     $(BINDIR)/copy.o                    \
+    $(BINDIR)/decryptor.o               \
     $(BINDIR)/error.o                   \
     $(BINDIR)/galactic_market.o         \
     $(BINDIR)/galactic_profits.o        \
@@ -68,6 +69,9 @@ $(BINDIR)/copy.o: $(SOURCEDIR)/copy.cpp $(SOURCEDIR)/copy.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/debug_mode.o: $(SOURCEDIR)/debug_mode.cpp $(SOURCEDIR)/debug_mode.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/decryptor.o: $(SOURCEDIR)/decryptor.cpp $(SOURCEDIR)/decryptor.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/error.o: $(SOURCEDIR)/error.cpp $(SOURCEDIR)/error.h
@@ -189,6 +193,8 @@ $(DOCDIR)/html_out/index.html:              \
     $(SOURCEDIR)/copy.cpp                   \
     $(SOURCEDIR)/debug_mode.h               \
     $(SOURCEDIR)/debug_mode.cpp             \
+    $(SOURCEDIR)/decryptor.h                \
+    $(SOURCEDIR)/decryptor.cpp              \
     $(SOURCEDIR)/error.h                    \
     $(SOURCEDIR)/error.cpp                  \
     $(SOURCEDIR)/galactic_market.h          \

@@ -62,11 +62,15 @@ void blueprints_t::read_from_json_structure(const Json::Value& json_root)
     
     // Allocate storage for all blueprints
     unsigned num_blueprints = json_root.size();
-    this->storage_.resize(num_blueprints);
+    this->storage_.reserve(num_blueprints);
     
     // Overwrite previous content
-    for (unsigned ix = 0; ix < num_blueprints; ix++)
-        this->storage_[ix].read_from_json_structure(json_root[ix]);
+    for (const Json::Value& json_cur_array_element : json_root)
+    {
+        blueprint_t new_blueprint;
+        new_blueprint.read_from_json_structure(json_cur_array_element);
+        this->storage_.emplace(new_blueprint.blueprint_id(), std::move(new_blueprint));
+    }
     
 }
 
@@ -99,13 +103,16 @@ void blueprints_t::write_to_json_buffer(std::string& buffer, unsigned indent_sta
     
     // Encode each blueprint as an element of an array.
     buffer += indent_1;
-    for (unsigned ix = 0, last_ix = num_blueprints - 1; ix <= last_ix; ix++)
+    unsigned last_ix = num_blueprints - 1;
+    unsigned ix = 0;
+    for (const std::pair<uint64_t, blueprint_t>& cur_blueprint : this->storage_)
     {
-        this->storage_[ix].write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
+        cur_blueprint.second.write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
         if (ix == last_ix)
             buffer += '\n';
         else
             buffer += ", ";
+        ix++;
     }
     
     // It is recommended to not put a newline on the last brace to allow

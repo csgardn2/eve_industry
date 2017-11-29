@@ -16,6 +16,7 @@
 #include "json.h"
 
 class blueprint_t;
+class blueprints_t;
 class station_market_t;
 
 /// @brief This is a final profitability report for a specific blueprint.
@@ -23,6 +24,14 @@ class blueprint_profit_t
 {
         
     public:
+        
+        /// @brief Indicates if a blueprint can be manufactured or if there is
+        /// a problem at a specific point in the supply chain.
+        enum class manufacturability_t {
+            SUCCESS,
+            // NUM_ENUMS element must be last
+            NUM_ENUMS
+        };
         
         /// @brief See @ref optimal_decryptor_id_.
         static const uint64_t NO_DECRYPTOR = 0;
@@ -65,7 +74,12 @@ class blueprint_profit_t
         
         void initialize_from_market
         (
-            const blueprint_t& blueprint,
+            /// [in] The blueprint whose profit you want to calculate
+            const blueprint_t& blueprint_of_interest,
+            /// [in] Archive of all blueprints.  This is mostly used for
+            /// invention, which requires a T1 blueprint and a T2 blueprint.
+            const blueprints_t& all_blueprints,
+            /// [in] Item price data
             const station_market_t& station_market
         );
         
@@ -175,10 +189,7 @@ class blueprint_profit_t
         float output_value_;
         
         /// @brief If manufacturing this item reqires invention, these decryptor
-        /// will maximize your profit amount.
-        ///
-        /// If not using any decryptor is the most profitable invention method,
-        /// this member is set to @ref NO_DECRYPTOR.
+        /// will maximize your average profit.
         uint64_t optimal_decryptor_id_;
         
 };

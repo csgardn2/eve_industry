@@ -30,10 +30,10 @@ void station_profits_t::calculate_blueprint_profits
     this->station_id_ = station_market.station_id();
     
     // Calculate profitability for each blueprint using this station's prices
-    for (const blueprint_t& cur_blueprint : blueprints_in.storage())
+    for (const std::pair<uint64_t, blueprint_t>& cur_blueprint : blueprints_in.storage())
     {
         blueprint_profit_t new_blueprint_profit;
-        new_blueprint_profit.initialize_from_market(cur_blueprint, station_market);
+        new_blueprint_profit.initialize_from_market(cur_blueprint.second, blueprints_in, station_market);
         this->blueprint_profits_.emplace_back(std::move(new_blueprint_profit));
     }
     

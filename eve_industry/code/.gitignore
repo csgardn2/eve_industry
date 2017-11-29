@@ -1,5 +1,6 @@
 *.o
 *.html
+core
 bin/eve_industry
 documentation/html_out
 data/json/prices.json

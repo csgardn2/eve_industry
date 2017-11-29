@@ -16,21 +16,24 @@
 #include "json.h"
 #include "station_market.h"
 
-float calculate_time(const blueprint_t& blueprint)
+float calculate_time(const blueprint_t& blueprint_of_interest, const blueprints_t& all_blueprints)
 {
     
-    /// TODO
-    return 0.0f;
+    // No matter what, you'll need to perform a manufacturing run.  Start with
+    // that time
+    float total_build_time = blueprint_of_interest.manufacture().time();
+    return total_build_time;
     
 }
 
 void blueprint_profit_t::initialize_from_market
 (
-    const blueprint_t& blueprint,
+    const blueprint_t& blueprint_of_interest,
+    const blueprints_t& all_blueprints,
     const station_market_t& station_market
 ){
     
-    this->time_ = calculate_time(blueprint);
+    this->time_ = calculate_time(blueprint_of_interest, all_blueprints);
     
     /// TODO
     

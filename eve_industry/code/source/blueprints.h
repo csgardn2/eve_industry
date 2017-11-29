@@ -10,7 +10,7 @@
 
 #include <fstream>
 #include <string_view>
-#include <vector>
+#include <unordered_map>
 
 #include "blueprint.h"
 #include "error.h"
@@ -32,7 +32,12 @@ class blueprints_t
 
         // Add member read and write functions
         
-        inline const std::vector<blueprint_t>& storage() const
+        inline const std::unordered_map<uint64_t, blueprint_t>& storage() const
+        {
+            return this->storage_;
+        }
+        
+        inline const std::unordered_map<uint64_t, blueprint_t>& storage()
         {
             return this->storage_;
         }
@@ -106,8 +111,10 @@ class blueprints_t
         // Try to make your members protected, even if they don't have to be.
         
         /// @brief Set of all the blueprints owned by a player.
-        std::vector<blueprint_t> storage_;
-        
+        ///
+        /// Key = @ref blueprint_t::blueprint_id_.
+        /// Value = The entire blueprint with that ID.
+        std::unordered_map<uint64_t, blueprint_t> storage_;
 };
 
 /// @brief Convenience alias to allow printing directly via cout or similar.

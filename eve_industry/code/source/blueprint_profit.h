@@ -26,6 +26,17 @@ class blueprint_profit_t
         
     public:
         
+        /// @brief Used to specify an optimization method or column to sort
+        /// by when encoding a list of blueprint profits
+        enum class sort_strategy_t
+        {
+            PROFIT_AMOUNT,
+            PROFIT_PERCENT,
+            PROFIT_PER_SECOND,
+            /// This element must be last
+            NUM_ENUMS
+        };
+        
         /// @brief Default constructor
         inline blueprint_profit_t() = default;
         
@@ -33,7 +44,7 @@ class blueprint_profit_t
         // Try to use initializer lists when possible.
         
         // Add operators here if desired.
-
+        
         // Add member read and write functions
         uint64_t blueprint_id() const
         {
@@ -62,6 +73,7 @@ class blueprint_profit_t
         
         // Add special-purpose functions here
         
+        /// @brief Choose the optimal decryptor 
         void initialize_from_market
         (
             /// [in] The blueprint whose profit you want to calculate
@@ -70,7 +82,9 @@ class blueprint_profit_t
             /// invention, which requires a T1 blueprint and a T2 blueprint.
             const blueprints_t& all_blueprints,
             /// [in] Item price data
-            const station_market_t& station_market
+            const station_market_t& station_market,
+            /// [in] Selects a metric to maximize when choosing a decryptor.
+            sort_strategy_t decryptor_optimization_strategy
         );
         
         inline float profit_amount() const

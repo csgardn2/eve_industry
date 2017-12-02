@@ -17,7 +17,8 @@
 void galactic_profits_t::caclulate_station_profits
 (
     const blueprints_t& blueprints,
-    const galactic_market_t& galactic_market
+    const galactic_market_t& galactic_market,
+    blueprint_profit_t::sort_strategy_t decryptor_optimization_strategy
 ){
     
     // Clear previous content
@@ -29,7 +30,7 @@ void galactic_profits_t::caclulate_station_profits
         for (const std::pair<uint64_t, station_market_t>& cur_station_market : cur_regional_market.second.stations())
         {
             station_profits_t new_station_profits;
-            new_station_profits.calculate_blueprint_profits(blueprints, cur_station_market.second);
+            new_station_profits.calculate_blueprint_profits(blueprints, cur_station_market.second, decryptor_optimization_strategy);
             this->station_profits_.emplace_back(std::move(new_station_profits));
         }
     }

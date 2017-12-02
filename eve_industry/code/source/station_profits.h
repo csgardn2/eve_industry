@@ -52,7 +52,8 @@ class station_profits_t
         void calculate_blueprint_profits
         (
             const blueprints_t& blueprints_in,
-            const station_market_t& station_market
+            const station_market_t& station_market,
+            blueprint_profit_t::sort_strategy_t decryptor_optimization_strategy
         );
         
         // Add encoders/decoders here

@@ -204,7 +204,7 @@ int main(int argc, char** argv)
                 if (args.debug_mode().verbose())
                     std::cout << "Calculating blueprint profitability.\n";
                 galactic_profits_t galactic_profits_out;
-                galactic_profits_out.caclulate_station_profits(blueprints_in, galactic_market);
+                galactic_profits_out.caclulate_station_profits(blueprints_in, galactic_market, args.decryptor_optimization_strategy());
                 
                 // Write profits report to file.
                 if (args.debug_mode().verbose())

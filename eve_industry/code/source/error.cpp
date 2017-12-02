@@ -24,6 +24,7 @@ const std::vector<std::string_view> error_message_t::error_names_ =
     "PRICES_IN_MISSING",
     "BLUEPRINTS_IN_MISSING",
     "PROFITS_OUT_MISSING",
+    "SORT_STRATEGY_INVALID",
     "UNKNOWN_ORDER_TYPE",
     "EVE_SUCKS",
     "NO_ORDERS",
@@ -35,6 +36,7 @@ const std::vector<std::string_view> error_message_t::error_names_ =
     "READ_INVALID_INVENT",
     "READ_INVALID_COPY",
     "UNKNOWN_DECRYPTOR_TYPE",
-    "UNKNOWN_MANUFACTURABILITY_STATUS"
+    "UNKNOWN_MANUFACTURABILITY_STATUS",
+    "UNKNOWN_SORT_STRATEGY"
 };
 

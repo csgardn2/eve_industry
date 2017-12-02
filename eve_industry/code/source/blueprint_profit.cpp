@@ -16,26 +16,18 @@
 #include "manufacturability.h"
 #include "station_market.h"
 
-float calculate_time(const blueprint_t& blueprint_of_interest, const blueprints_t& all_blueprints)
-{
-    
-    // No matter what, you'll need to perform a manufacturing run.  Start with
-    // that time
-    float total_build_time = blueprint_of_interest.manufacture().time();
-    return total_build_time;
-    
-}
-
 void blueprint_profit_t::initialize_from_market
 (
     const blueprint_t& blueprint_of_interest,
     const blueprints_t& all_blueprints,
-    const station_market_t& station_market
+    const station_market_t& station_market,
+    sort_strategy_t decryptor_optimization_strategy
 ){
     
-    this->time_ = calculate_time(blueprint_of_interest, all_blueprints);
+    // calculate profits for each decryptor
     
-    /// TODO
+    this->manufacturability_.status(manufacturability_t::status_t::MISSING_MARKET_DATA);
+    this->blueprint_id_ = blueprint_of_interest.blueprint_id();
     
 }
 

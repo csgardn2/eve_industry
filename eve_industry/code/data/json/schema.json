@@ -1,12 +1,17 @@
 {
     "definitions": {
+        "sort_strategy": {
+            "type": "string",
+            "description": "Indicates a preference for what you care most about during blueprint profitability calculations",
+            "enum": ["profit_amount", "profit_percent", "profit_per_second"]
+        },
         "args": {
             "type": "object",
             "description": "Command line argument validator and storage structure.",
             "properties": {
                 "mode": {
                     "type": "string",
-                    "enum": ["fetch-item-attributes", "fetch-structure-attributes"],
+                    "enum": ["fetch-item-attributes", "fetch-structure-attributes", "calculate-blueprint-profits"],
                     "description": "The high-level operation that this tool is to perform."
                 },
                 "item_attributes_out": {
@@ -24,6 +29,32 @@
                 "prices_out": {
                     "type": "string",
                     "description": "Live market buy and sell prices for specific items at specific stations."
+                },
+                "prices_in": {
+                    "type": "string",
+                    "description": "Input file containing live market buy and sell prices."
+                },
+                "blueprints_in": {
+                    "type": "string",
+                    "description": "Filename of a JSON file containing info about blueprints such as input materials and invention probabilities."
+                },
+                "profits_out": {
+                    "type": "string",
+                    "description": "Filename of a JSON file to report how profitable each blueprint is."
+                },
+                "cull_stations": {
+                    "type": "boolean",
+                    "description": "If true, strips out market orders from stations that weren't requested by @ref station_attributes_in."
+                },
+                "cull_orders": {
+                    "type": "boolean",
+                    "description": "If true, strips out all market orders that weren't the lowest sell order."
+                },
+                "output_order": {
+                    "$ref": "#/definitions/sort_strategy"
+                },
+                "decryptor_optimization_strategy": {
+                    "$ref": "#/definitions/sort_strategy"
                 }
             }
         },

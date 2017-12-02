@@ -47,7 +47,8 @@ class galactic_profits_t
         void caclulate_station_profits
         (
             const blueprints_t& blueprints,
-            const galactic_market_t& galactic_market
+            const galactic_market_t& galactic_market,
+    blueprint_profit_t::sort_strategy_t decryptor_optimization_strategy
         );
         
         // Add encoders/decoders here

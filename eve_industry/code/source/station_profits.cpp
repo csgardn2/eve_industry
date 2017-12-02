@@ -20,7 +20,8 @@
 void station_profits_t::calculate_blueprint_profits
 (
     const blueprints_t& blueprints_in,
-    const station_market_t& station_market
+    const station_market_t& station_market,
+    blueprint_profit_t::sort_strategy_t decryptor_optimization_strategy
 ){
     
     // Clear previous content
@@ -33,7 +34,7 @@ void station_profits_t::calculate_blueprint_profits
     for (const std::pair<uint64_t, blueprint_t>& cur_blueprint : blueprints_in.storage())
     {
         blueprint_profit_t new_blueprint_profit;
-        new_blueprint_profit.initialize_from_market(cur_blueprint.second, blueprints_in, station_market);
+        new_blueprint_profit.initialize_from_market(cur_blueprint.second, blueprints_in, station_market, decryptor_optimization_strategy);
         this->blueprint_profits_.emplace_back(std::move(new_blueprint_profit));
     }
     

@@ -29,6 +29,7 @@ enum class error_code_t
     PRICES_IN_MISSING,
     BLUEPRINTS_IN_MISSING,
     PROFITS_OUT_MISSING,
+    SORT_STRATEGY_INVALID,
     UNKNOWN_ORDER_TYPE,
     EVE_SUCKS,
     NO_ORDERS,
@@ -41,6 +42,7 @@ enum class error_code_t
     READ_INVALID_COPY,
     UNKNOWN_DECRYPTOR_TYPE,
     UNKNOWN_MANUFACTURABILITY_STATUS,
+    UNKNOWN_SORT_STRATEGY,
     /// This element must be last
     NUM_ENUMS
     

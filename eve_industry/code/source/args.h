@@ -12,6 +12,7 @@
 #include <string_view>
 #include <vector>
 
+#include "blueprint_profit.h"
 #include "debug_mode.h"
 #include "error.h"
 #include "json.h"
@@ -109,6 +110,16 @@ class args_t
         inline bool cull_orders() const
         {
             return this->cull_orders_;
+        }
+        
+        inline blueprint_profit_t::sort_strategy_t output_order() const
+        {
+            return this->output_order_;
+        }
+        
+        inline blueprint_profit_t::sort_strategy_t decryptor_optimization_strategy()
+        {
+            return this->decryptor_optimization_strategy_;
         }
         
         // Add more operators here if desired.
@@ -253,16 +264,22 @@ class args_t
         /// as input materials and invention probabilities.
         std::string blueprints_in_;
         
-        /// @brief Filename of a JSON file to report profits to.
+        /// @brief Filename of a JSON file to report how profitable each blueprint is.
         std::string profits_out_;
         
         /// @brief If true, strips out market orders from stations that weren't
-        /// requested by @ref station_attributes_in
+        /// requested by @ref station_attributes_in.
         bool cull_stations_;
         
         /// @brief If true, strips out all market orders that weren't the lowest
         /// sell order.
         bool cull_orders_;
+        
+        /// @brief See @ref blueprint_profit_t::sort_strategy_t
+        blueprint_profit_t::sort_strategy_t output_order_;
+        
+        /// @brief See @ref blueprint_profit_t::sort_strategy_t
+        blueprint_profit_t::sort_strategy_t decryptor_optimization_strategy_;
         
 };
 

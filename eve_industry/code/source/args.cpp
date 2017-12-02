@@ -46,6 +46,37 @@ std::string args_t::valid_mode_values() const
     
 }
 
+blueprint_profit_t::sort_strategy_t string_to_sort_strategy(std::string_view str)
+{
+    if (str == "profit_amount")
+        return blueprint_profit_t::sort_strategy_t::PROFIT_AMOUNT;
+    else if (str == "profit_percent")
+        return blueprint_profit_t::sort_strategy_t::PROFIT_PERCENT;
+    else if (str == "profit_per_second")
+        return blueprint_profit_t::sort_strategy_t::PROFIT_PER_SECOND;
+    else {
+        std::string message("Error.  Invalid value \"");
+        message += str;
+        message += "\" for enumerated sort strategy.\n";
+        throw error_message_t(error_code_t::SORT_STRATEGY_INVALID, message);
+    }
+}
+
+std::string_view sort_strategy_to_string(blueprint_profit_t::sort_strategy_t sort_strategy)
+{
+    switch (sort_strategy)
+    {
+        case blueprint_profit_t::sort_strategy_t::PROFIT_AMOUNT:
+            return "profit_amount";
+        case blueprint_profit_t::sort_strategy_t::PROFIT_PERCENT:
+            return "profit_percent";
+        case blueprint_profit_t::sort_strategy_t::PROFIT_PER_SECOND:
+            return "profit_per_second";
+        default:
+            throw error_message_t(error_code_t::UNKNOWN_SORT_STRATEGY, "Error.  Encountered unknown enum for sort_strategy_t.\n");
+    }
+}
+
 /// @brief Search for a particular argument within argv and extract that
 /// argument's parameter.
 ///
@@ -225,6 +256,24 @@ void args_t::parse(unsigned argc, char const* const* argv)
     // Parse --dont-cull-orders
     this->cull_orders_ = !find_existence("--dont-cull-orders", argc, argv);
     
+    // Parse output_order_
+    if (this->mode_ == mode_t::CALCULATE_BLUEPRINT_PROFITS)
+    {
+        std::string_view output_order_string = find_argument("--output-order", argc, argv);
+        if (!output_order_string.empty())
+            this->output_order_ = string_to_sort_strategy(output_order_string);
+        // else use default value set by clear()
+    }
+    
+    // Parse decryptor_optimization_strategy
+    if (this->mode_ == mode_t::CALCULATE_BLUEPRINT_PROFITS)
+    {
+        std::string_view decryptor_optimization_strategy_string = find_argument("--decryptor-optimization-strategy", argc, argv);
+        if (!decryptor_optimization_strategy_string.empty())
+            this->decryptor_optimization_strategy_ = string_to_sort_strategy(decryptor_optimization_strategy_string);
+        // else use default value set by clear()
+    }
+    
 }
 
 void args_t::clear()
@@ -240,6 +289,8 @@ void args_t::clear()
     this->profits_out_.clear();
     this->cull_stations_ = false;
     this->cull_orders_ = false;
+    this->output_order_ = blueprint_profit_t::sort_strategy_t::PROFIT_PER_SECOND;
+    this->decryptor_optimization_strategy_ = blueprint_profit_t::sort_strategy_t::PROFIT_PER_SECOND;
 }
 
 void args_t::read_from_json_file(std::istream& file)
@@ -299,7 +350,7 @@ void args_t::read_from_json_json(const Json::Value& json_root)
     this->mode_ = mode_t::NUM_ENUMS;
     for (unsigned ix = 0; ix < unsigned(mode_t::NUM_ENUMS); ix++)
     {
-        if (mode == args_t::mode_names_[ix])
+        if (mode == args_t::mode_values_[ix])
         {
             this->mode_ = mode_t(ix);
             break;
@@ -337,6 +388,38 @@ void args_t::read_from_json_json(const Json::Value& json_root)
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/prices_out was not found or not of type \"string\".\n");
     this->prices_out_ = json_prices_out.asString();
     
+    // Parse root/prices_in
+    const Json::Value& json_prices_in = json_root["prices_in"];
+    if (!json_prices_in.isString())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/prices_in was not found or not of type \"string\".\n");
+    this->prices_in_ = json_prices_in.asString();
+    
+    // Parse root/blueprints_in
+    const Json::Value& json_blueprints_in = json_root["json_blueprints_in"];
+    if (!json_blueprints_in.isString())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/blueprints_in was not found or not of type \"string\".\n");
+    this->blueprints_in_ = json_blueprints_in.asString();
+    
+    // Parse root/profits_out
+    const Json::Value& json_profits_out = json_root["json_profits_out"];
+    if (!json_profits_out.isString())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/profits_out was not found or not of type \"string\".\n");
+    this->profits_out_ = json_profits_out.asString();
+    
+    // Parse root/output_order
+    const Json::Value& json_output_order = json_root["json_output_order"];
+    if (!json_output_order.isString())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/output_order was not found or not of type \"string\".\n");
+    const std::string& output_order_string = json_output_order.asString();
+    this->output_order_ = string_to_sort_strategy(std::string_view(output_order_string));
+    
+    // Parse root/decryptor_optimization_strategy
+    const Json::Value& json_decryptor_optimization_strategy = json_root["json_decryptor_optimization_strategy"];
+    if (!json_decryptor_optimization_strategy.isString())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/decryptor_optimization_strategy was not found or not of type \"string\".\n");
+    const std::string& decryptor_optimization_strategy_string = json_decryptor_optimization_strategy.asString();
+    this->decryptor_optimization_strategy_ = string_to_sort_strategy(std::string_view(decryptor_optimization_strategy_string));
+    
 }
 
 void args_t::write_to_json_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
@@ -359,40 +442,75 @@ void args_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, un
     // Encode mode
     buffer += indent_1;
     buffer += "\"mode\": \"";
-    buffer += args_t::mode_names_[unsigned(this->mode_)];
-    buffer += "\"";
+    buffer += args_t::mode_values_[unsigned(this->mode_)];
+    buffer += "\",\n";
     
     // Encode item_attributes_out
-    buffer += ",\n";
     buffer += indent_1;
     buffer += "\"item_attributes_out\": \"";
     buffer += this->item_attributes_out_;
-    buffer += "\"";
+    buffer += "\",\n";
     
     // Encode item_attributes_in
-    buffer += ",\n";
     buffer += indent_1;
     buffer += "\"item_attributes_in\": \"";
     buffer += this->item_attributes_in_;
-    buffer += "\"";
+    buffer += "\",\n";
     
     // Encode station_attributes_in
-    buffer += ",\n";
     buffer += indent_1;
     buffer += "\"station_attributes_in\": \"";
     buffer += this->station_attributes_in_;
-    buffer += "\"";
+    buffer += "\",\n";
     
     // Encode prices_out
-    buffer += ",\n";
     buffer += indent_1;
     buffer += "\"prices_out\": \"";
     buffer += this->prices_out_;
-    buffer += "\"";
+    buffer += "\",\n";
+    
+    // Encode prices_in
+    buffer += indent_1;
+    buffer += "\"prices_in\": \"";
+    buffer += this->prices_in_;
+    buffer += "\",\n";
+    
+    // Encode blueprints_in
+    buffer += indent_1;
+    buffer += "\"blueprints_in\": \"";
+    buffer += this->blueprints_in_;
+    buffer += "\",\n";
+    
+    // Encode profits_out
+    buffer += indent_1;
+    buffer += "\"profits_out\": \"";
+    buffer += this->profits_out_;
+    buffer += "\",\n";
+    
+    // Encode cull_stations
+    buffer += indent_1;
+    buffer += "\"cull_stations\": ";
+    buffer += this->cull_stations_ ? "true,\n" : "false,\n";
+    
+    // Encode cull_orders
+    buffer += indent_1;
+    buffer += "\"cull_orders\": ";
+    buffer += this->cull_orders_ ? "true,\n" : "false,\n";
+    
+    // Encode output_order
+    buffer += indent_1;
+    buffer += "\"output_order\": \"";
+    buffer += sort_strategy_to_string(this->output_order_);
+    buffer += "\",\n";
+    
+    // Encode 
+    buffer += indent_1;
+    buffer += "\"decryptor_optimization_strategy\": \"";
+    buffer += sort_strategy_to_string(this->decryptor_optimization_strategy_);
+    buffer += "\"\n";
     
     // It is recommended to not put a newline on the last brace to allow
     // comma chaining when this object is an element of an array.
-    buffer += '\n';
     buffer += indent_0;
     buffer += "}";
     

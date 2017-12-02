@@ -41,6 +41,12 @@ class decryptor_t
         // Add member initialization constructors here
         // Try to use initializer lists when possible.
         
+        inline decryptor_t(type_t new_type)
+          : type_(new_type)
+        {
+            // All work done in initializer list
+        }
+        
         // Add operators here if desired.
         
         inline bool operator==(const decryptor_t& source) const
@@ -61,6 +67,12 @@ class decryptor_t
         inline bool operator!=(const type_t& source) const
         {
             return !(*this == source);
+        }
+        
+        inline decryptor_t& operator=(type_t new_type)
+        {
+            this->type_ = new_type;
+            return *this;
         }
         
         // Add member read and write functions

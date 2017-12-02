@@ -12,6 +12,37 @@
 #include "item_quantities.h"
 #include "error.h"
 #include "json.h"
+#include "station_market.h"
+
+float item_quantities_t::total_sell_value(const station_market_t& station_market, unsigned material_efficiency) const
+{
+    
+    float accumulator = 0.0f;
+    unsigned scale_material_efficiency = 100 - material_efficiency;
+    std::unordered_map<uint64_t, item_market_t>::const_iterator not_found = station_market.end();
+    
+    for (const item_quantity_t& cur_item_quantity : this->materials_list_)
+    {
+        
+        std::unordered_map<uint64_t, item_market_t>::const_iterator cur_item_market = station_market.items().find(cur_item_quantity.item_id());
+        if (cur_item_market == not_found)
+        {
+            std::string message("Error.  Could not find sell order for item with id ");
+            message += std::to_string(cur_item_quantity.item_id());
+            message += ".\n";
+            throw error_message_t(error_code_t::NO_ORDERS, message);
+        }
+        
+        // This integer rounding error (during divide) is intentional
+        // to match EvE's rounding rules.
+        accumulator +=
+            float(cur_item_quantity.quantity() * scale_material_efficiency / 100)
+          * cur_item_market->second.min_sell_order();
+    }
+    
+    return accumulator;
+    
+}
 
 void item_quantities_t::read_from_json_file(std::istream& file)
 {

@@ -16,6 +16,8 @@
 #include "item_quantity.h"
 #include "json.h"
 
+class station_market_t;
+
 /// @brief A list of items and a quantity associated with each item.
 ///
 /// Usually used as a bill of materials or a list of output products.
@@ -45,6 +47,18 @@ class item_quantities_t
         }
         
         // Add special-purpose functions here
+        
+        // Calculate the combined ISK value of all items in this structure
+        // based on the lowest sell order
+        //
+        // @exception error_message_t
+        float total_sell_value
+        (
+            // Prices for items at a specific station
+            const station_market_t& station_market,
+            // Ranges from [0 to 10].
+            unsigned material_efficiency
+        ) const;
         
         // Add encoders/decoders here
         

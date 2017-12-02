@@ -50,12 +50,12 @@ class manufacture_t
         
         inline const item_quantities_t& output_materials() const
         {
-            return this->input_materials_;
+            return this->output_materials_;
         }
         
         inline item_quantities_t& output_materials()
         {
-            return this->input_materials_;
+            return this->output_materials_;
         }
         
         inline unsigned material_efficiency() const

@@ -131,8 +131,9 @@ void manufacturability_t::write_to_json_buffer(std::string& buffer, unsigned ind
     }
     
     if (this->message_.empty())
+    {
         buffer += "\"\n";
-    else {
+    } else {
         buffer += "\",\n";
         buffer += indent_1;
         buffer += "\"mesage\": \"";

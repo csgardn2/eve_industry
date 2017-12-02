@@ -108,7 +108,6 @@ void galactic_profits_t::write_to_json_file(std::ostream& file, unsigned indent_
 void galactic_profits_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
 {
     
-    
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
     std::string_view indent_0(indent_1.data(), indent_start);
     

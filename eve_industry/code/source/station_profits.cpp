@@ -162,6 +162,10 @@ void station_profits_t::write_to_json_buffer(std::string& buffer, unsigned inden
         }
     
     }
+    
+    buffer += indent_1;
+    buffer += "]\n";
+    
     // It is recommended to not put a newline on the last brace to allow
     // comma chaining when this object is an element of an array.
     buffer += indent_0;

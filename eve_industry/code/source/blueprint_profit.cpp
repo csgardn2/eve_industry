@@ -26,8 +26,71 @@ void blueprint_profit_t::initialize_from_market
     
     // calculate profits for each decryptor
     
-    this->manufacturability_.status(manufacturability_t::status_t::MISSING_MARKET_DATA);
     this->blueprint_id_ = blueprint_of_interest.blueprint_id();
+    
+    // This will get overwritten if an error occurs
+    this->manufacturability_.status(manufacturability_t::status_t::OK);
+    
+    // If this is a T1 blueprint, then the calculation is easy and requires no
+    // decryptors
+    const blueprint_t::manufacture_t& manufacture = blueprint_of_interest.manufacture();
+    if (blueprint_of_interest.invent().valid())
+    {
+        
+        // This is a T2 blueprint that requires invention
+        
+        // TODO
+        
+        this->manufacturability_.status(manufacturability_t::status_t::MISSING_MARKET_DATA);
+        this->manufacturability_.message("T2 code not implemented.");
+        
+        
+    } else {
+        
+        // This is a T1 blueprint
+        
+        this->time_ = manufacture.time();
+        
+        // Calculate total cost, or mark this item as unmanufacturable if there
+        // is insufficient market data.
+        try
+        {
+            this->total_cost_ = manufacture.input_materials().total_sell_value
+            (
+                station_market,
+                manufacture.material_efficiency()
+            );
+        } catch (const error_message_t& error) {
+            if (error == error_code_t::NO_ORDERS)
+            {
+                this->manufacturability_.status(manufacturability_t::status_t::MISSING_MARKET_DATA);
+                this->manufacturability_.message(error.message());
+            } else {
+                throw error;
+            }
+        }
+        
+        // Calculate output value
+        try
+        {
+            this->output_value_ = manufacture.output_materials().total_sell_value
+            (
+                station_market,
+                0 // Material efficiency does not affect output amount
+            );
+        } catch (const error_message_t& error) {
+            if (error == error_code_t::NO_ORDERS)
+            {
+                this->manufacturability_.status(manufacturability_t::status_t::MISSING_MARKET_DATA);
+                this->manufacturability_.message(error.message());
+            } else {
+                throw error;
+            }
+        }
+        
+        this->optimal_decryptor_ = decryptor_t::type_t::NO_DECRYPTOR;
+        
+    }
     
 }
 

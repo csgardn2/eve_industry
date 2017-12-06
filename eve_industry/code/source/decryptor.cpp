@@ -18,7 +18,7 @@ float decryptor_t::raw_probability_multiplier() const
     switch (this->type_)
     {
         case type_t::NO_DECRYPTOR:
-            return 0.0f;
+            return 1.0f;
         case type_t::AUGMENTATION:
             return 0.6f;
         case type_t::OPTIMIZED_AUGMENTATION:
@@ -116,6 +116,35 @@ signed decryptor_t::raw_time_efficiency_modifier() const
             return 4;
         case type_t::OPTIMIZED_ATTAINMENT:
             return -2;
+        default:
+            throw error_message_t(error_code_t::UNKNOWN_DECRYPTOR_TYPE, "Error.  Tried to determine time efficiency modifier for invalid decryptor.\n");
+    }
+}
+
+uint64_t decryptor_t::item_id() const
+{
+    // These probably shouldn't be hard-coded, but it would be awkward to have
+    // the user specify them at the commad line plus they're unlikely to change
+    switch (this->type_)
+    {
+        case type_t::NO_DECRYPTOR:
+            throw error_message_t(error_code_t::UNKNOWN_DECRYPTOR_TYPE, "Error.  Cannot determine item id for null decryptor.\n");
+        case type_t::AUGMENTATION:
+            return 34203;
+        case type_t::OPTIMIZED_AUGMENTATION:
+            return 34208;
+        case type_t::SYMMETRY:
+            return 34206;
+        case type_t::PROCESS:
+            return 34205;
+        case type_t::ACCELERANT:
+            return 34201;
+        case type_t::PARITY:
+            return 34204;
+        case type_t::ATTAINMENT:
+            return 34202;
+        case type_t::OPTIMIZED_ATTAINMENT:
+            return 34207;
         default:
             throw error_message_t(error_code_t::UNKNOWN_DECRYPTOR_TYPE, "Error.  Tried to determine time efficiency modifier for invalid decryptor.\n");
     }

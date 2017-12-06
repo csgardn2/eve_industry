@@ -66,11 +66,6 @@ class blueprint_profit_t
             return this->output_value_;
         }
         
-        decryptor_t optimal_decryptor() const
-        {
-            return this->optimal_decryptor_;
-        }
-        
         // Add special-purpose functions here
         
         /// @brief Choose the optimal decryptor 
@@ -83,8 +78,9 @@ class blueprint_profit_t
             const blueprints_t& all_blueprints,
             /// [in] Item price data
             const station_market_t& station_market,
-            /// [in] Selects a metric to maximize when choosing a decryptor.
-            sort_strategy_t decryptor_optimization_strategy
+            /// [in] Selects a decryptor to modify time, input materials, and
+            /// output if this is a T2 blueprint.
+            const decryptor_t& decryptor
         );
         
         inline float profit_amount() const
@@ -200,12 +196,6 @@ class blueprint_profit_t
         ///
         /// Only valid if @ref manufacturability_t::is_ok() == true
         float output_value_;
-        
-        /// @brief If manufacturing this item reqires invention, these decryptor
-        /// will maximize your average profit.
-        ///
-        /// Only valid if @ref manufacturability_t::is_ok() == true
-        decryptor_t optimal_decryptor_;
         
 };
 

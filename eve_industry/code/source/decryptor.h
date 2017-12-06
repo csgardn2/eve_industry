@@ -139,6 +139,10 @@ class decryptor_t
                 return ret;
         }
         
+        /// @brief Get the item ID of this item used by the Swagger API.
+        /// @exception error_message_t If this is a @ref type_t::NO_DECRYPTOR.
+        uint64_t item_id() const;
+        
         // Add encoders/decoders here
         
         /// @brief Open a file conforming to data/json/schema.json and use it to initialize

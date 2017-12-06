@@ -34,7 +34,8 @@ void station_profits_t::calculate_blueprint_profits
     for (const std::pair<uint64_t, blueprint_t>& cur_blueprint : blueprints_in.storage())
     {
         blueprint_profit_t new_blueprint_profit;
-        new_blueprint_profit.initialize_from_market(cur_blueprint.second, blueprints_in, station_market, decryptor_optimization_strategy);
+        new_blueprint_profit.initialize_from_market(cur_blueprint.second, blueprints_in, station_market, decryptor_t::type_t::NO_DECRYPTOR);
+        // TODO create optimal t2 blueprint profit class
         this->blueprint_profits_.emplace_back(std::move(new_blueprint_profit));
     }
     

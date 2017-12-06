@@ -37,11 +37,6 @@ class blueprints_t
             return this->storage_;
         }
         
-        inline const std::unordered_map<uint64_t, blueprint_t>& storage()
-        {
-            return this->storage_;
-        }
-        
         // Add special-purpose functions here
         
         // Add encoders/decoders here

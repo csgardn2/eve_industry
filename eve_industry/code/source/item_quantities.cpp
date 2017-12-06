@@ -33,11 +33,12 @@ float item_quantities_t::total_sell_value(const station_market_t& station_market
             throw error_message_t(error_code_t::NO_ORDERS, message);
         }
         
+        // Round up to the nearest integer
+        unsigned rounded_modified_materials = (cur_item_quantity.quantity() * scale_material_efficiency + 99) / 100;
+        
         // This integer rounding error (during divide) is intentional
         // to match EvE's rounding rules.
-        accumulator +=
-            float(cur_item_quantity.quantity() * scale_material_efficiency / 100)
-          * cur_item_market->second.min_sell_order();
+        accumulator += float(rounded_modified_materials) * cur_item_market->second.min_sell_order();
     }
     
     return accumulator;

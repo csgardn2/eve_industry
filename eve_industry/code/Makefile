@@ -20,6 +20,7 @@ all: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME) $(BINDIR)/blueprint_conv
 # is beyond the scope of calculating blueprint profits.
 $(BINDIR)/blueprint_converter:              \
     $(BINDIR)/args_blueprint_converter.o    \
+    $(BINDIR)/args_slices.o                 \
     $(BINDIR)/blueprint.o                   \
     $(BINDIR)/blueprints.o                  \
     $(BINDIR)/blueprint_converter.o         \
@@ -85,6 +86,9 @@ $(BINDIR)/args_blueprint_converter.o: $(SOURCEDIR)/args_blueprint_converter.cpp 
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/args_eve_industry.o: $(SOURCEDIR)/args_eve_industry.cpp $(SOURCEDIR)/args_eve_industry.h
+	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
+
+$(BINDIR)/args_slices.o: $(SOURCEDIR)/args_slices.cpp $(SOURCEDIR)/args_slices.h
 	$(COMPILER) $(COMPILEFLAGS) -c -o $@ $<
 
 $(BINDIR)/blueprint.o: $(SOURCEDIR)/blueprint.cpp $(SOURCEDIR)/blueprint.h
@@ -218,6 +222,8 @@ $(DOCDIR)/html_out/index.html:                  \
     $(SOURCEDIR)/args_blueprint_converter.cpp   \
     $(SOURCEDIR)/args_eve_industry.h            \
     $(SOURCEDIR)/args_eve_industry.cpp          \
+    $(SOURCEDIR)/args_slices.h                  \
+    $(SOURCEDIR)/args_slices.cpp                \
     $(SOURCEDIR)/blueprint.h                    \
     $(SOURCEDIR)/blueprint.cpp                  \
     $(SOURCEDIR)/blueprints.h                   \

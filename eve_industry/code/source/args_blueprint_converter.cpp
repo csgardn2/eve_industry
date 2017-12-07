@@ -8,250 +8,181 @@
 #include <fstream>
 #include <string>
 #include <string_view>
-#include <unordered_map>
-#include <vector>
 
 #include "args_blueprint_converter.h"
+#include "args_slices.h"
 #include "error.h"
 #include "json.h"
 
-namespace args
+void args::blueprint_converter_t::clear()
 {
+    this->valid_ = false;
+    this->ccp_yaml_in_.clear();
+    this->custom_json_out_.clear();
+}
 
-    /// @brief See @ref split_argv
-    typedef std::unordered_map<std::string_view, std::vector<std::string_view> > arg_segment_t;
-
-    /// @brief A string from the command line starting with the '-' character as
-    /// well as zero or more subsequent parameters that don't start with '-'.
-    ///
-    /// The keys in the returned value are arguments starting with '-'.
-    /// The values in the returned value are the strings following the key up until
-    /// the next '-' prefixed argument.
-    ///
-    /// * input
-    ///     {"--verbose", "--mode", "fetch", "--input-file", "a.txt", "b.txt", "c.txt"}
-    /// * output
-    ///     key             | values
-    ///     :-------------: | :---
-    ///     "--verbose"     | {}
-    ///     "--mode"        | {"fetch"}
-    ///     "--input-file"  | {"a.txt", "b.txt", "c.txt"}
-    arg_segment_t split_argv(unsigned argc, char const* const* argv)
-    {
-        
-        arg_segment_t ret;
-        
-        // Argument currently being parsed
-        unsigned cur_arg_ix = 0;
-        
-        // Skip to the first argument starting with '-'.
-        while (true)
-        {
-            if (cur_arg_ix >= argc)
-                return ret;
-            if (argv[cur_arg_ix][0] == '-')
-                break;
-            cur_arg_ix++;
-        }
-        
-        // Extract each argument segment
-        while (true)
-        {
-            
-            /// All out of arguments
-            if (cur_arg_ix >= argc)
-                return ret;
-            
-            // The previous iteration will leave us off at the next argument
-            std::string_view new_key = argv[cur_arg_ix];
-            cur_arg_ix++;
-            
-            // Accumulate all parameters after this parameter
-            std::vector<std::string_view> new_value;
-            while (true)
-            {
-                if (cur_arg_ix >= argc || argv[cur_arg_ix][0] == '-')
-                    break;
-                new_value.emplace_back(argv[cur_arg_ix]);
-                cur_arg_ix++;
-            }
-            
-            ret.emplace(new_key, std::move(new_value));
-            
-        }
-        
-    }
-
-    void blueprint_converter_t::clear()
-    {
-        this->valid_ = false;
-        this->ccp_yaml_in_.clear();
-        this->custom_json_out_.clear();
-    }
-
-    void blueprint_converter_t::parse(unsigned argc, char const* const* argv)
-    {
-        
-        // Invalidate argument block
-        this->clear();
-        
-        // Pre-process arguments
-        const arg_segment_t arg_segments = split_argv(argc, argv);
-        arg_segment_t::const_iterator not_found = arg_segments.end();
-        
-        // Parse --ccp-yaml-in
-        arg_segment_t::const_iterator ccp_yaml_in_iter = arg_segments.find("--ccp-yaml-in");
-        if (ccp_yaml_in_iter == not_found)
-            throw error_message_t(error_code_t::ARG_MISSING_CCP_YAML_IN, "Error.  Missing required argument --ccp-yaml-in <file.yaml>");
-        if (ccp_yaml_in_iter->second.size() != 1)
-        {
-            std::string message("Error.  --ccp-yaml-in takes exactly one argument.  ");
-            message += std::to_string(ccp_yaml_in_iter->second.size());
-            message += " passed.";
-            throw error_message_t(error_code_t::ARG_WRONG_NUMBER_OF_PARAMETERS_CCP_YAML_IN, message);
-        }
-        this->ccp_yaml_in_ = ccp_yaml_in_iter->second.front();
-        
-        // Parse --custom-json-out
-        arg_segment_t::const_iterator custom_json_out_iter = arg_segments.find("--custom-json-out");
-        if (custom_json_out_iter == not_found)
-            throw error_message_t(error_code_t::ARG_MISSING_CUSTOM_JSON_OUT, "Error.  Missing required argument --custom-json-out <file.yaml>");
-        if (custom_json_out_iter->second.size() != 1)
-        {
-            std::string message("Error.  --custom-json-out takes exactly one argument.  ");
-            message += std::to_string(custom_json_out_iter->second.size());
-            message += " passed.";
-            throw error_message_t(error_code_t::ARG_WRONG_NUMBER_OF_PARAMETERS_CUSTOM_JSON_OUT, message);
-        }
-        this->custom_json_out_ = custom_json_out_iter->second.front();
-        
-        // If an error wasn't thrown by now, parsing must have been successful
-        this->valid_ = true;
-        
-    }
-
-    void blueprint_converter_t::read_from_json_file(std::istream& file)
-    {
-        
-        // Get the number of characters in the input file.
-        if (!file.good())
-            throw error_message_t(error_code_t::FILE_SIZE_FAILED, "Error.  Failed to determine file size when encoding args_t object.\n");
-        file.seekg(0, std::ios_base::end);
-        unsigned file_size = file.tellg();
-        file.seekg(0, std::ios_base::beg);
-        
-        // Read the entire file into RAM at once
-        std::string buffer(file_size, '\0');
-        file.read(buffer.data(), file_size);
-        if (!file.good())
-            throw error_message_t(error_code_t::FILE_READ_FAILED, "Error.  Failed to read file when decoding args_t object.\n");
-        this->read_from_json_buffer(std::string_view(buffer));
-        
-    }
-
-    void blueprint_converter_t::read_from_json_buffer(std::string_view buffer)
-    {
-        
-        Json::CharReaderBuilder builder;
-        Json::CharReader* reader = builder.newCharReader();
-        
-        Json::Value json_root;
-        std::string error_message;
-        bool success = reader->parse(buffer.begin(), buffer.end(), &json_root, &error_message);
-        delete reader;
-        if (!success)
-            Json::throwRuntimeError(error_message);
-        
-        // Now that the JSON syntax is parsed, extract the stat_list specific
-        // data.
-        this->read_from_json_structure(json_root);
-        
-    }
-
-    void blueprint_converter_t::read_from_json_structure(const Json::Value& json_root)
-    {
-        
-        // Parse root
-        if (!json_root.isObject())
-            throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of args_t is not of type \"object\".\n");
-        
-        // Decode valid
-        const Json::Value json_valid = json_root["valid"];
-        if (!json_valid.isBool())
-            throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/valid was not found or not of type \"boolean\".");
-        this->valid_ = json_valid.asBool();
-        
-        // Decode ccp_yaml_in
-        const Json::Value json_ccp_yaml_in = json_root["ccp_yaml_in"];
-        if (!json_ccp_yaml_in.isString())
-            throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/ccp_yaml_in was not found or not of type \"string\".");
-        this->ccp_yaml_in_ = json_ccp_yaml_in.asString();
-        
-        // Decode custon_json_out
-        const Json::Value json_custom_json_out = json_root["custom_json_out"];
-        if (!json_custom_json_out.isString())
-            throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/custom_json_out was not found or not of type \"string\".");
-        this->custom_json_out_ = json_custom_json_out.asString();
-        
-    }
-
-    void blueprint_converter_t::write_to_json_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
-    {
-        std::string buffer;
-        this->write_to_json_buffer(buffer, indent_start, spaces_per_tab);
-        file << buffer;
-        if (!file.good())
-            throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding args_t object.\n");
-    }
-
-    void blueprint_converter_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
-    {
-        
-        std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
-        std::string_view indent_0(indent_1.data(), indent_start);
-        
-        // It is recommended not to start a new line before the opening brace, to
-        // enable chaining.
-        buffer += "{\n";
-        
-        // Encode valid
-        buffer += indent_1;
-        buffer += "\"valid\": ";
-        buffer += this->valid_ ? "true,\n" : "false,\n";
-        
-        // Encode ccp_yaml_in
-        buffer += indent_1;
-        buffer += "\"ccp_yaml_in\": \"";
-        buffer += this->ccp_yaml_in_;
-        buffer += "\",\n";
-        
-        // Encpde ccp_json_out
-        buffer += indent_1;
-        buffer += "\"custom_json_out\": \"";
-        buffer += this->custom_json_out_;
-        buffer += "\"\n";
-        
-        // It is recommended to not put a newline on the last brace to allow
-        // comma chaining when this object is an element of an array.
-        buffer += indent_0;
-        buffer += '}';
-        
-    }
-
-    std::istream& operator>>(std::istream& stream, args::blueprint_converter_t& destination)
-    {
-        try
-        {
-            destination.read_from_json_file(stream);
-        } catch (const error_message_t& error) {
-            stream.setstate(std::ios::failbit);
-            throw error;
-        } catch (const Json::Exception& error) {
-            stream.setstate(std::ios::failbit);
-            throw error;
-        }
-        return stream;
-    }
+void args::blueprint_converter_t::parse(unsigned argc, char const* const* argv)
+{
     
+    // Invalidate argument block
+    this->clear();
+    
+    // Pre-process arguments
+    args::slices_t arg_slices;
+    arg_slices.initialize_from_command_line(argc, argv);
+    args::arg_map_t::const_iterator not_found = arg_slices.storage().end();
+    
+    // Parse --ccp-yaml-in
+    args::arg_map_t::const_iterator ccp_yaml_in_iter = arg_slices.storage().find("--ccp-yaml-in");
+    if (ccp_yaml_in_iter == not_found)
+        throw error_message_t(error_code_t::ARG_MISSING_CCP_YAML_IN, "Error.  Missing required argument --ccp-yaml-in <file.yaml>");
+    if (ccp_yaml_in_iter->second.size() != 1)
+    {
+        std::string message("Error.  --ccp-yaml-in takes exactly one argument.  ");
+        message += std::to_string(ccp_yaml_in_iter->second.size());
+        message += " passed.";
+        throw error_message_t(error_code_t::ARG_WRONG_NUMBER_OF_PARAMETERS_CCP_YAML_IN, message);
+    }
+    this->ccp_yaml_in_ = ccp_yaml_in_iter->second.front();
+    
+    // Parse --custom-json-out
+    args::arg_map_t::const_iterator custom_json_out_iter = arg_slices.storage().find("--custom-json-out");
+    if (custom_json_out_iter == not_found)
+        throw error_message_t(error_code_t::ARG_MISSING_CUSTOM_JSON_OUT, "Error.  Missing required argument --custom-json-out <file.yaml>");
+    if (custom_json_out_iter->second.size() != 1)
+    {
+        std::string message("Error.  --custom-json-out takes exactly one argument.  ");
+        message += std::to_string(custom_json_out_iter->second.size());
+        message += " passed.";
+        throw error_message_t(error_code_t::ARG_WRONG_NUMBER_OF_PARAMETERS_CUSTOM_JSON_OUT, message);
+    }
+    this->custom_json_out_ = custom_json_out_iter->second.front();
+    
+    // If an error wasn't thrown by now, parsing must have been successful
+    this->valid_ = true;
+    
+}
+
+void args::blueprint_converter_t::read_from_json_file(std::istream& file)
+{
+    
+    // Get the number of characters in the input file.
+    if (!file.good())
+        throw error_message_t(error_code_t::FILE_SIZE_FAILED, "Error.  Failed to determine file size when encoding args_t object.\n");
+    file.seekg(0, std::ios_base::end);
+    unsigned file_size = file.tellg();
+    file.seekg(0, std::ios_base::beg);
+    
+    // Read the entire file into RAM at once
+    std::string buffer(file_size, '\0');
+    file.read(buffer.data(), file_size);
+    if (!file.good())
+        throw error_message_t(error_code_t::FILE_READ_FAILED, "Error.  Failed to read file when decoding args_t object.\n");
+    this->read_from_json_buffer(std::string_view(buffer));
+    
+}
+
+void args::blueprint_converter_t::read_from_json_buffer(std::string_view buffer)
+{
+    
+    Json::CharReaderBuilder builder;
+    Json::CharReader* reader = builder.newCharReader();
+    
+    Json::Value json_root;
+    std::string error_message;
+    bool success = reader->parse(buffer.begin(), buffer.end(), &json_root, &error_message);
+    delete reader;
+    if (!success)
+        Json::throwRuntimeError(error_message);
+    
+    // Now that the JSON syntax is parsed, extract the stat_list specific
+    // data.
+    this->read_from_json_structure(json_root);
+    
+}
+
+void args::blueprint_converter_t::read_from_json_structure(const Json::Value& json_root)
+{
+    
+    // Parse root
+    if (!json_root.isObject())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of args_t is not of type \"object\".\n");
+    
+    // Decode valid
+    const Json::Value json_valid = json_root["valid"];
+    if (!json_valid.isBool())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/valid was not found or not of type \"boolean\".");
+    this->valid_ = json_valid.asBool();
+    
+    // Decode ccp_yaml_in
+    const Json::Value json_ccp_yaml_in = json_root["ccp_yaml_in"];
+    if (!json_ccp_yaml_in.isString())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/ccp_yaml_in was not found or not of type \"string\".");
+    this->ccp_yaml_in_ = json_ccp_yaml_in.asString();
+    
+    // Decode custon_json_out
+    const Json::Value json_custom_json_out = json_root["custom_json_out"];
+    if (!json_custom_json_out.isString())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  <args>/custom_json_out was not found or not of type \"string\".");
+    this->custom_json_out_ = json_custom_json_out.asString();
+    
+}
+
+void args::blueprint_converter_t::write_to_json_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
+{
+    std::string buffer;
+    this->write_to_json_buffer(buffer, indent_start, spaces_per_tab);
+    file << buffer;
+    if (!file.good())
+        throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding args_t object.\n");
+}
+
+void args::blueprint_converter_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
+{
+    
+    std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
+    std::string_view indent_0(indent_1.data(), indent_start);
+    
+    // It is recommended not to start a new line before the opening brace, to
+    // enable chaining.
+    buffer += "{\n";
+    
+    // Encode valid
+    buffer += indent_1;
+    buffer += "\"valid\": ";
+    buffer += this->valid_ ? "true,\n" : "false,\n";
+    
+    // Encode ccp_yaml_in
+    buffer += indent_1;
+    buffer += "\"ccp_yaml_in\": \"";
+    buffer += this->ccp_yaml_in_;
+    buffer += "\",\n";
+    
+    // Encpde ccp_json_out
+    buffer += indent_1;
+    buffer += "\"custom_json_out\": \"";
+    buffer += this->custom_json_out_;
+    buffer += "\"\n";
+    
+    // It is recommended to not put a newline on the last brace to allow
+    // comma chaining when this object is an element of an array.
+    buffer += indent_0;
+    buffer += '}';
+    
+}
+
+std::istream& operator>>(std::istream& stream, args::blueprint_converter_t& destination)
+{
+    try
+    {
+        destination.read_from_json_file(stream);
+    } catch (const error_message_t& error) {
+        stream.setstate(std::ios::failbit);
+        throw error;
+    } catch (const Json::Exception& error) {
+        stream.setstate(std::ios::failbit);
+        throw error;
+    }
+    return stream;
 }
 

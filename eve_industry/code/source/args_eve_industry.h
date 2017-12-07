@@ -20,8 +20,8 @@
 namespace args
 {
 
-    /// @brief Command line arguments are pre-processed, validated, and stored
-    /// in this structure for easy access.
+    /// @brief Command line argument parsing and validation for eve_industry
+    /// program.
     class eve_industry_t
     {
         

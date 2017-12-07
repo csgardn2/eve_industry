@@ -9,7 +9,7 @@
 #include <iostream>
 #include <unordered_set>
 
-#include "args.h"
+#include "args_eve_industry.h"
 #include "blueprints.h"
 #include "error.h"
 #include "galactic_market.h"
@@ -26,13 +26,13 @@ int main(int argc, char** argv)
     try
     {
         
-        args_t args;
+        args::eve_industry_t args;
         args.parse(argc, argv);
         
         switch (args.mode())
         {
             
-            case args_t::mode_t::FETCH_ITEM_ATTRIBUTES:
+            case args::eve_industry_t::mode_t::FETCH_ITEM_ATTRIBUTES:
             {
                 
                 // Open output file first so that we can find out if it fails
@@ -65,7 +65,7 @@ int main(int argc, char** argv)
                 
             }
             
-            case args_t::mode_t::FETCH_PRICES:
+            case args::eve_industry_t::mode_t::FETCH_PRICES:
             {
                 
                 // Open item attributes from file
@@ -170,7 +170,7 @@ int main(int argc, char** argv)
                 
             }
             
-            case args_t::mode_t::CALCULATE_BLUEPRINT_PROFITS:
+            case args::eve_industry_t::mode_t::CALCULATE_BLUEPRINT_PROFITS:
             {
                 
                 // Open prices file for reading
@@ -197,9 +197,6 @@ int main(int argc, char** argv)
                 blueprints_t blueprints_in;
                 blueprints_in.read_from_json_file(blueprints_in_file);
                 
-                std::ofstream file_of_poop("/home/poopslayer78/Scaffold/poop.json");
-                file_of_poop << blueprints_in;
-                
                 // Calculate blueprint profit at each station
                 if (args.debug_mode().verbose())
                     std::cout << "Calculating blueprint profitability.\n";
@@ -224,7 +221,7 @@ int main(int argc, char** argv)
             
             default:
             {
-                std::cerr << "Error.  Unimplemented mode \"" << args_t::enum_to_string(args.mode()) << "\".\n";
+                std::cerr << "Error.  Unimplemented mode \"" << args::eve_industry_t::enum_to_string(args.mode()) << "\".\n";
                 return -1;
             }
             

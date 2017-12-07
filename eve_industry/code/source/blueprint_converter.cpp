@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "args.h"
+#include "args_blueprint_converter.h"
 #include "error.h"
 #include "yaml-cpp/yaml.h"
 
@@ -11,7 +11,7 @@ int main(int argc, char** argv)
     {
         
         // Parse command line arguments
-        args_t args;
+        args::blueprint_converter_t args;
         args.parse(argc, argv);
         
         // Parse input file

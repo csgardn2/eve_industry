@@ -24,7 +24,7 @@ The operation you choose to perform with the --mode argument determines which
 arguments are required.  This table below lists the required and optional
 command line arguments for each mode.
 
-See @ref args_t::mode_t for additional command line usage.
+See @ref args::eve_industry_t::mode_t for additional command line usage.
 
 Dependencies
 ----

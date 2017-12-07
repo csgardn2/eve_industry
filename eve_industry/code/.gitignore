@@ -1,7 +1,8 @@
-*.o
 *.html
 core
 bin/eve_industry
+bin/blueprint_converter
+bin/*.o
 documentation/html_out
 data/json/prices.json
 data/json/profits.json

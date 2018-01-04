@@ -39,6 +39,11 @@ class blueprints_t
         
         // Add special-purpose functions here
         
+        inline void add_blueprint(const blueprint_t& new_blueprint)
+        {
+            this->storage_.emplace(new_blueprint.blueprint_id(), new_blueprint);
+        }
+        
         // Add encoders/decoders here
         
         /// @brief Open a file conforming to data/json/schema.json and use it to initialize

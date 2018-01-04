@@ -48,7 +48,7 @@ class galactic_profits_t
         (
             const blueprints_t& blueprints,
             const galactic_market_t& galactic_market,
-    blueprint_profit_t::sort_strategy_t decryptor_optimization_strategy
+            blueprint_profit_t::sort_strategy_t decryptor_optimization_strategy
         );
         
         // Add encoders/decoders here

@@ -29,7 +29,7 @@ float item_quantities_t::total_sell_value(const station_market_t& station_market
         {
             std::string message("Error.  Could not find sell order for item with id ");
             message += std::to_string(cur_item_quantity.item_id());
-            message += ".\n";
+            message += '.';
             throw error_message_t(error_code_t::NO_ORDERS, message);
         }
         
@@ -50,7 +50,7 @@ void item_quantities_t::read_from_json_file(std::istream& file)
     
     // Get the number of characters in the input file.
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_SIZE_FAILED, "Error.  Failed to determine file size when encoding item_quantities_t object.\n");
+        throw error_message_t(error_code_t::FILE_SIZE_FAILED, "Error.  Failed to determine file size when encoding item_quantities_t object.");
     file.seekg(0, std::ios_base::end);
     unsigned file_size = file.tellg();
     file.seekg(0, std::ios_base::beg);
@@ -59,7 +59,7 @@ void item_quantities_t::read_from_json_file(std::istream& file)
     std::string buffer(file_size, '\0');
     file.read(buffer.data(), file_size);
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_READ_FAILED, "Error.  Failed to read file when decoding item_quantities_t object.\n");
+        throw error_message_t(error_code_t::FILE_READ_FAILED, "Error.  Failed to read file when decoding item_quantities_t object.");
     this->read_from_json_buffer(std::string_view(buffer));
     
 }
@@ -88,7 +88,7 @@ void item_quantities_t::read_from_json_structure(const Json::Value& json_root)
     
     // Parse root
     if (!json_root.isArray())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of item_quantities is not of type \"array\".\n");
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of item_quantities is not of type \"array\".");
     
     this->materials_list_.reserve(json_root.size());
     
@@ -107,7 +107,7 @@ void item_quantities_t::write_to_json_file(std::ostream& file, unsigned indent_s
     this->write_to_json_buffer(buffer, indent_start, spaces_per_tab);
     file << buffer;
     if (!file.good())
-        throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding item_quantities_t object.\n");
+        throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding item_quantities_t object.");
 }
 
 void item_quantities_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const

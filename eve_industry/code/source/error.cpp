@@ -15,6 +15,8 @@ const std::vector<std::string_view> error_message_t::error_names_ =
     "FILE_READ_FAILED",
     "FILE_WRITE_FAILED",
     "JSON_SCHEMA_VIOLATION",
+    "YAML_SCHEMA_VIOLATION",
+    "YAML_MISSING_INVENTION_DEPENDENCY",
     "MODE_MISSING",
     "MODE_INVALID",
     "ITEM_ATTRIBUTES_OUT_MISSING",

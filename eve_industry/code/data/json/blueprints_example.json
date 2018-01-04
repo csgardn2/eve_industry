@@ -45,8 +45,8 @@
                     "quantity": 1
                 }
             ],
-            "material_efficiency": 10,
-            "time_efficiency": 20
+            "material_efficiency": 2,
+            "time_efficiency": 4
         },
         "invent": {
             "time": 128100,

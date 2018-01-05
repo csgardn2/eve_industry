@@ -45,7 +45,13 @@ class blueprint_profit_t
         
         // Add operators here if desired.
         
-        // Add member read and write functions
+        // Add member read and write functions here
+        
+        manufacturability_t manufacturability() const
+        {
+            return this->manufacturability_;
+        }
+        
         uint64_t blueprint_id() const
         {
             return this->blueprint_id_;

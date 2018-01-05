@@ -84,6 +84,9 @@ class station_profits_t
         (
             /// [out] Stream to append serialized object content to.
             std::ostream& file,
+            /// [in] Specify how the output should be sorted.  Better values
+            /// are written first, near the head of the file.
+            blueprint_profit_t::sort_strategy_t output_order,
             /// [in] The number of space ' ' characters to prepend to each line
             /// in the serialized output.
             unsigned indent_start = 0,
@@ -105,6 +108,9 @@ class station_profits_t
         (
             /// [out] This string is overwritten with serialzed JSON content.
             std::string& buffer,
+            /// [in] Specify how the output should be sorted.  Better values
+            /// are written first, near buffer[0].
+            blueprint_profit_t::sort_strategy_t output_order,
             /// [in] The number of space ' ' characters to prepend to each line
             /// in the serialized output.
             unsigned indent_start = 0,
@@ -134,7 +140,7 @@ class station_profits_t
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::ostream& operator<<(std::ostream& stream, const station_profits_t& source)
 {
-    source.write_to_json_file(stream);
+    source.write_to_json_file(stream, blueprint_profit_t::sort_strategy_t::PROFIT_PER_SECOND);
     return stream;
 }
 

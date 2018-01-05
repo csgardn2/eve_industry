@@ -96,17 +96,27 @@ void galactic_profits_t::read_from_json_structure(const Json::Value& json_root)
     
 }
 
-void galactic_profits_t::write_to_json_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
-{
+void galactic_profits_t::write_to_json_file
+(
+    std::ostream& file,
+    blueprint_profit_t::sort_strategy_t output_order,
+    unsigned indent_start,
+    unsigned spaces_per_tab
+) const {
     std::string buffer;
-    this->write_to_json_buffer(buffer, indent_start, spaces_per_tab);
+    this->write_to_json_buffer(buffer, output_order, indent_start, spaces_per_tab);
     file << buffer;
     if (!file.good())
         throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding galactic_profits_t object.\n");
 }
 
-void galactic_profits_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
-{
+void galactic_profits_t::write_to_json_buffer
+(
+    std::string& buffer,
+    blueprint_profit_t::sort_strategy_t output_order,
+    unsigned indent_start,
+    unsigned spaces_per_tab
+) const {
     
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
     std::string_view indent_0(indent_1.data(), indent_start);
@@ -127,7 +137,7 @@ void galactic_profits_t::write_to_json_buffer(std::string& buffer, unsigned inde
     buffer += indent_1;
     for (unsigned ix = 0, last_ix = num_stations - 1; ix <= last_ix; ix++)
     {
-        this->station_profits_[ix].write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
+        this->station_profits_[ix].write_to_json_buffer(buffer, output_order, indent_start + spaces_per_tab, spaces_per_tab);
         if (ix == last_ix)
             buffer += '\n';
         else

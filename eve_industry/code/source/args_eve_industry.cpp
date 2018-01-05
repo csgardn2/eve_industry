@@ -74,7 +74,7 @@ std::string_view sort_strategy_to_string(blueprint_profit_t::sort_strategy_t sor
         case blueprint_profit_t::sort_strategy_t::PROFIT_PER_SECOND:
             return "profit_per_second";
         default:
-            throw error_message_t(error_code_t::UNKNOWN_SORT_STRATEGY, "Error.  Encountered unknown enum for sort_strategy_t.\n");
+            throw error_message_t(error_code_t::UNKNOWN_SORT_STRATEGY, "Error.  Encountered unknown enum for sort_strategy_t while decoding arguments.\n");
     }
 }
 

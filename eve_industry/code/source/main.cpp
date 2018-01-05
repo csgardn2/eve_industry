@@ -212,7 +212,7 @@ int main(int argc, char** argv)
                     std::cerr << "Error.  Failed to open \"" << args.profits_out() << "\" for reading.\n";
                     return -1;
                 }
-                galactic_profits_out.write_to_json_file(profits_out_file);
+                galactic_profits_out.write_to_json_file(profits_out_file, args.output_order());
                 profits_out_file.close();
                 
                 break;

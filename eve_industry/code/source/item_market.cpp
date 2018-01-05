@@ -22,7 +22,7 @@ float item_market_t::min_buy_order() const
     {
         std::string message("No buy orders found for item with ID ");
         message += std::to_string(this->item_id_);
-        message += ".\n";
+        message += '.';
         throw error_message_t(error_code_t::NO_ORDERS, message);
     }
     
@@ -46,7 +46,7 @@ float item_market_t::max_buy_order() const
     {
         std::string message("No buy orders found for item with ID ");
         message += std::to_string(this->item_id_);
-        message += ".\n";
+        message += '.';
         throw error_message_t(error_code_t::NO_ORDERS, message);
     }
     
@@ -70,7 +70,7 @@ float item_market_t::min_sell_order() const
     {
         std::string message("No sell orders found for item with ID ");
         message += std::to_string(this->item_id_);
-        message += ".\n";
+        message += '.';
         throw error_message_t(error_code_t::NO_ORDERS, message);
     }
     
@@ -94,7 +94,7 @@ float item_market_t::max_sell_order() const
     {
         std::string message("No sell orders found for item with ID ");
         message += std::to_string(this->item_id_);
-        message += ".\n";
+        message += '.';
         throw error_message_t(error_code_t::NO_ORDERS, message);
     }
     

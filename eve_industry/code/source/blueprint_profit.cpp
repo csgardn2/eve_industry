@@ -35,6 +35,8 @@ void blueprint_profit_t::initialize_from_market
     // This will get overwritten if an error occurs
     this->manufacturability_.status(manufacturability_t::status_t::OK);
     
+    this->decryptor_ = decryptor;
+    
     // If this is a T1 blueprint, then the calculation is easy and requires no
     // decryptors
     const blueprint_t::manufacture_t& manufacture = blueprint_of_interest.manufacture();
@@ -226,8 +228,10 @@ void blueprint_profit_t::read_from_json_structure(const Json::Value& json_root)
         throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of blueprint_profit is not of type \"object\".\n");
     
     // Parse manufacturability
-    const Json::Value& json_manufacturability = json_root["manufacturability"];
-    this->manufacturability_.read_from_json_structure(json_manufacturability);
+    this->manufacturability_.read_from_json_structure(json_root["manufacturability"]);
+    
+    // Parse decryptor
+    this->decryptor_.read_from_json_structure(json_root["decryptor"]);
     
     // Parse blueprint_id
     const Json::Value& json_blueprint_id = json_root["blueprint_id"];
@@ -295,6 +299,11 @@ void blueprint_profit_t::write_to_json_buffer
     buffer += indent_1;
     buffer += "\"manufacturability\": ";
     this->manufacturability_.write_to_json_buffer(buffer, indent_start + spaces_per_tab, spaces_per_tab);
+    buffer += ",\n";
+    
+    buffer += indent_1;
+    buffer += "\"decryptor\": ";
+    this->decryptor_.write_to_json_buffer(buffer);
     buffer += ",\n";
     
     buffer += indent_1;

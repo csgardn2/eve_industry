@@ -48,9 +48,14 @@ class blueprint_profit_t
         
         // Add member read and write functions here
         
-        manufacturability_t manufacturability() const
+        const manufacturability_t& manufacturability() const
         {
             return this->manufacturability_;
+        }
+        
+        const decryptor_t& decryptor() const
+        {
+            return this->decryptor_;
         }
         
         uint64_t blueprint_id() const
@@ -179,6 +184,9 @@ class blueprint_profit_t
         
         /// @brief See @ref manufacturability_t.
         manufacturability_t manufacturability_;
+        
+        /// The decryptor used when calculating input cost and output value.
+        decryptor_t decryptor_;
         
         /// @brief This profitability report was generated for the blueprint
         /// with this ID.

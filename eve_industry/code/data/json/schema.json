@@ -406,6 +406,9 @@
                             "description": "This profitability report was generated for the blueprint with this ID.",
                             "minimum": 0
                         },
+                        "decryptor": {
+                            "$ref": "#/definitions/decryptor"
+                        },
                         "time": {
                             "type": "integer",
                             "description": "Total time to produce 1 final output item including copy and invention time.  Assumes that all input materials are purchased and not manufactured.  Invention time is weighted using the invention probability.",
@@ -420,9 +423,6 @@
                             "type": "number",
                             "description": "Value of the output items produced by one manufacturing run.  For example, a mjolnir fury light missil run produces 5000 missiles.  If these missiles sell for 87 ISK each then this value would be 435000.",
                             "minimum": 0
-                        },
-                        "optimal_decryptor": {
-                            "$ref": "#/definitions/decryptor"
                         },
                         "profit_amount": {
                             "type": "number",

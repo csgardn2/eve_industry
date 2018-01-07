@@ -205,7 +205,8 @@ calculate_blueprint_profits: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
         --mode calculate-blueprint-profits                          \
         --blueprints-in data/json/blueprints.json                   \
         --prices-in data/json/prices.json                           \
-        --profits-out data/json/profits.json
+        --profits-out data/json/profits.json                        \
+        --item-attributes-in data/json/item_attributes.json
 
 convert_blueprints:  $(DOCDIR)/html_out/index.html $(BINDIR)/blueprint_converter
 	$(BINDIR)/blueprint_converter                                   \

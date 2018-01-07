@@ -174,10 +174,12 @@ void args::eve_industry_t::parse(unsigned argc, char const* const* argv)
     }
     
     // Parse --item-attributes-in
-    if (this->mode_ == mode_t::FETCH_PRICES)
+    // Note this argument is required for FETCH_PRICES
+    // and optional for CALCULATE_BLUEPRINT_PROFITS
+    if (this->mode_ == mode_t::FETCH_PRICES || this->mode_ == mode_t::CALCULATE_BLUEPRINT_PROFITS)
     {
         this->item_attributes_in_ = find_argument("--item-attributes-in", argc, argv);
-        if (this->item_attributes_in_.empty())
+        if (this->item_attributes_in_.empty() && this->mode_ == mode_t::FETCH_PRICES)
         {
             std::string message("Error.  --item-attributes-in FILE is required for ");
             message += mode_values_[unsigned(this->mode_)];

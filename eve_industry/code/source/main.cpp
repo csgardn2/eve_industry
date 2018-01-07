@@ -197,6 +197,31 @@ int main(int argc, char** argv)
                 blueprints_t blueprints_in;
                 blueprints_in.read_from_json_file(blueprints_in_file);
                 
+                // Open optional item_attributes_in file for reading
+                std::unordered_map<uint64_t, std::string_view> blueprint_names; // <-- Empty and valid if argument not passed
+                item_attributes_t item_attributes_in;
+                if (!args.item_attributes_in().empty())
+                {
+                    
+                    // Open file
+                    if (args.debug_mode().verbose())
+                        std::cout << "Parsing item-attributes-in file \"" << args.item_attributes_in() << "\".\n";
+                    std::ifstream item_attributes_in_file(args.item_attributes_in());
+                    if (!item_attributes_in_file.good())
+                    {
+                        std::cerr << "Error.  Failed to open \"" << args.item_attributes_in() << "\" for reading.\n";
+                        return -1;
+                    }
+                    
+                    // Parse JSON
+                    item_attributes_in.read_from_json_file(item_attributes_in_file);
+                    
+                    // Generate ID -> Name mapping
+                    for (const item_attribute_t& cur_item : item_attributes_in.items())
+                        blueprint_names.emplace(cur_item.id(), std::string_view(cur_item.name()));
+                    
+                }
+                
                 // Calculate blueprint profit at each station
                 if (args.debug_mode().verbose())
                     std::cout << "Calculating blueprint profitability.\n";
@@ -212,7 +237,7 @@ int main(int argc, char** argv)
                     std::cerr << "Error.  Failed to open \"" << args.profits_out() << "\" for reading.\n";
                     return -1;
                 }
-                galactic_profits_out.write_to_json_file(profits_out_file, args.output_order());
+                galactic_profits_out.write_to_json_file(profits_out_file, args.output_order(), blueprint_names);
                 profits_out_file.close();
                 
                 break;

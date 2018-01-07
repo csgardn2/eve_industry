@@ -10,6 +10,7 @@
 
 #include <fstream>
 #include <string_view>
+#include <unordered_map>
 
 #include "decryptor.h"
 #include "error.h"
@@ -132,6 +133,9 @@ class blueprint_profit_t
         (
             /// [out] Stream to append serialized object content to.
             std::ostream& file,
+            /// [in] Allows human readable names to be displayed with the
+            /// blueprint's profit report
+            const std::unordered_map<uint64_t, std::string_view>& blueprint_names,
             /// [in] The number of space ' ' characters to prepend to each line
             /// in the serialized output.
             unsigned indent_start = 0,
@@ -153,6 +157,9 @@ class blueprint_profit_t
         (
             /// [out] This string is overwritten with serialzed JSON content.
             std::string& buffer,
+            /// [in] Allows human readable names to be displayed with the
+            /// blueprint's profit report
+            const std::unordered_map<uint64_t, std::string_view>& blueprint_names,
             /// [in] The number of space ' ' characters to prepend to each line
             /// in the serialized output.
             unsigned indent_start = 0,
@@ -208,7 +215,7 @@ class blueprint_profit_t
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::ostream& operator<<(std::ostream& stream, const blueprint_profit_t& source)
 {
-    source.write_to_json_file(stream);
+    source.write_to_json_file(stream, std::unordered_map<uint64_t, std::string_view>());
     return stream;
 }
 

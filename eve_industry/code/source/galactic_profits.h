@@ -82,6 +82,9 @@ class galactic_profits_t
             /// [in] Specify how the output should be sorted.  Better values
             /// are written first, near the head of the file.
             blueprint_profit_t::sort_strategy_t output_order,
+            /// [in] Allows human readable names to be displayed with each
+            /// blueprint's profit report
+            const std::unordered_map<uint64_t, std::string_view>& blueprint_names,
             /// [in] The number of space ' ' characters to prepend to each line
             /// in the serialized output.
             unsigned indent_start = 0,
@@ -106,6 +109,9 @@ class galactic_profits_t
             /// [in] Specify how the output should be sorted.  Better values
             /// are written first, near buffer[0].
             blueprint_profit_t::sort_strategy_t output_order,
+            /// [in] Allows human readable names to be displayed with each
+            /// blueprint's profit report
+            const std::unordered_map<uint64_t, std::string_view>& blueprint_names,
             /// [in] The number of space ' ' characters to prepend to each line
             /// in the serialized output.
             unsigned indent_start = 0,
@@ -131,7 +137,12 @@ class galactic_profits_t
 /// @brief Convenience alias to allow printing directly via cout or similar.
 inline std::ostream& operator<<(std::ostream& stream, const galactic_profits_t& source)
 {
-    source.write_to_json_file(stream, blueprint_profit_t::sort_strategy_t::PROFIT_PER_SECOND);
+    source.write_to_json_file
+    (
+        stream,
+        blueprint_profit_t::sort_strategy_t::PROFIT_PER_SECOND,
+        std::unordered_map<uint64_t, std::string_view>()
+    );
     return stream;
 }
 

@@ -9,6 +9,7 @@
 #include <map>
 #include <string>
 #include <string_view>
+#include <unordered_map>
 #include <vector>
 
 #include "blueprints.h"
@@ -124,11 +125,12 @@ void station_profits_t::write_to_json_file
 (
     std::ostream& file,
     blueprint_profit_t::sort_strategy_t output_order,
+    const std::unordered_map<uint64_t, std::string_view>& blueprint_names,
     unsigned indent_start,
     unsigned spaces_per_tab
 ) const {
     std::string buffer;
-    this->write_to_json_buffer(buffer, output_order, indent_start, spaces_per_tab);
+    this->write_to_json_buffer(buffer, output_order, blueprint_names, indent_start, spaces_per_tab);
     file << buffer;
     if (!file.good())
         throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding station_profits_t object.\n");
@@ -138,6 +140,7 @@ void station_profits_t::write_to_json_buffer
 (
     std::string& buffer,
     blueprint_profit_t::sort_strategy_t output_order,
+    const std::unordered_map<uint64_t, std::string_view>& blueprint_names,
     unsigned indent_start,
     unsigned spaces_per_tab
 ) const {
@@ -171,6 +174,8 @@ void station_profits_t::write_to_json_buffer
         
         buffer += "[\n";
         buffer += indent_2;
+        
+        // TODO encode failed blueprints at the end of the report
         
         // Sort the blueprints by putting them into a tree.
         // The negative profit is stored in the tree so that the most profitable
@@ -217,25 +222,13 @@ void station_profits_t::write_to_json_buffer
         unsigned last_ix = sorted_blueprint_profits.size() - 1;
         for (const std::pair<float, const blueprint_profit_t*> cur_sorted_blueprint : sorted_blueprint_profits)
         {
-            cur_sorted_blueprint.second->write_to_json_buffer(buffer, indent_start + 2 * spaces_per_tab, spaces_per_tab);
+            cur_sorted_blueprint.second->write_to_json_buffer(buffer, blueprint_names, indent_start + 2 * spaces_per_tab, spaces_per_tab);
             if (ix == last_ix)
                 buffer += '\n';
             else
                 buffer += ", ";
             ix++;
         }
-        
-        // Encode each profit as an element of an array.
-        /*
-        for (unsigned ix = 0, last_ix = num_station_profits - 1; ix <= last_ix; ix++)
-        {
-            this->blueprint_profits_[ix].write_to_json_buffer(buffer, indent_start + 2 * spaces_per_tab, spaces_per_tab);
-            if (ix == last_ix)
-                buffer += '\n';
-            else
-                buffer += ", ";
-        }
-        */
         
     }
     

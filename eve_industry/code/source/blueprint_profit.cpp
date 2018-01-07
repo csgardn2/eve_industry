@@ -10,6 +10,7 @@
 #include <fstream>
 #include <string>
 #include <string_view>
+#include <unordered_map>
 
 #include "blueprint.h"
 #include "blueprint_profit.h"
@@ -262,17 +263,27 @@ void blueprint_profit_t::read_from_json_structure(const Json::Value& json_root)
     
 }
 
-void blueprint_profit_t::write_to_json_file(std::ostream& file, unsigned indent_start, unsigned spaces_per_tab) const
-{
+void blueprint_profit_t::write_to_json_file
+(
+    std::ostream& file,
+    const std::unordered_map<uint64_t, std::string_view>& blueprint_names,
+    unsigned indent_start,
+    unsigned spaces_per_tab
+) const {
     std::string buffer;
-    this->write_to_json_buffer(buffer, indent_start, spaces_per_tab);
+    this->write_to_json_buffer(buffer, blueprint_names, indent_start, spaces_per_tab);
     file << buffer;
     if (!file.good())
         throw error_message_t(error_code_t::FILE_WRITE_FAILED, "Error.  Failed to write file when encoding blueprint_profit_t object.\n");
 }
 
-void blueprint_profit_t::write_to_json_buffer(std::string& buffer, unsigned indent_start, unsigned spaces_per_tab) const
-{
+void blueprint_profit_t::write_to_json_buffer
+(
+    std::string& buffer,
+    const std::unordered_map<uint64_t, std::string_view>& blueprint_names,
+    unsigned indent_start,
+    unsigned spaces_per_tab
+) const {
     
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
     std::string_view indent_0(indent_1.data(), indent_start);
@@ -289,6 +300,18 @@ void blueprint_profit_t::write_to_json_buffer(std::string& buffer, unsigned inde
     buffer += indent_1;
     buffer += "\"blueprint_id\": ";
     buffer += std::to_string(this->blueprint_id_);
+    
+    // If a name for this blueprint could be found, output it
+    // else no name was found, print nothing and continue
+    std::unordered_map<uint64_t, std::string_view>::const_iterator name_match = blueprint_names.find(this->blueprint_id_);
+    if (name_match != blueprint_names.end())
+    {
+        buffer += ",\n";
+        buffer += indent_1;
+        buffer += "\"blueprint_name\": \"";
+        buffer += name_match->second;
+        buffer += '\"';
+    }
     
     // All other members are only valid if this blueprint is manufacturable.
     if (this->manufacturability_.is_ok())

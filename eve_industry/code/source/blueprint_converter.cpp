@@ -500,7 +500,6 @@ bool convert_blueprint
             }
             uint64_t invented_blueprint_id = yaml_cur_product_type_id.as<uint64_t>();
             
-            // TODO you left off here
             if (invented_blueprint_id == cur_blueprint_id)
             {
                 

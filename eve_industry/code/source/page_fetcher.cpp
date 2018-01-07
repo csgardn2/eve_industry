@@ -199,9 +199,20 @@ void page_fetcher_t::read_from_json_json(const Json::Value& json_root)
     
     // Parse root
     if (!json_root.isObject())
-        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of TODO is not of type \"object\".\n");
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error.  Root of page_fetcher is not of type \"object\".\n");
     
-    // TODO Decode the rest of your member variables here.
+    // Parse base_url
+    const Json::Value& json_base_url = json_root["base_url"];
+    if (!json_base_url.isString())
+        throw error_message_t(error_code_t::JSON_SCHEMA_VIOLATION, "Error <page_fetcher>/base_url was not found or not of type \"string\".\n");
+    this->base_url_ = json_base_url.asString();
+    
+    // Non-encodable members
+    this->next_page_ = 1;
+    this->kill_switch_ = false;
+    this->output_lock_.unlock();
+    this->last_print_length_ = 0;
+    this->print_lock_.unlock();
     
 }
 
@@ -217,13 +228,15 @@ void page_fetcher_t::write_to_json_buffer(std::string& buffer, unsigned indent_s
     
     std::string indent_1(indent_start + 1 * spaces_per_tab, ' ');
     std::string_view indent_0(indent_1.data(), indent_start);
-    // TODO Create as many indent levels as needed using string_view.
     
     // It is recommended not to start a new line before the opening brace, to
     // enable chaining.
     buffer += "{\n";
     
-    // TODO Encode member variables.
+    buffer += indent_1;
+    buffer += "\"base_url\": \"";
+    buffer += this->base_url_;
+    buffer += "\"\n";
     
     // It is recommended to not put a newline on the last brace to allow
     // comma chaining when this object is an element of an array.

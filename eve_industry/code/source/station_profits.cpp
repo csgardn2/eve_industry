@@ -175,13 +175,12 @@ void station_profits_t::write_to_json_buffer
         buffer += "[\n";
         buffer += indent_2;
         
-        // TODO encode failed blueprints at the end of the report
-        
         // Sort the blueprints by putting them into a tree.
         // The negative profit is stored in the tree so that the most profitable
         // items will be closer to sorted_blueprint_profits.begin() and get
         // outputted first.
         std::map<float, const blueprint_profit_t*> sorted_blueprint_profits;
+        std::vector<const blueprint_profit_t*> failed_blueprints;
         switch (output_order)
         {
             case blueprint_profit_t::sort_strategy_t::PROFIT_AMOUNT:
@@ -190,6 +189,8 @@ void station_profits_t::write_to_json_buffer
                 {
                     if (cur_blueprint.manufacturability().is_ok())
                         sorted_blueprint_profits.emplace(-cur_blueprint.profit_amount(), &cur_blueprint);
+                    else
+                        failed_blueprints.emplace_back(&cur_blueprint);
                 }
                 break;
             }
@@ -200,6 +201,8 @@ void station_profits_t::write_to_json_buffer
                 {
                     if (cur_blueprint.manufacturability().is_ok())
                         sorted_blueprint_profits.emplace(-cur_blueprint.profit_percent(), &cur_blueprint);
+                    else
+                        failed_blueprints.emplace_back(&cur_blueprint);
                 }
                 break;
             }
@@ -210,6 +213,8 @@ void station_profits_t::write_to_json_buffer
                 {
                     if (cur_blueprint.manufacturability().is_ok())
                         sorted_blueprint_profits.emplace(-cur_blueprint.profit_per_second(), &cur_blueprint);
+                    else
+                        failed_blueprints.emplace_back(&cur_blueprint);
                 }
                 break;
             }
@@ -218,11 +223,24 @@ void station_profits_t::write_to_json_buffer
                 throw error_message_t(error_code_t::UNKNOWN_SORT_STRATEGY, "Error.  Encountered unknown enum for sort_strategy_t while writing station_profits_t.\n");
         }
         
+        // Encode successfull blueprints
         unsigned ix = 0;
-        unsigned last_ix = sorted_blueprint_profits.size() - 1;
+        unsigned last_ix = sorted_blueprint_profits.size() + failed_blueprints.size() - 1;
         for (const std::pair<float, const blueprint_profit_t*> cur_sorted_blueprint : sorted_blueprint_profits)
         {
             cur_sorted_blueprint.second->write_to_json_buffer(buffer, blueprint_names, indent_start + 2 * spaces_per_tab, spaces_per_tab);
+            if (ix == last_ix)
+                buffer += '\n';
+            else
+                buffer += ", ";
+            ix++;
+        }
+        
+        ix = 0;
+        last_ix = failed_blueprints.size() - 1;
+        for (const blueprint_profit_t* cur_failed_blueprint : failed_blueprints)
+        {
+            cur_failed_blueprint->write_to_json_buffer(buffer, blueprint_names, indent_start + 2 * spaces_per_tab, spaces_per_tab);
             if (ix == last_ix)
                 buffer += '\n';
             else

@@ -27,6 +27,16 @@ See data/json/schema.json for documentation on writing program inputs.
     
 
 ----
+Additional documentation
+----
+Documentation is build whenever the code is built.  You will need to install doxygen first.
+````
+sudo apt-get install doxygen graphviz
+make -j documentation/html_out/index.html
+firefox documentation/html_out/index.html # Doesn't have to be firefox ;)
+````
+
+----
 Command line usage:
 ----
 ````
@@ -76,6 +86,7 @@ sudo apt-get install libcurl4-openssl-dev
 *   Install doxygen
 ````
 sudo apt-get install doxygen
+sudo apt-get install graphviz
 ````
 
 File IO Protocols

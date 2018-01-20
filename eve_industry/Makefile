@@ -197,13 +197,13 @@ fetch_prices: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 	$(BINDIR)/$(EXENAME)                                            \
         --mode fetch-prices                                         \
         --item-attributes-in data/json/item_attributes.json         \
-        --station-attributes-in data/json/station_attributes.json   \
+        --station-attributes-in data/json/amarr.json                \
         --prices-out data/json/prices.json
 
 calculate_blueprint_profits: $(DOCDIR)/html_out/index.html $(BINDIR)/$(EXENAME)
 	$(BINDIR)/$(EXENAME)                                            \
         --mode calculate-blueprint-profits                          \
-        --blueprints-in data/json/blueprints.json                   \
+        --blueprints-in data/json/blueprints_owned.json             \
         --prices-in data/json/prices.json                           \
         --profits-out data/json/profits.json                        \
         --item-attributes-in data/json/item_attributes.json

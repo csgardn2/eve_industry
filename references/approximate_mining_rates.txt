@@ -1,4 +1,0 @@
-Mining Throughput           Hull        Mining Equipment                Boosts                                                                                  Notes
-8.06 m3 / sec (measured)    Orca        5x Mining Drone I               Orca Mining Forman Burst II + Mining Laser Optimization Charge (-28.6% cycle time)      Mining a small asteroid 2500m away
-31.34 m3 / sec (measured)   Covetor     2x Modulated Strip Miner II     Orca Mining Forman Burst II + Mining Laser Optimization Charge (-28.6% cycle time)      Does NOT include travel time (ore dumped to fleet hanger).  Does NOT include drone mining amount.
-1.46 m3 / sec (measured)    Covetor     4x Mining Drone I               Orca Mining Forman Burst II + Mining Laser Optimization Charge (-28.6% cycle time)      Does NOT include travel time (ore dumped to fleet hanger).  Mining a small asteroid 2700m away.
